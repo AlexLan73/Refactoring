@@ -14,8 +14,8 @@ OUTPUT_LANGUAGE        = Russian
 #---------------------------------------------------------------------------
 # Input
 #---------------------------------------------------------------------------
-INPUT                  = ../../include ../../src
-FILE_PATTERNS          = *.h *.c
+INPUT                  = ../../include ../../src pages
+FILE_PATTERNS          = *.h *.c *.md
 RECURSIVE              = NO
 INPUT_ENCODING         = UTF-8
 
@@ -52,6 +52,13 @@ FULL_PATH_NAMES        = NO
 #---------------------------------------------------------------------------
 GENERATE_HTML          = YES
 HTML_OUTPUT            = html
+
+# MathJax для формул (без установки LaTeX)
+USE_MATHJAX            = YES
+MATHJAX_VERSION        = MathJax_3
+
+# Картинки (графики из plots/)
+IMAGE_PATH             = ../plots
 
 #---------------------------------------------------------------------------
 # LaTeX output (disabled)

@@ -1,0 +1,684 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Discriminator Estimates (КППО/ТЗК): Файл discr_common.c</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+window.MathJax = {
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Discriminator Estimates (КППО/ТЗК)
+   </div>
+   <div id="projectbrief">Дискриминаторные оценки координат цели по отсчётам ДН антенны</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.16.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Поиск',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('discr__common_8c.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Файл discr_common.c</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>КППО / ТЗК. Обёртки для дискриминаторных оценок.  
+<a href="#details">Подробнее...</a></p>
+<div class="textblock"><code>#include &lt;stdio.h&gt;</code><br />
+<code>#include &lt;math.h&gt;</code><br />
+<code>#include &lt;float.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="discr__common_8h_source.html">discr_common.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="discrcg_8h_source.html">discrcg.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="discrea_8h_source.html">discrea.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="discrqa_8h_source.html">discrqa.h</a>&quot;</code><br />
+</div>
+<p><a href="discr__common_8c_source.html">См. исходные тексты.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-define-members" class="groupheader"><a id="define-members" name="define-members"></a>
+Макросы</h2></td></tr>
+<tr class="memitem:a525335710b53cb064ca56b936120431e" id="r_a525335710b53cb064ca56b936120431e"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a525335710b53cb064ca56b936120431e">_USE_MATH_DEFINES</a></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+Функции</h2></td></tr>
+<tr class="memitem:af4df1b14fa693f96ea5413c1eb0d12a5" id="r_af4df1b14fa693f96ea5413c1eb0d12a5"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#af4df1b14fa693f96ea5413c1eb0d12a5">discr2</a> (double maz[2][2], double mel[2][2], double mval[2][2], double *az, double *el, double *val)</td></tr>
+<tr class="memdesc:af4df1b14fa693f96ea5413c1eb0d12a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Двухточечный дискриминатор (обёртка), центр тяжести.  <br /></td></tr>
+<tr class="memitem:ada0fa80ec1c0edd0e0135de4d4a01c5d" id="r_ada0fa80ec1c0edd0e0135de4d4a01c5d"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#ada0fa80ec1c0edd0e0135de4d4a01c5d">discr3</a> (double **maz, double **mel, double **mval, int ndnx, int ndny, <a class="el" href="discr__types_8h.html#aaf88ae4f33b415b82feb394eade4a8da">DISCRTYPE</a> discrtype, double dx, double lambda, double *az, double *el, double *val)</td></tr>
+<tr class="memdesc:ada0fa80ec1c0edd0e0135de4d4a01c5d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Трехточечный дискриминатор (обёртка).  <br /></td></tr>
+<tr class="memitem:ab26c38a3820da7bc179b57f8bd8faa04" id="r_ab26c38a3820da7bc179b57f8bd8faa04"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#ab26c38a3820da7bc179b57f8bd8faa04">checkuse3d</a> (double **maz, double **mel, double **mval, int ndnx, int ndny)</td></tr>
+<tr class="memdesc:ab26c38a3820da7bc179b57f8bd8faa04"><td class="mdescLeft">&#160;</td><td class="mdescRight">Проверка на возможность использования 3-точечного дискриминатора.  <br /></td></tr>
+<tr class="memitem:ac4d4e1deafa0bcc5b3c0ba33b1190c43" id="r_ac4d4e1deafa0bcc5b3c0ba33b1190c43"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#ac4d4e1deafa0bcc5b3c0ba33b1190c43">discr3_</a> (double maz[3][3], double mel[3][3], double mval[3][3], <a class="el" href="discr__types_8h.html#aaf88ae4f33b415b82feb394eade4a8da">DISCRTYPE</a> discrtype, double dx, double lambda, double *az, double *el, double *val)</td></tr>
+<tr class="memdesc:ac4d4e1deafa0bcc5b3c0ba33b1190c43"><td class="mdescLeft">&#160;</td><td class="mdescRight">Адаптер discr3 для статических массивов 3x3.  <br /></td></tr>
+<tr class="memitem:a71fe9d3f7b4098569040fa293a6cf0b7" id="r_a71fe9d3f7b4098569040fa293a6cf0b7"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a71fe9d3f7b4098569040fa293a6cf0b7">conv3to2</a> (double maz3[3][3], double mel3[3][3], double mval3[3][3], double maz2[2][2], double mel2[2][2], double mval2[2][2])</td></tr>
+<tr class="memdesc:a71fe9d3f7b4098569040fa293a6cf0b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Выделение подматрицы 2x2 из 3x3 для перехода на 2-точечный дискриминатор.  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Подробное описание</h2>
+<div class="textblock"><p>КППО / ТЗК. Обёртки для дискриминаторных оценок. </p>
+<dl class="section author"><dt>Автор</dt><dd>Керский Е.В. </dd></dl>
+<dl class="section date"><dt>Дата</dt><dd>06.07.2017 </dd></dl>
+<p>Рефакторинг: Кодо, 2026-03-28 Изменения:</p><ul>
+<li>ERR-001: реализованы <a class="el" href="#af4df1b14fa693f96ea5413c1eb0d12a5" title="Двухточечный дискриминатор (обёртка), центр тяжести.">discr2()</a> и <a class="el" href="#a71fe9d3f7b4098569040fa293a6cf0b7" title="Выделение подматрицы 2x2 из 3x3 для перехода на 2-точечный дискриминатор.">conv3to2()</a></li>
+<li>ERR-003: <a class="el" href="#ada0fa80ec1c0edd0e0135de4d4a01c5d" title="Трехточечный дискриминатор (обёртка).">discr3()</a> больше НЕ модифицирует входные maz/mel (работает с копиями)</li>
+<li>ERR-004: FLT_EPSILON → DBL_EPSILON</li>
+<li>ERR-006: добавлена поддержка DT_CG в <a class="el" href="#ada0fa80ec1c0edd0e0135de4d4a01c5d" title="Трехточечный дискриминатор (обёртка).">discr3()</a></li>
+<li>STYLE: единые 2-пробельные отступы </li>
+</ul>
+
+<p class="definition">См. определение в файле <a class="el" href="discr__common_8c_source.html">discr_common.c</a></p>
+</div><a name="doc-define-members" id="doc-define-members"></a><h2 id="header-doc-define-members" class="groupheader">Макросы</h2>
+<a id="a525335710b53cb064ca56b936120431e" name="a525335710b53cb064ca56b936120431e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a525335710b53cb064ca56b936120431e">&#9670;&#160;</a></span>_USE_MATH_DEFINES</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define _USE_MATH_DEFINES</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">См. определение в файле <a class="el" href="discr__common_8c_source.html">discr_common.c</a> строка <a class="el" href="discr__common_8c_source.html#l00017">17</a></p>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Функции</h2>
+<a id="ab26c38a3820da7bc179b57f8bd8faa04" name="ab26c38a3820da7bc179b57f8bd8faa04"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab26c38a3820da7bc179b57f8bd8faa04">&#9670;&#160;</a></span>checkuse3d()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int checkuse3d </td>
+          <td>(</td>
+          <td class="paramtype">double **</td>          <td class="paramname"><span class="paramname"><em>maz</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double **</td>          <td class="paramname"><span class="paramname"><em>mel</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double **</td>          <td class="paramname"><span class="paramname"><em>mval</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>ndnx</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>ndny</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Проверка на возможность использования 3-точечного дискриминатора. </p>
+<p>Проверяет что все амплитуды положительны.</p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">maz</td><td>[in] массив азимутальных координат (не используется, для совместимости) </td></tr>
+    <tr><td class="paramname">mel</td><td>[in] массив угломестных координат (не используется, для совместимости) </td></tr>
+    <tr><td class="paramname">mval</td><td>[in] массив амплитуд </td></tr>
+    <tr><td class="paramname">ndnx</td><td>[in] число ДН по оси X </td></tr>
+    <tr><td class="paramname">ndny</td><td>[in] число ДН по оси Y </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>1 — можно использовать, 0 — нельзя </dd></dl>
+
+<p class="definition">См. определение в файле <a class="el" href="discr__common_8c_source.html">discr_common.c</a> строка <a class="el" href="discr__common_8c_source.html#l00192">192</a></p>
+<div class="fragment"><div class="line"><span class="lineno">  193</span>{</div>
+<div class="line"><span class="lineno">  194</span>  <span class="keywordtype">int</span> i, j;</div>
+<div class="line"><span class="lineno">  195</span>  (void)maz;</div>
+<div class="line"><span class="lineno">  196</span>  (void)mel;</div>
+<div class="line"><span class="lineno">  197</span> </div>
+<div class="line"><span class="lineno">  198</span>  <span class="keywordflow">for</span> (i = 0; i &lt; ndnx; i++)</div>
+<div class="line"><span class="lineno">  199</span>    <span class="keywordflow">for</span> (j = 0; j &lt; ndny; j++)</div>
+<div class="line"><span class="lineno">  200</span>      <span class="keywordflow">if</span> (mval[i][j] &lt; DBL_EPSILON)  <span class="comment">/* ERR-004 fix: was FLT_EPSILON */</span></div>
+<div class="line"><span class="lineno">  201</span>        <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">  202</span>  <span class="keywordflow">return</span> 1;</div>
+<div class="line"><span class="lineno">  203</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a71fe9d3f7b4098569040fa293a6cf0b7" name="a71fe9d3f7b4098569040fa293a6cf0b7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a71fe9d3f7b4098569040fa293a6cf0b7">&#9670;&#160;</a></span>conv3to2()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int conv3to2 </td>
+          <td>(</td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>maz3</em></span>[3][3], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>mel3</em></span>[3][3], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>mval3</em></span>[3][3], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>maz2</em></span>[2][2], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>mel2</em></span>[2][2], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>mval2</em></span>[2][2]&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Выделение подматрицы 2x2 из 3x3 для перехода на 2-точечный дискриминатор. </p>
+<p>Выбирает квадрант 2x2 с максимальной суммарной амплитудой. Используется когда 3-точечный дискриминатор невозможен (checkuse3d вернул 0, вогнутость и т.д.).</p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">maz3</td><td>[in] азимутальные координаты 3x3 </td></tr>
+    <tr><td class="paramname">mel3</td><td>[in] угломестные координаты 3x3 </td></tr>
+    <tr><td class="paramname">mval3</td><td>[in] амплитуды 3x3 </td></tr>
+    <tr><td class="paramname">maz2</td><td>[out] азимутальные координаты 2x2 </td></tr>
+    <tr><td class="paramname">mel2</td><td>[out] угломестные координаты 2x2 </td></tr>
+    <tr><td class="paramname">mval2</td><td>[out] амплитуды 2x2 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>0 — успех </dd></dl>
+
+<p class="definition">См. определение в файле <a class="el" href="discr__common_8c_source.html">discr_common.c</a> строка <a class="el" href="discr__common_8c_source.html#l00249">249</a></p>
+<div class="fragment"><div class="line"><span class="lineno">  251</span>{</div>
+<div class="line"><span class="lineno">  252</span>  <span class="keywordtype">int</span> bestR = 0, bestC = 0;</div>
+<div class="line"><span class="lineno">  253</span>  <span class="keywordtype">double</span> bestSum = -1.0;</div>
+<div class="line"><span class="lineno">  254</span>  <span class="keywordtype">int</span> r, c, i, j;</div>
+<div class="line"><span class="lineno">  255</span> </div>
+<div class="line"><span class="lineno">  256</span>  <span class="comment">/* Перебираем все 4 квадранта 2x2 (смещения: (0,0), (0,1), (1,0), (1,1)) */</span></div>
+<div class="line"><span class="lineno">  257</span>  <span class="keywordflow">for</span> (r = 0; r &lt; 2; r++) {</div>
+<div class="line"><span class="lineno">  258</span>    <span class="keywordflow">for</span> (c = 0; c &lt; 2; c++) {</div>
+<div class="line"><span class="lineno">  259</span>      <span class="keywordtype">double</span> sum = mval3[r][c]     + mval3[r][c + 1]</div>
+<div class="line"><span class="lineno">  260</span>                 + mval3[r + 1][c] + mval3[r + 1][c + 1];</div>
+<div class="line"><span class="lineno">  261</span>      <span class="keywordflow">if</span> (sum &gt; bestSum) {</div>
+<div class="line"><span class="lineno">  262</span>        bestSum = sum;</div>
+<div class="line"><span class="lineno">  263</span>        bestR = r;</div>
+<div class="line"><span class="lineno">  264</span>        bestC = c;</div>
+<div class="line"><span class="lineno">  265</span>      }</div>
+<div class="line"><span class="lineno">  266</span>    }</div>
+<div class="line"><span class="lineno">  267</span>  }</div>
+<div class="line"><span class="lineno">  268</span> </div>
+<div class="line"><span class="lineno">  269</span>  <span class="comment">/* Копируем выбранный квадрант */</span></div>
+<div class="line"><span class="lineno">  270</span>  <span class="keywordflow">for</span> (i = 0; i &lt; 2; i++) {</div>
+<div class="line"><span class="lineno">  271</span>    <span class="keywordflow">for</span> (j = 0; j &lt; 2; j++) {</div>
+<div class="line"><span class="lineno">  272</span>      maz2[i][j]  = maz3[bestR + i][bestC + j];</div>
+<div class="line"><span class="lineno">  273</span>      mel2[i][j]  = mel3[bestR + i][bestC + j];</div>
+<div class="line"><span class="lineno">  274</span>      mval2[i][j] = mval3[bestR + i][bestC + j];</div>
+<div class="line"><span class="lineno">  275</span>    }</div>
+<div class="line"><span class="lineno">  276</span>  }</div>
+<div class="line"><span class="lineno">  277</span> </div>
+<div class="line"><span class="lineno">  278</span>  <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">  279</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="af4df1b14fa693f96ea5413c1eb0d12a5" name="af4df1b14fa693f96ea5413c1eb0d12a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af4df1b14fa693f96ea5413c1eb0d12a5">&#9670;&#160;</a></span>discr2()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int discr2 </td>
+          <td>(</td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>maz</em></span>[2][2], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>mel</em></span>[2][2], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>mval</em></span>[2][2], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double *</td>          <td class="paramname"><span class="paramname"><em>az</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double *</td>          <td class="paramname"><span class="paramname"><em>el</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double *</td>          <td class="paramname"><span class="paramname"><em>val</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Двухточечный дискриминатор (обёртка), центр тяжести. </p>
+<p>Принимает матрицы 2x2 координат и амплитуд ДН. Находит строку/столбец с максимумом и оценивает az, el через <a class="el" href="discrcg_8h.html#a2f34219caf8080f3d9a219cfb4a5e7c0" title="Двухточечный дискриминатор, центр тяжести.">discr2cg()</a>.</p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">maz</td><td>[in] массив азимутальных координат 2x2 </td></tr>
+    <tr><td class="paramname">mel</td><td>[in] массив угломестных координат 2x2 </td></tr>
+    <tr><td class="paramname">mval</td><td>[in] массив амплитуд 2x2 </td></tr>
+    <tr><td class="paramname">az</td><td>[out] уточнённая координата азимута </td></tr>
+    <tr><td class="paramname">el</td><td>[out] уточнённая координата угла места </td></tr>
+    <tr><td class="paramname">val</td><td>[out] уточнённое значение амплитуды </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>0 — норма, -1 — ошибка </dd></dl>
+
+<p class="definition">См. определение в файле <a class="el" href="discr__common_8c_source.html">discr_common.c</a> строка <a class="el" href="discr__common_8c_source.html#l00043">43</a></p>
+<div class="fragment"><div class="line"><span class="lineno">   45</span>{</div>
+<div class="line"><span class="lineno">   46</span>  <span class="keywordtype">int</span> maxRow = 0, maxCol = 0;</div>
+<div class="line"><span class="lineno">   47</span>  <span class="keywordtype">double</span> maxAmpl = -1.0;</div>
+<div class="line"><span class="lineno">   48</span>  <span class="keywordtype">int</span> i, j;</div>
+<div class="line"><span class="lineno">   49</span> </div>
+<div class="line"><span class="lineno">   50</span>  <span class="comment">/* Проверка: все амплитуды должны быть положительны */</span></div>
+<div class="line"><span class="lineno">   51</span>  <span class="keywordflow">for</span> (i = 0; i &lt; 2; ++i)</div>
+<div class="line"><span class="lineno">   52</span>    <span class="keywordflow">for</span> (j = 0; j &lt; 2; ++j)</div>
+<div class="line"><span class="lineno">   53</span>      <span class="keywordflow">if</span> (mval[i][j] &lt; DBL_EPSILON) {</div>
+<div class="line"><span class="lineno">   54</span>        *az = 0.0; *el = 0.0; *val = 0.0;</div>
+<div class="line"><span class="lineno">   55</span>        <span class="keywordflow">return</span> -1;</div>
+<div class="line"><span class="lineno">   56</span>      }</div>
+<div class="line"><span class="lineno">   57</span> </div>
+<div class="line"><span class="lineno">   58</span>  <span class="comment">/* Поиск максимума */</span></div>
+<div class="line"><span class="lineno">   59</span>  <span class="keywordflow">for</span> (i = 0; i &lt; 2; ++i)</div>
+<div class="line"><span class="lineno">   60</span>    <span class="keywordflow">for</span> (j = 0; j &lt; 2; ++j)</div>
+<div class="line"><span class="lineno">   61</span>      <span class="keywordflow">if</span> (mval[i][j] &gt; maxAmpl) {</div>
+<div class="line"><span class="lineno">   62</span>        maxRow = i;</div>
+<div class="line"><span class="lineno">   63</span>        maxCol = j;</div>
+<div class="line"><span class="lineno">   64</span>        maxAmpl = mval[i][j];</div>
+<div class="line"><span class="lineno">   65</span>      }</div>
+<div class="line"><span class="lineno">   66</span> </div>
+<div class="line"><span class="lineno">   67</span>  <span class="comment">/* Оценка по азимуту (по строке maxRow) */</span></div>
+<div class="line"><span class="lineno">   68</span>  *az = <a class="code hl_function" href="discrcg_8h.html#a2f34219caf8080f3d9a219cfb4a5e7c0">discr2cg</a>(mval[maxRow][0], mval[maxRow][1],</div>
+<div class="line"><span class="lineno">   69</span>                 maz[maxRow][0],  maz[maxRow][1]);</div>
+<div class="line"><span class="lineno">   70</span> </div>
+<div class="line"><span class="lineno">   71</span>  <span class="comment">/* Оценка по углу места (по столбцу maxCol) */</span></div>
+<div class="line"><span class="lineno">   72</span>  *el = <a class="code hl_function" href="discrcg_8h.html#a2f34219caf8080f3d9a219cfb4a5e7c0">discr2cg</a>(mval[0][maxCol], mval[1][maxCol],</div>
+<div class="line"><span class="lineno">   73</span>                 mel[0][maxCol],  mel[1][maxCol]);</div>
+<div class="line"><span class="lineno">   74</span> </div>
+<div class="line"><span class="lineno">   75</span>  *val = maxAmpl;</div>
+<div class="line"><span class="lineno">   76</span>  <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">   77</span>}</div>
+<div class="ttc" id="adiscrcg_8h_html_a2f34219caf8080f3d9a219cfb4a5e7c0"><div class="ttname"><a href="discrcg_8h.html#a2f34219caf8080f3d9a219cfb4a5e7c0">discr2cg</a></div><div class="ttdeci">double discr2cg(double A1, double A2, double x1, double x2)</div><div class="ttdoc">Двухточечный дискриминатор, центр тяжести.</div><div class="ttdef"><b>Определения</b> <a href="discrcg_8c_source.html#l00028">discrcg.c:28</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ada0fa80ec1c0edd0e0135de4d4a01c5d" name="ada0fa80ec1c0edd0e0135de4d4a01c5d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada0fa80ec1c0edd0e0135de4d4a01c5d">&#9670;&#160;</a></span>discr3()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int discr3 </td>
+          <td>(</td>
+          <td class="paramtype">double **</td>          <td class="paramname"><span class="paramname"><em>maz</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double **</td>          <td class="paramname"><span class="paramname"><em>mel</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double **</td>          <td class="paramname"><span class="paramname"><em>mval</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>ndnx</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>ndny</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="discr__types_8h.html#aaf88ae4f33b415b82feb394eade4a8da">DISCRTYPE</a></td>          <td class="paramname"><span class="paramname"><em>discrtype</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>dx</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>lambda</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double *</td>          <td class="paramname"><span class="paramname"><em>az</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double *</td>          <td class="paramname"><span class="paramname"><em>el</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double *</td>          <td class="paramname"><span class="paramname"><em>val</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Трехточечный дискриминатор (обёртка). </p>
+<p>Принимает матрицы ndnx x ndny координат и амплитуд ДН. Поддерживает типы: DT_CG, DT_QA, DT_EA.</p>
+<dl class="section warning"><dt>Предупреждения</dt><dd>Функция НЕ модифицирует входные массивы maz, mel (исправлено в рефакторинге, ERR-003).</dd></dl>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">maz</td><td>[in] массив азимутальных координат </td></tr>
+    <tr><td class="paramname">mel</td><td>[in] массив угломестных координат </td></tr>
+    <tr><td class="paramname">mval</td><td>[in] массив амплитуд </td></tr>
+    <tr><td class="paramname">ndnx</td><td>[in] число ДН по оси X </td></tr>
+    <tr><td class="paramname">ndny</td><td>[in] число ДН по оси Y </td></tr>
+    <tr><td class="paramname">discrtype</td><td>[in] тип дискриминатора (DT_CG, DT_QA, DT_EA) </td></tr>
+    <tr><td class="paramname">dx</td><td>[in] шаг по углу (используется для DT_QA, DT_EA) </td></tr>
+    <tr><td class="paramname">lambda</td><td>[in] длина волны (используется для DT_QA, DT_EA) </td></tr>
+    <tr><td class="paramname">az</td><td>[out] уточнённая координата азимута </td></tr>
+    <tr><td class="paramname">el</td><td>[out] уточнённая координата угла места </td></tr>
+    <tr><td class="paramname">val</td><td>[out] уточнённое значение амплитуды </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>0 — норма, -1 — нельзя использовать 3-точ., -2 — неизвестный тип </dd></dl>
+
+<p class="definition">См. определение в файле <a class="el" href="discr__common_8c_source.html">discr_common.c</a> строка <a class="el" href="discr__common_8c_source.html#l00101">101</a></p>
+<div class="fragment"><div class="line"><span class="lineno">  104</span>{</div>
+<div class="line"><span class="lineno">  105</span>  <span class="keywordtype">double</span> aztmp = 0.0, eltmp = 0.0, valaz = 0.0, valel = 0.0;</div>
+<div class="line"><span class="lineno">  106</span>  <span class="keywordtype">int</span> maxRow = 0, maxCol = 0;</div>
+<div class="line"><span class="lineno">  107</span>  <span class="keywordtype">double</span> maxAmpl = -1.0;</div>
+<div class="line"><span class="lineno">  108</span>  <span class="keyword">const</span> <span class="keywordtype">double</span> c = 2.0 * M_PI * dx / lambda;</div>
+<div class="line"><span class="lineno">  109</span>  <span class="keywordtype">int</span> i, j;</div>
+<div class="line"><span class="lineno">  110</span> </div>
+<div class="line"><span class="lineno">  111</span>  <span class="comment">/* Проверка на возможность использования 3-точечного дискриминатора */</span></div>
+<div class="line"><span class="lineno">  112</span>  <span class="keywordflow">if</span> (!<a class="code hl_function" href="#ab26c38a3820da7bc179b57f8bd8faa04">checkuse3d</a>(maz, mel, mval, ndnx, ndny))</div>
+<div class="line"><span class="lineno">  113</span>    <span class="keywordflow">return</span> -1;</div>
+<div class="line"><span class="lineno">  114</span> </div>
+<div class="line"><span class="lineno">  115</span>  <span class="comment">/* Поиск строки и столбца с максимальной амплитудой */</span></div>
+<div class="line"><span class="lineno">  116</span>  <span class="keywordflow">for</span> (i = 0; i &lt; ndnx; ++i)</div>
+<div class="line"><span class="lineno">  117</span>    <span class="keywordflow">for</span> (j = 0; j &lt; ndny; ++j)</div>
+<div class="line"><span class="lineno">  118</span>      <span class="keywordflow">if</span> (mval[i][j] &gt; maxAmpl) {</div>
+<div class="line"><span class="lineno">  119</span>        maxRow = i;</div>
+<div class="line"><span class="lineno">  120</span>        maxCol = j;</div>
+<div class="line"><span class="lineno">  121</span>        maxAmpl = mval[i][j];</div>
+<div class="line"><span class="lineno">  122</span>      }</div>
+<div class="line"><span class="lineno">  123</span> </div>
+<div class="line"><span class="lineno">  124</span>  <span class="keywordflow">switch</span> (discrtype) {</div>
+<div class="line"><span class="lineno">  125</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="discr__types_8h.html#aaf88ae4f33b415b82feb394eade4a8daae2da9b2700939ec4ed72deb5b7210922">DT_CG</a>:</div>
+<div class="line"><span class="lineno">  126</span>      <span class="comment">/* ERR-006 fix: добавлена поддержка центра тяжести */</span></div>
+<div class="line"><span class="lineno">  127</span>      <span class="keywordflow">if</span> (ndny &gt;= 3) {</div>
+<div class="line"><span class="lineno">  128</span>        aztmp = <a class="code hl_function" href="discrcg_8h.html#ab3655559ca8de2c4fa17fc6341fad94c">discr3cg</a>(mval[maxRow][0], mval[maxRow][1], mval[maxRow][2],</div>
+<div class="line"><span class="lineno">  129</span>                         maz[maxRow][0],  maz[maxRow][1],  maz[maxRow][2]);</div>
+<div class="line"><span class="lineno">  130</span>      }</div>
+<div class="line"><span class="lineno">  131</span>      <span class="keywordflow">if</span> (ndnx &gt;= 3) {</div>
+<div class="line"><span class="lineno">  132</span>        eltmp = <a class="code hl_function" href="discrcg_8h.html#ab3655559ca8de2c4fa17fc6341fad94c">discr3cg</a>(mval[0][maxCol], mval[1][maxCol], mval[2][maxCol],</div>
+<div class="line"><span class="lineno">  133</span>                         mel[0][maxCol],  mel[1][maxCol],  mel[2][maxCol]);</div>
+<div class="line"><span class="lineno">  134</span>      }</div>
+<div class="line"><span class="lineno">  135</span>      *val = maxAmpl;</div>
+<div class="line"><span class="lineno">  136</span>      <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  137</span> </div>
+<div class="line"><span class="lineno">  138</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="discr__types_8h.html#aaf88ae4f33b415b82feb394eade4a8daac62b9c6de522c4e07d7a5db1f7a8a450">DT_QA</a>:</div>
+<div class="line"><span class="lineno">  139</span>      <span class="comment">/* ERR-003 fix: координаты умножаем на c локально, не модифицируя входные данные */</span></div>
+<div class="line"><span class="lineno">  140</span>      aztmp = <a class="code hl_function" href="discrqa_8h.html#a5cdf0c7b82518afc98773e8f323ddb3b">discr3qa</a>(mval[maxRow][0], mval[maxRow][1], mval[maxRow][2],</div>
+<div class="line"><span class="lineno">  141</span>                       maz[maxRow][0] * c, maz[maxRow][1] * c, maz[maxRow][2] * c);</div>
+<div class="line"><span class="lineno">  142</span>      eltmp = <a class="code hl_function" href="discrqa_8h.html#a5cdf0c7b82518afc98773e8f323ddb3b">discr3qa</a>(mval[0][maxCol], mval[1][maxCol], mval[2][maxCol],</div>
+<div class="line"><span class="lineno">  143</span>                       mel[0][maxCol] * c, mel[1][maxCol] * c, mel[2][maxCol] * c);</div>
+<div class="line"><span class="lineno">  144</span>      *val = maxAmpl;</div>
+<div class="line"><span class="lineno">  145</span>      <span class="comment">/* Обратное преобразование из масштабированных координат */</span></div>
+<div class="line"><span class="lineno">  146</span>      *az = aztmp / c;</div>
+<div class="line"><span class="lineno">  147</span>      *el = eltmp / c;</div>
+<div class="line"><span class="lineno">  148</span>      <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">  149</span> </div>
+<div class="line"><span class="lineno">  150</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="discr__types_8h.html#aaf88ae4f33b415b82feb394eade4a8daa9a8bffd804f7f397ac94141de14fc707">DT_EA</a>:</div>
+<div class="line"><span class="lineno">  151</span>      <span class="comment">/* ERR-003 fix: координаты умножаем на c локально */</span></div>
+<div class="line"><span class="lineno">  152</span>      <a class="code hl_function" href="discrea_8h.html#a1d0a905788c41a528b49032ecb9c2748">discr3ea</a>(mval[maxRow][0], mval[maxRow][1], mval[maxRow][2],</div>
+<div class="line"><span class="lineno">  153</span>               maz[maxRow][0] * c, maz[maxRow][1] * c, maz[maxRow][2] * c, &amp;aztmp);</div>
+<div class="line"><span class="lineno">  154</span>      <a class="code hl_function" href="discrea_8h.html#a1d0a905788c41a528b49032ecb9c2748">discr3ea</a>(mval[0][maxCol], mval[1][maxCol], mval[2][maxCol],</div>
+<div class="line"><span class="lineno">  155</span>               mel[0][maxCol] * c, mel[1][maxCol] * c, mel[2][maxCol] * c, &amp;eltmp);</div>
+<div class="line"><span class="lineno">  156</span> </div>
+<div class="line"><span class="lineno">  157</span>      valaz = <a class="code hl_function" href="discrea_8h.html#aeaf78c0e3173b3e10d91f87f58a171d0">discr3eaY</a>(mval[maxRow][0], mval[maxRow][1],</div>
+<div class="line"><span class="lineno">  158</span>                        maz[maxRow][0] * c, maz[maxRow][1] * c, aztmp);</div>
+<div class="line"><span class="lineno">  159</span>      valel = <a class="code hl_function" href="discrea_8h.html#aeaf78c0e3173b3e10d91f87f58a171d0">discr3eaY</a>(mval[0][maxCol], mval[1][maxCol],</div>
+<div class="line"><span class="lineno">  160</span>                        mel[0][maxCol] * c, mel[1][maxCol] * c, eltmp);</div>
+<div class="line"><span class="lineno">  161</span> </div>
+<div class="line"><span class="lineno">  162</span>      *val = (valaz &gt; valel) ? valaz : valel;</div>
+<div class="line"><span class="lineno">  163</span>      *val = (maxAmpl &gt; *val) ? maxAmpl : *val;</div>
+<div class="line"><span class="lineno">  164</span>      <span class="comment">/* Обратное преобразование */</span></div>
+<div class="line"><span class="lineno">  165</span>      *az = aztmp / c;</div>
+<div class="line"><span class="lineno">  166</span>      *el = eltmp / c;</div>
+<div class="line"><span class="lineno">  167</span>      <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">  168</span> </div>
+<div class="line"><span class="lineno">  169</span>    <span class="keywordflow">default</span>:</div>
+<div class="line"><span class="lineno">  170</span>      *az = 0.0; *el = 0.0; *val = 0.0;</div>
+<div class="line"><span class="lineno">  171</span>      <span class="keywordflow">return</span> -2;</div>
+<div class="line"><span class="lineno">  172</span>  }</div>
+<div class="line"><span class="lineno">  173</span> </div>
+<div class="line"><span class="lineno">  174</span>  <span class="comment">/* Для DT_CG — координаты не масштабируются */</span></div>
+<div class="line"><span class="lineno">  175</span>  *az = aztmp;</div>
+<div class="line"><span class="lineno">  176</span>  *el = eltmp;</div>
+<div class="line"><span class="lineno">  177</span>  <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">  178</span>}</div>
+<div class="ttc" id="adiscr__common_8c_html_ab26c38a3820da7bc179b57f8bd8faa04"><div class="ttname"><a href="#ab26c38a3820da7bc179b57f8bd8faa04">checkuse3d</a></div><div class="ttdeci">int checkuse3d(double **maz, double **mel, double **mval, int ndnx, int ndny)</div><div class="ttdoc">Проверка на возможность использования 3-точечного дискриминатора.</div><div class="ttdef"><b>Определения</b> <a href="discr__common_8c_source.html#l00192">discr_common.c:192</a></div></div>
+<div class="ttc" id="adiscr__types_8h_html_aaf88ae4f33b415b82feb394eade4a8daa9a8bffd804f7f397ac94141de14fc707"><div class="ttname"><a href="discr__types_8h.html#aaf88ae4f33b415b82feb394eade4a8daa9a8bffd804f7f397ac94141de14fc707">DT_EA</a></div><div class="ttdeci">@ DT_EA</div><div class="ttdoc">Экспоненциальная аппроксимация.</div><div class="ttdef"><b>Определения</b> <a href="discr__types_8h_source.html#l00035">discr_types.h:35</a></div></div>
+<div class="ttc" id="adiscr__types_8h_html_aaf88ae4f33b415b82feb394eade4a8daac62b9c6de522c4e07d7a5db1f7a8a450"><div class="ttname"><a href="discr__types_8h.html#aaf88ae4f33b415b82feb394eade4a8daac62b9c6de522c4e07d7a5db1f7a8a450">DT_QA</a></div><div class="ttdeci">@ DT_QA</div><div class="ttdoc">Квадратичная аппроксимация.</div><div class="ttdef"><b>Определения</b> <a href="discr__types_8h_source.html#l00034">discr_types.h:34</a></div></div>
+<div class="ttc" id="adiscr__types_8h_html_aaf88ae4f33b415b82feb394eade4a8daae2da9b2700939ec4ed72deb5b7210922"><div class="ttname"><a href="discr__types_8h.html#aaf88ae4f33b415b82feb394eade4a8daae2da9b2700939ec4ed72deb5b7210922">DT_CG</a></div><div class="ttdeci">@ DT_CG</div><div class="ttdoc">Центр масс.</div><div class="ttdef"><b>Определения</b> <a href="discr__types_8h_source.html#l00032">discr_types.h:32</a></div></div>
+<div class="ttc" id="adiscrcg_8h_html_ab3655559ca8de2c4fa17fc6341fad94c"><div class="ttname"><a href="discrcg_8h.html#ab3655559ca8de2c4fa17fc6341fad94c">discr3cg</a></div><div class="ttdeci">double discr3cg(double A1, double A2, double A3, double x1, double x2, double x3)</div><div class="ttdoc">Трехточечный дискриминатор, центр тяжести.</div><div class="ttdef"><b>Определения</b> <a href="discrcg_8c_source.html#l00050">discrcg.c:50</a></div></div>
+<div class="ttc" id="adiscrea_8h_html_a1d0a905788c41a528b49032ecb9c2748"><div class="ttname"><a href="discrea_8h.html#a1d0a905788c41a528b49032ecb9c2748">discr3ea</a></div><div class="ttdeci">int discr3ea(double A1, double A2, double A3, double x1, double x2, double x3, double *xe)</div><div class="ttdoc">Трехточечный дискриминатор, экспоненциальная аппроксимация (Exponential).</div><div class="ttdef"><b>Определения</b> <a href="discrea_8c_source.html#l00050">discrea.c:50</a></div></div>
+<div class="ttc" id="adiscrea_8h_html_aeaf78c0e3173b3e10d91f87f58a171d0"><div class="ttname"><a href="discrea_8h.html#aeaf78c0e3173b3e10d91f87f58a171d0">discr3eaY</a></div><div class="ttdeci">double discr3eaY(double A1, double A2, double x1, double x2, double xe)</div><div class="ttdoc">Уточнение амплитуды по экспоненциальной аппроксимации.</div><div class="ttdef"><b>Определения</b> <a href="discrea_8c_source.html#l00146">discrea.c:146</a></div></div>
+<div class="ttc" id="adiscrqa_8h_html_a5cdf0c7b82518afc98773e8f323ddb3b"><div class="ttname"><a href="discrqa_8h.html#a5cdf0c7b82518afc98773e8f323ddb3b">discr3qa</a></div><div class="ttdeci">double discr3qa(double A1, double A2, double A3, double x1, double x2, double x3)</div><div class="ttdoc">Трехточечный дискриминатор, аппроксимация квадратичной зависимостью (Quadratic).</div><div class="ttdef"><b>Определения</b> <a href="discrqa_8c_source.html#l00039">discrqa.c:39</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ac4d4e1deafa0bcc5b3c0ba33b1190c43" name="ac4d4e1deafa0bcc5b3c0ba33b1190c43"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac4d4e1deafa0bcc5b3c0ba33b1190c43">&#9670;&#160;</a></span>discr3_()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int discr3_ </td>
+          <td>(</td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>maz</em></span>[3][3], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>mel</em></span>[3][3], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>mval</em></span>[3][3], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="discr__types_8h.html#aaf88ae4f33b415b82feb394eade4a8da">DISCRTYPE</a></td>          <td class="paramname"><span class="paramname"><em>discrtype</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>dx</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>lambda</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double *</td>          <td class="paramname"><span class="paramname"><em>az</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double *</td>          <td class="paramname"><span class="paramname"><em>el</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double *</td>          <td class="paramname"><span class="paramname"><em>val</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Адаптер discr3 для статических массивов 3x3. </p>
+<p>Адаптер трехточечного дискриминатора для статических массивов 3x3.</p>
+<p>Преобразует массивы double[3][3] в double** для вызова <a class="el" href="discr__common_8h.html#ada0fa80ec1c0edd0e0135de4d4a01c5d" title="Трехточечный дискриминатор (обёртка).">discr3()</a>.</p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">maz</td><td>[in] массив азимутальных координат 3x3 </td></tr>
+    <tr><td class="paramname">mel</td><td>[in] массив угломестных координат 3x3 </td></tr>
+    <tr><td class="paramname">mval</td><td>[in] массив амплитуд 3x3 </td></tr>
+    <tr><td class="paramname">discrtype</td><td>[in] тип дискриминатора </td></tr>
+    <tr><td class="paramname">dx</td><td>[in] шаг по углу </td></tr>
+    <tr><td class="paramname">lambda</td><td>[in] длина волны </td></tr>
+    <tr><td class="paramname">az</td><td>[out] уточнённая координата азимута </td></tr>
+    <tr><td class="paramname">el</td><td>[out] уточнённая координата угла места </td></tr>
+    <tr><td class="paramname">val</td><td>[out] уточнённое значение амплитуды </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>0 — норма, -1 — ошибка, -2 — неизвестный тип </dd></dl>
+
+<p class="definition">См. определение в файле <a class="el" href="discr__common_8c_source.html">discr_common.c</a> строка <a class="el" href="discr__common_8c_source.html#l00221">221</a></p>
+<div class="fragment"><div class="line"><span class="lineno">  224</span>{</div>
+<div class="line"><span class="lineno">  225</span>  <span class="keywordtype">double</span> *pmaz[3]  = { &amp;maz[0][0],  &amp;maz[1][0],  &amp;maz[2][0] };</div>
+<div class="line"><span class="lineno">  226</span>  <span class="keywordtype">double</span> *pmel[3]  = { &amp;mel[0][0],  &amp;mel[1][0],  &amp;mel[2][0] };</div>
+<div class="line"><span class="lineno">  227</span>  <span class="keywordtype">double</span> *pmval[3] = { &amp;mval[0][0], &amp;mval[1][0], &amp;mval[2][0] };</div>
+<div class="line"><span class="lineno">  228</span> </div>
+<div class="line"><span class="lineno">  229</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#ada0fa80ec1c0edd0e0135de4d4a01c5d">discr3</a>(pmaz, pmel, pmval, 3, 3,</div>
+<div class="line"><span class="lineno">  230</span>                discrtype, dx, lambda,</div>
+<div class="line"><span class="lineno">  231</span>                az, el, val);</div>
+<div class="line"><span class="lineno">  232</span>}</div>
+<div class="ttc" id="adiscr__common_8c_html_ada0fa80ec1c0edd0e0135de4d4a01c5d"><div class="ttname"><a href="#ada0fa80ec1c0edd0e0135de4d4a01c5d">discr3</a></div><div class="ttdeci">int discr3(double **maz, double **mel, double **mval, int ndnx, int ndny, DISCRTYPE discrtype, double dx, double lambda, double *az, double *el, double *val)</div><div class="ttdoc">Трехточечный дискриминатор (обёртка).</div><div class="ttdef"><b>Определения</b> <a href="discr__common_8c_source.html#l00101">discr_common.c:101</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a href="discr__common_8c.html">discr_common.c</a></li>
+    <li class="footer">Создано системой <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.1 </li>
+  </ul>
+</div>
+</body>
+</html>

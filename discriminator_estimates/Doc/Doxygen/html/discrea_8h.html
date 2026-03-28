@@ -1,0 +1,419 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Discriminator Estimates (КППО/ТЗК): Файл discrea.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+window.MathJax = {
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Discriminator Estimates (КППО/ТЗК)
+   </div>
+   <div id="projectbrief">Дискриминаторные оценки координат цели по отсчётам ДН антенны</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.16.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Поиск',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('discrea_8h.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Файл discrea.h</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Комплекс программ первичной обработки (КППО). Программа вычисления текущих замеров координат (ТЗК). Дискриминатор. Аппроксимация экспоненциальной зависимостью.  
+<a href="#details">Подробнее...</a></p>
+
+<p><a href="discrea_8h_source.html">См. исходные тексты.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+Функции</h2></td></tr>
+<tr class="memitem:a1d0a905788c41a528b49032ecb9c2748" id="r_a1d0a905788c41a528b49032ecb9c2748"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a1d0a905788c41a528b49032ecb9c2748">discr3ea</a> (double A1, double A2, double A3, double x1, double x2, double x3, double *xe)</td></tr>
+<tr class="memdesc:a1d0a905788c41a528b49032ecb9c2748"><td class="mdescLeft">&#160;</td><td class="mdescRight">Трехточечный дискриминатор, экспоненциальная аппроксимация (Exponential).  <br /></td></tr>
+<tr class="memitem:aeaf78c0e3173b3e10d91f87f58a171d0" id="r_aeaf78c0e3173b3e10d91f87f58a171d0"><td class="memItemLeft">double&#160;</td><td class="memItemRight"><a class="el" href="#aeaf78c0e3173b3e10d91f87f58a171d0">discr3eaY</a> (double A1, double A2, double x1, double x2, double xe)</td></tr>
+<tr class="memdesc:aeaf78c0e3173b3e10d91f87f58a171d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Уточнение амплитуды по экспоненциальной аппроксимации.  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Подробное описание</h2>
+<div class="textblock"><p>Комплекс программ первичной обработки (КППО). Программа вычисления текущих замеров координат (ТЗК). Дискриминатор. Аппроксимация экспоненциальной зависимостью. </p>
+<dl class="section author"><dt>Автор</dt><dd>Добродумов А.Б. </dd></dl>
+<dl class="section date"><dt>Дата</dt><dd>15.04.2012 </dd></dl>
+
+<p class="definition">См. определение в файле <a class="el" href="discrea_8h_source.html">discrea.h</a></p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Функции</h2>
+<a id="a1d0a905788c41a528b49032ecb9c2748" name="a1d0a905788c41a528b49032ecb9c2748"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1d0a905788c41a528b49032ecb9c2748">&#9670;&#160;</a></span>discr3ea()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int discr3ea </td>
+          <td>(</td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>A1</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>A2</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>A3</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>x1</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>x2</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>x3</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double *</td>          <td class="paramname"><span class="paramname"><em>xe</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Трехточечный дискриминатор, экспоненциальная аппроксимация (Exponential). </p>
+<p>Аппроксимирует отсчёты ДН функцией:   </p><p class="formulaDsp">
+\[  y = A_{max} \exp\!\bigl(-a\,(x - x_0)^2\bigr)
+\]
+</p>
+<p>Алгоритм: логарифмирование амплитуд \( z_i = \ln A_i \), аппроксимация параболой \( z(x) = \alpha + \beta x + \gamma x^2 \) и нахождение вершины:   </p><p class="formulaDsp">
+\[  x_e = \frac{\alpha}{2\,\beta}
+\]
+</p>
+<p> где \( \alpha \) и \( \beta \) вычисляются из системы уравнений по трём логарифмированным амплитудам.</p>
+<dl class="section warning"><dt>Предупреждения</dt><dd>Все амплитуды должны быть строго положительны ( \( A_i &gt; 0 \)). Максимум должен лежать в центре (выпуклость).</dd></dl>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">A1</td><td>амплитуда первой точки (должна быть &gt; 0) </td></tr>
+    <tr><td class="paramname">A2</td><td>амплитуда второй точки (должна быть &gt; 0) </td></tr>
+    <tr><td class="paramname">A3</td><td>амплитуда третьей точки (должна быть &gt; 0) </td></tr>
+    <tr><td class="paramname">x1</td><td>координата первой точки </td></tr>
+    <tr><td class="paramname">x2</td><td>координата второй точки </td></tr>
+    <tr><td class="paramname">x3</td><td>координата третьей точки </td></tr>
+    <tr><td class="paramname">xe</td><td>[out] оценка координаты \( x_e \) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>EXIT_SUCCESS (0) при успехе, EXIT_FAILURE (1) при ошибке (при ошибке *xe содержит приближённое значение)</dd></dl>
+<p>Трехточечный дискриминатор, экспоненциальная аппроксимация (Exponential).</p>
+<p>Алгоритм:</p><ol type="1">
+<li>Проверка входных данных (ненулевые амплитуды, не все равны)</li>
+<li>Сортировка по координате (x должна возрастать)</li>
+<li>Проверка на выпуклость (максимум должен быть в центре)</li>
+<li>Логарифмирование: z = ln(A), аппроксимация параболой z(x)</li>
+<li>Вершина параболы: xe = 0.5 * a / b</li>
+<li>Ограничение на вылет за пределы зондирования</li>
+</ol>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">A1</td><td>амплитуда первой точки (должна быть &gt; 0) </td></tr>
+    <tr><td class="paramname">A2</td><td>амплитуда второй точки (должна быть &gt; 0) </td></tr>
+    <tr><td class="paramname">A3</td><td>амплитуда третьей точки (должна быть &gt; 0) </td></tr>
+    <tr><td class="paramname">x1</td><td>координата первой точки </td></tr>
+    <tr><td class="paramname">x2</td><td>координата второй точки </td></tr>
+    <tr><td class="paramname">x3</td><td>координата третьей точки </td></tr>
+    <tr><td class="paramname">xe</td><td>[out] оценка координаты </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>EXIT_SUCCESS (0) при успехе, EXIT_FAILURE (1) при ошибке (при ошибке *xe содержит приближённое значение) </dd></dl>
+
+<p class="definition">См. определение в файле <a class="el" href="discrea_8c_source.html">discrea.c</a> строка <a class="el" href="discrea_8c_source.html#l00050">50</a></p>
+<div class="fragment"><div class="line"><span class="lineno">   52</span>{</div>
+<div class="line"><span class="lineno">   53</span>  <span class="keywordtype">double</span> a = 0.0, b = 0.0;</div>
+<div class="line"><span class="lineno">   54</span>  <span class="keywordtype">double</span> z1, z2, z3;</div>
+<div class="line"><span class="lineno">   55</span>  <span class="keywordtype">double</span> f1, f2, f3;</div>
+<div class="line"><span class="lineno">   56</span>  <span class="keywordtype">double</span> a1, a2, a3, a12, a23, a13;</div>
+<div class="line"><span class="lineno">   57</span>  <span class="comment">/* ERR-002 fix: локальная переменная вместо static */</span></div>
+<div class="line"><span class="lineno">   58</span>  <a class="code hl_struct" href="structaxstr__t.html">axstr_t</a> ax[3];</div>
+<div class="line"><span class="lineno">   59</span> </div>
+<div class="line"><span class="lineno">   60</span>  <span class="comment">/* Проверка: все амплитуды должны быть положительны */</span></div>
+<div class="line"><span class="lineno">   61</span>  <span class="keywordflow">if</span> (A1 &lt; DBL_EPSILON || A2 &lt; DBL_EPSILON || A3 &lt; DBL_EPSILON) {</div>
+<div class="line"><span class="lineno">   62</span>    *xe = x2;</div>
+<div class="line"><span class="lineno">   63</span>    <span class="keywordflow">return</span> EXIT_FAILURE;</div>
+<div class="line"><span class="lineno">   64</span>  }</div>
+<div class="line"><span class="lineno">   65</span> </div>
+<div class="line"><span class="lineno">   66</span>  <span class="comment">/* Проверка: не все амплитуды равны */</span></div>
+<div class="line"><span class="lineno">   67</span>  <span class="keywordflow">if</span> ((fabs(A1 - A2) &lt; DBL_EPSILON) &amp;&amp; (fabs(A2 - A3) &lt; DBL_EPSILON)) {</div>
+<div class="line"><span class="lineno">   68</span>    *xe = x2;</div>
+<div class="line"><span class="lineno">   69</span>    <span class="keywordflow">return</span> EXIT_FAILURE;</div>
+<div class="line"><span class="lineno">   70</span>  }</div>
+<div class="line"><span class="lineno">   71</span> </div>
+<div class="line"><span class="lineno">   72</span>  <span class="comment">/* Сортировка по координате (x должна возрастать) */</span></div>
+<div class="line"><span class="lineno">   73</span>  ax[0].<a class="code hl_variable" href="structaxstr__t.html#ad0ebf0e44c5b4d91881919a56737ff86">a</a> = A1; ax[0].<a class="code hl_variable" href="structaxstr__t.html#a33b12c05f89f90d477279098cb64908d">x</a> = x1;</div>
+<div class="line"><span class="lineno">   74</span>  ax[1].<a class="code hl_variable" href="structaxstr__t.html#ad0ebf0e44c5b4d91881919a56737ff86">a</a> = A2; ax[1].<a class="code hl_variable" href="structaxstr__t.html#a33b12c05f89f90d477279098cb64908d">x</a> = x2;</div>
+<div class="line"><span class="lineno">   75</span>  ax[2].<a class="code hl_variable" href="structaxstr__t.html#ad0ebf0e44c5b4d91881919a56737ff86">a</a> = A3; ax[2].<a class="code hl_variable" href="structaxstr__t.html#a33b12c05f89f90d477279098cb64908d">x</a> = x3;</div>
+<div class="line"><span class="lineno">   76</span>  qsort(ax, 3, <span class="keyword">sizeof</span>(<a class="code hl_struct" href="structaxstr__t.html">axstr_t</a>), <a class="code hl_function" href="discrea_8c.html#a3da7a19413de8b894b042ac61bc441e4">compare_by_x</a>);</div>
+<div class="line"><span class="lineno">   77</span> </div>
+<div class="line"><span class="lineno">   78</span>  a1 = ax[0].<a class="code hl_variable" href="structaxstr__t.html#ad0ebf0e44c5b4d91881919a56737ff86">a</a>; a2 = ax[1].<a class="code hl_variable" href="structaxstr__t.html#ad0ebf0e44c5b4d91881919a56737ff86">a</a>; a3 = ax[2].<a class="code hl_variable" href="structaxstr__t.html#ad0ebf0e44c5b4d91881919a56737ff86">a</a>;</div>
+<div class="line"><span class="lineno">   79</span>  f1 = ax[0].<a class="code hl_variable" href="structaxstr__t.html#a33b12c05f89f90d477279098cb64908d">x</a>; f2 = ax[1].<a class="code hl_variable" href="structaxstr__t.html#a33b12c05f89f90d477279098cb64908d">x</a>; f3 = ax[2].<a class="code hl_variable" href="structaxstr__t.html#a33b12c05f89f90d477279098cb64908d">x</a>;</div>
+<div class="line"><span class="lineno">   80</span> </div>
+<div class="line"><span class="lineno">   81</span>  <span class="comment">/* Проверка на выпуклость: максимум должен быть в центре */</span></div>
+<div class="line"><span class="lineno">   82</span>  a12 = a1 - a2;</div>
+<div class="line"><span class="lineno">   83</span>  a23 = a2 - a3;</div>
+<div class="line"><span class="lineno">   84</span>  a13 = a1 - a3;</div>
+<div class="line"><span class="lineno">   85</span> </div>
+<div class="line"><span class="lineno">   86</span>  <span class="comment">/* Вогнутость: максимум справа (например 2, 4, 8) */</span></div>
+<div class="line"><span class="lineno">   87</span>  <span class="keywordflow">if</span> ((a12 &lt; 0 &amp;&amp; a23 &lt; 0 &amp;&amp; a12 &gt; a23) ||</div>
+<div class="line"><span class="lineno">   88</span>      (a12 &gt; 0 &amp;&amp; a23 &lt; 0 &amp;&amp; a13 &lt; 0)) {</div>
+<div class="line"><span class="lineno">   89</span>    *xe = x3;</div>
+<div class="line"><span class="lineno">   90</span>    <span class="keywordflow">return</span> EXIT_FAILURE;</div>
+<div class="line"><span class="lineno">   91</span>  }</div>
+<div class="line"><span class="lineno">   92</span>  <span class="comment">/* Вогнутость: максимум слева (например 8, 4, 2) */</span></div>
+<div class="line"><span class="lineno">   93</span>  <span class="keywordflow">if</span> ((a12 &gt; 0 &amp;&amp; a23 &gt; 0 &amp;&amp; a12 &gt; a23) ||</div>
+<div class="line"><span class="lineno">   94</span>      (a12 &gt; 0 &amp;&amp; a23 &lt; 0 &amp;&amp; a13 &gt; 0)) {</div>
+<div class="line"><span class="lineno">   95</span>    *xe = x1;</div>
+<div class="line"><span class="lineno">   96</span>    <span class="keywordflow">return</span> EXIT_FAILURE;</div>
+<div class="line"><span class="lineno">   97</span>  }</div>
+<div class="line"><span class="lineno">   98</span> </div>
+<div class="line"><span class="lineno">   99</span>  <span class="comment">/* Логарифмирование */</span></div>
+<div class="line"><span class="lineno">  100</span>  z1 = log(a1);</div>
+<div class="line"><span class="lineno">  101</span>  z2 = log(a2);</div>
+<div class="line"><span class="lineno">  102</span>  z3 = log(a3);</div>
+<div class="line"><span class="lineno">  103</span> </div>
+<div class="line"><span class="lineno">  104</span>  <span class="comment">/* Коэффициенты параболы z(x) = a + b*x + ... */</span></div>
+<div class="line"><span class="lineno">  105</span>  a = z1 * (f2 * f2 - f3 * f3) + z2 * (f3 * f3 - f1 * f1) + z3 * (f1 * f1 - f2 * f2);</div>
+<div class="line"><span class="lineno">  106</span>  b = z1 * (f2 - f3) + z2 * (f3 - f1) + z3 * (f1 - f2);</div>
+<div class="line"><span class="lineno">  107</span> </div>
+<div class="line"><span class="lineno">  108</span>  <span class="keywordflow">if</span> (fabs(b) &lt; DBL_EPSILON) {</div>
+<div class="line"><span class="lineno">  109</span>    <span class="keywordflow">if</span> (a * b &gt;= 0) {</div>
+<div class="line"><span class="lineno">  110</span>      *xe = f3 + 0.5 * (f3 - f1);</div>
+<div class="line"><span class="lineno">  111</span>      <span class="keywordflow">return</span> EXIT_FAILURE;</div>
+<div class="line"><span class="lineno">  112</span>    } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  113</span>      *xe = f1 - 0.5 * (f3 - f1);</div>
+<div class="line"><span class="lineno">  114</span>      <span class="keywordflow">return</span> EXIT_FAILURE;</div>
+<div class="line"><span class="lineno">  115</span>    }</div>
+<div class="line"><span class="lineno">  116</span>  }</div>
+<div class="line"><span class="lineno">  117</span> </div>
+<div class="line"><span class="lineno">  118</span>  <span class="comment">/* Вершина параболы */</span></div>
+<div class="line"><span class="lineno">  119</span>  *xe = 0.5 * a / b;</div>
+<div class="line"><span class="lineno">  120</span> </div>
+<div class="line"><span class="lineno">  121</span>  <span class="comment">/* Ограничение на вылет за пределы зондирования */</span></div>
+<div class="line"><span class="lineno">  122</span>  <span class="keywordflow">if</span> (*xe &gt; f3 + 0.5 * (f3 - f1)) {</div>
+<div class="line"><span class="lineno">  123</span>    *xe = f3 + 0.5 * (f3 - f1);</div>
+<div class="line"><span class="lineno">  124</span>    <span class="keywordflow">return</span> EXIT_FAILURE;</div>
+<div class="line"><span class="lineno">  125</span>  }</div>
+<div class="line"><span class="lineno">  126</span>  <span class="keywordflow">if</span> (*xe &lt; f1 - 0.5 * (f3 - f1)) {</div>
+<div class="line"><span class="lineno">  127</span>    *xe = f1 - 0.5 * (f3 - f1);</div>
+<div class="line"><span class="lineno">  128</span>    <span class="keywordflow">return</span> EXIT_FAILURE;</div>
+<div class="line"><span class="lineno">  129</span>  }</div>
+<div class="line"><span class="lineno">  130</span> </div>
+<div class="line"><span class="lineno">  131</span>  <span class="keywordflow">return</span> EXIT_SUCCESS;</div>
+<div class="line"><span class="lineno">  132</span>}</div>
+<div class="ttc" id="adiscrea_8c_html_a3da7a19413de8b894b042ac61bc441e4"><div class="ttname"><a href="discrea_8c.html#a3da7a19413de8b894b042ac61bc441e4">compare_by_x</a></div><div class="ttdeci">static int compare_by_x(const void *p1, const void *p2)</div><div class="ttdoc">Сортировка пар (амплитуда, координата) по возрастанию координаты.</div><div class="ttdef"><b>Определения</b> <a href="discrea_8c_source.html#l00176">discrea.c:176</a></div></div>
+<div class="ttc" id="astructaxstr__t_html"><div class="ttname"><a href="structaxstr__t.html">axstr_t</a></div><div class="ttdoc">Структура для сортировки пар (амплитуда, координата).</div><div class="ttdef"><b>Определения</b> <a href="discrea_8c_source.html#l00022">discrea.c:22</a></div></div>
+<div class="ttc" id="astructaxstr__t_html_a33b12c05f89f90d477279098cb64908d"><div class="ttname"><a href="structaxstr__t.html#a33b12c05f89f90d477279098cb64908d">axstr_t::x</a></div><div class="ttdeci">double x</div><div class="ttdoc">координата</div><div class="ttdef"><b>Определения</b> <a href="discrea_8c_source.html#l00024">discrea.c:24</a></div></div>
+<div class="ttc" id="astructaxstr__t_html_ad0ebf0e44c5b4d91881919a56737ff86"><div class="ttname"><a href="structaxstr__t.html#ad0ebf0e44c5b4d91881919a56737ff86">axstr_t::a</a></div><div class="ttdeci">double a</div><div class="ttdoc">амплитуда</div><div class="ttdef"><b>Определения</b> <a href="discrea_8c_source.html#l00023">discrea.c:23</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="aeaf78c0e3173b3e10d91f87f58a171d0" name="aeaf78c0e3173b3e10d91f87f58a171d0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeaf78c0e3173b3e10d91f87f58a171d0">&#9670;&#160;</a></span>discr3eaY()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double discr3eaY </td>
+          <td>(</td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>A1</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>A2</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>x1</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>x2</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>xe</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Уточнение амплитуды по экспоненциальной аппроксимации. </p>
+<p>По двум точкам и найденной координате \( x_e \) вычисляет уточнённую амплитуду в точке \( x_e \):   </p><p class="formulaDsp">
+\[  y_e = A_2 \cdot \exp\!\bigl(a_0 \cdot (x_2 - x_e)^2\bigr)
+\]
+</p>
+<p> где коэффициент \( a_0 \) определяется из соотношения:    </p><p class="formulaDsp">
+\[  a_0 = \frac{\ln A_1 - \ln A_2}
+             {2\,x_e\,(x_1 - x_2) - x_1^2 + x_2^2}
+\]
+</p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">A1</td><td>амплитуда первой точки (должна быть &gt; 0) </td></tr>
+    <tr><td class="paramname">A2</td><td>амплитуда второй точки (должна быть &gt; 0) </td></tr>
+    <tr><td class="paramname">x1</td><td>координата первой точки </td></tr>
+    <tr><td class="paramname">x2</td><td>координата второй точки </td></tr>
+    <tr><td class="paramname">xe</td><td>вычисленная координата (результат discr3ea) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>уточнённое значение амплитуды \( y_e \); при \( A_1 &lt; \varepsilon \) или \( A_2 &lt; \varepsilon \) возвращает 0.0</dd></dl>
+<p>Формула: ye = A2 * exp(a0 * (x2 - xe)²)</p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">A1</td><td>амплитуда первой точки </td></tr>
+    <tr><td class="paramname">A2</td><td>амплитуда второй точки </td></tr>
+    <tr><td class="paramname">x1</td><td>координата первой точки </td></tr>
+    <tr><td class="paramname">x2</td><td>координата второй точки </td></tr>
+    <tr><td class="paramname">xe</td><td>вычисленная координата (результат discr3ea) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>уточнённое значение амплитуды </dd></dl>
+
+<p class="definition">См. определение в файле <a class="el" href="discrea_8c_source.html">discrea.c</a> строка <a class="el" href="discrea_8c_source.html#l00146">146</a></p>
+<div class="fragment"><div class="line"><span class="lineno">  147</span>{</div>
+<div class="line"><span class="lineno">  148</span>  <span class="keywordtype">double</span> ye, yMax;</div>
+<div class="line"><span class="lineno">  149</span>  <span class="keywordtype">double</span> z1, z2;</div>
+<div class="line"><span class="lineno">  150</span>  <span class="keywordtype">double</span> a0, dxe;</div>
+<div class="line"><span class="lineno">  151</span> </div>
+<div class="line"><span class="lineno">  152</span>  <span class="keywordflow">if</span> (A1 &lt; DBL_EPSILON || A2 &lt; DBL_EPSILON)</div>
+<div class="line"><span class="lineno">  153</span>    <span class="keywordflow">return</span> 0.0;</div>
+<div class="line"><span class="lineno">  154</span> </div>
+<div class="line"><span class="lineno">  155</span>  yMax = (A1 &gt; A2) ? A1 : A2;</div>
+<div class="line"><span class="lineno">  156</span> </div>
+<div class="line"><span class="lineno">  157</span>  z1 = log(A1);</div>
+<div class="line"><span class="lineno">  158</span>  z2 = log(A2);</div>
+<div class="line"><span class="lineno">  159</span> </div>
+<div class="line"><span class="lineno">  160</span>  a0 = (2.0 * xe * (x1 - x2) - x1 * x1 + x2 * x2);</div>
+<div class="line"><span class="lineno">  161</span> </div>
+<div class="line"><span class="lineno">  162</span>  <span class="keywordflow">if</span> (fabs(a0) &lt; DBL_EPSILON)</div>
+<div class="line"><span class="lineno">  163</span>    <span class="keywordflow">return</span> yMax;</div>
+<div class="line"><span class="lineno">  164</span> </div>
+<div class="line"><span class="lineno">  165</span>  a0 = (z1 - z2) / a0;</div>
+<div class="line"><span class="lineno">  166</span> </div>
+<div class="line"><span class="lineno">  167</span>  dxe = x2 - xe;</div>
+<div class="line"><span class="lineno">  168</span>  ye = A2 * exp(a0 * dxe * dxe);</div>
+<div class="line"><span class="lineno">  169</span> </div>
+<div class="line"><span class="lineno">  170</span>  <span class="keywordflow">return</span> ye;</div>
+<div class="line"><span class="lineno">  171</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a href="discrea_8h.html">discrea.h</a></li>
+    <li class="footer">Создано системой <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.1 </li>
+  </ul>
+</div>
+</body>
+</html>

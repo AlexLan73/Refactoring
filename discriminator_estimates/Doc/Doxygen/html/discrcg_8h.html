@@ -1,0 +1,347 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Discriminator Estimates (КППО/ТЗК): Файл discrcg.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+window.MathJax = {
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Discriminator Estimates (КППО/ТЗК)
+   </div>
+   <div id="projectbrief">Дискриминаторные оценки координат цели по отсчётам ДН антенны</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.16.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Поиск',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('discrcg_8h.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Файл discrcg.h</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Комплекс программ первичной обработки (КППО). Программа вычисления текущих замеров координат (ТЗК). Дискриминатор. Центр тяжести.  
+<a href="#details">Подробнее...</a></p>
+
+<p><a href="discrcg_8h_source.html">См. исходные тексты.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+Функции</h2></td></tr>
+<tr class="memitem:a2f34219caf8080f3d9a219cfb4a5e7c0" id="r_a2f34219caf8080f3d9a219cfb4a5e7c0"><td class="memItemLeft">double&#160;</td><td class="memItemRight"><a class="el" href="#a2f34219caf8080f3d9a219cfb4a5e7c0">discr2cg</a> (double A1, double A2, double x1, double x2)</td></tr>
+<tr class="memdesc:a2f34219caf8080f3d9a219cfb4a5e7c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Двухточечный дискриминатор, центр тяжести.  <br /></td></tr>
+<tr class="memitem:ab3655559ca8de2c4fa17fc6341fad94c" id="r_ab3655559ca8de2c4fa17fc6341fad94c"><td class="memItemLeft">double&#160;</td><td class="memItemRight"><a class="el" href="#ab3655559ca8de2c4fa17fc6341fad94c">discr3cg</a> (double A1, double A2, double A3, double x1, double x2, double x3)</td></tr>
+<tr class="memdesc:ab3655559ca8de2c4fa17fc6341fad94c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Трехточечный дискриминатор, центр тяжести.  <br /></td></tr>
+<tr class="memitem:a9ad0e5b9b43b3c30b233cf174c5688d3" id="r_a9ad0e5b9b43b3c30b233cf174c5688d3"><td class="memItemLeft">double&#160;</td><td class="memItemRight"><a class="el" href="#a9ad0e5b9b43b3c30b233cf174c5688d3">discrncg</a> (const double *A, const double *x, unsigned int N)</td></tr>
+<tr class="memdesc:a9ad0e5b9b43b3c30b233cf174c5688d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Дискриминатор для произвольного числа точек, центр тяжести.  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Подробное описание</h2>
+<div class="textblock"><p>Комплекс программ первичной обработки (КППО). Программа вычисления текущих замеров координат (ТЗК). Дискриминатор. Центр тяжести. </p>
+<dl class="section author"><dt>Автор</dt><dd>Федоров С.А. </dd></dl>
+<dl class="section date"><dt>Дата</dt><dd>07.05.2010 </dd></dl>
+
+<p class="definition">См. определение в файле <a class="el" href="discrcg_8h_source.html">discrcg.h</a></p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Функции</h2>
+<a id="a2f34219caf8080f3d9a219cfb4a5e7c0" name="a2f34219caf8080f3d9a219cfb4a5e7c0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2f34219caf8080f3d9a219cfb4a5e7c0">&#9670;&#160;</a></span>discr2cg()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double discr2cg </td>
+          <td>(</td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>A1</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>A2</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>x1</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>x2</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Двухточечный дискриминатор, центр тяжести. </p>
+<p>Формула: \( x_e = \frac{A_1 \cdot x_1 + A_2 \cdot x_2}{A_1 + A_2} \) </p><dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">A1</td><td>амплитуда первой точки </td></tr>
+    <tr><td class="paramname">A2</td><td>амплитуда второй точки </td></tr>
+    <tr><td class="paramname">x1</td><td>координата первой точки </td></tr>
+    <tr><td class="paramname">x2</td><td>координата второй точки </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>оценка координаты; при A1+A2=0 возвращает (x1+x2)/2</dd></dl>
+<p>Формула: xe = (A1*x1 + A2*x2) / (A1 + A2)</p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">A1</td><td>амплитуда первой точки </td></tr>
+    <tr><td class="paramname">A2</td><td>амплитуда второй точки </td></tr>
+    <tr><td class="paramname">x1</td><td>координата первой точки </td></tr>
+    <tr><td class="paramname">x2</td><td>координата второй точки </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>оценка координаты; при A1+A2=0 возвращает середину (x1+x2)/2 </dd></dl>
+
+<p class="definition">См. определение в файле <a class="el" href="discrcg_8c_source.html">discrcg.c</a> строка <a class="el" href="discrcg_8c_source.html#l00028">28</a></p>
+<div class="fragment"><div class="line"><span class="lineno">   30</span>{</div>
+<div class="line"><span class="lineno">   31</span>  <span class="keywordtype">double</span> sum = A1 + A2;</div>
+<div class="line"><span class="lineno">   32</span>  <span class="keywordflow">if</span> (fabs(sum) &lt; DBL_EPSILON)</div>
+<div class="line"><span class="lineno">   33</span>    <span class="keywordflow">return</span> (x1 + x2) * 0.5;</div>
+<div class="line"><span class="lineno">   34</span>  <span class="keywordflow">return</span> (A1 * x1 + A2 * x2) / sum;</div>
+<div class="line"><span class="lineno">   35</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ab3655559ca8de2c4fa17fc6341fad94c" name="ab3655559ca8de2c4fa17fc6341fad94c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab3655559ca8de2c4fa17fc6341fad94c">&#9670;&#160;</a></span>discr3cg()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double discr3cg </td>
+          <td>(</td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>A1</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>A2</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>A3</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>x1</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>x2</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>x3</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Трехточечный дискриминатор, центр тяжести. </p>
+<p>Формула: \( x_e = \frac{A_1 x_1 + A_2 x_2 + A_3 x_3}{A_1 + A_2 + A_3} \) </p><dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">A1</td><td>амплитуда первой точки </td></tr>
+    <tr><td class="paramname">A2</td><td>амплитуда второй точки </td></tr>
+    <tr><td class="paramname">A3</td><td>амплитуда третьей точки </td></tr>
+    <tr><td class="paramname">x1</td><td>координата первой точки </td></tr>
+    <tr><td class="paramname">x2</td><td>координата второй точки </td></tr>
+    <tr><td class="paramname">x3</td><td>координата третьей точки </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>оценка координаты; при сумме=0 возвращает x2</dd></dl>
+<p>Формула: xe = (A1*x1 + A2*x2 + A3*x3) / (A1 + A2 + A3)</p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">A1</td><td>амплитуда первой точки </td></tr>
+    <tr><td class="paramname">A2</td><td>амплитуда второй точки </td></tr>
+    <tr><td class="paramname">A3</td><td>амплитуда третьей точки </td></tr>
+    <tr><td class="paramname">x1</td><td>координата первой точки </td></tr>
+    <tr><td class="paramname">x2</td><td>координата второй точки </td></tr>
+    <tr><td class="paramname">x3</td><td>координата третьей точки </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>оценка координаты; при сумме=0 возвращает x2 (центральная точка) </dd></dl>
+
+<p class="definition">См. определение в файле <a class="el" href="discrcg_8c_source.html">discrcg.c</a> строка <a class="el" href="discrcg_8c_source.html#l00050">50</a></p>
+<div class="fragment"><div class="line"><span class="lineno">   52</span>{</div>
+<div class="line"><span class="lineno">   53</span>  <span class="keywordtype">double</span> sum = A1 + A2 + A3;</div>
+<div class="line"><span class="lineno">   54</span>  <span class="keywordflow">if</span> (fabs(sum) &lt; DBL_EPSILON)</div>
+<div class="line"><span class="lineno">   55</span>    <span class="keywordflow">return</span> x2;</div>
+<div class="line"><span class="lineno">   56</span>  <span class="keywordflow">return</span> (A1 * x1 + A2 * x2 + A3 * x3) / sum;</div>
+<div class="line"><span class="lineno">   57</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a9ad0e5b9b43b3c30b233cf174c5688d3" name="a9ad0e5b9b43b3c30b233cf174c5688d3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9ad0e5b9b43b3c30b233cf174c5688d3">&#9670;&#160;</a></span>discrncg()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double discrncg </td>
+          <td>(</td>
+          <td class="paramtype">const double *</td>          <td class="paramname"><span class="paramname"><em>A</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double *</td>          <td class="paramname"><span class="paramname"><em>x</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned int</td>          <td class="paramname"><span class="paramname"><em>N</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Дискриминатор для произвольного числа точек, центр тяжести. </p>
+<p>Формула: \( x_e = \frac{\sum_{i=0}^{N-1} A_i \cdot x_i}{\sum_{i=0}^{N-1} A_i} \) </p><dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">A</td><td>массив амплитуд (N элементов) </td></tr>
+    <tr><td class="paramname">x</td><td>массив координат (N элементов) </td></tr>
+    <tr><td class="paramname">N</td><td>число точек </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>оценка координаты; при sum(A)=0 возвращает x[N/2]</dd></dl>
+<p>Формула: xe = sum(A[i]*x[i]) / sum(A[i])</p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">A</td><td>массив амплитуд точек (N элементов) </td></tr>
+    <tr><td class="paramname">x</td><td>массив координат точек (N элементов) </td></tr>
+    <tr><td class="paramname">N</td><td>число точек </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>оценка координаты; при sum(A)=0 возвращает x[N/2] </dd></dl>
+
+<p class="definition">См. определение в файле <a class="el" href="discrcg_8c_source.html">discrcg.c</a> строка <a class="el" href="discrcg_8c_source.html#l00069">69</a></p>
+<div class="fragment"><div class="line"><span class="lineno">   70</span>{</div>
+<div class="line"><span class="lineno">   71</span>  <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> n;</div>
+<div class="line"><span class="lineno">   72</span>  <span class="keywordtype">double</span> Axs = 0.0, As = 0.0;</div>
+<div class="line"><span class="lineno">   73</span> </div>
+<div class="line"><span class="lineno">   74</span>  <span class="keywordflow">for</span> (n = 0; n &lt; N; n++) {</div>
+<div class="line"><span class="lineno">   75</span>    As += A[n];</div>
+<div class="line"><span class="lineno">   76</span>    Axs += A[n] * x[n];</div>
+<div class="line"><span class="lineno">   77</span>  }</div>
+<div class="line"><span class="lineno">   78</span> </div>
+<div class="line"><span class="lineno">   79</span>  <span class="keywordflow">if</span> (fabs(As) &lt; DBL_EPSILON) {</div>
+<div class="line"><span class="lineno">   80</span>    <span class="keywordflow">if</span> (N &gt; 0)</div>
+<div class="line"><span class="lineno">   81</span>      <span class="keywordflow">return</span> x[N / 2];</div>
+<div class="line"><span class="lineno">   82</span>    <span class="keywordflow">return</span> 0.0;</div>
+<div class="line"><span class="lineno">   83</span>  }</div>
+<div class="line"><span class="lineno">   84</span>  <span class="keywordflow">return</span> Axs / As;</div>
+<div class="line"><span class="lineno">   85</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a href="discrcg_8h.html">discrcg.h</a></li>
+    <li class="footer">Создано системой <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.1 </li>
+  </ul>
+</div>
+</body>
+</html>

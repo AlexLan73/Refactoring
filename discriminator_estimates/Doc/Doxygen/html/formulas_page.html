@@ -1,0 +1,265 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Discriminator Estimates (КППО/ТЗК): Математические формулы</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+window.MathJax = {
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Discriminator Estimates (КППО/ТЗК)
+   </div>
+   <div id="projectbrief">Дискриминаторные оценки координат цели по отсчётам ДН антенны</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.16.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Поиск',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('formulas_page.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div><div class="header">
+  <div class="headertitle"><div class="title">Математические формулы </div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p><a class="anchor" id="md_pages_2formulas"></a></p>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md0"></a>
+Полное описание формул дискриминаторных оценок</h1>
+<hr  />
+<h1 class="doxsection"><a class="anchor" id="autotoc_md2"></a>
+1. Центр тяжести (CG — Center of Gravity)</h1>
+<p>Простейший метод. Координата оценивается как взвешенное среднее.</p>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md3"></a>
+2-точечный (discr2cg)</h2>
+<p class="formulaDsp">
+\[x_e = \frac{A_1 \cdot x_1 + A_2 \cdot x_2}{A_1 + A_2}
+\]
+</p>
+<p><b>Геометрический смысл</b>: координата центра масс двух точек с "массами" \( A_1 \) и \( A_2 \).</p>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md4"></a>
+3-точечный (discr3cg)</h2>
+<p class="formulaDsp">
+\[x_e = \frac{A_1 \cdot x_1 + A_2 \cdot x_2 + A_3 \cdot x_3}{A_1 + A_2 + A_3}
+\]
+</p>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md5"></a>
+N-точечный (discrncg)</h2>
+<p class="formulaDsp">
+\[x_e = \frac{\sum_{i=0}^{N-1} A_i \cdot x_i}{\sum_{i=0}^{N-1} A_i}
+\]
+</p>
+<p><b>Защита</b>: при \( \sum A_i = 0 \) возвращается средняя точка (ERR-005 fix).</p>
+<hr  />
+<h1 class="doxsection"><a class="anchor" id="autotoc_md7"></a>
+2. Суммарно-разностный (SD — Sum-Difference)</h1>
+<p>Классический моноимпульсный метод. Использует отношение разности к сумме.</p>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md8"></a>
+2-точечный (discr2sd)</h2>
+<p class="formulaDsp">
+\[x_c = \frac{x_1 + x_2}{2}
+\]
+</p>
+<p class="formulaDsp">
+\[\Delta x = c \cdot \frac{A_2 - A_1}{A_2 + A_1}
+\]
+</p>
+<p class="formulaDsp">
+\[x_e = x_c + \Delta x
+\]
+</p>
+<p>где \( c \) — коэффициент крутизны дискриминаторной характеристики.</p>
+<p><b>Физический смысл</b>: \( \frac{A_2 - A_1}{A_2 + A_1} \) — нормированная разность, пропорциональная отклонению цели от середины. Коэффициент \( c \) зависит от ширины ДН и шага сетки.</p>
+<hr  />
+<h1 class="doxsection"><a class="anchor" id="autotoc_md10"></a>
+3. Квадратичная аппроксимация (QA — Quadratic Approximation)</h1>
+<p>Через 3 точки проводится парабола \( y = a x^2 + b x + c \), находится вершина.</p>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md11"></a>
+3-точечный (discr3qa)</h2>
+<p class="formulaDsp">
+\[A_o = \frac{A_2 - A_1}{A_2 - A_3}
+\]
+</p>
+<p class="formulaDsp">
+\[x_e = \frac{1}{2} \cdot \frac{(A_o - 1) \cdot x_2^2 - A_o \cdot x_3^2 + x_1^2}{(A_o - 1) \cdot x_2 - A_o \cdot x_3 + x_1}
+\]
+</p>
+<p><b>Граничные случаи</b> (ERR-004 fix, используется <span class="tt">DBL_EPSILON</span>):</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Условие  </th><th class="markdownTableHeadNone">Результат  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">\( A_1 = A_2 = A_3 \)  </td><td class="markdownTableBodyNone">\( x_e = x_2 \) (центральная точка)  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">\( A_2 = A_3 \), \( A_1 &gt; A_2 \)  </td><td class="markdownTableBodyNone">\( x_e = x_1 \)  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">\( A_2 = A_3 \), \( A_1 &lt; A_2 \)  </td><td class="markdownTableBodyNone">\( x_e = \frac{x_2 + x_3}{2} \)  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">\( A_1 = A_2 \), \( A_3 &gt; A_2 \)  </td><td class="markdownTableBodyNone">\( x_e = x_3 \)  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">\( A_1 = A_2 \), \( A_3 &lt; A_2 \)  </td><td class="markdownTableBodyNone">\( x_e = \frac{x_1 + x_2}{2} \)  </td></tr>
+</table>
+<hr  />
+<h1 class="doxsection"><a class="anchor" id="autotoc_md13"></a>
+4. Экспоненциальная аппроксимация (EA — Exponential Approximation)</h1>
+<p>Наиболее точный метод. Моделирует ДН функцией Гаусса:</p>
+<p class="formulaDsp">
+\[y(x) = A_{max} \cdot \exp\left( -a \cdot (x - x_0)^2 \right)
+\]
+</p>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md14"></a>
+Алгоритм (discr3ea)</h2>
+<p><b>Шаг 1</b>: Проверка входных данных</p><ul>
+<li>Все амплитуды должны быть &gt; 0</li>
+<li>Не все амплитуды равны</li>
+</ul>
+<p><b>Шаг 2</b>: Сортировка по возрастанию координаты \( x \)</p>
+<p><b>Шаг 3</b>: Проверка выпуклости</p><ul>
+<li>Максимум должен быть в центре (а не на краю)</li>
+<li>При вогнутости → <span class="tt">EXIT_FAILURE</span></li>
+</ul>
+<p><b>Шаг 4</b>: Логарифмирование</p>
+<p class="formulaDsp">
+\[z_i = \ln(A_i), \quad i = 1, 2, 3
+\]
+</p>
+<p>Задача сводится к параболической аппроксимации в логарифмическом масштабе: \( z(x) = -a(x - x_0)^2 + \ln(A_{max}) \)</p>
+<p><b>Шаг 5</b>: Вершина параболы</p>
+<p class="formulaDsp">
+\[\alpha = z_1 (f_2^2 - f_3^2) + z_2 (f_3^2 - f_1^2) + z_3 (f_1^2 - f_2^2)
+\]
+</p>
+<p class="formulaDsp">
+\[\beta = z_1 (f_2 - f_3) + z_2 (f_3 - f_1) + z_3 (f_1 - f_2)
+\]
+</p>
+<p class="formulaDsp">
+\[x_e = \frac{\alpha}{2 \beta}
+\]
+</p>
+<p>где \( f_i \) — координаты после сортировки.</p>
+<p><b>Шаг 6</b>: Ограничение на вылет</p>
+<p class="formulaDsp">
+\[f_1 - \frac{f_3 - f_1}{2} \leq x_e \leq f_3 + \frac{f_3 - f_1}{2}
+\]
+</p>
+<p>Оценка не должна выходить за пределы области зондирования более чем на полшага.</p>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md15"></a>
+Уточнение амплитуды (discr3eaY)</h2>
+<p class="formulaDsp">
+\[a_0 = \frac{z_1 - z_2}{2 x_e (x_1 - x_2) - x_1^2 + x_2^2}
+\]
+</p>
+<p class="formulaDsp">
+\[y_e = A_2 \cdot \exp\left( a_0 \cdot (x_2 - x_e)^2 \right)
+\]
+</p>
+<hr  />
+<h1 class="doxsection"><a class="anchor" id="autotoc_md17"></a>
+5. Обёртка discr3() — коэффициент пересчёта</h1>
+<p>Для обёрток <span class="tt"><a class="el" href="discr__common_8h.html#ada0fa80ec1c0edd0e0135de4d4a01c5d" title="Трехточечный дискриминатор (обёртка).">discr3()</a></span> и <span class="tt"><a class="el" href="discr__common_8h.html#ac4d4e1deafa0bcc5b3c0ba33b1190c43" title="Адаптер трехточечного дискриминатора для статических массивов 3x3.">discr3_()</a></span> координаты пересчитываются:</p>
+<p class="formulaDsp">
+\[c = \frac{2 \pi \cdot dx}{\lambda}
+\]
+</p>
+<p>где \( dx \) — шаг антенной решётки, \( \lambda \) — длина волны.</p>
+<p>Координаты масштабируются: \( x&#39; = x \cdot c \), оценка возвращается в исходных единицах: \( x_e = x&#39;_e / c \).</p>
+<dl class="section note"><dt>Заметки</dt><dd>После рефакторинга (ERR-003 fix) входные массивы <b>не модифицируются</b> — координаты умножаются на \( c \) при передаче в дискриминатор, а не в массиве. </dd></dl>
+</div></div><!-- contents -->
+</div><!-- PageDoc -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="index.html">Главная страница</a></li>
+    <li class="footer">Создано системой <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.1 </li>
+  </ul>
+</div>
+</body>
+</html>
