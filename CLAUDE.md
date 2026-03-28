@@ -71,8 +71,9 @@ Refactoring/
 │   ├── src/             # Исходный код (.c/.cpp)
 │   ├── src_new/         # (опционально) C++ вариант с суффиксом _new
 │   ├── python/          # Python биндинги (ctypes для C, pybind11 для C++)
-│   ├── test_cpp/        # C++ тесты (*.hpp + all_test.hpp + README.md)
-│   ├── test_python/     # Python тесты (test_*.py)
+│   ├── test_cpp/        # C++ тесты простые (*.hpp + all_test.hpp)
+│   ├── test_gtest/      # C++ тесты Google Test (gtest, FetchContent)
+│   ├── test_python/     # Python тесты (test_*.py) + графики
 │   └── CMakeLists.txt
 └── scripts/             # Вспомогательные скрипты (сборка, тесты)
 ```
@@ -306,6 +307,22 @@ inline void run_all() {
 }
 }  // namespace
 ```
+
+### Структура test_gtest/ (Google Test)
+
+```
+test_gtest/
+├── test_discr_cg_gtest.cpp     # GTest: центр тяжести
+├── test_discr_sd_gtest.cpp     # GTest: суммарно-разностный
+├── test_discr_qa_gtest.cpp     # GTest: квадратичная аппроксимация
+├── test_discr_ea_gtest.cpp     # GTest: экспоненциальная аппроксимация
+└── test_discr_common_gtest.cpp # GTest: обёртки
+```
+
+**Подключение**: CMake FetchContent (автоматическая загрузка googletest v1.15.2)
+**Сборка**: `cmake --build build --target test_discr_gtest`
+**Запуск**: `./build/test_discr_gtest` или `ctest --test-dir build`
+**Данные**: экспериментальные данные — отсчёты sinc(x) = sin(x)/x (ДН антенны)
 
 ---
 
