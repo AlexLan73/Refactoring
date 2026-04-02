@@ -3,20 +3,25 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
-<meta name="generator" content="Doxygen 1.16.1"/>
+<meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Discriminator Estimates (КППО/ТЗК): Исходный файл discrea.c</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
-<script type="text/javascript" src="clipboard.js"></script>
-<link href="navtree.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="navtreedata.js"></script>
-<script type="text/javascript" src="navtree.js"></script>
-<script type="text/javascript" src="cookie.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript">
+window.MathJax = {
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -35,38 +40,28 @@
 </table>
 </div>
 <!-- end header part -->
-<!-- Создано системой Doxygen 1.16.1 -->
+<!-- Создано системой Doxygen 1.9.8 -->
 <script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
 var searchBox = new SearchBox("searchBox", "search/",'.html');
-</script>
-<script type="text/javascript">
-$(function() { codefold.init(); });
+/* @license-end */
 </script>
 <script type="text/javascript" src="menudata.js"></script>
 <script type="text/javascript" src="menu.js"></script>
 <script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
 $(function() {
-  initMenu('',true,false,'search.php','Поиск',true);
-  $(function() { init_search(); });
+  initMenu('',true,false,'search.php','Поиск');
+  $(document).ready(function() { init_search(); });
 });
+/* @license-end */
 </script>
 <div id="main-nav"></div>
-</div><!-- top -->
-<div id="side-nav" class="ui-resizable side-nav-resizable">
-  <div id="nav-tree">
-    <div id="nav-tree-contents">
-      <div id="nav-sync" class="sync"></div>
-    </div>
-  </div>
-  <div id="splitbar" style="-moz-user-select:none;" 
-       class="ui-resizable-handle">
-  </div>
-</div>
 <script type="text/javascript">
-$(function(){initNavTree('discrea_8c_source.html','',''); });
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function() { init_codefold(0); });
+/* @license-end */
 </script>
-<div id="container">
-<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -88,17 +83,21 @@ $(function(){initNavTree('discrea_8c_source.html','',''); });
 </div>
 </div>
 
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li>  </ul>
+</div>
+</div><!-- top -->
 <div class="header">
   <div class="headertitle"><div class="title">discrea.c</div></div>
 </div><!--header-->
 <div class="contents">
-<a href="discrea_8c.html">См. документацию.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span></div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
+<a href="discrea_8c.html">См. документацию.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span> </div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#include &lt;float.h&gt;</span></div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#include &lt;math.h&gt;</span></div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="preprocessor">#include &lt;stdlib.h&gt;</span></div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="preprocessor">#include &quot;<a class="code" href="discrea_8h.html">discrea.h</a>&quot;</span></div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
 <div class="foldopen" id="foldopen00022" data-start="{" data-end="};">
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="structaxstr__t.html">   22</a></span><span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno"><a class="line" href="structaxstr__t.html#ad0ebf0e44c5b4d91881919a56737ff86">   23</a></span>  <span class="keywordtype">double</span> <a class="code hl_variable" href="structaxstr__t.html#ad0ebf0e44c5b4d91881919a56737ff86">a</a>;  </div>
@@ -107,7 +106,7 @@ $(function(){initNavTree('discrea_8c_source.html','',''); });
 </div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="keyword">static</span> <span class="keywordtype">int</span> <a class="code hl_function" href="discrea_8c.html#a3da7a19413de8b894b042ac61bc441e4">compare_by_x</a>(<span class="keyword">const</span> <span class="keywordtype">void</span> *p1, <span class="keyword">const</span> <span class="keywordtype">void</span> *p2);</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
 <div class="foldopen" id="foldopen00050" data-start="{" data-end="}">
 <div class="line"><a id="l00050" name="l00050"></a><span class="lineno"><a class="line" href="discrea_8h.html#a1d0a905788c41a528b49032ecb9c2748">   50</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="discrea_8c.html#a1d0a905788c41a528b49032ecb9c2748">discr3ea</a>(<span class="keywordtype">double</span> A1, <span class="keywordtype">double</span> A2, <span class="keywordtype">double</span> A3,</div>
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>             <span class="keywordtype">double</span> x1, <span class="keywordtype">double</span> x2, <span class="keywordtype">double</span> x3, <span class="keywordtype">double</span> *xe)</div>
@@ -193,7 +192,7 @@ $(function(){initNavTree('discrea_8c_source.html','',''); });
 <div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>  <span class="keywordflow">return</span> EXIT_SUCCESS;</div>
 <div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>}</div>
 </div>
-<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span></div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span> </div>
 <div class="foldopen" id="foldopen00146" data-start="{" data-end="}">
 <div class="line"><a id="l00146" name="l00146"></a><span class="lineno"><a class="line" href="discrea_8h.html#aeaf78c0e3173b3e10d91f87f58a171d0">  146</a></span><span class="keywordtype">double</span> <a class="code hl_function" href="discrea_8c.html#aeaf78c0e3173b3e10d91f87f58a171d0">discr3eaY</a>(<span class="keywordtype">double</span> A1, <span class="keywordtype">double</span> A2, <span class="keywordtype">double</span> x1, <span class="keywordtype">double</span> x2, <span class="keywordtype">double</span> xe)</div>
 <div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>{</div>
@@ -222,7 +221,7 @@ $(function(){initNavTree('discrea_8c_source.html','',''); });
 <div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>  <span class="keywordflow">return</span> ye;</div>
 <div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>}</div>
 </div>
-<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span></div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span> </div>
 <div class="foldopen" id="foldopen00176" data-start="{" data-end="}">
 <div class="line"><a id="l00176" name="l00176"></a><span class="lineno"><a class="line" href="discrea_8c.html#a3da7a19413de8b894b042ac61bc441e4">  176</a></span><span class="keyword">static</span> <span class="keywordtype">int</span> <a class="code hl_function" href="discrea_8c.html#a3da7a19413de8b894b042ac61bc441e4">compare_by_x</a>(<span class="keyword">const</span> <span class="keywordtype">void</span> *p1, <span class="keyword">const</span> <span class="keywordtype">void</span> *p2)</div>
 <div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>{</div>
@@ -236,22 +235,17 @@ $(function(){initNavTree('discrea_8c_source.html','',''); });
 <div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>  <span class="keywordflow">return</span> 0;</div>
 <div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>}</div>
 </div>
-<div class="ttc" id="adiscrea_8c_html_a1d0a905788c41a528b49032ecb9c2748"><div class="ttname"><a href="discrea_8c.html#a1d0a905788c41a528b49032ecb9c2748">discr3ea</a></div><div class="ttdeci">int discr3ea(double A1, double A2, double A3, double x1, double x2, double x3, double *xe)</div><div class="ttdoc">Трехточечный дискриминатор, экспоненциальная аппроксимация.</div><div class="ttdef"><b>Определения</b> <a href="#l00050">discrea.c:50</a></div></div>
-<div class="ttc" id="adiscrea_8c_html_a3da7a19413de8b894b042ac61bc441e4"><div class="ttname"><a href="discrea_8c.html#a3da7a19413de8b894b042ac61bc441e4">compare_by_x</a></div><div class="ttdeci">static int compare_by_x(const void *p1, const void *p2)</div><div class="ttdoc">Сортировка пар (амплитуда, координата) по возрастанию координаты.</div><div class="ttdef"><b>Определения</b> <a href="#l00176">discrea.c:176</a></div></div>
-<div class="ttc" id="adiscrea_8c_html_aeaf78c0e3173b3e10d91f87f58a171d0"><div class="ttname"><a href="discrea_8c.html#aeaf78c0e3173b3e10d91f87f58a171d0">discr3eaY</a></div><div class="ttdeci">double discr3eaY(double A1, double A2, double x1, double x2, double xe)</div><div class="ttdoc">Уточнение амплитуды по экспоненциальной аппроксимации.</div><div class="ttdef"><b>Определения</b> <a href="#l00146">discrea.c:146</a></div></div>
+<div class="ttc" id="adiscrea_8c_html_a1d0a905788c41a528b49032ecb9c2748"><div class="ttname"><a href="discrea_8c.html#a1d0a905788c41a528b49032ecb9c2748">discr3ea</a></div><div class="ttdeci">int discr3ea(double A1, double A2, double A3, double x1, double x2, double x3, double *xe)</div><div class="ttdoc">Трехточечный дискриминатор, экспоненциальная аппроксимация.</div><div class="ttdef"><b>Definition</b> <a href="discrea_8c_source.html#l00050">discrea.c:50</a></div></div>
+<div class="ttc" id="adiscrea_8c_html_a3da7a19413de8b894b042ac61bc441e4"><div class="ttname"><a href="discrea_8c.html#a3da7a19413de8b894b042ac61bc441e4">compare_by_x</a></div><div class="ttdeci">static int compare_by_x(const void *p1, const void *p2)</div><div class="ttdoc">Сортировка пар (амплитуда, координата) по возрастанию координаты.</div><div class="ttdef"><b>Definition</b> <a href="discrea_8c_source.html#l00176">discrea.c:176</a></div></div>
+<div class="ttc" id="adiscrea_8c_html_aeaf78c0e3173b3e10d91f87f58a171d0"><div class="ttname"><a href="discrea_8c.html#aeaf78c0e3173b3e10d91f87f58a171d0">discr3eaY</a></div><div class="ttdeci">double discr3eaY(double A1, double A2, double x1, double x2, double xe)</div><div class="ttdoc">Уточнение амплитуды по экспоненциальной аппроксимации.</div><div class="ttdef"><b>Definition</b> <a href="discrea_8c_source.html#l00146">discrea.c:146</a></div></div>
 <div class="ttc" id="adiscrea_8h_html"><div class="ttname"><a href="discrea_8h.html">discrea.h</a></div><div class="ttdoc">Комплекс программ первичной обработки (КППО). Программа вычисления текущих замеров координат (ТЗК)....</div></div>
-<div class="ttc" id="astructaxstr__t_html"><div class="ttname"><a href="structaxstr__t.html">axstr_t</a></div><div class="ttdoc">Структура для сортировки пар (амплитуда, координата).</div><div class="ttdef"><b>Определения</b> <a href="#l00022">discrea.c:22</a></div></div>
-<div class="ttc" id="astructaxstr__t_html_a33b12c05f89f90d477279098cb64908d"><div class="ttname"><a href="structaxstr__t.html#a33b12c05f89f90d477279098cb64908d">axstr_t::x</a></div><div class="ttdeci">double x</div><div class="ttdoc">координата</div><div class="ttdef"><b>Определения</b> <a href="#l00024">discrea.c:24</a></div></div>
-<div class="ttc" id="astructaxstr__t_html_ad0ebf0e44c5b4d91881919a56737ff86"><div class="ttname"><a href="structaxstr__t.html#ad0ebf0e44c5b4d91881919a56737ff86">axstr_t::a</a></div><div class="ttdeci">double a</div><div class="ttdoc">амплитуда</div><div class="ttdef"><b>Определения</b> <a href="#l00023">discrea.c:23</a></div></div>
+<div class="ttc" id="astructaxstr__t_html"><div class="ttname"><a href="structaxstr__t.html">axstr_t</a></div><div class="ttdoc">Структура для сортировки пар (амплитуда, координата).</div><div class="ttdef"><b>Definition</b> <a href="discrea_8c_source.html#l00022">discrea.c:22</a></div></div>
+<div class="ttc" id="astructaxstr__t_html_a33b12c05f89f90d477279098cb64908d"><div class="ttname"><a href="structaxstr__t.html#a33b12c05f89f90d477279098cb64908d">axstr_t::x</a></div><div class="ttdeci">double x</div><div class="ttdoc">координата</div><div class="ttdef"><b>Definition</b> <a href="discrea_8c_source.html#l00024">discrea.c:24</a></div></div>
+<div class="ttc" id="astructaxstr__t_html_ad0ebf0e44c5b4d91881919a56737ff86"><div class="ttname"><a href="structaxstr__t.html#ad0ebf0e44c5b4d91881919a56737ff86">axstr_t::a</a></div><div class="ttdeci">double a</div><div class="ttdoc">амплитуда</div><div class="ttdef"><b>Definition</b> <a href="discrea_8c_source.html#l00023">discrea.c:23</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
-</div><!-- doc-content -->
-</div><!-- container -->
 <!-- start footer part -->
-<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
-  <ul>
-    <li class="navelem"><a href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a href="discrea_8c.html">discrea.c</a></li>
-    <li class="footer">Создано системой <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.1 </li>
-  </ul>
-</div>
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8
+</small></address>
 </body>
 </html>

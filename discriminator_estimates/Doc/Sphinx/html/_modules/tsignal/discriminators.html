@@ -1,0 +1,373 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ru" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>tsignal.discriminators &mdash; Discriminator Estimates — FFT Frequency Discriminators</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=9ca2116e"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/translations.js?v=cd1d70c9"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Алфавитный указатель" href="../../genindex.html" />
+    <link rel="search" title="Поиск" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Discriminator Estimates — FFT Frequency
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Поиск в документации" aria-label="Поиск в документации" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Меню навигации">
+              <p class="caption" role="heading"><span class="caption-text">Содержание:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">Обзор</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tests.html">Тесты</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Меню навигации для мобильных устройств" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Discriminator Estimates — FFT Frequency</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Навигация по страницам">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Код модуля</a></li>
+      <li class="breadcrumb-item active">tsignal.discriminators</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Исходный код tsignal.discriminators</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Частотные дискриминаторы FFT-спектра.</span>
+
+<span class="sd">Точная реализация по C-исходникам из проекта discriminator_estimates</span>
+<span class="sd">(Refactoring/discriminator_estimates/src/).</span>
+
+<span class="sd">Методы:</span>
+<span class="sd">  lay — 3-точечный Jacobsen: -Re{(Sp-Sm)/(2S0-Sm-Sp)} * fd/N  (fcalcdelay.m)</span>
+<span class="sd">  exp — 3-точечный, парабола на log|S| с проверками  (discr3ea.c)</span>
+<span class="sd">  sqr — 3-точечный, парабола по формуле Ao           (discr3qa.c)</span>
+<span class="sd">  sd  — 2-точечный, суммарно-разностный              (discrsd.c)</span>
+<span class="sd">  cg  — 2-точечный, центр тяжести                    (discrcg.c)</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Callable</span>
+
+
+<span class="c1"># --------------------------------------------------------------------------- #</span>
+<span class="c1">#  Вспомогательные функции                                                     #</span>
+<span class="c1"># --------------------------------------------------------------------------- #</span>
+
+<span class="k">def</span> <span class="nf">_peak_triplet</span><span class="p">(</span><span class="n">fft_data</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Вернуть индексы (k_m, k, k_p) трёх бинов вокруг максимума.&quot;&quot;&quot;</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">fft_data</span><span class="p">)))</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">fft_data</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="n">N</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="p">(</span><span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="n">N</span>
+
+
+<span class="k">def</span> <span class="nf">_top2</span><span class="p">(</span><span class="n">fft_data</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Вернуть индексы двух бинов с наибольшим модулем (k1=max, k2=second).&quot;&quot;&quot;</span>
+    <span class="n">mag</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">fft_data</span><span class="p">)</span>
+    <span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">mag</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">idx</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]),</span> <span class="nb">int</span><span class="p">(</span><span class="n">idx</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span>
+
+
+<span class="c1"># --------------------------------------------------------------------------- #</span>
+<span class="c1">#  lay — Jacobsen (из fcalcdelay.m)                                            #</span>
+<span class="c1"># --------------------------------------------------------------------------- #</span>
+
+<div class="viewcode-block" id="discriminator_lay">
+<a class="viewcode-back" href="../../api.html#tsignal.discriminators.discriminator_lay">[документация]</a>
+<span class="k">def</span> <span class="nf">discriminator_lay</span><span class="p">(</span><span class="n">fft_data</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+                      <span class="n">f_axis</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Метод «Лайонса» — формула Jacobsen из fcalcdelay.m.</span>
+
+<span class="sd">    sigmapeak = (ffts(k+1)-ffts(k-1)) / (2*ffts(k)-ffts(k-1)-ffts(k+1))</span>
+<span class="sd">    f = fmax - real(sigmapeak) * fd / count</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">k_m</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">k_p</span> <span class="o">=</span> <span class="n">_peak_triplet</span><span class="p">(</span><span class="n">fft_data</span><span class="p">)</span>
+    <span class="n">S_m</span> <span class="o">=</span> <span class="n">fft_data</span><span class="p">[</span><span class="n">k_m</span><span class="p">]</span>
+    <span class="n">S_0</span> <span class="o">=</span> <span class="n">fft_data</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+    <span class="n">S_p</span> <span class="o">=</span> <span class="n">fft_data</span><span class="p">[</span><span class="n">k_p</span><span class="p">]</span>
+    <span class="n">denom</span> <span class="o">=</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">S_0</span> <span class="o">-</span> <span class="n">S_m</span> <span class="o">-</span> <span class="n">S_p</span>
+    <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">denom</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mf">1e-60</span><span class="p">:</span>
+        <span class="n">sigmapeak</span> <span class="o">=</span> <span class="p">(</span><span class="n">S_p</span> <span class="o">-</span> <span class="n">S_m</span><span class="p">)</span> <span class="o">/</span> <span class="n">denom</span>
+        <span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">fft_data</span><span class="p">)</span>
+        <span class="n">fd</span> <span class="o">=</span> <span class="p">(</span><span class="n">f_axis</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">f_axis</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">*</span> <span class="n">N</span>
+        <span class="n">f_est</span> <span class="o">=</span> <span class="n">f_axis</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">sigmapeak</span><span class="p">)</span> <span class="o">*</span> <span class="n">fd</span> <span class="o">/</span> <span class="n">N</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">f_est</span> <span class="o">=</span> <span class="n">f_axis</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">f_est</span><span class="p">,</span> <span class="nb">abs</span><span class="p">(</span><span class="n">fft_data</span><span class="p">[</span><span class="n">k</span><span class="p">])</span></div>
+
+
+
+<span class="c1"># --------------------------------------------------------------------------- #</span>
+<span class="c1">#  exp — discr3ea.c (парабола на log с проверками)                             #</span>
+<span class="c1"># --------------------------------------------------------------------------- #</span>
+
+<div class="viewcode-block" id="discriminator_exp">
+<a class="viewcode-back" href="../../api.html#tsignal.discriminators.discriminator_exp">[документация]</a>
+<span class="k">def</span> <span class="nf">discriminator_exp</span><span class="p">(</span><span class="n">fft_data</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+                      <span class="n">f_axis</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Экспоненциальная 3-точечная интерполяция — из discr3ea.c.</span>
+
+<span class="sd">    Алгоритм:</span>
+<span class="sd">      1. Сортировка 3 точек по x (координате)</span>
+<span class="sd">      2. Проверка на выпуклость (максимум в центре)</span>
+<span class="sd">      3. Логарифмирование: z = ln(A)</span>
+<span class="sd">      4. Парабола z(x), вершина: xe = 0.5 * a / b</span>
+<span class="sd">      5. Ограничение на вылет за пределы ±1.5·(f3-f1) от краёв</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">k_m</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">k_p</span> <span class="o">=</span> <span class="n">_peak_triplet</span><span class="p">(</span><span class="n">fft_data</span><span class="p">)</span>
+    <span class="n">amp_k</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">fft_data</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>
+    <span class="n">eps</span> <span class="o">=</span> <span class="mf">1e-300</span>
+
+    <span class="c1"># Собираем 3 точки (амплитуда, частота)</span>
+    <span class="n">points</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">fft_data</span><span class="p">[</span><span class="n">k_m</span><span class="p">]),</span> <span class="n">f_axis</span><span class="p">[</span><span class="n">k_m</span><span class="p">]),</span>
+        <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">fft_data</span><span class="p">[</span><span class="n">k</span><span class="p">]),</span>   <span class="n">f_axis</span><span class="p">[</span><span class="n">k</span><span class="p">]),</span>
+        <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">fft_data</span><span class="p">[</span><span class="n">k_p</span><span class="p">]),</span> <span class="n">f_axis</span><span class="p">[</span><span class="n">k_p</span><span class="p">]),</span>
+    <span class="p">]</span>
+
+    <span class="n">A1</span><span class="p">,</span> <span class="n">A2</span><span class="p">,</span> <span class="n">A3</span> <span class="o">=</span> <span class="n">points</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">points</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">points</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="c1"># Проверка: все амплитуды &gt; 0</span>
+    <span class="k">if</span> <span class="n">A1</span> <span class="o">&lt;</span> <span class="n">eps</span> <span class="ow">or</span> <span class="n">A2</span> <span class="o">&lt;</span> <span class="n">eps</span> <span class="ow">or</span> <span class="n">A3</span> <span class="o">&lt;</span> <span class="n">eps</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">f_axis</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">amp_k</span>
+
+    <span class="c1"># Проверка: не все равны</span>
+    <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">A1</span> <span class="o">-</span> <span class="n">A2</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">eps</span> <span class="ow">and</span> <span class="nb">abs</span><span class="p">(</span><span class="n">A2</span> <span class="o">-</span> <span class="n">A3</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">eps</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">f_axis</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">amp_k</span>
+
+    <span class="c1"># Сортировка по координате (возрастание x)</span>
+    <span class="n">points</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">p</span><span class="p">:</span> <span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">a1</span><span class="p">,</span> <span class="n">f1</span> <span class="o">=</span> <span class="n">points</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">a2</span><span class="p">,</span> <span class="n">f2</span> <span class="o">=</span> <span class="n">points</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">a3</span><span class="p">,</span> <span class="n">f3</span> <span class="o">=</span> <span class="n">points</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+
+    <span class="c1"># Проверка на выпуклость</span>
+    <span class="n">d12</span> <span class="o">=</span> <span class="n">a1</span> <span class="o">-</span> <span class="n">a2</span>
+    <span class="n">d23</span> <span class="o">=</span> <span class="n">a2</span> <span class="o">-</span> <span class="n">a3</span>
+    <span class="n">d13</span> <span class="o">=</span> <span class="n">a1</span> <span class="o">-</span> <span class="n">a3</span>
+    <span class="c1"># Вогнутость: максимум справа</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">d12</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">d23</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">d12</span> <span class="o">&gt;</span> <span class="n">d23</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">d12</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">d23</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">d13</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">f3</span><span class="p">,</span> <span class="n">amp_k</span>
+    <span class="c1"># Вогнутость: максимум слева</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">d12</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">d23</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">d12</span> <span class="o">&gt;</span> <span class="n">d23</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">d12</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">d23</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">d13</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">f1</span><span class="p">,</span> <span class="n">amp_k</span>
+
+    <span class="c1"># Логарифмирование</span>
+    <span class="n">z1</span><span class="p">,</span> <span class="n">z2</span><span class="p">,</span> <span class="n">z3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">a1</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">a2</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">a3</span><span class="p">)</span>
+
+    <span class="c1"># Коэффициенты параболы</span>
+    <span class="n">a_coeff</span> <span class="o">=</span> <span class="n">z1</span> <span class="o">*</span> <span class="p">(</span><span class="n">f2</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">f3</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">z2</span> <span class="o">*</span> <span class="p">(</span><span class="n">f3</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">f1</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">z3</span> <span class="o">*</span> <span class="p">(</span><span class="n">f1</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">f2</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">b_coeff</span> <span class="o">=</span> <span class="n">z1</span> <span class="o">*</span> <span class="p">(</span><span class="n">f2</span> <span class="o">-</span> <span class="n">f3</span><span class="p">)</span> <span class="o">+</span> <span class="n">z2</span> <span class="o">*</span> <span class="p">(</span><span class="n">f3</span> <span class="o">-</span> <span class="n">f1</span><span class="p">)</span> <span class="o">+</span> <span class="n">z3</span> <span class="o">*</span> <span class="p">(</span><span class="n">f1</span> <span class="o">-</span> <span class="n">f2</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">b_coeff</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-300</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">f_axis</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">amp_k</span>
+
+    <span class="c1"># Вершина параболы</span>
+    <span class="n">xe</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">a_coeff</span> <span class="o">/</span> <span class="n">b_coeff</span>
+
+    <span class="c1"># Ограничение на вылет</span>
+    <span class="n">span</span> <span class="o">=</span> <span class="n">f3</span> <span class="o">-</span> <span class="n">f1</span>
+    <span class="k">if</span> <span class="n">xe</span> <span class="o">&gt;</span> <span class="n">f3</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">span</span><span class="p">:</span>
+        <span class="n">xe</span> <span class="o">=</span> <span class="n">f3</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">span</span>
+    <span class="k">if</span> <span class="n">xe</span> <span class="o">&lt;</span> <span class="n">f1</span> <span class="o">-</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">span</span><span class="p">:</span>
+        <span class="n">xe</span> <span class="o">=</span> <span class="n">f1</span> <span class="o">-</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">span</span>
+
+    <span class="k">return</span> <span class="n">xe</span><span class="p">,</span> <span class="n">amp_k</span></div>
+
+
+
+<span class="c1"># --------------------------------------------------------------------------- #</span>
+<span class="c1">#  sqr — discr3qa.c (парабола по формуле Ao)                                   #</span>
+<span class="c1"># --------------------------------------------------------------------------- #</span>
+
+<div class="viewcode-block" id="discriminator_sqr">
+<a class="viewcode-back" href="../../api.html#tsignal.discriminators.discriminator_sqr">[документация]</a>
+<span class="k">def</span> <span class="nf">discriminator_sqr</span><span class="p">(</span><span class="n">fft_data</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+                      <span class="n">f_axis</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Квадратичная 3-точечная интерполяция — из discr3qa.c.</span>
+
+<span class="sd">    Формула (через отношение Ao):</span>
+<span class="sd">        Ao = (A2 - A1) / (A2 - A3)</span>
+<span class="sd">        xe = 0.5 * ((Ao-1)*x2² - Ao*x3² + x1²) / ((Ao-1)*x2 - Ao*x3 + x1)</span>
+
+<span class="sd">    Граничные случаи обрабатываются как в оригинале.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">k_m</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">k_p</span> <span class="o">=</span> <span class="n">_peak_triplet</span><span class="p">(</span><span class="n">fft_data</span><span class="p">)</span>
+    <span class="n">A1</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">fft_data</span><span class="p">[</span><span class="n">k_m</span><span class="p">])</span>
+    <span class="n">A2</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">fft_data</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>
+    <span class="n">A3</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">fft_data</span><span class="p">[</span><span class="n">k_p</span><span class="p">])</span>
+    <span class="n">x1</span> <span class="o">=</span> <span class="n">f_axis</span><span class="p">[</span><span class="n">k_m</span><span class="p">]</span>
+    <span class="n">x2</span> <span class="o">=</span> <span class="n">f_axis</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+    <span class="n">x3</span> <span class="o">=</span> <span class="n">f_axis</span><span class="p">[</span><span class="n">k_p</span><span class="p">]</span>
+    <span class="n">eps</span> <span class="o">=</span> <span class="mf">1e-300</span>
+
+    <span class="c1"># Граничный случай: A2 ≈ A3</span>
+    <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">A2</span> <span class="o">-</span> <span class="n">A3</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">eps</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">A2</span> <span class="o">-</span> <span class="n">A1</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">eps</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">x2</span><span class="p">,</span> <span class="n">A2</span>
+        <span class="k">if</span> <span class="n">A1</span> <span class="o">&gt;</span> <span class="n">A2</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">x1</span><span class="p">,</span> <span class="n">A2</span>
+        <span class="k">return</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">x3</span> <span class="o">+</span> <span class="n">x2</span><span class="p">),</span> <span class="n">A2</span>
+
+    <span class="c1"># Граничный случай: A1 ≈ A2</span>
+    <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">A2</span> <span class="o">-</span> <span class="n">A1</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">eps</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">A3</span> <span class="o">&gt;</span> <span class="n">A2</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">x3</span><span class="p">,</span> <span class="n">A2</span>
+        <span class="k">return</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">x1</span> <span class="o">+</span> <span class="n">x2</span><span class="p">),</span> <span class="n">A2</span>
+
+    <span class="c1"># Основная формула</span>
+    <span class="n">Ao</span> <span class="o">=</span> <span class="p">(</span><span class="n">A2</span> <span class="o">-</span> <span class="n">A1</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">A2</span> <span class="o">-</span> <span class="n">A3</span><span class="p">)</span>
+    <span class="n">denom</span> <span class="o">=</span> <span class="p">(</span><span class="n">Ao</span> <span class="o">-</span> <span class="mf">1.0</span><span class="p">)</span> <span class="o">*</span> <span class="n">x2</span> <span class="o">-</span> <span class="n">Ao</span> <span class="o">*</span> <span class="n">x3</span> <span class="o">+</span> <span class="n">x1</span>
+    <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">denom</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">eps</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">x2</span><span class="p">,</span> <span class="n">A2</span>
+    <span class="n">xe</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">((</span><span class="n">Ao</span> <span class="o">-</span> <span class="mf">1.0</span><span class="p">)</span> <span class="o">*</span> <span class="n">x2</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">Ao</span> <span class="o">*</span> <span class="n">x3</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">x1</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="n">denom</span>
+    <span class="k">return</span> <span class="n">xe</span><span class="p">,</span> <span class="n">A2</span></div>
+
+
+
+<span class="c1"># --------------------------------------------------------------------------- #</span>
+<span class="c1">#  sd — discrsd.c (2-точечный суммарно-разностный)                             #</span>
+<span class="c1"># --------------------------------------------------------------------------- #</span>
+
+<div class="viewcode-block" id="discriminator_sd">
+<a class="viewcode-back" href="../../api.html#tsignal.discriminators.discriminator_sd">[документация]</a>
+<span class="k">def</span> <span class="nf">discriminator_sd</span><span class="p">(</span><span class="n">fft_data</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+                     <span class="n">f_axis</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    2-точечный суммарно-разностный — из discrsd.c.</span>
+
+<span class="sd">    Из fcalcdelay.m:</span>
+<span class="sd">        f = discr2sd(0.132497, P_max^2, P_second^2, f_max, f_second)</span>
+
+<span class="sd">    Из discrsd.c:</span>
+<span class="sd">        xc = (x1 + x2) / 2</span>
+<span class="sd">        dx = c * (A2 - A1) / (A2 + A1)</span>
+<span class="sd">        xe = xc + dx</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">KSD</span> <span class="o">=</span> <span class="mf">0.132497</span>
+    <span class="n">k1</span><span class="p">,</span> <span class="n">k2</span> <span class="o">=</span> <span class="n">_top2</span><span class="p">(</span><span class="n">fft_data</span><span class="p">)</span>
+    <span class="n">A1</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">fft_data</span><span class="p">[</span><span class="n">k1</span><span class="p">])</span> <span class="o">**</span> <span class="mi">2</span>   <span class="c1"># мощность первого (макс.)</span>
+    <span class="n">A2</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">fft_data</span><span class="p">[</span><span class="n">k2</span><span class="p">])</span> <span class="o">**</span> <span class="mi">2</span>   <span class="c1"># мощность второго</span>
+    <span class="n">x1</span> <span class="o">=</span> <span class="n">f_axis</span><span class="p">[</span><span class="n">k1</span><span class="p">]</span>
+    <span class="n">x2</span> <span class="o">=</span> <span class="n">f_axis</span><span class="p">[</span><span class="n">k2</span><span class="p">]</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="n">A2</span> <span class="o">+</span> <span class="n">A1</span>
+    <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">total</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-300</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">x1</span> <span class="o">+</span> <span class="n">x2</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.5</span><span class="p">,</span> <span class="nb">abs</span><span class="p">(</span><span class="n">fft_data</span><span class="p">[</span><span class="n">k1</span><span class="p">])</span>
+    <span class="n">xc</span> <span class="o">=</span> <span class="p">(</span><span class="n">x1</span> <span class="o">+</span> <span class="n">x2</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.5</span>
+    <span class="n">dx</span> <span class="o">=</span> <span class="n">KSD</span> <span class="o">*</span> <span class="p">(</span><span class="n">A2</span> <span class="o">-</span> <span class="n">A1</span><span class="p">)</span> <span class="o">/</span> <span class="n">total</span>
+    <span class="k">return</span> <span class="n">xc</span> <span class="o">+</span> <span class="n">dx</span><span class="p">,</span> <span class="nb">abs</span><span class="p">(</span><span class="n">fft_data</span><span class="p">[</span><span class="n">k1</span><span class="p">])</span></div>
+
+
+
+<span class="c1"># --------------------------------------------------------------------------- #</span>
+<span class="c1">#  cg — discrcg.c (2-точечный центр тяжести)                                  #</span>
+<span class="c1"># --------------------------------------------------------------------------- #</span>
+
+<div class="viewcode-block" id="discriminator_cg">
+<a class="viewcode-back" href="../../api.html#tsignal.discriminators.discriminator_cg">[документация]</a>
+<span class="k">def</span> <span class="nf">discriminator_cg</span><span class="p">(</span><span class="n">fft_data</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+                     <span class="n">f_axis</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    2-точечный центр тяжести — из discrcg.c.</span>
+
+<span class="sd">    Из fcalcdelay.m:</span>
+<span class="sd">        f = discr2cg(a_max, a_second, f_max, f_second)</span>
+
+<span class="sd">    Из discrcg.c:</span>
+<span class="sd">        xe = (A1*x1 + A2*x2) / (A1 + A2)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">k1</span><span class="p">,</span> <span class="n">k2</span> <span class="o">=</span> <span class="n">_top2</span><span class="p">(</span><span class="n">fft_data</span><span class="p">)</span>
+    <span class="n">A1</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">fft_data</span><span class="p">[</span><span class="n">k1</span><span class="p">])</span>
+    <span class="n">A2</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">fft_data</span><span class="p">[</span><span class="n">k2</span><span class="p">])</span>
+    <span class="n">x1</span> <span class="o">=</span> <span class="n">f_axis</span><span class="p">[</span><span class="n">k1</span><span class="p">]</span>
+    <span class="n">x2</span> <span class="o">=</span> <span class="n">f_axis</span><span class="p">[</span><span class="n">k2</span><span class="p">]</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="n">A1</span> <span class="o">+</span> <span class="n">A2</span>
+    <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">total</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-300</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">x1</span> <span class="o">+</span> <span class="n">x2</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">A1</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">A1</span> <span class="o">*</span> <span class="n">x1</span> <span class="o">+</span> <span class="n">A2</span> <span class="o">*</span> <span class="n">x2</span><span class="p">)</span> <span class="o">/</span> <span class="n">total</span><span class="p">,</span> <span class="n">A1</span></div>
+
+
+
+<span class="c1"># --------------------------------------------------------------------------- #</span>
+<span class="c1">#  Реестр методов                                                               #</span>
+<span class="c1"># --------------------------------------------------------------------------- #</span>
+
+<span class="n">DISCRIMINATORS</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]]</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;cg&quot;</span><span class="p">:</span>  <span class="n">discriminator_cg</span><span class="p">,</span>
+    <span class="s2">&quot;sqr&quot;</span><span class="p">:</span> <span class="n">discriminator_sqr</span><span class="p">,</span>
+    <span class="s2">&quot;exp&quot;</span><span class="p">:</span> <span class="n">discriminator_exp</span><span class="p">,</span>
+    <span class="s2">&quot;lay&quot;</span><span class="p">:</span> <span class="n">discriminator_lay</span><span class="p">,</span>
+    <span class="s2">&quot;sd&quot;</span><span class="p">:</span>  <span class="n">discriminator_sd</span><span class="p">,</span>
+<span class="p">}</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Авторские права . </p>
+  </div>
+
+  Собрано при помощи <a href="https://www.sphinx-doc.org/">Sphinx</a> с использованием
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">темы,</a>
+    предоставленной <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

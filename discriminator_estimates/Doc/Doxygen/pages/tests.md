@@ -1,6 +1,6 @@
 # Тестирование {#tests_page}
 
-## 3 вида тестов — 74 теста на данных sinc(x)
+## 4 вида тестов — 77+ тестов
 
 Все тесты используют экспериментальные данные, моделирующие ДН антенны:
 
@@ -176,6 +176,42 @@ ctest  # или так
 
 ### Python
 ```bash
-python test_python/test_discriminators.py       # тесты
-python test_python/test_discriminators_plot.py   # графики → Doc/plots/
+python test_python/test_discriminators.py       # sinc(x) тесты
+python test_python/test_discriminators_plot.py   # sinc(x) графики → Doc/plots/
+python test_python/test_fft_frequency.py         # FFT тесты (10 проверок)
+python test_python/test_fft_frequency_plot.py    # FFT графики → Doc/plots/
 ```
+
+---
+
+## 4. FFT-дискриминаторы частоты (`test_python/`) — 10 тестов + 2 графика
+
+**Фреймворк**: PyCore (TestRunner)
+**Запуск**: `python test_python/test_fft_frequency.py`
+
+Тестирование дискриминаторов в задаче оценки частоты по FFT-спектру
+(воспроизведение MatLab Primer.m + fcalcdelay.m).
+
+### Тестовые группы
+
+| Класс | Тестов | Что проверяет |
+|-------|--------|---------------|
+| `TestFFTBasic` | 4 | Симметрия (fsin=0), смещённый пик, все 5 методов |
+| `TestFFTSweep` | 4 | Монотонность ДХ, макс. ошибка < 10 кГц, знак оценки |
+| `TestFFTCompare` | 2 | EXP лучше SQR лучше LAY; таблица точности |
+
+### Результат
+
+```
+[PASS]  TestFFTBasic.test_exp_at_center
+[PASS]  TestFFTBasic.test_exp_shifted: f_est=98575, err=4825 Hz
+[PASS]  TestFFTSweep.test_exp_monotonic (17 pts)
+[PASS]  TestFFTCompare.test_exp_best: EXP(2902) < SQR(13553) < LAY(22933)
+Total: 10 passed, 0 failed, 0 skipped
+```
+
+### Графики FFT
+
+@image html fft_primer_m.png "Дискриминационная характеристика FFT (Primer.m)"
+
+@image html fft_exp_error_windows.png "Ошибка метода EXP: все методы + сравнение окон"

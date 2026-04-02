@@ -1,0 +1,213 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Discriminator Estimates (КППО/ТЗК): FFT-дискриминаторы частоты</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript">
+window.MathJax = {
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Discriminator Estimates (КППО/ТЗК)
+   </div>
+   <div id="projectbrief">Дискриминаторные оценки координат цели по отсчётам ДН антенны</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Поиск');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="index.html">Главная страница</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div><div class="header">
+  <div class="headertitle"><div class="title">FFT-дискриминаторы частоты</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><h1><a class="anchor" id="autotoc_md0"></a>
+Оценка частоты по FFT-спектру (из Primer.m)</h1>
+<p>Дискриминаторы модуля применяются не только для оценки угловых координат по ДН антенны, но и для <b>точной оценки частоты</b> по FFT-спектру комплексного сигнала.</p>
+<h2><a class="anchor" id="autotoc_md1"></a>
+Сигнал</h2>
+<p class="formulaDsp">
+\[
+x(t) = A \cdot \exp(j \cdot 2\pi \cdot f_{sin} \cdot t) + \text{noise}
+\]
+</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Параметр   </th><th class="markdownTableHeadNone">Значение   </th><th class="markdownTableHeadNone">Описание    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">N   </td><td class="markdownTableBodyNone">32   </td><td class="markdownTableBodyNone">Число отсчётов    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">fd   </td><td class="markdownTableBodyNone">12 МГц   </td><td class="markdownTableBodyNone">Частота дискретизации    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">df = fd/N   </td><td class="markdownTableBodyNone">375 кГц   </td><td class="markdownTableBodyNone">Ширина бина FFT    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">fsin   </td><td class="markdownTableBodyNone">[-df/2, +df/2]   </td><td class="markdownTableBodyNone">Sweep (±187.5 кГц)    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Окно   </td><td class="markdownTableBodyNone">Hamming   </td><td class="markdownTableBodyNone">-43 дБ боковые лепестки   </td></tr>
+</table>
+<hr  />
+<h1><a class="anchor" id="autotoc_md3"></a>
+5 методов оценки частоты</h1>
+<h2><a class="anchor" id="autotoc_md4"></a>
+3-точечные (бины k-1, k, k+1)</h2>
+<p><b>EXP</b> (discr3ea.c — парабола на log|S|):  </p><p class="formulaDsp">
+\[
+z_i = \ln|S_i|, \quad
+\alpha = z_1(f_2^2-f_3^2) + z_2(f_3^2-f_1^2) + z_3(f_1^2-f_2^2)
+\]
+</p>
+  <p class="formulaDsp">
+\[
+\beta = z_1(f_2-f_3) + z_2(f_3-f_1) + z_3(f_1-f_2), \quad
+f_{est} = \frac{\alpha}{2\beta}
+\]
+</p>
+<p><b>SQR</b> (discr3qa.c — парабола на |S|):  </p><p class="formulaDsp">
+\[
+A_o = \frac{A_2 - A_1}{A_2 - A_3}, \quad
+f_{est} = \frac{(A_o-1)f_2^2 - A_o f_3^2 + f_1^2}{2\bigl((A_o-1)f_2 - A_o f_3 + f_1\bigr)}
+\]
+</p>
+<p><b>LAY</b> (Jacobsen, fcalcdelay.m):  </p><p class="formulaDsp">
+\[
+\sigma = \frac{S_{k+1} - S_{k-1}}{2 S_k - S_{k-1} - S_{k+1}}, \quad
+f_{est} = f_k - \operatorname{Re}\{\sigma\} \cdot \frac{f_d}{N}
+\]
+</p>
+<h2><a class="anchor" id="autotoc_md5"></a>
+2-точечные (top-2 bins по амплитуде)</h2>
+<p><b>SD</b> (<a class="el" href="discrsd_8c.html" title="КППО / ТЗК. Дискриминатор — суммарно-разностный (Sum-Difference).">discrsd.c</a>):  </p><p class="formulaDsp">
+\[
+f_{est} = \frac{f_1+f_2}{2} + c \cdot \frac{P_2 - P_1}{P_2 + P_1}, \quad c = 0.132497
+\]
+</p>
+<p><b>CG</b> (<a class="el" href="discrcg_8c.html" title="КППО / ТЗК. Дискриминатор — центр тяжести (Center of Gravity).">discrcg.c</a>):  </p><p class="formulaDsp">
+\[
+f_{est} = \frac{A_1 f_1 + A_2 f_2}{A_1 + A_2}
+\]
+</p>
+<hr  />
+<h1><a class="anchor" id="autotoc_md7"></a>
+Дискриминационная характеристика</h1>
+<div class="image">
+<img src="fft_primer_m.png" alt=""/>
+<div class="caption">
+Рис. 5: Дискриминационная характеристика 5 FFT-методов (sweep ±df/2)</div></div>
+<p>Верхний ряд: спектры FFT при fsin = -df/2, 0, +df/2. Средний ряд: оценки частоты vs. истинная частота (65 точек sweep). Нижний ряд: ошибка оценки.</p>
+<hr  />
+<h1><a class="anchor" id="autotoc_md9"></a>
+Сравнение точности</h1>
+<p>Sweep ±df/4, N=32, окно Hamming, без шума:</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Метод   </th><th class="markdownTableHeadNone">Средняя ошибка   </th><th class="markdownTableHeadNone">Макс. ошибка   </th><th class="markdownTableHeadNone">Рекомендация    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><b>EXP</b>   </td><td class="markdownTableBodyNone">2 902 Гц   </td><td class="markdownTableBodyNone">4 825 Гц   </td><td class="markdownTableBodyNone"><b>Лучший для Hamming</b>    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">SQR   </td><td class="markdownTableBodyNone">13 553 Гц   </td><td class="markdownTableBodyNone">23 348 Гц   </td><td class="markdownTableBodyNone">Хороший    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">LAY   </td><td class="markdownTableBodyNone">22 933 Гц   </td><td class="markdownTableBodyNone">43 811 Гц   </td><td class="markdownTableBodyNone">Biased (Jacobsen для Hamming)    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">CG   </td><td class="markdownTableBodyNone">84 664 Гц   </td><td class="markdownTableBodyNone">115 270 Гц   </td><td class="markdownTableBodyNone">Грубая оценка    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">SD   </td><td class="markdownTableBodyNone">138 393 Гц   </td><td class="markdownTableBodyNone">187 500 Гц   </td><td class="markdownTableBodyNone">Очень грубая (c=0.132497)   </td></tr>
+</table>
+<hr  />
+<h1><a class="anchor" id="autotoc_md11"></a>
+Влияние оконной функции</h1>
+<div class="image">
+<img src="fft_exp_error_windows.png" alt=""/>
+<div class="caption">
+Рис. 6: Ошибка метода EXP для разных оконных функций</div></div>
+<p>Левый график: сравнение всех 5 методов (Hamming). Правый график: метод EXP с окнами Hamming / Hann / Blackman.</p>
+<p><b>Blackman</b> даёт наименьшую ошибку для метода EXP — его форма спектрального пика ближе всего к гауссиане.</p>
+<hr  />
+<h1><a class="anchor" id="autotoc_md13"></a>
+Запуск тестов</h1>
+<div class="fragment"><div class="line"># Тесты (10 проверок):</div>
+<div class="line">python test_python/test_fft_frequency.py</div>
+<div class="line"> </div>
+<div class="line"># Графики -&gt; Doc/plots/fft_*.png:</div>
+<div class="line">python test_python/test_fft_frequency_plot.py</div>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md14"></a>
+Происхождение</h1>
+<div class="fragment"><div class="line">C-исходники (2010-2012)        MatLab               Python</div>
+<div class="line">discr3ea.c (Добродумов) ──▶ discr=&#39;exp&#39; ──▶ fft_discr_exp()</div>
+<div class="line">discr3qa.c (Федоров)    ──▶ discr=&#39;sqr&#39; ──▶ fft_discr_sqr()</div>
+<div class="line">discrsd.c  (Федоров)    ──▶ discr=&#39;sd&#39;  ──▶ fft_discr_sd()</div>
+<div class="line">discrcg.c  (Федоров)    ──▶ discr=&#39;cg&#39;  ──▶ fft_discr_cg()</div>
+<div class="line">fcalcdelay.m            ──▶ discr=&#39;lay&#39; ──▶ fft_discr_lay()</div>
+</div><!-- fragment --> </div></div><!-- contents -->
+</div><!-- PageDoc -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8
+</small></address>
+</body>
+</html>

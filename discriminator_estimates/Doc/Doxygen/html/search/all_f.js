@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['of_20gravity_0',['1. Центр тяжести (CG — Center of Gravity)',['../formulas_page.html#autotoc_md2',1,'']]]
+  ['m_0',['Оценка частоты по FFT-спектру (из Primer.m)',['../fft_page.html#autotoc_md0',1,'']]],
+  ['mainpage_2emd_1',['mainpage.md',['../mainpage_8md.html',1,'']]]
 ];

@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['sd_20—_20sum_20difference_0',['2. Суммарно-разностный (SD — Sum-Difference)',['../formulas_page.html#autotoc_md7',1,'']]],
-  ['sinc_20x_1',['3 вида тестов — 74 теста на данных sinc(x)',['../tests_page.html#autotoc_md26',1,'']]],
-  ['sum_20difference_2',['2. Суммарно-разностный (SD — Sum-Difference)',['../formulas_page.html#autotoc_md7',1,'']]]
+  ['primer_20m_0',['Оценка частоты по FFT-спектру (из Primer.m)',['../fft_page.html#autotoc_md0',1,'']]],
+  ['python_1',['Python',['../tests_page.html#autotoc_md66',1,'']]],
+  ['python_20тесты_20tt_20test_5fpython_20tt_20—_207_20тестов_203_20графика_2',['3. Python тесты (&lt;tt&gt;test_python/&lt;/tt&gt;) — 7 тестов + 3 графика',['../tests_page.html#autotoc_md58',1,'']]]
 ];

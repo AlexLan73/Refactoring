@@ -3,20 +3,25 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
-<meta name="generator" content="Doxygen 1.16.1"/>
+<meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Discriminator Estimates (КППО/ТЗК): Исходный файл discr_common.c</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
-<script type="text/javascript" src="clipboard.js"></script>
-<link href="navtree.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="navtreedata.js"></script>
-<script type="text/javascript" src="navtree.js"></script>
-<script type="text/javascript" src="cookie.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript">
+window.MathJax = {
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -35,38 +40,28 @@
 </table>
 </div>
 <!-- end header part -->
-<!-- Создано системой Doxygen 1.16.1 -->
+<!-- Создано системой Doxygen 1.9.8 -->
 <script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
 var searchBox = new SearchBox("searchBox", "search/",'.html');
-</script>
-<script type="text/javascript">
-$(function() { codefold.init(); });
+/* @license-end */
 </script>
 <script type="text/javascript" src="menudata.js"></script>
 <script type="text/javascript" src="menu.js"></script>
 <script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
 $(function() {
-  initMenu('',true,false,'search.php','Поиск',true);
-  $(function() { init_search(); });
+  initMenu('',true,false,'search.php','Поиск');
+  $(document).ready(function() { init_search(); });
 });
+/* @license-end */
 </script>
 <div id="main-nav"></div>
-</div><!-- top -->
-<div id="side-nav" class="ui-resizable side-nav-resizable">
-  <div id="nav-tree">
-    <div id="nav-tree-contents">
-      <div id="nav-sync" class="sync"></div>
-    </div>
-  </div>
-  <div id="splitbar" style="-moz-user-select:none;" 
-       class="ui-resizable-handle">
-  </div>
-</div>
 <script type="text/javascript">
-$(function(){initNavTree('discr__common_8c_source.html','',''); });
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function() { init_codefold(0); });
+/* @license-end */
 </script>
-<div id="container">
-<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -88,12 +83,16 @@ $(function(){initNavTree('discr__common_8c_source.html','',''); });
 </div>
 </div>
 
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li>  </ul>
+</div>
+</div><!-- top -->
 <div class="header">
   <div class="headertitle"><div class="title">discr_common.c</div></div>
 </div><!--header-->
 <div class="contents">
-<a href="discr__common_8c.html">См. документацию.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span></div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
+<a href="discr__common_8c.html">См. документацию.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span> </div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#ifndef _USE_MATH_DEFINES</span></div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="discr__common_8c.html#a525335710b53cb064ca56b936120431e">   17</a></span><span class="preprocessor">#define _USE_MATH_DEFINES</span></div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="preprocessor">#endif</span></div>
@@ -105,7 +104,7 @@ $(function(){initNavTree('discr__common_8c_source.html','',''); });
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="preprocessor">#include &quot;<a class="code" href="discrcg_8h.html">discrcg.h</a>&quot;</span></div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="preprocessor">#include &quot;<a class="code" href="discrea_8h.html">discrea.h</a>&quot;</span></div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="preprocessor">#include &quot;<a class="code" href="discrqa_8h.html">discrqa.h</a>&quot;</span></div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
 <div class="foldopen" id="foldopen00043" data-start="{" data-end="}">
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno"><a class="line" href="discr__common_8h.html#af4df1b14fa693f96ea5413c1eb0d12a5">   43</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="discr__common_8c.html#af4df1b14fa693f96ea5413c1eb0d12a5">discr2</a>(<span class="keywordtype">double</span> maz[2][2], <span class="keywordtype">double</span> mel[2][2], <span class="keywordtype">double</span> mval[2][2],</div>
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>           <span class="keywordtype">double</span> *az, <span class="keywordtype">double</span> *el, <span class="keywordtype">double</span> *val)</div>
@@ -143,7 +142,7 @@ $(function(){initNavTree('discr__common_8c_source.html','',''); });
 <div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>  <span class="keywordflow">return</span> 0;</div>
 <div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>}</div>
 </div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span></div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
 <div class="foldopen" id="foldopen00101" data-start="{" data-end="}">
 <div class="line"><a id="l00101" name="l00101"></a><span class="lineno"><a class="line" href="discr__common_8h.html#ada0fa80ec1c0edd0e0135de4d4a01c5d">  101</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="discr__common_8c.html#ada0fa80ec1c0edd0e0135de4d4a01c5d">discr3</a>(<span class="keywordtype">double</span> **maz, <span class="keywordtype">double</span> **mel, <span class="keywordtype">double</span> **mval, <span class="keywordtype">int</span> ndnx, <span class="keywordtype">int</span> ndny,</div>
 <div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>           <a class="code hl_enumeration" href="discr__types_8h.html#aaf88ae4f33b415b82feb394eade4a8da">DISCRTYPE</a> discrtype, <span class="keywordtype">double</span> dx, <span class="keywordtype">double</span> lambda,</div>
@@ -224,7 +223,7 @@ $(function(){initNavTree('discr__common_8c_source.html','',''); });
 <div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>  <span class="keywordflow">return</span> 0;</div>
 <div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>}</div>
 </div>
-<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span></div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span> </div>
 <div class="foldopen" id="foldopen00192" data-start="{" data-end="}">
 <div class="line"><a id="l00192" name="l00192"></a><span class="lineno"><a class="line" href="discr__common_8h.html#ab26c38a3820da7bc179b57f8bd8faa04">  192</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="discr__common_8c.html#ab26c38a3820da7bc179b57f8bd8faa04">checkuse3d</a>(<span class="keywordtype">double</span> **maz, <span class="keywordtype">double</span> **mel, <span class="keywordtype">double</span> **mval, <span class="keywordtype">int</span> ndnx, <span class="keywordtype">int</span> ndny)</div>
 <div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>{</div>
@@ -239,7 +238,7 @@ $(function(){initNavTree('discr__common_8c_source.html','',''); });
 <div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>  <span class="keywordflow">return</span> 1;</div>
 <div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>}</div>
 </div>
-<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span></div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span> </div>
 <div class="foldopen" id="foldopen00221" data-start="{" data-end="}">
 <div class="line"><a id="l00221" name="l00221"></a><span class="lineno"><a class="line" href="discr__common_8h.html#ac4d4e1deafa0bcc5b3c0ba33b1190c43">  221</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="discr__common_8c.html#ac4d4e1deafa0bcc5b3c0ba33b1190c43">discr3_</a>(<span class="keywordtype">double</span> maz[3][3], <span class="keywordtype">double</span> mel[3][3], <span class="keywordtype">double</span> mval[3][3],</div>
 <div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>            <a class="code hl_enumeration" href="discr__types_8h.html#aaf88ae4f33b415b82feb394eade4a8da">DISCRTYPE</a> discrtype, <span class="keywordtype">double</span> dx, <span class="keywordtype">double</span> lambda,</div>
@@ -254,7 +253,7 @@ $(function(){initNavTree('discr__common_8c_source.html','',''); });
 <div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>                az, el, val);</div>
 <div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>}</div>
 </div>
-<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span></div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span> </div>
 <div class="foldopen" id="foldopen00249" data-start="{" data-end="}">
 <div class="line"><a id="l00249" name="l00249"></a><span class="lineno"><a class="line" href="discr__common_8h.html#a71fe9d3f7b4098569040fa293a6cf0b7">  249</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="discr__common_8c.html#a71fe9d3f7b4098569040fa293a6cf0b7">conv3to2</a>(<span class="keywordtype">double</span> maz3[3][3], <span class="keywordtype">double</span> mel3[3][3], <span class="keywordtype">double</span> mval3[3][3],</div>
 <div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>             <span class="keywordtype">double</span> maz2[2][2], <span class="keywordtype">double</span> mel2[2][2], <span class="keywordtype">double</span> mval2[2][2])</div>
@@ -288,33 +287,28 @@ $(function(){initNavTree('discr__common_8c_source.html','',''); });
 <div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>  <span class="keywordflow">return</span> 0;</div>
 <div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>}</div>
 </div>
-<div class="ttc" id="adiscr__common_8c_html_a71fe9d3f7b4098569040fa293a6cf0b7"><div class="ttname"><a href="discr__common_8c.html#a71fe9d3f7b4098569040fa293a6cf0b7">conv3to2</a></div><div class="ttdeci">int conv3to2(double maz3[3][3], double mel3[3][3], double mval3[3][3], double maz2[2][2], double mel2[2][2], double mval2[2][2])</div><div class="ttdoc">Выделение подматрицы 2x2 из 3x3 для перехода на 2-точечный дискриминатор.</div><div class="ttdef"><b>Определения</b> <a href="#l00249">discr_common.c:249</a></div></div>
-<div class="ttc" id="adiscr__common_8c_html_ab26c38a3820da7bc179b57f8bd8faa04"><div class="ttname"><a href="discr__common_8c.html#ab26c38a3820da7bc179b57f8bd8faa04">checkuse3d</a></div><div class="ttdeci">int checkuse3d(double **maz, double **mel, double **mval, int ndnx, int ndny)</div><div class="ttdoc">Проверка на возможность использования 3-точечного дискриминатора.</div><div class="ttdef"><b>Определения</b> <a href="#l00192">discr_common.c:192</a></div></div>
-<div class="ttc" id="adiscr__common_8c_html_ac4d4e1deafa0bcc5b3c0ba33b1190c43"><div class="ttname"><a href="discr__common_8c.html#ac4d4e1deafa0bcc5b3c0ba33b1190c43">discr3_</a></div><div class="ttdeci">int discr3_(double maz[3][3], double mel[3][3], double mval[3][3], DISCRTYPE discrtype, double dx, double lambda, double *az, double *el, double *val)</div><div class="ttdoc">Адаптер discr3 для статических массивов 3x3.</div><div class="ttdef"><b>Определения</b> <a href="#l00221">discr_common.c:221</a></div></div>
-<div class="ttc" id="adiscr__common_8c_html_ada0fa80ec1c0edd0e0135de4d4a01c5d"><div class="ttname"><a href="discr__common_8c.html#ada0fa80ec1c0edd0e0135de4d4a01c5d">discr3</a></div><div class="ttdeci">int discr3(double **maz, double **mel, double **mval, int ndnx, int ndny, DISCRTYPE discrtype, double dx, double lambda, double *az, double *el, double *val)</div><div class="ttdoc">Трехточечный дискриминатор (обёртка).</div><div class="ttdef"><b>Определения</b> <a href="#l00101">discr_common.c:101</a></div></div>
-<div class="ttc" id="adiscr__common_8c_html_af4df1b14fa693f96ea5413c1eb0d12a5"><div class="ttname"><a href="discr__common_8c.html#af4df1b14fa693f96ea5413c1eb0d12a5">discr2</a></div><div class="ttdeci">int discr2(double maz[2][2], double mel[2][2], double mval[2][2], double *az, double *el, double *val)</div><div class="ttdoc">Двухточечный дискриминатор (обёртка), центр тяжести.</div><div class="ttdef"><b>Определения</b> <a href="#l00043">discr_common.c:43</a></div></div>
+<div class="ttc" id="adiscr__common_8c_html_a71fe9d3f7b4098569040fa293a6cf0b7"><div class="ttname"><a href="discr__common_8c.html#a71fe9d3f7b4098569040fa293a6cf0b7">conv3to2</a></div><div class="ttdeci">int conv3to2(double maz3[3][3], double mel3[3][3], double mval3[3][3], double maz2[2][2], double mel2[2][2], double mval2[2][2])</div><div class="ttdoc">Выделение подматрицы 2x2 из 3x3 для перехода на 2-точечный дискриминатор.</div><div class="ttdef"><b>Definition</b> <a href="discr__common_8c_source.html#l00249">discr_common.c:249</a></div></div>
+<div class="ttc" id="adiscr__common_8c_html_ab26c38a3820da7bc179b57f8bd8faa04"><div class="ttname"><a href="discr__common_8c.html#ab26c38a3820da7bc179b57f8bd8faa04">checkuse3d</a></div><div class="ttdeci">int checkuse3d(double **maz, double **mel, double **mval, int ndnx, int ndny)</div><div class="ttdoc">Проверка на возможность использования 3-точечного дискриминатора.</div><div class="ttdef"><b>Definition</b> <a href="discr__common_8c_source.html#l00192">discr_common.c:192</a></div></div>
+<div class="ttc" id="adiscr__common_8c_html_ac4d4e1deafa0bcc5b3c0ba33b1190c43"><div class="ttname"><a href="discr__common_8c.html#ac4d4e1deafa0bcc5b3c0ba33b1190c43">discr3_</a></div><div class="ttdeci">int discr3_(double maz[3][3], double mel[3][3], double mval[3][3], DISCRTYPE discrtype, double dx, double lambda, double *az, double *el, double *val)</div><div class="ttdoc">Адаптер discr3 для статических массивов 3x3.</div><div class="ttdef"><b>Definition</b> <a href="discr__common_8c_source.html#l00221">discr_common.c:221</a></div></div>
+<div class="ttc" id="adiscr__common_8c_html_ada0fa80ec1c0edd0e0135de4d4a01c5d"><div class="ttname"><a href="discr__common_8c.html#ada0fa80ec1c0edd0e0135de4d4a01c5d">discr3</a></div><div class="ttdeci">int discr3(double **maz, double **mel, double **mval, int ndnx, int ndny, DISCRTYPE discrtype, double dx, double lambda, double *az, double *el, double *val)</div><div class="ttdoc">Трехточечный дискриминатор (обёртка).</div><div class="ttdef"><b>Definition</b> <a href="discr__common_8c_source.html#l00101">discr_common.c:101</a></div></div>
+<div class="ttc" id="adiscr__common_8c_html_af4df1b14fa693f96ea5413c1eb0d12a5"><div class="ttname"><a href="discr__common_8c.html#af4df1b14fa693f96ea5413c1eb0d12a5">discr2</a></div><div class="ttdeci">int discr2(double maz[2][2], double mel[2][2], double mval[2][2], double *az, double *el, double *val)</div><div class="ttdoc">Двухточечный дискриминатор (обёртка), центр тяжести.</div><div class="ttdef"><b>Definition</b> <a href="discr__common_8c_source.html#l00043">discr_common.c:43</a></div></div>
 <div class="ttc" id="adiscr__common_8h_html"><div class="ttname"><a href="discr__common_8h.html">discr_common.h</a></div><div class="ttdoc">Комплекс программ первичной обработки (КППО). Программа вычисления текущих замеров координат (ТЗК)....</div></div>
-<div class="ttc" id="adiscr__types_8h_html_aaf88ae4f33b415b82feb394eade4a8da"><div class="ttname"><a href="discr__types_8h.html#aaf88ae4f33b415b82feb394eade4a8da">DISCRTYPE</a></div><div class="ttdeci">DISCRTYPE</div><div class="ttdoc">Типы оценки координат.</div><div class="ttdef"><b>Определения</b> <a href="discr__types_8h_source.html#l00029">discr_types.h:30</a></div></div>
-<div class="ttc" id="adiscr__types_8h_html_aaf88ae4f33b415b82feb394eade4a8daa9a8bffd804f7f397ac94141de14fc707"><div class="ttname"><a href="discr__types_8h.html#aaf88ae4f33b415b82feb394eade4a8daa9a8bffd804f7f397ac94141de14fc707">DT_EA</a></div><div class="ttdeci">@ DT_EA</div><div class="ttdoc">Экспоненциальная аппроксимация.</div><div class="ttdef"><b>Определения</b> <a href="discr__types_8h_source.html#l00035">discr_types.h:35</a></div></div>
-<div class="ttc" id="adiscr__types_8h_html_aaf88ae4f33b415b82feb394eade4a8daac62b9c6de522c4e07d7a5db1f7a8a450"><div class="ttname"><a href="discr__types_8h.html#aaf88ae4f33b415b82feb394eade4a8daac62b9c6de522c4e07d7a5db1f7a8a450">DT_QA</a></div><div class="ttdeci">@ DT_QA</div><div class="ttdoc">Квадратичная аппроксимация.</div><div class="ttdef"><b>Определения</b> <a href="discr__types_8h_source.html#l00034">discr_types.h:34</a></div></div>
-<div class="ttc" id="adiscr__types_8h_html_aaf88ae4f33b415b82feb394eade4a8daae2da9b2700939ec4ed72deb5b7210922"><div class="ttname"><a href="discr__types_8h.html#aaf88ae4f33b415b82feb394eade4a8daae2da9b2700939ec4ed72deb5b7210922">DT_CG</a></div><div class="ttdeci">@ DT_CG</div><div class="ttdoc">Центр масс.</div><div class="ttdef"><b>Определения</b> <a href="discr__types_8h_source.html#l00032">discr_types.h:32</a></div></div>
+<div class="ttc" id="adiscr__types_8h_html_aaf88ae4f33b415b82feb394eade4a8da"><div class="ttname"><a href="discr__types_8h.html#aaf88ae4f33b415b82feb394eade4a8da">DISCRTYPE</a></div><div class="ttdeci">DISCRTYPE</div><div class="ttdoc">Типы оценки координат.</div><div class="ttdef"><b>Definition</b> <a href="discr__types_8h_source.html#l00029">discr_types.h:30</a></div></div>
+<div class="ttc" id="adiscr__types_8h_html_aaf88ae4f33b415b82feb394eade4a8daa9a8bffd804f7f397ac94141de14fc707"><div class="ttname"><a href="discr__types_8h.html#aaf88ae4f33b415b82feb394eade4a8daa9a8bffd804f7f397ac94141de14fc707">DT_EA</a></div><div class="ttdeci">@ DT_EA</div><div class="ttdoc">Экспоненциальная аппроксимация.</div><div class="ttdef"><b>Definition</b> <a href="discr__types_8h_source.html#l00035">discr_types.h:35</a></div></div>
+<div class="ttc" id="adiscr__types_8h_html_aaf88ae4f33b415b82feb394eade4a8daac62b9c6de522c4e07d7a5db1f7a8a450"><div class="ttname"><a href="discr__types_8h.html#aaf88ae4f33b415b82feb394eade4a8daac62b9c6de522c4e07d7a5db1f7a8a450">DT_QA</a></div><div class="ttdeci">@ DT_QA</div><div class="ttdoc">Квадратичная аппроксимация.</div><div class="ttdef"><b>Definition</b> <a href="discr__types_8h_source.html#l00034">discr_types.h:34</a></div></div>
+<div class="ttc" id="adiscr__types_8h_html_aaf88ae4f33b415b82feb394eade4a8daae2da9b2700939ec4ed72deb5b7210922"><div class="ttname"><a href="discr__types_8h.html#aaf88ae4f33b415b82feb394eade4a8daae2da9b2700939ec4ed72deb5b7210922">DT_CG</a></div><div class="ttdeci">@ DT_CG</div><div class="ttdoc">Центр масс.</div><div class="ttdef"><b>Definition</b> <a href="discr__types_8h_source.html#l00032">discr_types.h:32</a></div></div>
 <div class="ttc" id="adiscrcg_8h_html"><div class="ttname"><a href="discrcg_8h.html">discrcg.h</a></div><div class="ttdoc">Комплекс программ первичной обработки (КППО). Программа вычисления текущих замеров координат (ТЗК)....</div></div>
-<div class="ttc" id="adiscrcg_8h_html_a2f34219caf8080f3d9a219cfb4a5e7c0"><div class="ttname"><a href="discrcg_8h.html#a2f34219caf8080f3d9a219cfb4a5e7c0">discr2cg</a></div><div class="ttdeci">double discr2cg(double A1, double A2, double x1, double x2)</div><div class="ttdoc">Двухточечный дискриминатор, центр тяжести.</div><div class="ttdef"><b>Определения</b> <a href="discrcg_8c_source.html#l00028">discrcg.c:28</a></div></div>
-<div class="ttc" id="adiscrcg_8h_html_ab3655559ca8de2c4fa17fc6341fad94c"><div class="ttname"><a href="discrcg_8h.html#ab3655559ca8de2c4fa17fc6341fad94c">discr3cg</a></div><div class="ttdeci">double discr3cg(double A1, double A2, double A3, double x1, double x2, double x3)</div><div class="ttdoc">Трехточечный дискриминатор, центр тяжести.</div><div class="ttdef"><b>Определения</b> <a href="discrcg_8c_source.html#l00050">discrcg.c:50</a></div></div>
+<div class="ttc" id="adiscrcg_8h_html_a2f34219caf8080f3d9a219cfb4a5e7c0"><div class="ttname"><a href="discrcg_8h.html#a2f34219caf8080f3d9a219cfb4a5e7c0">discr2cg</a></div><div class="ttdeci">double discr2cg(double A1, double A2, double x1, double x2)</div><div class="ttdoc">Двухточечный дискриминатор, центр тяжести.</div><div class="ttdef"><b>Definition</b> <a href="discrcg_8c_source.html#l00028">discrcg.c:28</a></div></div>
+<div class="ttc" id="adiscrcg_8h_html_ab3655559ca8de2c4fa17fc6341fad94c"><div class="ttname"><a href="discrcg_8h.html#ab3655559ca8de2c4fa17fc6341fad94c">discr3cg</a></div><div class="ttdeci">double discr3cg(double A1, double A2, double A3, double x1, double x2, double x3)</div><div class="ttdoc">Трехточечный дискриминатор, центр тяжести.</div><div class="ttdef"><b>Definition</b> <a href="discrcg_8c_source.html#l00050">discrcg.c:50</a></div></div>
 <div class="ttc" id="adiscrea_8h_html"><div class="ttname"><a href="discrea_8h.html">discrea.h</a></div><div class="ttdoc">Комплекс программ первичной обработки (КППО). Программа вычисления текущих замеров координат (ТЗК)....</div></div>
-<div class="ttc" id="adiscrea_8h_html_a1d0a905788c41a528b49032ecb9c2748"><div class="ttname"><a href="discrea_8h.html#a1d0a905788c41a528b49032ecb9c2748">discr3ea</a></div><div class="ttdeci">int discr3ea(double A1, double A2, double A3, double x1, double x2, double x3, double *xe)</div><div class="ttdoc">Трехточечный дискриминатор, экспоненциальная аппроксимация (Exponential).</div><div class="ttdef"><b>Определения</b> <a href="discrea_8c_source.html#l00050">discrea.c:50</a></div></div>
-<div class="ttc" id="adiscrea_8h_html_aeaf78c0e3173b3e10d91f87f58a171d0"><div class="ttname"><a href="discrea_8h.html#aeaf78c0e3173b3e10d91f87f58a171d0">discr3eaY</a></div><div class="ttdeci">double discr3eaY(double A1, double A2, double x1, double x2, double xe)</div><div class="ttdoc">Уточнение амплитуды по экспоненциальной аппроксимации.</div><div class="ttdef"><b>Определения</b> <a href="discrea_8c_source.html#l00146">discrea.c:146</a></div></div>
+<div class="ttc" id="adiscrea_8h_html_a1d0a905788c41a528b49032ecb9c2748"><div class="ttname"><a href="discrea_8h.html#a1d0a905788c41a528b49032ecb9c2748">discr3ea</a></div><div class="ttdeci">int discr3ea(double A1, double A2, double A3, double x1, double x2, double x3, double *xe)</div><div class="ttdoc">Трехточечный дискриминатор, экспоненциальная аппроксимация (Exponential).</div><div class="ttdef"><b>Definition</b> <a href="discrea_8c_source.html#l00050">discrea.c:50</a></div></div>
+<div class="ttc" id="adiscrea_8h_html_aeaf78c0e3173b3e10d91f87f58a171d0"><div class="ttname"><a href="discrea_8h.html#aeaf78c0e3173b3e10d91f87f58a171d0">discr3eaY</a></div><div class="ttdeci">double discr3eaY(double A1, double A2, double x1, double x2, double xe)</div><div class="ttdoc">Уточнение амплитуды по экспоненциальной аппроксимации.</div><div class="ttdef"><b>Definition</b> <a href="discrea_8c_source.html#l00146">discrea.c:146</a></div></div>
 <div class="ttc" id="adiscrqa_8h_html"><div class="ttname"><a href="discrqa_8h.html">discrqa.h</a></div><div class="ttdoc">Комплекс программ первичной обработки (КППО). Программа вычисления текущих замеров координат (ТЗК)....</div></div>
-<div class="ttc" id="adiscrqa_8h_html_a5cdf0c7b82518afc98773e8f323ddb3b"><div class="ttname"><a href="discrqa_8h.html#a5cdf0c7b82518afc98773e8f323ddb3b">discr3qa</a></div><div class="ttdeci">double discr3qa(double A1, double A2, double A3, double x1, double x2, double x3)</div><div class="ttdoc">Трехточечный дискриминатор, аппроксимация квадратичной зависимостью (Quadratic).</div><div class="ttdef"><b>Определения</b> <a href="discrqa_8c_source.html#l00039">discrqa.c:39</a></div></div>
+<div class="ttc" id="adiscrqa_8h_html_a5cdf0c7b82518afc98773e8f323ddb3b"><div class="ttname"><a href="discrqa_8h.html#a5cdf0c7b82518afc98773e8f323ddb3b">discr3qa</a></div><div class="ttdeci">double discr3qa(double A1, double A2, double A3, double x1, double x2, double x3)</div><div class="ttdoc">Трехточечный дискриминатор, аппроксимация квадратичной зависимостью (Quadratic).</div><div class="ttdef"><b>Definition</b> <a href="discrqa_8c_source.html#l00039">discrqa.c:39</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
-</div><!-- doc-content -->
-</div><!-- container -->
 <!-- start footer part -->
-<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
-  <ul>
-    <li class="navelem"><a href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a href="discr__common_8c.html">discr_common.c</a></li>
-    <li class="footer">Создано системой <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.1 </li>
-  </ul>
-</div>
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8
+</small></address>
 </body>
 </html>

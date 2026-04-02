@@ -9,6 +9,7 @@
 #include "test_discr_qa.hpp"
 #include "test_discr_ea.hpp"
 #include "test_discr_common.hpp"
+#include "test_discr_auto.hpp"
 
 namespace discriminator_estimates_all_test {
 
@@ -18,6 +19,7 @@ inline void run() {
   discr_test_qa::run_all();
   discr_test_ea::run_all();
   discr_test_common::run_all();
+  discr_test_auto::run_all();
 
   std::cout << "\n========================================\n";
   std::cout << "ALL DISCRIMINATOR TESTS COMPLETE\n";

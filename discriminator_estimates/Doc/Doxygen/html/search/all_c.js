@@ -1,6 +1,10 @@
 var searchData=
 [
-  ['google_20test_0',['Google Test',['../tests_page.html#autotoc_md44',1,'']]],
-  ['google_20test_20test_5fgtest_20—_2040_20тестов_1',['2. Google Test (&lt;span class=&quot;tt&quot;&gt;test_gtest/&lt;/span&gt;) — 40 тестов',['../tests_page.html#autotoc_md33',1,'']]],
-  ['gravity_2',['1. Центр тяжести (CG — Center of Gravity)',['../formulas_page.html#autotoc_md2',1,'']]]
+  ['fft_0',['Графики FFT',['../tests_page.html#autotoc_md71',1,'']]],
+  ['fft_20дискриминаторы_20частоты_1',['FFT-дискриминаторы частоты',['../fft_page.html',1,'index']]],
+  ['fft_20дискриминаторы_20частоты_20tt_20test_5fpython_20tt_20—_2010_20тестов_202_20графика_2',['4. FFT-дискриминаторы частоты (&lt;tt&gt;test_python/&lt;/tt&gt;) — 10 тестов + 2 графика',['../tests_page.html#autotoc_md68',1,'']]],
+  ['fft_20применение_3a_20оценка_20частоты_20по_20спектру_3',['FFT-применение: оценка частоты по спектру',['../index.html#autotoc_md42',1,'']]],
+  ['fft_20спектру_20из_20primer_20m_4',['Оценка частоты по FFT-спектру (из Primer.m)',['../fft_page.html#autotoc_md0',1,'']]],
+  ['fft_2emd_5',['fft.md',['../fft_8md.html',1,'']]],
+  ['formulas_2emd_6',['formulas.md',['../formulas_8md.html',1,'']]]
 ];

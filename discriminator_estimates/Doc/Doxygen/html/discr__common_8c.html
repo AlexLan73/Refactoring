@@ -3,20 +3,16 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
-<meta name="generator" content="Doxygen 1.16.1"/>
+<meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Discriminator Estimates (КППО/ТЗК): Файл discr_common.c</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
-<script type="text/javascript" src="clipboard.js"></script>
-<link href="navtree.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="navtreedata.js"></script>
-<script type="text/javascript" src="navtree.js"></script>
-<script type="text/javascript" src="cookie.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 <script type="text/javascript">
 window.MathJax = {
   options: {
@@ -44,38 +40,23 @@ window.MathJax = {
 </table>
 </div>
 <!-- end header part -->
-<!-- Создано системой Doxygen 1.16.1 -->
+<!-- Создано системой Doxygen 1.9.8 -->
 <script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
 var searchBox = new SearchBox("searchBox", "search/",'.html');
-</script>
-<script type="text/javascript">
-$(function() { codefold.init(); });
+/* @license-end */
 </script>
 <script type="text/javascript" src="menudata.js"></script>
 <script type="text/javascript" src="menu.js"></script>
 <script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
 $(function() {
-  initMenu('',true,false,'search.php','Поиск',true);
-  $(function() { init_search(); });
+  initMenu('',true,false,'search.php','Поиск');
+  $(document).ready(function() { init_search(); });
 });
+/* @license-end */
 </script>
 <div id="main-nav"></div>
-</div><!-- top -->
-<div id="side-nav" class="ui-resizable side-nav-resizable">
-  <div id="nav-tree">
-    <div id="nav-tree-contents">
-      <div id="nav-sync" class="sync"></div>
-    </div>
-  </div>
-  <div id="splitbar" style="-moz-user-select:none;" 
-       class="ui-resizable-handle">
-  </div>
-</div>
-<script type="text/javascript">
-$(function(){initNavTree('discr__common_8c.html','',''); });
-</script>
-<div id="container">
-<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -97,7 +78,15 @@ $(function(){initNavTree('discr__common_8c.html','',''); });
 </div>
 </div>
 
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li>  </ul>
+</div>
+</div><!-- top -->
 <div class="header">
+  <div class="summary">
+<a href="#define-members">Макросы</a> &#124;
+<a href="#func-members">Функции</a>  </div>
   <div class="headertitle"><div class="title">Файл discr_common.c</div></div>
 </div><!--header-->
 <div class="contents">
@@ -114,37 +103,43 @@ $(function(){initNavTree('discr__common_8c.html','',''); });
 </div>
 <p><a href="discr__common_8c_source.html">См. исходные тексты.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-define-members" class="groupheader"><a id="define-members" name="define-members"></a>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
 Макросы</h2></td></tr>
-<tr class="memitem:a525335710b53cb064ca56b936120431e" id="r_a525335710b53cb064ca56b936120431e"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a525335710b53cb064ca56b936120431e">_USE_MATH_DEFINES</a></td></tr>
+<tr class="memitem:a525335710b53cb064ca56b936120431e" id="r_a525335710b53cb064ca56b936120431e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="discr__common_8c.html#a525335710b53cb064ca56b936120431e">_USE_MATH_DEFINES</a></td></tr>
+<tr class="separator:a525335710b53cb064ca56b936120431e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Функции</h2></td></tr>
-<tr class="memitem:af4df1b14fa693f96ea5413c1eb0d12a5" id="r_af4df1b14fa693f96ea5413c1eb0d12a5"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#af4df1b14fa693f96ea5413c1eb0d12a5">discr2</a> (double maz[2][2], double mel[2][2], double mval[2][2], double *az, double *el, double *val)</td></tr>
+<tr class="memitem:af4df1b14fa693f96ea5413c1eb0d12a5" id="r_af4df1b14fa693f96ea5413c1eb0d12a5"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="discr__common_8c.html#af4df1b14fa693f96ea5413c1eb0d12a5">discr2</a> (double maz[2][2], double mel[2][2], double mval[2][2], double *az, double *el, double *val)</td></tr>
 <tr class="memdesc:af4df1b14fa693f96ea5413c1eb0d12a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Двухточечный дискриминатор (обёртка), центр тяжести.  <br /></td></tr>
-<tr class="memitem:ada0fa80ec1c0edd0e0135de4d4a01c5d" id="r_ada0fa80ec1c0edd0e0135de4d4a01c5d"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#ada0fa80ec1c0edd0e0135de4d4a01c5d">discr3</a> (double **maz, double **mel, double **mval, int ndnx, int ndny, <a class="el" href="discr__types_8h.html#aaf88ae4f33b415b82feb394eade4a8da">DISCRTYPE</a> discrtype, double dx, double lambda, double *az, double *el, double *val)</td></tr>
+<tr class="separator:af4df1b14fa693f96ea5413c1eb0d12a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada0fa80ec1c0edd0e0135de4d4a01c5d" id="r_ada0fa80ec1c0edd0e0135de4d4a01c5d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="discr__common_8c.html#ada0fa80ec1c0edd0e0135de4d4a01c5d">discr3</a> (double **maz, double **mel, double **mval, int ndnx, int ndny, <a class="el" href="discr__types_8h.html#aaf88ae4f33b415b82feb394eade4a8da">DISCRTYPE</a> discrtype, double dx, double lambda, double *az, double *el, double *val)</td></tr>
 <tr class="memdesc:ada0fa80ec1c0edd0e0135de4d4a01c5d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Трехточечный дискриминатор (обёртка).  <br /></td></tr>
-<tr class="memitem:ab26c38a3820da7bc179b57f8bd8faa04" id="r_ab26c38a3820da7bc179b57f8bd8faa04"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#ab26c38a3820da7bc179b57f8bd8faa04">checkuse3d</a> (double **maz, double **mel, double **mval, int ndnx, int ndny)</td></tr>
+<tr class="separator:ada0fa80ec1c0edd0e0135de4d4a01c5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab26c38a3820da7bc179b57f8bd8faa04" id="r_ab26c38a3820da7bc179b57f8bd8faa04"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="discr__common_8c.html#ab26c38a3820da7bc179b57f8bd8faa04">checkuse3d</a> (double **maz, double **mel, double **mval, int ndnx, int ndny)</td></tr>
 <tr class="memdesc:ab26c38a3820da7bc179b57f8bd8faa04"><td class="mdescLeft">&#160;</td><td class="mdescRight">Проверка на возможность использования 3-точечного дискриминатора.  <br /></td></tr>
-<tr class="memitem:ac4d4e1deafa0bcc5b3c0ba33b1190c43" id="r_ac4d4e1deafa0bcc5b3c0ba33b1190c43"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#ac4d4e1deafa0bcc5b3c0ba33b1190c43">discr3_</a> (double maz[3][3], double mel[3][3], double mval[3][3], <a class="el" href="discr__types_8h.html#aaf88ae4f33b415b82feb394eade4a8da">DISCRTYPE</a> discrtype, double dx, double lambda, double *az, double *el, double *val)</td></tr>
+<tr class="separator:ab26c38a3820da7bc179b57f8bd8faa04"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac4d4e1deafa0bcc5b3c0ba33b1190c43" id="r_ac4d4e1deafa0bcc5b3c0ba33b1190c43"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="discr__common_8c.html#ac4d4e1deafa0bcc5b3c0ba33b1190c43">discr3_</a> (double maz[3][3], double mel[3][3], double mval[3][3], <a class="el" href="discr__types_8h.html#aaf88ae4f33b415b82feb394eade4a8da">DISCRTYPE</a> discrtype, double dx, double lambda, double *az, double *el, double *val)</td></tr>
 <tr class="memdesc:ac4d4e1deafa0bcc5b3c0ba33b1190c43"><td class="mdescLeft">&#160;</td><td class="mdescRight">Адаптер discr3 для статических массивов 3x3.  <br /></td></tr>
-<tr class="memitem:a71fe9d3f7b4098569040fa293a6cf0b7" id="r_a71fe9d3f7b4098569040fa293a6cf0b7"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a71fe9d3f7b4098569040fa293a6cf0b7">conv3to2</a> (double maz3[3][3], double mel3[3][3], double mval3[3][3], double maz2[2][2], double mel2[2][2], double mval2[2][2])</td></tr>
+<tr class="separator:ac4d4e1deafa0bcc5b3c0ba33b1190c43"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a71fe9d3f7b4098569040fa293a6cf0b7" id="r_a71fe9d3f7b4098569040fa293a6cf0b7"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="discr__common_8c.html#a71fe9d3f7b4098569040fa293a6cf0b7">conv3to2</a> (double maz3[3][3], double mel3[3][3], double mval3[3][3], double maz2[2][2], double mel2[2][2], double mval2[2][2])</td></tr>
 <tr class="memdesc:a71fe9d3f7b4098569040fa293a6cf0b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Выделение подматрицы 2x2 из 3x3 для перехода на 2-точечный дискриминатор.  <br /></td></tr>
+<tr class="separator:a71fe9d3f7b4098569040fa293a6cf0b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Подробное описание</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Подробное описание</h2>
 <div class="textblock"><p>КППО / ТЗК. Обёртки для дискриминаторных оценок. </p>
 <dl class="section author"><dt>Автор</dt><dd>Керский Е.В. </dd></dl>
 <dl class="section date"><dt>Дата</dt><dd>06.07.2017 </dd></dl>
 <p>Рефакторинг: Кодо, 2026-03-28 Изменения:</p><ul>
-<li>ERR-001: реализованы <a class="el" href="#af4df1b14fa693f96ea5413c1eb0d12a5" title="Двухточечный дискриминатор (обёртка), центр тяжести.">discr2()</a> и <a class="el" href="#a71fe9d3f7b4098569040fa293a6cf0b7" title="Выделение подматрицы 2x2 из 3x3 для перехода на 2-точечный дискриминатор.">conv3to2()</a></li>
-<li>ERR-003: <a class="el" href="#ada0fa80ec1c0edd0e0135de4d4a01c5d" title="Трехточечный дискриминатор (обёртка).">discr3()</a> больше НЕ модифицирует входные maz/mel (работает с копиями)</li>
+<li>ERR-001: реализованы <a class="el" href="discr__common_8c.html#af4df1b14fa693f96ea5413c1eb0d12a5" title="Двухточечный дискриминатор (обёртка), центр тяжести.">discr2()</a> и <a class="el" href="discr__common_8c.html#a71fe9d3f7b4098569040fa293a6cf0b7" title="Выделение подматрицы 2x2 из 3x3 для перехода на 2-точечный дискриминатор.">conv3to2()</a></li>
+<li>ERR-003: <a class="el" href="discr__common_8c.html#ada0fa80ec1c0edd0e0135de4d4a01c5d" title="Трехточечный дискриминатор (обёртка).">discr3()</a> больше НЕ модифицирует входные maz/mel (работает с копиями)</li>
 <li>ERR-004: FLT_EPSILON → DBL_EPSILON</li>
-<li>ERR-006: добавлена поддержка DT_CG в <a class="el" href="#ada0fa80ec1c0edd0e0135de4d4a01c5d" title="Трехточечный дискриминатор (обёртка).">discr3()</a></li>
+<li>ERR-006: добавлена поддержка DT_CG в <a class="el" href="discr__common_8c.html#ada0fa80ec1c0edd0e0135de4d4a01c5d" title="Трехточечный дискриминатор (обёртка).">discr3()</a></li>
 <li>STYLE: единые 2-пробельные отступы </li>
 </ul>
 
 <p class="definition">См. определение в файле <a class="el" href="discr__common_8c_source.html">discr_common.c</a></p>
-</div><a name="doc-define-members" id="doc-define-members"></a><h2 id="header-doc-define-members" class="groupheader">Макросы</h2>
+</div><h2 class="groupheader">Макросы</h2>
 <a id="a525335710b53cb064ca56b936120431e" name="a525335710b53cb064ca56b936120431e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a525335710b53cb064ca56b936120431e">&#9670;&#160;</a></span>_USE_MATH_DEFINES</h2>
 
@@ -161,7 +156,7 @@ $(function(){initNavTree('discr__common_8c.html','',''); });
 
 </div>
 </div>
-<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Функции</h2>
+<h2 class="groupheader">Функции</h2>
 <a id="ab26c38a3820da7bc179b57f8bd8faa04" name="ab26c38a3820da7bc179b57f8bd8faa04"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab26c38a3820da7bc179b57f8bd8faa04">&#9670;&#160;</a></span>checkuse3d()</h2>
 
@@ -171,27 +166,37 @@ $(function(){initNavTree('discr__common_8c.html','',''); });
         <tr>
           <td class="memname">int checkuse3d </td>
           <td>(</td>
-          <td class="paramtype">double **</td>          <td class="paramname"><span class="paramname"><em>maz</em></span>, </td>
+          <td class="paramtype">double **&#160;</td>
+          <td class="paramname"><em>maz</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">double **</td>          <td class="paramname"><span class="paramname"><em>mel</em></span>, </td>
+          <td class="paramtype">double **&#160;</td>
+          <td class="paramname"><em>mel</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">double **</td>          <td class="paramname"><span class="paramname"><em>mval</em></span>, </td>
+          <td class="paramtype">double **&#160;</td>
+          <td class="paramname"><em>mval</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>ndnx</em></span>, </td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>ndnx</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>ndny</em></span>&#160;)</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>ndny</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -234,32 +239,43 @@ $(function(){initNavTree('discr__common_8c.html','',''); });
         <tr>
           <td class="memname">int conv3to2 </td>
           <td>(</td>
-          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>maz3</em></span>[3][3], </td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>maz3</em>[3][3], </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>mel3</em></span>[3][3], </td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>mel3</em>[3][3], </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>mval3</em></span>[3][3], </td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>mval3</em>[3][3], </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>maz2</em></span>[2][2], </td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>maz2</em>[2][2], </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>mel2</em></span>[2][2], </td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>mel2</em>[2][2], </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>mval2</em></span>[2][2]&#160;)</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>mval2</em>[2][2]&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -321,32 +337,43 @@ $(function(){initNavTree('discr__common_8c.html','',''); });
         <tr>
           <td class="memname">int discr2 </td>
           <td>(</td>
-          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>maz</em></span>[2][2], </td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>maz</em>[2][2], </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>mel</em></span>[2][2], </td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>mel</em>[2][2], </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>mval</em></span>[2][2], </td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>mval</em>[2][2], </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">double *</td>          <td class="paramname"><span class="paramname"><em>az</em></span>, </td>
+          <td class="paramtype">double *&#160;</td>
+          <td class="paramname"><em>az</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">double *</td>          <td class="paramname"><span class="paramname"><em>el</em></span>, </td>
+          <td class="paramtype">double *&#160;</td>
+          <td class="paramname"><em>el</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">double *</td>          <td class="paramname"><span class="paramname"><em>val</em></span>&#160;)</td>
+          <td class="paramtype">double *&#160;</td>
+          <td class="paramname"><em>val</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -400,7 +427,7 @@ $(function(){initNavTree('discr__common_8c.html','',''); });
 <div class="line"><span class="lineno">   75</span>  *val = maxAmpl;</div>
 <div class="line"><span class="lineno">   76</span>  <span class="keywordflow">return</span> 0;</div>
 <div class="line"><span class="lineno">   77</span>}</div>
-<div class="ttc" id="adiscrcg_8h_html_a2f34219caf8080f3d9a219cfb4a5e7c0"><div class="ttname"><a href="discrcg_8h.html#a2f34219caf8080f3d9a219cfb4a5e7c0">discr2cg</a></div><div class="ttdeci">double discr2cg(double A1, double A2, double x1, double x2)</div><div class="ttdoc">Двухточечный дискриминатор, центр тяжести.</div><div class="ttdef"><b>Определения</b> <a href="discrcg_8c_source.html#l00028">discrcg.c:28</a></div></div>
+<div class="ttc" id="adiscrcg_8h_html_a2f34219caf8080f3d9a219cfb4a5e7c0"><div class="ttname"><a href="discrcg_8h.html#a2f34219caf8080f3d9a219cfb4a5e7c0">discr2cg</a></div><div class="ttdeci">double discr2cg(double A1, double A2, double x1, double x2)</div><div class="ttdoc">Двухточечный дискриминатор, центр тяжести.</div><div class="ttdef"><b>Definition</b> <a href="discrcg_8c_source.html#l00028">discrcg.c:28</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -413,57 +440,73 @@ $(function(){initNavTree('discr__common_8c.html','',''); });
         <tr>
           <td class="memname">int discr3 </td>
           <td>(</td>
-          <td class="paramtype">double **</td>          <td class="paramname"><span class="paramname"><em>maz</em></span>, </td>
+          <td class="paramtype">double **&#160;</td>
+          <td class="paramname"><em>maz</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">double **</td>          <td class="paramname"><span class="paramname"><em>mel</em></span>, </td>
+          <td class="paramtype">double **&#160;</td>
+          <td class="paramname"><em>mel</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">double **</td>          <td class="paramname"><span class="paramname"><em>mval</em></span>, </td>
+          <td class="paramtype">double **&#160;</td>
+          <td class="paramname"><em>mval</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>ndnx</em></span>, </td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>ndnx</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>ndny</em></span>, </td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>ndny</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="discr__types_8h.html#aaf88ae4f33b415b82feb394eade4a8da">DISCRTYPE</a></td>          <td class="paramname"><span class="paramname"><em>discrtype</em></span>, </td>
+          <td class="paramtype"><a class="el" href="discr__types_8h.html#aaf88ae4f33b415b82feb394eade4a8da">DISCRTYPE</a>&#160;</td>
+          <td class="paramname"><em>discrtype</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>dx</em></span>, </td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>dx</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>lambda</em></span>, </td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>lambda</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">double *</td>          <td class="paramname"><span class="paramname"><em>az</em></span>, </td>
+          <td class="paramtype">double *&#160;</td>
+          <td class="paramname"><em>az</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">double *</td>          <td class="paramname"><span class="paramname"><em>el</em></span>, </td>
+          <td class="paramtype">double *&#160;</td>
+          <td class="paramname"><em>el</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">double *</td>          <td class="paramname"><span class="paramname"><em>val</em></span>&#160;)</td>
+          <td class="paramtype">double *&#160;</td>
+          <td class="paramname"><em>val</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -498,7 +541,7 @@ $(function(){initNavTree('discr__common_8c.html','',''); });
 <div class="line"><span class="lineno">  109</span>  <span class="keywordtype">int</span> i, j;</div>
 <div class="line"><span class="lineno">  110</span> </div>
 <div class="line"><span class="lineno">  111</span>  <span class="comment">/* Проверка на возможность использования 3-точечного дискриминатора */</span></div>
-<div class="line"><span class="lineno">  112</span>  <span class="keywordflow">if</span> (!<a class="code hl_function" href="#ab26c38a3820da7bc179b57f8bd8faa04">checkuse3d</a>(maz, mel, mval, ndnx, ndny))</div>
+<div class="line"><span class="lineno">  112</span>  <span class="keywordflow">if</span> (!<a class="code hl_function" href="discr__common_8c.html#ab26c38a3820da7bc179b57f8bd8faa04">checkuse3d</a>(maz, mel, mval, ndnx, ndny))</div>
 <div class="line"><span class="lineno">  113</span>    <span class="keywordflow">return</span> -1;</div>
 <div class="line"><span class="lineno">  114</span> </div>
 <div class="line"><span class="lineno">  115</span>  <span class="comment">/* Поиск строки и столбца с максимальной амплитудой */</span></div>
@@ -565,14 +608,14 @@ $(function(){initNavTree('discr__common_8c.html','',''); });
 <div class="line"><span class="lineno">  176</span>  *el = eltmp;</div>
 <div class="line"><span class="lineno">  177</span>  <span class="keywordflow">return</span> 0;</div>
 <div class="line"><span class="lineno">  178</span>}</div>
-<div class="ttc" id="adiscr__common_8c_html_ab26c38a3820da7bc179b57f8bd8faa04"><div class="ttname"><a href="#ab26c38a3820da7bc179b57f8bd8faa04">checkuse3d</a></div><div class="ttdeci">int checkuse3d(double **maz, double **mel, double **mval, int ndnx, int ndny)</div><div class="ttdoc">Проверка на возможность использования 3-точечного дискриминатора.</div><div class="ttdef"><b>Определения</b> <a href="discr__common_8c_source.html#l00192">discr_common.c:192</a></div></div>
-<div class="ttc" id="adiscr__types_8h_html_aaf88ae4f33b415b82feb394eade4a8daa9a8bffd804f7f397ac94141de14fc707"><div class="ttname"><a href="discr__types_8h.html#aaf88ae4f33b415b82feb394eade4a8daa9a8bffd804f7f397ac94141de14fc707">DT_EA</a></div><div class="ttdeci">@ DT_EA</div><div class="ttdoc">Экспоненциальная аппроксимация.</div><div class="ttdef"><b>Определения</b> <a href="discr__types_8h_source.html#l00035">discr_types.h:35</a></div></div>
-<div class="ttc" id="adiscr__types_8h_html_aaf88ae4f33b415b82feb394eade4a8daac62b9c6de522c4e07d7a5db1f7a8a450"><div class="ttname"><a href="discr__types_8h.html#aaf88ae4f33b415b82feb394eade4a8daac62b9c6de522c4e07d7a5db1f7a8a450">DT_QA</a></div><div class="ttdeci">@ DT_QA</div><div class="ttdoc">Квадратичная аппроксимация.</div><div class="ttdef"><b>Определения</b> <a href="discr__types_8h_source.html#l00034">discr_types.h:34</a></div></div>
-<div class="ttc" id="adiscr__types_8h_html_aaf88ae4f33b415b82feb394eade4a8daae2da9b2700939ec4ed72deb5b7210922"><div class="ttname"><a href="discr__types_8h.html#aaf88ae4f33b415b82feb394eade4a8daae2da9b2700939ec4ed72deb5b7210922">DT_CG</a></div><div class="ttdeci">@ DT_CG</div><div class="ttdoc">Центр масс.</div><div class="ttdef"><b>Определения</b> <a href="discr__types_8h_source.html#l00032">discr_types.h:32</a></div></div>
-<div class="ttc" id="adiscrcg_8h_html_ab3655559ca8de2c4fa17fc6341fad94c"><div class="ttname"><a href="discrcg_8h.html#ab3655559ca8de2c4fa17fc6341fad94c">discr3cg</a></div><div class="ttdeci">double discr3cg(double A1, double A2, double A3, double x1, double x2, double x3)</div><div class="ttdoc">Трехточечный дискриминатор, центр тяжести.</div><div class="ttdef"><b>Определения</b> <a href="discrcg_8c_source.html#l00050">discrcg.c:50</a></div></div>
-<div class="ttc" id="adiscrea_8h_html_a1d0a905788c41a528b49032ecb9c2748"><div class="ttname"><a href="discrea_8h.html#a1d0a905788c41a528b49032ecb9c2748">discr3ea</a></div><div class="ttdeci">int discr3ea(double A1, double A2, double A3, double x1, double x2, double x3, double *xe)</div><div class="ttdoc">Трехточечный дискриминатор, экспоненциальная аппроксимация (Exponential).</div><div class="ttdef"><b>Определения</b> <a href="discrea_8c_source.html#l00050">discrea.c:50</a></div></div>
-<div class="ttc" id="adiscrea_8h_html_aeaf78c0e3173b3e10d91f87f58a171d0"><div class="ttname"><a href="discrea_8h.html#aeaf78c0e3173b3e10d91f87f58a171d0">discr3eaY</a></div><div class="ttdeci">double discr3eaY(double A1, double A2, double x1, double x2, double xe)</div><div class="ttdoc">Уточнение амплитуды по экспоненциальной аппроксимации.</div><div class="ttdef"><b>Определения</b> <a href="discrea_8c_source.html#l00146">discrea.c:146</a></div></div>
-<div class="ttc" id="adiscrqa_8h_html_a5cdf0c7b82518afc98773e8f323ddb3b"><div class="ttname"><a href="discrqa_8h.html#a5cdf0c7b82518afc98773e8f323ddb3b">discr3qa</a></div><div class="ttdeci">double discr3qa(double A1, double A2, double A3, double x1, double x2, double x3)</div><div class="ttdoc">Трехточечный дискриминатор, аппроксимация квадратичной зависимостью (Quadratic).</div><div class="ttdef"><b>Определения</b> <a href="discrqa_8c_source.html#l00039">discrqa.c:39</a></div></div>
+<div class="ttc" id="adiscr__common_8c_html_ab26c38a3820da7bc179b57f8bd8faa04"><div class="ttname"><a href="discr__common_8c.html#ab26c38a3820da7bc179b57f8bd8faa04">checkuse3d</a></div><div class="ttdeci">int checkuse3d(double **maz, double **mel, double **mval, int ndnx, int ndny)</div><div class="ttdoc">Проверка на возможность использования 3-точечного дискриминатора.</div><div class="ttdef"><b>Definition</b> <a href="discr__common_8c_source.html#l00192">discr_common.c:192</a></div></div>
+<div class="ttc" id="adiscr__types_8h_html_aaf88ae4f33b415b82feb394eade4a8daa9a8bffd804f7f397ac94141de14fc707"><div class="ttname"><a href="discr__types_8h.html#aaf88ae4f33b415b82feb394eade4a8daa9a8bffd804f7f397ac94141de14fc707">DT_EA</a></div><div class="ttdeci">@ DT_EA</div><div class="ttdoc">Экспоненциальная аппроксимация.</div><div class="ttdef"><b>Definition</b> <a href="discr__types_8h_source.html#l00035">discr_types.h:35</a></div></div>
+<div class="ttc" id="adiscr__types_8h_html_aaf88ae4f33b415b82feb394eade4a8daac62b9c6de522c4e07d7a5db1f7a8a450"><div class="ttname"><a href="discr__types_8h.html#aaf88ae4f33b415b82feb394eade4a8daac62b9c6de522c4e07d7a5db1f7a8a450">DT_QA</a></div><div class="ttdeci">@ DT_QA</div><div class="ttdoc">Квадратичная аппроксимация.</div><div class="ttdef"><b>Definition</b> <a href="discr__types_8h_source.html#l00034">discr_types.h:34</a></div></div>
+<div class="ttc" id="adiscr__types_8h_html_aaf88ae4f33b415b82feb394eade4a8daae2da9b2700939ec4ed72deb5b7210922"><div class="ttname"><a href="discr__types_8h.html#aaf88ae4f33b415b82feb394eade4a8daae2da9b2700939ec4ed72deb5b7210922">DT_CG</a></div><div class="ttdeci">@ DT_CG</div><div class="ttdoc">Центр масс.</div><div class="ttdef"><b>Definition</b> <a href="discr__types_8h_source.html#l00032">discr_types.h:32</a></div></div>
+<div class="ttc" id="adiscrcg_8h_html_ab3655559ca8de2c4fa17fc6341fad94c"><div class="ttname"><a href="discrcg_8h.html#ab3655559ca8de2c4fa17fc6341fad94c">discr3cg</a></div><div class="ttdeci">double discr3cg(double A1, double A2, double A3, double x1, double x2, double x3)</div><div class="ttdoc">Трехточечный дискриминатор, центр тяжести.</div><div class="ttdef"><b>Definition</b> <a href="discrcg_8c_source.html#l00050">discrcg.c:50</a></div></div>
+<div class="ttc" id="adiscrea_8h_html_a1d0a905788c41a528b49032ecb9c2748"><div class="ttname"><a href="discrea_8h.html#a1d0a905788c41a528b49032ecb9c2748">discr3ea</a></div><div class="ttdeci">int discr3ea(double A1, double A2, double A3, double x1, double x2, double x3, double *xe)</div><div class="ttdoc">Трехточечный дискриминатор, экспоненциальная аппроксимация (Exponential).</div><div class="ttdef"><b>Definition</b> <a href="discrea_8c_source.html#l00050">discrea.c:50</a></div></div>
+<div class="ttc" id="adiscrea_8h_html_aeaf78c0e3173b3e10d91f87f58a171d0"><div class="ttname"><a href="discrea_8h.html#aeaf78c0e3173b3e10d91f87f58a171d0">discr3eaY</a></div><div class="ttdeci">double discr3eaY(double A1, double A2, double x1, double x2, double xe)</div><div class="ttdoc">Уточнение амплитуды по экспоненциальной аппроксимации.</div><div class="ttdef"><b>Definition</b> <a href="discrea_8c_source.html#l00146">discrea.c:146</a></div></div>
+<div class="ttc" id="adiscrqa_8h_html_a5cdf0c7b82518afc98773e8f323ddb3b"><div class="ttname"><a href="discrqa_8h.html#a5cdf0c7b82518afc98773e8f323ddb3b">discr3qa</a></div><div class="ttdeci">double discr3qa(double A1, double A2, double A3, double x1, double x2, double x3)</div><div class="ttdoc">Трехточечный дискриминатор, аппроксимация квадратичной зависимостью (Quadratic).</div><div class="ttdef"><b>Definition</b> <a href="discrqa_8c_source.html#l00039">discrqa.c:39</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -585,47 +628,61 @@ $(function(){initNavTree('discr__common_8c.html','',''); });
         <tr>
           <td class="memname">int discr3_ </td>
           <td>(</td>
-          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>maz</em></span>[3][3], </td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>maz</em>[3][3], </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>mel</em></span>[3][3], </td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>mel</em>[3][3], </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>mval</em></span>[3][3], </td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>mval</em>[3][3], </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="discr__types_8h.html#aaf88ae4f33b415b82feb394eade4a8da">DISCRTYPE</a></td>          <td class="paramname"><span class="paramname"><em>discrtype</em></span>, </td>
+          <td class="paramtype"><a class="el" href="discr__types_8h.html#aaf88ae4f33b415b82feb394eade4a8da">DISCRTYPE</a>&#160;</td>
+          <td class="paramname"><em>discrtype</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>dx</em></span>, </td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>dx</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>lambda</em></span>, </td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>lambda</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">double *</td>          <td class="paramname"><span class="paramname"><em>az</em></span>, </td>
+          <td class="paramtype">double *&#160;</td>
+          <td class="paramname"><em>az</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">double *</td>          <td class="paramname"><span class="paramname"><em>el</em></span>, </td>
+          <td class="paramtype">double *&#160;</td>
+          <td class="paramname"><em>el</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">double *</td>          <td class="paramname"><span class="paramname"><em>val</em></span>&#160;)</td>
+          <td class="paramtype">double *&#160;</td>
+          <td class="paramname"><em>val</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -655,30 +712,18 @@ $(function(){initNavTree('discr__common_8c.html','',''); });
 <div class="line"><span class="lineno">  226</span>  <span class="keywordtype">double</span> *pmel[3]  = { &amp;mel[0][0],  &amp;mel[1][0],  &amp;mel[2][0] };</div>
 <div class="line"><span class="lineno">  227</span>  <span class="keywordtype">double</span> *pmval[3] = { &amp;mval[0][0], &amp;mval[1][0], &amp;mval[2][0] };</div>
 <div class="line"><span class="lineno">  228</span> </div>
-<div class="line"><span class="lineno">  229</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="#ada0fa80ec1c0edd0e0135de4d4a01c5d">discr3</a>(pmaz, pmel, pmval, 3, 3,</div>
+<div class="line"><span class="lineno">  229</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="discr__common_8c.html#ada0fa80ec1c0edd0e0135de4d4a01c5d">discr3</a>(pmaz, pmel, pmval, 3, 3,</div>
 <div class="line"><span class="lineno">  230</span>                discrtype, dx, lambda,</div>
 <div class="line"><span class="lineno">  231</span>                az, el, val);</div>
 <div class="line"><span class="lineno">  232</span>}</div>
-<div class="ttc" id="adiscr__common_8c_html_ada0fa80ec1c0edd0e0135de4d4a01c5d"><div class="ttname"><a href="#ada0fa80ec1c0edd0e0135de4d4a01c5d">discr3</a></div><div class="ttdeci">int discr3(double **maz, double **mel, double **mval, int ndnx, int ndny, DISCRTYPE discrtype, double dx, double lambda, double *az, double *el, double *val)</div><div class="ttdoc">Трехточечный дискриминатор (обёртка).</div><div class="ttdef"><b>Определения</b> <a href="discr__common_8c_source.html#l00101">discr_common.c:101</a></div></div>
+<div class="ttc" id="adiscr__common_8c_html_ada0fa80ec1c0edd0e0135de4d4a01c5d"><div class="ttname"><a href="discr__common_8c.html#ada0fa80ec1c0edd0e0135de4d4a01c5d">discr3</a></div><div class="ttdeci">int discr3(double **maz, double **mel, double **mval, int ndnx, int ndny, DISCRTYPE discrtype, double dx, double lambda, double *az, double *el, double *val)</div><div class="ttdoc">Трехточечный дискриминатор (обёртка).</div><div class="ttdef"><b>Definition</b> <a href="discr__common_8c_source.html#l00101">discr_common.c:101</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
 </div><!-- contents -->
-</div><!-- doc-content -->
-<div id="page-nav" class="page-nav-panel">
-<div id="page-nav-resize-handle"></div>
-<div id="page-nav-tree">
-<div id="page-nav-contents">
-</div><!-- page-nav-contents -->
-</div><!-- page-nav-tree -->
-</div><!-- page-nav -->
-</div><!-- container -->
 <!-- start footer part -->
-<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
-  <ul>
-    <li class="navelem"><a href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a href="discr__common_8c.html">discr_common.c</a></li>
-    <li class="footer">Создано системой <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.1 </li>
-  </ul>
-</div>
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8
+</small></address>
 </body>
 </html>

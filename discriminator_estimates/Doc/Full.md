@@ -608,9 +608,9 @@ int conv3to2(double maz3[3][3], double mel3[3][3], double mval3[3][3],
 |-----------|-----------|--------|--------|--------|
 | C++ (простые) | assert + iostream | 5 (.hpp) + 1 (.cpp) | 27 | Аналитические + sinc(x) |
 | C++ (GTest) | Google Test v1.15.2 | 5 (.cpp) | 40 | sinc(x) = sin(x)/x |
-| Python | PyCore.TestRunner | 2 (.py) | 7 классов/методов | sinc(x) + numpy эталон |
+| Python | PyCore.TestRunner | 4 (.py) | 17 классов/методов | sinc(x) + FFT + numpy |
 
-**Итого**: 67+ тестовых проверок.
+**Итого**: 77+ тестовых проверок.
 
 ### 8.2. C++ тесты (простые, без фреймворка)
 
@@ -648,8 +648,49 @@ int conv3to2(double maz3[3][3], double mel3[3][3], double mval3[3][3],
 |------|---------|----------------|
 | `test_discriminators.py` | 3 | CG на sinc: симметрия, смещение 0.3, 5 точек; QA на sinc: симметрия, смещение 0.2, мелкая сетка; Сравнение CG vs QA |
 | `test_discriminators_plot.py` | -- | Генерация 3 графиков (не тест, визуализация) |
+| `test_fft_frequency.py` | 3 | FFT-дискриминаторы: sweep, монотонность ДХ, сравнение точности 5 методов (Primer.m) |
+| `test_fft_frequency_plot.py` | -- | Генерация 2 графиков FFT (3x3 фигура Primer.m + ошибка EXP с окнами) |
 
 Тесты используют **numpy** как эталон и **PyCore.TestRunner** с **DataValidator** для валидации.
+
+### 8.6. FFT-дискриминаторы частоты (из Primer.m)
+
+Дополнительный набор тестов проверяет работу дискриминаторов в задаче **оценки частоты
+по FFT-спектру** комплексного сигнала (воспроизведение MatLab Primer.m + fcalcdelay.m).
+
+**Сигнал**: `x(t) = exp(j·2pi·fsin·t)`, N=32, fd=12 МГц, окно Хэмминга.
+
+**5 методов** (порт из C-исходников + fcalcdelay.m):
+
+| Метод | Тип | Формула | Исходник |
+|-------|-----|---------|----------|
+| exp | 3-точ. | парабола на log\|S\| | discr3ea.c |
+| sqr | 3-точ. | парабола на \|S\| (Ao) | discr3qa.c |
+| lay | 3-точ. | Jacobsen: `-Re{(Sp-Sm)/(2S0-Sm-Sp)}·fd/N` | fcalcdelay.m |
+| sd | 2-точ. | `(x1+x2)/2 + c·(A2-A1)/(A2+A1)`, c=0.132497 | discrsd.c |
+| cg | 2-точ. | `(A1·x1+A2·x2)/(A1+A2)` | discrcg.c |
+
+**Таблица точности** (sweep ±df/4, N=32, Hamming):
+
+```
+Метод | Средняя ошибка | Макс. ошибка
+------+----------------+-------------
+exp   |       2 902 Hz |    4 825 Hz   <-- лучший
+sqr   |      13 553 Hz |   23 348 Hz
+lay   |      22 933 Hz |   43 811 Hz
+sd    |     138 393 Hz |  187 500 Hz   <-- грубая оценка
+cg    |      84 664 Hz |  115 270 Hz
+```
+
+**Графики** (Doc/plots/):
+- `fft_primer_m.png` — 3×3 фигура: спектры + оценки + ошибки (как Primer.m)
+- `fft_exp_error_windows.png` — ошибка EXP: все методы + сравнение окон
+
+```bash
+# Запуск:
+python test_python/test_fft_frequency.py       # 10 тестов
+python test_python/test_fft_frequency_plot.py   # 2 графика -> Doc/plots/
+```
 
 ### 8.5. Экспериментальные данные
 

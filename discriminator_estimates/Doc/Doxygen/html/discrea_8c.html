@@ -3,20 +3,16 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
-<meta name="generator" content="Doxygen 1.16.1"/>
+<meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Discriminator Estimates (КППО/ТЗК): Файл discrea.c</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
-<script type="text/javascript" src="clipboard.js"></script>
-<link href="navtree.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="navtreedata.js"></script>
-<script type="text/javascript" src="navtree.js"></script>
-<script type="text/javascript" src="cookie.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 <script type="text/javascript">
 window.MathJax = {
   options: {
@@ -44,38 +40,23 @@ window.MathJax = {
 </table>
 </div>
 <!-- end header part -->
-<!-- Создано системой Doxygen 1.16.1 -->
+<!-- Создано системой Doxygen 1.9.8 -->
 <script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
 var searchBox = new SearchBox("searchBox", "search/",'.html');
-</script>
-<script type="text/javascript">
-$(function() { codefold.init(); });
+/* @license-end */
 </script>
 <script type="text/javascript" src="menudata.js"></script>
 <script type="text/javascript" src="menu.js"></script>
 <script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
 $(function() {
-  initMenu('',true,false,'search.php','Поиск',true);
-  $(function() { init_search(); });
+  initMenu('',true,false,'search.php','Поиск');
+  $(document).ready(function() { init_search(); });
 });
+/* @license-end */
 </script>
 <div id="main-nav"></div>
-</div><!-- top -->
-<div id="side-nav" class="ui-resizable side-nav-resizable">
-  <div id="nav-tree">
-    <div id="nav-tree-contents">
-      <div id="nav-sync" class="sync"></div>
-    </div>
-  </div>
-  <div id="splitbar" style="-moz-user-select:none;" 
-       class="ui-resizable-handle">
-  </div>
-</div>
-<script type="text/javascript">
-$(function(){initNavTree('discrea_8c.html','',''); });
-</script>
-<div id="container">
-<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -97,7 +78,15 @@ $(function(){initNavTree('discrea_8c.html','',''); });
 </div>
 </div>
 
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li>  </ul>
+</div>
+</div><!-- top -->
 <div class="header">
+  <div class="summary">
+<a href="#nested-classes">Структуры данных</a> &#124;
+<a href="#func-members">Функции</a>  </div>
   <div class="headertitle"><div class="title">Файл discrea.c</div></div>
 </div><!--header-->
 <div class="contents">
@@ -111,21 +100,25 @@ $(function(){initNavTree('discrea_8c.html','',''); });
 </div>
 <p><a href="discrea_8c_source.html">См. исходные тексты.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Структуры данных</h2></td></tr>
-<tr class="memitem:axstr_5Ft" id="r_axstr_5Ft"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structaxstr__t.html">axstr_t</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaxstr__t.html">axstr_t</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Структура для сортировки пар (амплитуда, координата).  <a href="structaxstr__t.html#details">Подробнее...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Функции</h2></td></tr>
-<tr class="memitem:a3da7a19413de8b894b042ac61bc441e4" id="r_a3da7a19413de8b894b042ac61bc441e4"><td class="memItemLeft">static int&#160;</td><td class="memItemRight"><a class="el" href="#a3da7a19413de8b894b042ac61bc441e4">compare_by_x</a> (const void *p1, const void *p2)</td></tr>
+<tr class="memitem:a3da7a19413de8b894b042ac61bc441e4" id="r_a3da7a19413de8b894b042ac61bc441e4"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="discrea_8c.html#a3da7a19413de8b894b042ac61bc441e4">compare_by_x</a> (const void *p1, const void *p2)</td></tr>
 <tr class="memdesc:a3da7a19413de8b894b042ac61bc441e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Сортировка пар (амплитуда, координата) по возрастанию координаты.  <br /></td></tr>
-<tr class="memitem:a1d0a905788c41a528b49032ecb9c2748" id="r_a1d0a905788c41a528b49032ecb9c2748"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a1d0a905788c41a528b49032ecb9c2748">discr3ea</a> (double A1, double A2, double A3, double x1, double x2, double x3, double *xe)</td></tr>
+<tr class="separator:a3da7a19413de8b894b042ac61bc441e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d0a905788c41a528b49032ecb9c2748" id="r_a1d0a905788c41a528b49032ecb9c2748"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="discrea_8c.html#a1d0a905788c41a528b49032ecb9c2748">discr3ea</a> (double A1, double A2, double A3, double x1, double x2, double x3, double *xe)</td></tr>
 <tr class="memdesc:a1d0a905788c41a528b49032ecb9c2748"><td class="mdescLeft">&#160;</td><td class="mdescRight">Трехточечный дискриминатор, экспоненциальная аппроксимация.  <br /></td></tr>
-<tr class="memitem:aeaf78c0e3173b3e10d91f87f58a171d0" id="r_aeaf78c0e3173b3e10d91f87f58a171d0"><td class="memItemLeft">double&#160;</td><td class="memItemRight"><a class="el" href="#aeaf78c0e3173b3e10d91f87f58a171d0">discr3eaY</a> (double A1, double A2, double x1, double x2, double xe)</td></tr>
+<tr class="separator:a1d0a905788c41a528b49032ecb9c2748"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeaf78c0e3173b3e10d91f87f58a171d0" id="r_aeaf78c0e3173b3e10d91f87f58a171d0"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="discrea_8c.html#aeaf78c0e3173b3e10d91f87f58a171d0">discr3eaY</a> (double A1, double A2, double x1, double x2, double xe)</td></tr>
 <tr class="memdesc:aeaf78c0e3173b3e10d91f87f58a171d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Уточнение амплитуды по экспоненциальной аппроксимации.  <br /></td></tr>
+<tr class="separator:aeaf78c0e3173b3e10d91f87f58a171d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Подробное описание</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Подробное описание</h2>
 <div class="textblock"><p>КППО / ТЗК. Дискриминатор — экспоненциальная аппроксимация (Exponential). </p>
 <dl class="section author"><dt>Автор</dt><dd>Добродумов А.Б. </dd></dl>
 <dl class="section date"><dt>Дата</dt><dd>15.04.2012 </dd></dl>
@@ -136,7 +129,7 @@ $(function(){initNavTree('discrea_8c.html','',''); });
 </ul>
 
 <p class="definition">См. определение в файле <a class="el" href="discrea_8c_source.html">discrea.c</a></p>
-</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Функции</h2>
+</div><h2 class="groupheader">Функции</h2>
 <a id="a3da7a19413de8b894b042ac61bc441e4" name="a3da7a19413de8b894b042ac61bc441e4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3da7a19413de8b894b042ac61bc441e4">&#9670;&#160;</a></span>compare_by_x()</h2>
 
@@ -147,19 +140,26 @@ $(function(){initNavTree('discrea_8c.html','',''); });
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int compare_by_x </td>
+          <td class="memname">static int compare_by_x </td>
           <td>(</td>
-          <td class="paramtype">const void *</td>          <td class="paramname"><span class="paramname"><em>p1</em></span>, </td>
+          <td class="paramtype">const void *&#160;</td>
+          <td class="paramname"><em>p1</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const void *</td>          <td class="paramname"><span class="paramname"><em>p2</em></span>&#160;)</td>
+          <td class="paramtype">const void *&#160;</td>
+          <td class="paramname"><em>p2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -177,8 +177,8 @@ $(function(){initNavTree('discrea_8c.html','',''); });
 <div class="line"><span class="lineno">  184</span>    <span class="keywordflow">return</span> 1;</div>
 <div class="line"><span class="lineno">  185</span>  <span class="keywordflow">return</span> 0;</div>
 <div class="line"><span class="lineno">  186</span>}</div>
-<div class="ttc" id="astructaxstr__t_html"><div class="ttname"><a href="structaxstr__t.html">axstr_t</a></div><div class="ttdoc">Структура для сортировки пар (амплитуда, координата).</div><div class="ttdef"><b>Определения</b> <a href="discrea_8c_source.html#l00022">discrea.c:22</a></div></div>
-<div class="ttc" id="astructaxstr__t_html_a33b12c05f89f90d477279098cb64908d"><div class="ttname"><a href="structaxstr__t.html#a33b12c05f89f90d477279098cb64908d">axstr_t::x</a></div><div class="ttdeci">double x</div><div class="ttdoc">координата</div><div class="ttdef"><b>Определения</b> <a href="discrea_8c_source.html#l00024">discrea.c:24</a></div></div>
+<div class="ttc" id="astructaxstr__t_html"><div class="ttname"><a href="structaxstr__t.html">axstr_t</a></div><div class="ttdoc">Структура для сортировки пар (амплитуда, координата).</div><div class="ttdef"><b>Definition</b> <a href="discrea_8c_source.html#l00022">discrea.c:22</a></div></div>
+<div class="ttc" id="astructaxstr__t_html_a33b12c05f89f90d477279098cb64908d"><div class="ttname"><a href="structaxstr__t.html#a33b12c05f89f90d477279098cb64908d">axstr_t::x</a></div><div class="ttdeci">double x</div><div class="ttdoc">координата</div><div class="ttdef"><b>Definition</b> <a href="discrea_8c_source.html#l00024">discrea.c:24</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -191,37 +191,49 @@ $(function(){initNavTree('discrea_8c.html','',''); });
         <tr>
           <td class="memname">int discr3ea </td>
           <td>(</td>
-          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>A1</em></span>, </td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>A1</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>A2</em></span>, </td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>A2</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>A3</em></span>, </td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>A3</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>x1</em></span>, </td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>x1</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>x2</em></span>, </td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>x2</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>x3</em></span>, </td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>x3</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">double *</td>          <td class="paramname"><span class="paramname"><em>xe</em></span>&#160;)</td>
+          <td class="paramtype">double *&#160;</td>
+          <td class="paramname"><em>xe</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -275,7 +287,7 @@ $(function(){initNavTree('discrea_8c.html','',''); });
 <div class="line"><span class="lineno">   73</span>  ax[0].<a class="code hl_variable" href="structaxstr__t.html#ad0ebf0e44c5b4d91881919a56737ff86">a</a> = A1; ax[0].<a class="code hl_variable" href="structaxstr__t.html#a33b12c05f89f90d477279098cb64908d">x</a> = x1;</div>
 <div class="line"><span class="lineno">   74</span>  ax[1].<a class="code hl_variable" href="structaxstr__t.html#ad0ebf0e44c5b4d91881919a56737ff86">a</a> = A2; ax[1].<a class="code hl_variable" href="structaxstr__t.html#a33b12c05f89f90d477279098cb64908d">x</a> = x2;</div>
 <div class="line"><span class="lineno">   75</span>  ax[2].<a class="code hl_variable" href="structaxstr__t.html#ad0ebf0e44c5b4d91881919a56737ff86">a</a> = A3; ax[2].<a class="code hl_variable" href="structaxstr__t.html#a33b12c05f89f90d477279098cb64908d">x</a> = x3;</div>
-<div class="line"><span class="lineno">   76</span>  qsort(ax, 3, <span class="keyword">sizeof</span>(<a class="code hl_struct" href="structaxstr__t.html">axstr_t</a>), <a class="code hl_function" href="#a3da7a19413de8b894b042ac61bc441e4">compare_by_x</a>);</div>
+<div class="line"><span class="lineno">   76</span>  qsort(ax, 3, <span class="keyword">sizeof</span>(<a class="code hl_struct" href="structaxstr__t.html">axstr_t</a>), <a class="code hl_function" href="discrea_8c.html#a3da7a19413de8b894b042ac61bc441e4">compare_by_x</a>);</div>
 <div class="line"><span class="lineno">   77</span> </div>
 <div class="line"><span class="lineno">   78</span>  a1 = ax[0].<a class="code hl_variable" href="structaxstr__t.html#ad0ebf0e44c5b4d91881919a56737ff86">a</a>; a2 = ax[1].<a class="code hl_variable" href="structaxstr__t.html#ad0ebf0e44c5b4d91881919a56737ff86">a</a>; a3 = ax[2].<a class="code hl_variable" href="structaxstr__t.html#ad0ebf0e44c5b4d91881919a56737ff86">a</a>;</div>
 <div class="line"><span class="lineno">   79</span>  f1 = ax[0].<a class="code hl_variable" href="structaxstr__t.html#a33b12c05f89f90d477279098cb64908d">x</a>; f2 = ax[1].<a class="code hl_variable" href="structaxstr__t.html#a33b12c05f89f90d477279098cb64908d">x</a>; f3 = ax[2].<a class="code hl_variable" href="structaxstr__t.html#a33b12c05f89f90d477279098cb64908d">x</a>;</div>
@@ -332,8 +344,8 @@ $(function(){initNavTree('discrea_8c.html','',''); });
 <div class="line"><span class="lineno">  130</span> </div>
 <div class="line"><span class="lineno">  131</span>  <span class="keywordflow">return</span> EXIT_SUCCESS;</div>
 <div class="line"><span class="lineno">  132</span>}</div>
-<div class="ttc" id="adiscrea_8c_html_a3da7a19413de8b894b042ac61bc441e4"><div class="ttname"><a href="#a3da7a19413de8b894b042ac61bc441e4">compare_by_x</a></div><div class="ttdeci">static int compare_by_x(const void *p1, const void *p2)</div><div class="ttdoc">Сортировка пар (амплитуда, координата) по возрастанию координаты.</div><div class="ttdef"><b>Определения</b> <a href="discrea_8c_source.html#l00176">discrea.c:176</a></div></div>
-<div class="ttc" id="astructaxstr__t_html_ad0ebf0e44c5b4d91881919a56737ff86"><div class="ttname"><a href="structaxstr__t.html#ad0ebf0e44c5b4d91881919a56737ff86">axstr_t::a</a></div><div class="ttdeci">double a</div><div class="ttdoc">амплитуда</div><div class="ttdef"><b>Определения</b> <a href="discrea_8c_source.html#l00023">discrea.c:23</a></div></div>
+<div class="ttc" id="adiscrea_8c_html_a3da7a19413de8b894b042ac61bc441e4"><div class="ttname"><a href="discrea_8c.html#a3da7a19413de8b894b042ac61bc441e4">compare_by_x</a></div><div class="ttdeci">static int compare_by_x(const void *p1, const void *p2)</div><div class="ttdoc">Сортировка пар (амплитуда, координата) по возрастанию координаты.</div><div class="ttdef"><b>Definition</b> <a href="discrea_8c_source.html#l00176">discrea.c:176</a></div></div>
+<div class="ttc" id="astructaxstr__t_html_ad0ebf0e44c5b4d91881919a56737ff86"><div class="ttname"><a href="structaxstr__t.html#ad0ebf0e44c5b4d91881919a56737ff86">axstr_t::a</a></div><div class="ttdeci">double a</div><div class="ttdoc">амплитуда</div><div class="ttdef"><b>Definition</b> <a href="discrea_8c_source.html#l00023">discrea.c:23</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -346,27 +358,37 @@ $(function(){initNavTree('discrea_8c.html','',''); });
         <tr>
           <td class="memname">double discr3eaY </td>
           <td>(</td>
-          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>A1</em></span>, </td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>A1</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>A2</em></span>, </td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>A2</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>x1</em></span>, </td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>x1</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>x2</em></span>, </td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>x2</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>xe</em></span>&#160;)</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>xe</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -415,21 +437,9 @@ $(function(){initNavTree('discrea_8c.html','',''); });
 </div>
 </div>
 </div><!-- contents -->
-</div><!-- doc-content -->
-<div id="page-nav" class="page-nav-panel">
-<div id="page-nav-resize-handle"></div>
-<div id="page-nav-tree">
-<div id="page-nav-contents">
-</div><!-- page-nav-contents -->
-</div><!-- page-nav-tree -->
-</div><!-- page-nav -->
-</div><!-- container -->
 <!-- start footer part -->
-<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
-  <ul>
-    <li class="navelem"><a href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a href="discrea_8c.html">discrea.c</a></li>
-    <li class="footer">Создано системой <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.1 </li>
-  </ul>
-</div>
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8
+</small></address>
 </body>
 </html>

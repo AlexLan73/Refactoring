@@ -1,0 +1,299 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ru" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>API Reference &mdash; Discriminator Estimates — FFT Frequency Discriminators</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=9ca2116e"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/translations.js?v=cd1d70c9"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Алфавитный указатель" href="genindex.html" />
+    <link rel="search" title="Поиск" href="search.html" />
+    <link rel="next" title="Тесты" href="tests.html" />
+    <link rel="prev" title="Обзор" href="overview.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Discriminator Estimates — FFT Frequency
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Поиск в документации" aria-label="Поиск в документации" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Меню навигации">
+              <p class="caption" role="heading"><span class="caption-text">Содержание:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Обзор</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#module-tsignal.signal_gen">signal_gen</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#tsignal.signal_gen.get_window"><code class="docutils literal notranslate"><span class="pre">get_window()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tsignal.signal_gen.create_signal"><code class="docutils literal notranslate"><span class="pre">create_signal()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tsignal.signal_gen.compute_fft"><code class="docutils literal notranslate"><span class="pre">compute_fft()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tsignal.signal_gen.make_freq_axis"><code class="docutils literal notranslate"><span class="pre">make_freq_axis()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-tsignal.discriminators">discriminators</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#tsignal.discriminators.discriminator_lay"><code class="docutils literal notranslate"><span class="pre">discriminator_lay()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tsignal.discriminators.discriminator_exp"><code class="docutils literal notranslate"><span class="pre">discriminator_exp()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tsignal.discriminators.discriminator_sqr"><code class="docutils literal notranslate"><span class="pre">discriminator_sqr()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tsignal.discriminators.discriminator_sd"><code class="docutils literal notranslate"><span class="pre">discriminator_sd()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tsignal.discriminators.discriminator_cg"><code class="docutils literal notranslate"><span class="pre">discriminator_cg()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tests.html">Тесты</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Меню навигации для мобильных устройств" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Discriminator Estimates — FFT Frequency</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Навигация по страницам">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">API Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/api.rst.txt" rel="nofollow"> Просмотреть исходный код страницы</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="api-reference">
+<h1>API Reference<a class="headerlink" href="#api-reference" title="Ссылка на этот заголовок"></a></h1>
+<section id="module-tsignal.signal_gen">
+<span id="signal-gen"></span><h2>signal_gen<a class="headerlink" href="#module-tsignal.signal_gen" title="Ссылка на этот заголовок"></a></h2>
+<p>Генерация тестового сигнала и вычисление оконного FFT.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="tsignal.signal_gen.get_window">
+<span class="sig-prename descclassname"><span class="pre">tsignal.signal_gen.</span></span><span class="sig-name descname"><span class="pre">get_window</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="reference internal" href="_modules/tsignal/signal_gen.html#get_window"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#tsignal.signal_gen.get_window" title="Ссылка на это определение"></a></dt>
+<dd><p>Вернуть оконную функцию по имени.</p>
+<p>Встроенные (numpy): <code class="docutils literal notranslate"><span class="pre">&quot;hamming&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;hann&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;bartlett&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;blackman&quot;</span></code>
+Scipy (если установлен): <code class="docutils literal notranslate"><span class="pre">&quot;kaiser8&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;kaiser14&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;flattop&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;nuttall&quot;</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – Название окна (регистронезависимо)</p></li>
+<li><p><strong>N</strong> (<em>int</em>) – Длина окна</p></li>
+</ul>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p>np.ndarray, shape (N,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tsignal.signal_gen.create_signal">
+<span class="sig-prename descclassname"><span class="pre">tsignal.signal_gen.</span></span><span class="sig-name descname"><span class="pre">create_signal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fsin</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fd</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">an</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1e-09</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="reference internal" href="_modules/tsignal/signal_gen.html#create_signal"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#tsignal.signal_gen.create_signal" title="Ссылка на это определение"></a></dt>
+<dd><p>Создать комплексный экспоненциальный сигнал с шумом.</p>
+<dl class="simple">
+<dt>Генерирует N отсчётов комплексной огибающей:</dt><dd><p>s(t) = a · exp(j·2π·fsin·t) + noise</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fsin</strong> (<em>float</em>) – Частота сигнала, Гц</p></li>
+<li><p><strong>fd</strong> (<em>float</em>) – Частота дискретизации, Гц</p></li>
+<li><p><strong>N</strong> (<em>int</em>) – Количество отсчётов</p></li>
+<li><p><strong>a</strong> (<em>float</em>) – Амплитуда сигнала (по умолчанию 1.0)</p></li>
+<li><p><strong>an</strong> (<em>float</em>) – СКО шума (по умолчанию 1e-9 — практически без шума)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Результат<span class="colon">:</span></dt>
+<dd class="field-even"><p>Комплексная огибающая сигнала, N отсчётов</p>
+</dd>
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray (complex128)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tsignal.signal_gen.compute_fft">
+<span class="sig-prename descclassname"><span class="pre">tsignal.signal_gen.</span></span><span class="sig-name descname"><span class="pre">compute_fft</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">signal</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nfft</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'hamming'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="reference internal" href="_modules/tsignal/signal_gen.html#compute_fft"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#tsignal.signal_gen.compute_fft" title="Ссылка на это определение"></a></dt>
+<dd><p>Вычислить оконный FFT спектр сигнала.</p>
+<blockquote>
+<div><p>FFT = fftshift( fft(signal · win(N), nfft) )</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>signal</strong> (<em>np.ndarray</em>) – Комплексный входной сигнал (N отсчётов)</p></li>
+<li><p><strong>nfft</strong> (<em>int</em>) – Размер FFT</p></li>
+<li><p><strong>window</strong> (<em>str</em>) – Имя окна (см. <a class="reference internal" href="#tsignal.signal_gen.get_window" title="tsignal.signal_gen.get_window"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_window()</span></code></a>). По умолчанию <code class="docutils literal notranslate"><span class="pre">&quot;hamming&quot;</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Результат<span class="colon">:</span></dt>
+<dd class="field-even"><p>Комплексный спектр (fftshift), nfft точек</p>
+</dd>
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray (complex128)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tsignal.signal_gen.make_freq_axis">
+<span class="sig-prename descclassname"><span class="pre">tsignal.signal_gen.</span></span><span class="sig-name descname"><span class="pre">make_freq_axis</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nfft</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fd</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="reference internal" href="_modules/tsignal/signal_gen.html#make_freq_axis"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#tsignal.signal_gen.make_freq_axis" title="Ссылка на это определение"></a></dt>
+<dd><p>Построить частотную ось FFT после fftshift.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>nfft</strong> (<em>int</em>) – Размер FFT</p></li>
+<li><p><strong>fd</strong> (<em>float</em>) – Частота дискретизации, Гц</p></li>
+</ul>
+</dd>
+<dt class="field-even">Результат<span class="colon">:</span></dt>
+<dd class="field-even"><p>Частоты, Гц, nfft точек: от -fd/2 до fd/2 - df</p>
+</dd>
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-tsignal.discriminators">
+<span id="discriminators"></span><h2>discriminators<a class="headerlink" href="#module-tsignal.discriminators" title="Ссылка на этот заголовок"></a></h2>
+<p>Частотные дискриминаторы FFT-спектра.</p>
+<p>Точная реализация по C-исходникам из проекта discriminator_estimates
+(Refactoring/discriminator_estimates/src/).</p>
+<dl class="simple">
+<dt>Методы:</dt><dd><p>lay — 3-точечный Jacobsen: -Re{(Sp-Sm)/(2S0-Sm-Sp)} * fd/N  (fcalcdelay.m)
+exp — 3-точечный, парабола на log|S| с проверками  (discr3ea.c)
+sqr — 3-точечный, парабола по формуле Ao           (discr3qa.c)
+sd  — 2-точечный, суммарно-разностный              (discrsd.c)
+cg  — 2-точечный, центр тяжести                    (discrcg.c)</p>
+</dd>
+</dl>
+<dl class="py function">
+<dt class="sig sig-object py" id="tsignal.discriminators.discriminator_lay">
+<span class="sig-prename descclassname"><span class="pre">tsignal.discriminators.</span></span><span class="sig-name descname"><span class="pre">discriminator_lay</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fft_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_axis</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/tsignal/discriminators.html#discriminator_lay"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#tsignal.discriminators.discriminator_lay" title="Ссылка на это определение"></a></dt>
+<dd><p>Метод «Лайонса» — формула Jacobsen из fcalcdelay.m.</p>
+<p>sigmapeak = (ffts(k+1)-ffts(k-1)) / (2*ffts(k)-ffts(k-1)-ffts(k+1))
+f = fmax - real(sigmapeak) * fd / count</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tsignal.discriminators.discriminator_exp">
+<span class="sig-prename descclassname"><span class="pre">tsignal.discriminators.</span></span><span class="sig-name descname"><span class="pre">discriminator_exp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fft_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_axis</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/tsignal/discriminators.html#discriminator_exp"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#tsignal.discriminators.discriminator_exp" title="Ссылка на это определение"></a></dt>
+<dd><p>Экспоненциальная 3-точечная интерполяция — из discr3ea.c.</p>
+<dl class="simple">
+<dt>Алгоритм:</dt><dd><ol class="arabic simple">
+<li><p>Сортировка 3 точек по x (координате)</p></li>
+<li><p>Проверка на выпуклость (максимум в центре)</p></li>
+<li><p>Логарифмирование: z = ln(A)</p></li>
+<li><p>Парабола z(x), вершина: xe = 0.5 * a / b</p></li>
+<li><p>Ограничение на вылет за пределы ±1.5·(f3-f1) от краёв</p></li>
+</ol>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tsignal.discriminators.discriminator_sqr">
+<span class="sig-prename descclassname"><span class="pre">tsignal.discriminators.</span></span><span class="sig-name descname"><span class="pre">discriminator_sqr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fft_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_axis</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/tsignal/discriminators.html#discriminator_sqr"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#tsignal.discriminators.discriminator_sqr" title="Ссылка на это определение"></a></dt>
+<dd><p>Квадратичная 3-точечная интерполяция — из discr3qa.c.</p>
+<dl class="simple">
+<dt>Формула (через отношение Ao):</dt><dd><p>Ao = (A2 - A1) / (A2 - A3)
+xe = 0.5 * ((Ao-1)*x2² - Ao*x3² + x1²) / ((Ao-1)*x2 - Ao*x3 + x1)</p>
+</dd>
+</dl>
+<p>Граничные случаи обрабатываются как в оригинале.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tsignal.discriminators.discriminator_sd">
+<span class="sig-prename descclassname"><span class="pre">tsignal.discriminators.</span></span><span class="sig-name descname"><span class="pre">discriminator_sd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fft_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_axis</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/tsignal/discriminators.html#discriminator_sd"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#tsignal.discriminators.discriminator_sd" title="Ссылка на это определение"></a></dt>
+<dd><p>2-точечный суммарно-разностный — из discrsd.c.</p>
+<dl class="simple">
+<dt>Из fcalcdelay.m:</dt><dd><p>f = discr2sd(0.132497, P_max^2, P_second^2, f_max, f_second)</p>
+</dd>
+<dt>Из discrsd.c:</dt><dd><p>xc = (x1 + x2) / 2
+dx = c * (A2 - A1) / (A2 + A1)
+xe = xc + dx</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tsignal.discriminators.discriminator_cg">
+<span class="sig-prename descclassname"><span class="pre">tsignal.discriminators.</span></span><span class="sig-name descname"><span class="pre">discriminator_cg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fft_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_axis</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/tsignal/discriminators.html#discriminator_cg"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#tsignal.discriminators.discriminator_cg" title="Ссылка на это определение"></a></dt>
+<dd><p>2-точечный центр тяжести — из discrcg.c.</p>
+<dl class="simple">
+<dt>Из fcalcdelay.m:</dt><dd><p>f = discr2cg(a_max, a_second, f_max, f_second)</p>
+</dd>
+<dt>Из discrcg.c:</dt><dd><p>xe = (A1*x1 + A2*x2) / (A1 + A2)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Нижняя область">
+        <a href="overview.html" class="btn btn-neutral float-left" title="Обзор" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Предыдущая</a>
+        <a href="tests.html" class="btn btn-neutral float-right" title="Тесты" accesskey="n" rel="next">Следующая <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Авторские права . </p>
+  </div>
+
+  Собрано при помощи <a href="https://www.sphinx-doc.org/">Sphinx</a> с использованием
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">темы,</a>
+    предоставленной <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -11,6 +11,7 @@ set(SOURCES
   src/discrqa.c
   src/discrsd.c
   src/discr_common.c
+  src/discr_auto.c
 )
 
 # --- Статическая библиотека (для C++ тестов) ---
