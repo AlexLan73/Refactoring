@@ -10,6 +10,7 @@ set(SOURCES
   src/discrea.c
   src/discrqa.c
   src/discrsd.c
+  src/discr5ea.c
   src/discr_common.c
   src/discr_auto.c
 )
@@ -17,6 +18,7 @@ set(SOURCES
 # --- Статическая библиотека (для C++ тестов) ---
 add_library(discr STATIC ${SOURCES})
 target_include_directories(discr PUBLIC include/)
+set_target_properties(discr PROPERTIES OUTPUT_NAME "discr_static")
 
 # --- Shared библиотека (для Python ctypes) ---
 add_library(discr_shared SHARED ${SOURCES})
@@ -78,6 +80,10 @@ set_target_properties(test_discr_gtest PROPERTIES
   CXX_STANDARD 17
   CXX_STANDARD_REQUIRED ON
 )
+
+if(MSVC)
+  target_compile_definitions(test_discr_gtest PRIVATE _USE_MATH_DEFINES)
+endif()
 
 include(GoogleTest)
 gtest_discover_tests(test_discr_gtest)
