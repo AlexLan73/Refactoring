@@ -21,7 +21,7 @@ sys.path.insert(0, str(REPO_ROOT))
 
 from PyCore.runner import TestRunner, SkipTest
 from PyCore.validators import DataValidator
-from ..\PyCo
+
 
 # --- sinc(x) ---
 

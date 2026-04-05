@@ -1,8 +1,59 @@
 # TASKS: Интерактивная анимация дискриминаторов
 
 **Спецификация**: `Animation/PLAN.md`
-**Статус**: READY
+**Статус**: ✅ COMPLETED (2026-04-02)
 **Каталог**: `discriminator_estimates/test_python/analysis/Animation/`
+
+---
+
+## 🚀 КАК СТАРТАНУТЬ (инструкция для исполнителя)
+
+> Прочитай этот блок ПЕРВЫМ. Ниже — детальные таски.
+
+### Подготовка (1 раз)
+
+```bash
+# 1. Перейти в рабочую директорию
+cd discriminator_estimates/test_python
+
+# 2. Проверить зависимости
+python -c "import matplotlib; import numpy; from PIL import Image; print('OK:', matplotlib.__version__)"
+# Если ошибка → pip install matplotlib Pillow
+
+# 3. Проверить что common.py работает
+python -c "from analysis.common import sinc, ref_cg_2pt, ref_qa, ref_ea, ref_auto, select_top2, classify_zone, COLORS; print('common.py OK')"
+
+# 4. Проверить PyCore
+python -c "from PyCore.runner import TestRunner, SkipTest; print('PyCore OK')"
+```
+
+### Порядок выполнения
+
+```
+TASK-A0 → TASK-A1 → TASK-A2 → TASK-A3 → TASK-A4 → TASK-A5
+                                    ↘ TASK-A6 → TASK-A7     → TASK-A9
+                                    ↘ TASK-A8 ──────────────↗
+```
+
+**Правило**: после каждого таска — запустить тест из секции "Критерии приёмки".
+Если тест не прошёл — чини, не переходи дальше.
+
+### Контрольные точки (можно остановиться)
+
+| После | Результат | Как проверить |
+|-------|-----------|---------------|
+| A4 | `sweep_all.gif` (первый GIF!) | `python -c "from PIL import Image; im=Image.open('analysis/Animation/output/sweep_all.gif'); print(im.n_frames, im.size)"` |
+| A5 | Все 5 GIF | Аналогично для каждого |
+| A7 | Интерактивное окно | `python analysis/Animation/anim_interactive.py` — двигай слайдеры |
+| A9 | Всё готово | Полная верификация |
+
+### ⚠️ ВАЖНО — результаты ревью (исправлены в тасках ниже)
+
+1. **zone_bg**: НЕ удалять/пересоздавать axvspan! Менять `set_facecolor()`+`set_alpha()`. Иначе blit сломается.
+2. **xlim**: При step=const использовать фиксированные `xlim=[-4, 4]`. Динамический xlim — ТОЛЬКО в S4 (step_change).
+3. **S5 ≠ S1**: S5 auto_demo расширен до `x0: -2.0 → +2.0` чтобы чаще попадать в monotonic зону.
+4. **pytest ЗАПРЕЩЁН** — только `PyCore.runner.TestRunner`.
+5. **SD опущен** в METHODS — это намеренно (требует параметр c).
 
 ---
 
@@ -15,13 +66,26 @@
 ### Что сделать
 
 1. Создать `Animation/__init__.py` (пустой)
-2. Создать `Animation/output/` (пустой каталог, через mkdir)
+2. Создать `Animation/output/` (пустой каталог, через mkdir) + `.gitkeep`
 3. Проверить что `Animation/PLAN.md` на месте
+4. **Проверить зависимости** (если нет — установить):
+   ```python
+   # Проверка (запустить из discriminator_estimates/test_python/):
+   python -c "
+   import matplotlib; print(f'matplotlib {matplotlib.__version__}')
+   import numpy; print(f'numpy {numpy.__version__}')
+   from PIL import Image; print('Pillow OK')
+   import tkinter; print('tkinter OK')
+   from analysis.common import sinc, COLORS; print('common.py OK')
+   from PyCore.runner import TestRunner; print('PyCore OK')
+   "
+   ```
 
 ### Критерии приёмки
 - [ ] `Animation/__init__.py` существует
-- [ ] `Animation/output/` существует
+- [ ] `Animation/output/` существует (с `.gitkeep`)
 - [ ] `ls Animation/` показывает: `PLAN.md  __init__.py  output/`
+- [ ] Все 6 import-проверок выше печатают OK
 
 ---
 
@@ -102,7 +166,14 @@
 
 5. Создание artists на ax_bar (горизонтальный barh):
    - `self.bars = ax_bar.barh(METHODS, [0]*4, color=[COLORS[m] for m in METHODS])`
-   - `self.bars_text = []` — 4 текста значений (обновляются в update)
+   - Тексты значений (по одному на метод):
+     ```python
+     self.bars_text = []
+     for i, m in enumerate(METHODS):
+         t = ax_bar.text(0.01, i, '', va='center', ha='left',
+                         color='white', fontsize=9, fontweight='bold')
+         self.bars_text.append(t)
+     ```
    - ax_bar: xlim=[0, 1.0], xlabel='|error|'
 
 6. Создание history (для scope):
@@ -154,9 +225,9 @@
 
    **Шаг 4**: Обновить line_sinc
    ```python
-   x_fine_shifted = np.linspace(-step - step*1.5, step + step*1.5, 500)
-   self.line_sinc.set_xdata(x_fine_shifted)
-   self.line_sinc.set_ydata(sinc(x_fine_shifted - x0))
+   # ⚠️ x_fine фиксированный [-4, 4] (создан в setup)
+   # НЕ пересоздавать каждый кадр — только обновить Y!
+   self.line_sinc.set_ydata(sinc(self.x_fine - x0))
    ```
 
    **Шаг 5**: Обновить scatter (3 точки)
@@ -195,19 +266,21 @@
 
    **Шаг 9**: Обновить zone_bg
    ```python
+   # ⚠️ КРИТИЧНО: НЕ вызывать remove()! Это ломает blit.
+   # Просто менять цвет и прозрачность существующего Patch:
    zone = classify_zone(x0)
-   self.zone_bg.remove()
-   xlim = self.ax_main.get_xlim()
-   self.zone_bg = self.ax_main.axvspan(
-       xlim[0], xlim[1],
-       alpha=ZONE_COLORS[zone][1],
-       color=ZONE_COLORS[zone][0], zorder=0)
+   self.zone_bg.set_facecolor(ZONE_COLORS[zone][0])
+   self.zone_bg.set_alpha(ZONE_COLORS[zone][1])
    ```
 
-   **Шаг 10**: Обновить xlim (если step изменился)
+   **Шаг 10**: Обновить xlim (ТОЛЬКО если step динамический, например S4)
    ```python
-   margin = step * 1.5
-   self.ax_main.set_xlim(-step - margin, step + margin)
+   # По умолчанию xlim=[-4, 4] фиксирован из setup().
+   # Динамический xlim нужен ТОЛЬКО для S4 (step_change):
+   if self._dynamic_xlim:  # флаг, устанавливается снаружи
+       margin = step * 1.5
+       self.ax_main.set_xlim(-step - margin, step + margin)
+       # zone_bg — ширина полная, менять не надо (axvspan по xlim из setup)
    ```
 
    **Шаг 11**: Обновить text_info
@@ -332,14 +405,15 @@
 
 4. S5: `auto_demo`
    ```python
+   # ⚠️ Range шире чем S1! [-2.0, +2.0] — чаще monotonic зона → видно EA↔E2
    export("auto_demo",
-          x0_fn  = lambda f: -1.5 + 3.0 * f / 74,
+          x0_fn  = lambda f: -2.0 + 4.0 * f / 74,
           snr_fn = lambda f: 0.0,
           step_fn= lambda f: 1.0,
           n_frames=75)
    ```
-   Фишка: в update() для S5 — момент переключения EA↔E2 выделить текстом "→ EXTRAP E2".
-   Можно реализовать как параметр AnimScene или отдельную логику в export.
+   Фишка: при |x0| > ~1.0 данные monotonic → AUTO переключается на E2 (пунктир).
+   Текст info должен показывать `AUTO: E2` / `AUTO: EA` — это уже есть в update() шаг 11.
 
 5. TestRunner тесты:
    - `test_sweep_zoom` — GIF exists + frames
@@ -427,6 +501,9 @@
 
 2. Play — `fig.canvas.new_timer(interval=INTERVAL_MS)`:
    ```python
+   timer = fig.canvas.new_timer(interval=INTERVAL_MS)
+   timer.add_callback(play_step)  # ← ОБЯЗАТЕЛЬНО! Без этого таймер пустой
+
    def play_step():
        nonlocal x0_play
        x0_play += 0.02
@@ -488,17 +565,24 @@
 
 1. Создать `anim_scope.py`:
    - `matplotlib.use("TkAgg")`
-   - `AnimScene().setup(figsize=(12, 8), mode='scope')`
+   - **НЕ вызывать** `AnimScene().setup(mode='scope')` — scope строит layout САМОСТОЯТЕЛЬНО
+   - Причина: scope имеет 6 axes (sinc + 4 канала + info), это слишком отличается от export/interactive
 
-2. Создать 4 scope-канала (отдельные Axes):
+2. Создать собственный layout с 4 scope-каналами:
    ```python
+   plt.style.use("dark_background")
+   fig = plt.figure(figsize=(12, 8))
    gs = fig.add_gridspec(nrows=8, ncols=1, hspace=0.15)
    ax_sinc = fig.add_subplot(gs[0:2, 0])
    ax_cg   = fig.add_subplot(gs[2, 0])
    ax_qa   = fig.add_subplot(gs[3, 0])
    ax_ea   = fig.add_subplot(gs[4, 0])
    ax_auto = fig.add_subplot(gs[5, 0])
+   # gs[6:8] — кнопки Play/Pause + инфо
    ```
+   Затем создать AnimScene вручную: `scene = AnimScene()`, задать `scene.ax_main = ax_sinc`,
+   и вызвать только создание artists (без GridSpec). Или использовать update() напрямую
+   для вычислений, а отрисовку scope делать отдельно.
 
 3. Для каждого канала:
    - `line_scope_X = ax_X.plot(range(200), np.full(200, np.nan), color=COLORS[X])[0]`

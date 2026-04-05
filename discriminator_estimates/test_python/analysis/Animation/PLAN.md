@@ -276,15 +276,15 @@ step:   0.3 → 2.5 (линейно)
 Фишка:  xlim динамически расширяется, точки разъезжаются
 ```
 
-#### S5: `auto_demo.gif` — AUTO переключение
+#### S5: `auto_demo.gif` — AUTO переключение (range шире!)
 
 ```
-x0:     -1.5 → +1.5
+x0:     -2.0 → +2.0  (⚠️ шире чем S1! чтобы чаще monotonic зона)
 Кадры:  75, FPS: 15
-Смысл:  AUTO = EA в центре, → E2 по краям
+Смысл:  AUTO = EA в центре, → E2 по краям (|x0| > ~1.0)
 Фишка:  момент переключения EA→E2 выделен:
-        - текст мигает "→ EXTRAP E2"
-        - линия AUTO меняет стиль (пунктир → сплошная)
+        - текст info показывает "AUTO: E2" / "AUTO: EA"
+        - линия AUTO меняет стиль (сплошная → пунктир)
 ```
 
 ### Структура кода
@@ -579,14 +579,17 @@ timer.add_callback(step_func)
 Причина: FuncAnimation(blit=True) конфликтует с Slider.
 Timer + draw_idle() работает стабильно.
 
-### 7.3. Динамический xlim при изменении step
+### 7.3. xlim — фиксированный по умолчанию, динамический для S4
 
 ```python
-margin = step * 1.5
-ax_main.set_xlim(-step - margin, step + margin)
+# По умолчанию: xlim=[-4, 4] (из setup), x_fine=np.linspace(-4, 4, 500)
+# Динамический xlim — ТОЛЬКО для S4 (step_change):
+if dynamic_xlim:
+    margin = step * 1.5
+    ax_main.set_xlim(-step - margin, step + margin)
 ```
 
-Сетка расширяется → оси следуют за ней.
+Фиксированный xlim гарантирует что sinc виден при любом x0 ∈ [-1.5, 1.5].
 
 ### 7.4. Индикация переключения AUTO mode
 
@@ -615,22 +618,18 @@ ZONE_COLORS = {
 # Обновляется в update():
 zone = classify_zone(x0)
 
-# Цвет + прозрачность:
+# ⚠️ КРИТИЧНО: НЕ вызывать remove()! Это ломает blit.
+# Просто менять цвет и прозрачность:
 self.zone_bg.set_facecolor(ZONE_COLORS[zone][0])
 self.zone_bg.set_alpha(ZONE_COLORS[zone][1])
 
-# При изменении step — обновить ширину zone_bg:
-xlim = self.ax_main.get_xlim()
-# axvspan хранит координаты в .xy (Polygon), пересоздаём:
-self.zone_bg.remove()
-self.zone_bg = self.ax_main.axvspan(
-    xlim[0], xlim[1], alpha=ZONE_COLORS[zone][1],
-    color=ZONE_COLORS[zone][0], zorder=0)
+# zone_bg создаётся в setup() с xlim=[-4, 4] — покрывает весь график.
+# При динамическом xlim (S4) zone_bg автоматически растягивается
+# вместе с осями, т.к. axvspan привязан к data coordinates.
 ```
 
-> ⚠️ После `remove()` + пересоздания — обновить `get_artists()`, иначе blit
-> будет держать ссылку на удалённый объект. Лучшая практика: хранить zone_bg
-> в `self` и пересобирать список artists в `update()` перед return.
+> ✅ zone_bg — один объект на всю жизнь figure. Создан в setup(), обновляется
+> через set_facecolor()/set_alpha(). Никогда не remove()!
 
 ### 7.6. GIF размер
 
