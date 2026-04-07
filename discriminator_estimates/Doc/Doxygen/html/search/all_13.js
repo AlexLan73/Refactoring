@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['qa_20—_20quadratic_20approximation_0',['3. Квадратичная аппроксимация (QA — Quadratic Approximation)',['../formulas_page.html#autotoc_md25',1,'']]],
-  ['quadratic_20approximation_1',['3. Квадратичная аппроксимация (QA — Quadratic Approximation)',['../formulas_page.html#autotoc_md25',1,'']]]
+  ['interpolation_202025_0',['IPI (Iterative Parabolic Interpolation, 2025)',['../recommendations_page.html#autotoc_md146',1,'']]],
+  ['ipi_20iterative_20parabolic_20interpolation_202025_1',['IPI (Iterative Parabolic Interpolation, 2025)',['../recommendations_page.html#autotoc_md146',1,'']]],
+  ['iterative_20parabolic_20interpolation_202025_2',['IPI (Iterative Parabolic Interpolation, 2025)',['../recommendations_page.html#autotoc_md146',1,'']]]
 ];

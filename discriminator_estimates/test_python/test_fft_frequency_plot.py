@@ -30,7 +30,7 @@ from test_fft_frequency import (
     METHODS, fft_discr_exp,
 )
 
-OUT_DIR = Path(__file__).resolve().parent.parent / "Doc" / "plots"
+OUT_DIR = Path(__file__).resolve().parent.parent / "Doc" / "plots" / "2_no_noise"
 OUT_DIR.mkdir(parents=True, exist_ok=True)
 
 

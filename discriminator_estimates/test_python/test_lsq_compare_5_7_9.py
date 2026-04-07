@@ -46,7 +46,7 @@ except ImportError:
     HAS_SCIPY = False
 
 
-OUT_DIR = Path(__file__).resolve().parent.parent / "Doc" / "plots"
+OUT_DIR = Path(__file__).resolve().parent.parent / "Doc" / "plots" / "3_noise"
 OUT_DIR.mkdir(parents=True, exist_ok=True)
 
 

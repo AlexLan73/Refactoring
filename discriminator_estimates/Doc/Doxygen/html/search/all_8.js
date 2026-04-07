@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['bins_20по_20амплитуде_0',['2-точечные (top-2 bins по амплитуде)',['../fft_page.html#autotoc_md5',1,'']]],
-  ['blockquote_1',['&lt;/blockquote&gt;',['../index.html#autotoc_md34',1,'']]]
+  ['8_20обёртка_20discr3_20—_20коэффициент_20пересчёта_0',['8. Обёртка discr3() — коэффициент пересчёта',['../formulas_page.html#autotoc_md44',1,'']]]
 ];

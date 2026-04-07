@@ -33,7 +33,7 @@ sys.path.insert(0, str(ANIM_DIR))
 from anim_core import AnimScene
 from PyCore.runner import TestRunner
 
-OUT = ANIM_DIR / "output"
+OUT = MODULE_DIR / "Doc" / "plots" / "1_animation"
 OUT.mkdir(parents=True, exist_ok=True)
 
 

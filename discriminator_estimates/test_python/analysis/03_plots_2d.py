@@ -34,7 +34,7 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 plt.style.use("dark_background")
 
-OUT_PLOTS = ANALYSIS_DIR / "plots" / "2d"
+OUT_PLOTS = MODULE_DIR / "Doc" / "plots" / "2_no_noise"
 OUT_PLOTS.mkdir(parents=True, exist_ok=True)
 OUT_RESULTS = ANALYSIS_DIR / "results"
 

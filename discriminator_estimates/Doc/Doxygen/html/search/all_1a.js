@@ -1,8 +1,9 @@
 var searchData=
 [
-  ['главная_20страница_0',['Главная страница',['../index.html',1,'']]],
-  ['графика_1',['графика',['../tests_page.html#autotoc_md58',1,'3. Python тесты (&lt;tt&gt;test_python/&lt;/tt&gt;) — 7 тестов + 3 графика'],['../tests_page.html#autotoc_md68',1,'4. FFT-дискриминаторы частоты (&lt;tt&gt;test_python/&lt;/tt&gt;) — 10 тестов + 2 графика']]],
-  ['графики_2',['Графики',['../tests_page.html#autotoc_md61',1,'']]],
-  ['графики_20fft_3',['Графики FFT',['../tests_page.html#autotoc_md71',1,'']]],
-  ['группы_4',['Тестовые группы',['../tests_page.html#autotoc_md69',1,'']]]
+  ['qa_20на_20угловой_20дн_0',['C: классический 3-точечный QA на угловой ДН',['../index.html#autotoc_md61',1,'']]],
+  ['qa_20—_20quadratic_20approximation_1',['3. Квадратичная аппроксимация (QA — Quadratic Approximation)',['../formulas_page.html#autotoc_md25',1,'']]],
+  ['quadratic_20approximation_2',['3. Квадратичная аппроксимация (QA — Quadratic Approximation)',['../formulas_page.html#autotoc_md25',1,'']]],
+  ['quick_20reference_20—_20как_20использовать_3',['Quick reference — как использовать',['../recommendations_page.html#autotoc_md138',1,'']]],
+  ['quinn_202nd_20и_20комплексный_20pipeline_4',['Что дальше — Quinn 2nd и комплексный pipeline',['../recommendations_page.html#autotoc_md144',1,'']]],
+  ['quinn_202nd_20estimator_20—_20максимум_20точности_5',['Quinn 2nd estimator — максимум точности',['../recommendations_page.html#autotoc_md145',1,'']]]
 ];

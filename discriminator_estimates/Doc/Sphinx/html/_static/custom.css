@@ -1,0 +1,75 @@
+/* Кастомные стили для Discriminator Estimates docs */
+
+/* Подкрасим края админишен-блоков */
+.admonition.tip {
+    border-left: 4px solid #2e8b57;
+}
+
+.admonition.warning {
+    border-left: 4px solid #d97706;
+}
+
+.admonition.important {
+    border-left: 4px solid #7c3aed;
+}
+
+/* Курсив и центрирование подписей к рисункам */
+figcaption {
+    font-style: italic;
+    color: var(--color-foreground-muted);
+    text-align: center;
+    margin-top: 0.5em;
+    font-size: 0.95em;
+}
+
+/* Hero-картинка на главной — тень и скруглённые углы */
+.hero-image img,
+div.figure img,
+figure img {
+    border-radius: 8px;
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.12);
+    max-width: 100%;
+    height: auto;
+}
+
+/* Компактнее таблицы */
+table.docutils {
+    font-size: 0.95em;
+}
+
+table.docutils th {
+    background: var(--color-background-secondary);
+}
+
+/* Inline math чуть крупнее — чтобы не терялась */
+mjx-container[jax="CHTML"][display="false"] {
+    font-size: 1.05em !important;
+}
+
+/* Выделяем главный призыв в tip-блоке */
+.admonition.tip p.admonition-title {
+    font-weight: 700;
+    font-size: 1.05em;
+}
+
+/* Хлебные крошки и подзаголовки */
+.rubric {
+    color: var(--color-brand-primary);
+    font-size: 1.1em;
+    font-weight: 600;
+    margin-top: 1em;
+}
+
+/* Код-блоки с подсветкой */
+div.highlight {
+    border-radius: 6px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+
+/* Ограничим ширину GIF-анимаций */
+img[src$=".gif"] {
+    max-width: 90%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}

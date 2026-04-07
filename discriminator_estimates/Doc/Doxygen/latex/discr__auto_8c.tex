@@ -1,0 +1,378 @@
+\doxysection{Файл discr\+\_\+auto.\+c}
+\hypertarget{discr__auto_8c}{}\label{discr__auto_8c}\index{discr\_auto.c@{discr\_auto.c}}
+
+
+Автоматический дискриминатор с экстраполяцией.  
+
+
+{\ttfamily \#include "{}discr\+\_\+auto.\+h"{}}\newline
+{\ttfamily \#include "{}discrea.\+h"{}}\newline
+{\ttfamily \#include "{}discrqa.\+h"{}}\newline
+{\ttfamily \#include $<$math.\+h$>$}\newline
+{\ttfamily \#include $<$float.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+\doxysubsubsection*{Структуры данных}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structax__pair__t}{ax\+\_\+pair\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Структура для сортировки пар (амплитуда, координата) по x. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Функции}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{discr__auto_8c_a0fccaee4e2734f24cb735a57e89a706a}{discr\+\_\+is\+\_\+monotonic}} (double A1, double A2, double A3)
+\begin{DoxyCompactList}\small\item\em Проверка монотонности трёх отсчётов. \end{DoxyCompactList}\item 
+static int \mbox{\hyperlink{discr__auto_8c_a2c8a868999c0d7f0acbb33842ce31507}{cmp\+\_\+by\+\_\+x}} (const void \texorpdfstring{$\ast$}{*}p1, const void \texorpdfstring{$\ast$}{*}p2)
+\item 
+int \mbox{\hyperlink{discr__auto_8c_aff4b1fea96d16566196f7f7c44331547}{discr3\+\_\+extrap\+\_\+gauss}} (double A1, double A2, double A3, double x1, double x2, double x3, double \texorpdfstring{$\ast$}{*}xe)
+\begin{DoxyCompactList}\small\item\em Гауссова экстраполяция (E2) для монотонных случаев. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{discr__auto_8c_a99aa3243f4143e13f9e1a2fda43c714e}{discr3\+\_\+auto}} (double A1, double A2, double A3, double x1, double x2, double x3, double \texorpdfstring{$\ast$}{*}xe)
+\begin{DoxyCompactList}\small\item\em Автоматический дискриминатор с переключением. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Подробное описание}
+Автоматический дискриминатор с экстраполяцией. 
+
+\begin{DoxyAuthor}{Автор}
+Кодо (AI Assistant) 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Дата}
+2026-\/04-\/02 
+\end{DoxyDate}
+Реализует стратегию автопереключения на основе результатов аналитического исследования (analysis/\+REPORT.\+md)\+:
+
+Нормальный случай (есть перегиб)\+: EA → QA fallback EA даёт MAE = 0.\+005 (0.\+5\% шага сетки)
+
+Монотонный случай (пик за сеткой)\+: E2 (Гауссова экстраполяция) E2 даёт MAE = 0.\+148, что в 2-\/3 раза лучше прямого EA
+
+E2 — это тот же алгоритм что и EA (логарифмирование + парабола), но БЕЗ проверки на выпуклость и с расширенным clipping (2× вместо 0.\+5×). Это позволяет вершине параболы оказаться далеко за сеткой — что и нужно. 
+
+См. определение в файле \mbox{\hyperlink{discr__auto_8c_source}{discr\+\_\+auto.\+c}}
+
+
+
+\doxysubsection{Функции}
+\Hypertarget{discr__auto_8c_a2c8a868999c0d7f0acbb33842ce31507}\label{discr__auto_8c_a2c8a868999c0d7f0acbb33842ce31507} 
+\index{discr\_auto.c@{discr\_auto.c}!cmp\_by\_x@{cmp\_by\_x}}
+\index{cmp\_by\_x@{cmp\_by\_x}!discr\_auto.c@{discr\_auto.c}}
+\doxysubsubsection{\texorpdfstring{cmp\_by\_x()}{cmp\_by\_x()}}
+{\footnotesize\ttfamily static int cmp\+\_\+by\+\_\+x (\begin{DoxyParamCaption}\item[{const void \texorpdfstring{$\ast$}{*}}]{p1,  }\item[{const void \texorpdfstring{$\ast$}{*}}]{p2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+См. определение в файле \mbox{\hyperlink{discr__auto_8c_source}{discr\+\_\+auto.\+c}} строка \mbox{\hyperlink{discr__auto_8c_source_l00063}{63}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00064\ \{}
+\DoxyCodeLine{00065\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structax__pair__t}{ax\_pair\_t}}\ *a\ =\ (\textcolor{keyword}{const}\ \mbox{\hyperlink{structax__pair__t}{ax\_pair\_t}}\ *)p1;}
+\DoxyCodeLine{00066\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structax__pair__t}{ax\_pair\_t}}\ *b\ =\ (\textcolor{keyword}{const}\ \mbox{\hyperlink{structax__pair__t}{ax\_pair\_t}}\ *)p2;}
+\DoxyCodeLine{00067\ \ \ \textcolor{keywordflow}{if}\ (a-\/>\mbox{\hyperlink{structax__pair__t_a1f33e2dc3ddb82b069068b192567dc7e}{x}}\ <\ b-\/>\mbox{\hyperlink{structax__pair__t_a1f33e2dc3ddb82b069068b192567dc7e}{x}})\ \textcolor{keywordflow}{return}\ -\/1;}
+\DoxyCodeLine{00068\ \ \ \textcolor{keywordflow}{if}\ (a-\/>\mbox{\hyperlink{structax__pair__t_a1f33e2dc3ddb82b069068b192567dc7e}{x}}\ >\ b-\/>\mbox{\hyperlink{structax__pair__t_a1f33e2dc3ddb82b069068b192567dc7e}{x}})\ \textcolor{keywordflow}{return}\ \ 1;}
+\DoxyCodeLine{00069\ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{00070\ \}}
+
+\end{DoxyCode}
+\Hypertarget{discr__auto_8c_a99aa3243f4143e13f9e1a2fda43c714e}\label{discr__auto_8c_a99aa3243f4143e13f9e1a2fda43c714e} 
+\index{discr\_auto.c@{discr\_auto.c}!discr3\_auto@{discr3\_auto}}
+\index{discr3\_auto@{discr3\_auto}!discr\_auto.c@{discr\_auto.c}}
+\doxysubsubsection{\texorpdfstring{discr3\_auto()}{discr3\_auto()}}
+{\footnotesize\ttfamily int discr3\+\_\+auto (\begin{DoxyParamCaption}\item[{double}]{A1,  }\item[{double}]{A2,  }\item[{double}]{A3,  }\item[{double}]{x1,  }\item[{double}]{x2,  }\item[{double}]{x3,  }\item[{double \texorpdfstring{$\ast$}{*}}]{xe }\end{DoxyParamCaption})}
+
+
+
+Автоматический дискриминатор с переключением. 
+
+Алгоритм выбора\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordflow}{if}\ (is\_monotonic(A1,\ A2,\ A3)):}
+\DoxyCodeLine{\ \ \ \ xe\ =\ extrap\_gauss(...)\ \ \ \ \ \ \ \ \textcolor{comment}{//\ E2\ —\ Гауссова\ экстраполяция}}
+\DoxyCodeLine{else:}
+\DoxyCodeLine{\ \ \ \ ret\ =\ \mbox{\hyperlink{discrea_8h_a1d0a905788c41a528b49032ecb9c2748}{discr3ea}}(...)\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ EA\ —\ экспоненциальный\ (лучший)}}
+\DoxyCodeLine{\ \ \ \ if\ (ret\ ==\ FAILURE):}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ xe\ =\ \mbox{\hyperlink{discrqa_8h_a5cdf0c7b82518afc98773e8f323ddb3b}{discr3qa}}(...)\ \ \ \ \ \ \ \ \textcolor{comment}{//\ QA\ —\ квадратичный\ (fallback)}}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyParams}{Аргументы}
+{\em A1} & амплитуда первой точки \\
+\hline
+{\em A2} & амплитуда второй точки \\
+\hline
+{\em A3} & амплитуда третьей точки \\
+\hline
+{\em x1} & координата первой точки \\
+\hline
+{\em x2} & координата второй точки \\
+\hline
+{\em x3} & координата третьей точки \\
+\hline
+{\em xe} & \mbox{[}out\mbox{]} оценка координаты \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+0 — EA успех, 1 — использован QA fallback, 2 — использована экстраполяция E2, 3 — экстраполяция E2 не сошлась (xe = x2) 
+\end{DoxyReturn}
+
+
+См. определение в файле \mbox{\hyperlink{discr__auto_8c_source}{discr\+\_\+auto.\+c}} строка \mbox{\hyperlink{discr__auto_8c_source_l00191}{191}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00194\ \{}
+\DoxyCodeLine{00195\ \ \ \textcolor{keywordtype}{int}\ ret;}
+\DoxyCodeLine{00196\ }
+\DoxyCodeLine{00197\ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00198\ \textcolor{comment}{\ \ \ *\ Ветка\ 1:\ МОНОТОННЫЕ\ данные\ (пик\ за\ сеткой)}}
+\DoxyCodeLine{00199\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00200\ \textcolor{comment}{\ \ \ *\ Когда\ A1\ ≥\ A2\ ≥\ A3\ или\ A1\ ≤\ A2\ ≤\ A3,\ среди\ 3\ отсчётов}}
+\DoxyCodeLine{00201\ \textcolor{comment}{\ \ \ *\ нет\ перегиба\ —\ пик\ ДН\ находится\ за\ пределами\ сетки.}}
+\DoxyCodeLine{00202\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00203\ \textcolor{comment}{\ \ \ *\ Стандартные\ дискриминаторы\ в\ этом\ случае:}}
+\DoxyCodeLine{00204\ \textcolor{comment}{\ \ \ *\ \ \ CG:\ MAE\ =\ 0.46\ (почти\ случайная\ оценка)}}
+\DoxyCodeLine{00205\ \textcolor{comment}{\ \ \ *\ \ \ QA:\ MAE\ =\ 0.32,\ MaxErr\ =\ 1.23\ (парабола\ улетает!)}}
+\DoxyCodeLine{00206\ \textcolor{comment}{\ \ \ *\ \ \ EA:\ возвращает\ FAILURE,\ ставит\ xe\ =\ краевой\ отсчёт}}
+\DoxyCodeLine{00207\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00208\ \textcolor{comment}{\ \ \ *\ Гауссова\ экстраполяция\ (E2):\ MAE\ =\ 0.148}}
+\DoxyCodeLine{00209\ \textcolor{comment}{\ \ \ *\ \ \ →\ в\ 2-\/3\ раза\ лучше\ любого\ стандартного\ метода!}}
+\DoxyCodeLine{00210\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{00211\ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{discr__auto_8c_a0fccaee4e2734f24cb735a57e89a706a}{discr\_is\_monotonic}}(A1,\ A2,\ A3))\ \{}
+\DoxyCodeLine{00212\ \ \ \ \ ret\ =\ \mbox{\hyperlink{discr__auto_8c_aff4b1fea96d16566196f7f7c44331547}{discr3\_extrap\_gauss}}(A1,\ A2,\ A3,\ x1,\ x2,\ x3,\ xe);}
+\DoxyCodeLine{00213\ \ \ \ \ \textcolor{keywordflow}{return}\ (ret\ ==\ EXIT\_SUCCESS)\ ?\ 2\ :\ 3;}
+\DoxyCodeLine{00214\ \ \ \ \ \textcolor{comment}{/*\ 2\ =\ E2\ сработала,\ 3\ =\ E2\ не\ смогла\ (нули,\ вырожденность)\ */}}
+\DoxyCodeLine{00215\ \ \ \}}
+\DoxyCodeLine{00216\ }
+\DoxyCodeLine{00217\ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00218\ \textcolor{comment}{\ \ \ *\ Ветка\ 2:\ НОРМАЛЬНЫЕ\ данные\ (пик\ внутри\ сетки)}}
+\DoxyCodeLine{00219\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00220\ \textcolor{comment}{\ \ \ *\ EA\ (экспоненциальный):\ MAE\ =\ 0.005\ в\ нормальной\ зоне}}
+\DoxyCodeLine{00221\ \textcolor{comment}{\ \ \ *\ \ \ Лучший\ метод!\ Использует\ log-\/параболу,\ точнее\ QA.}}
+\DoxyCodeLine{00222\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00223\ \textcolor{comment}{\ \ \ *\ Если\ EA\ вернёт\ FAILURE\ (вогнутость,\ нули),\ переходим\ на\ QA.}}
+\DoxyCodeLine{00224\ \textcolor{comment}{\ \ \ *\ QA:\ MAE\ =\ 0.006\ —\ почти\ так\ же\ точен,\ но\ без\ ограничений}}
+\DoxyCodeLine{00225\ \textcolor{comment}{\ \ \ *\ \ \ \ \ на\ знак\ амплитуд\ и\ выпуклость.}}
+\DoxyCodeLine{00226\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{00227\ \ \ ret\ =\ \mbox{\hyperlink{discrea_8h_a1d0a905788c41a528b49032ecb9c2748}{discr3ea}}(A1,\ A2,\ A3,\ x1,\ x2,\ x3,\ xe);}
+\DoxyCodeLine{00228\ }
+\DoxyCodeLine{00229\ \ \ \textcolor{keywordflow}{if}\ (ret\ ==\ EXIT\_SUCCESS)\ \{}
+\DoxyCodeLine{00230\ \ \ \ \ \textcolor{keywordflow}{return}\ 0;\ \ \textcolor{comment}{/*\ EA\ справился\ —\ лучший\ результат\ */}}
+\DoxyCodeLine{00231\ \ \ \}}
+\DoxyCodeLine{00232\ }
+\DoxyCodeLine{00233\ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00234\ \textcolor{comment}{\ \ \ *\ Ветка\ 3:\ FALLBACK\ на\ QA}}
+\DoxyCodeLine{00235\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00236\ \textcolor{comment}{\ \ \ *\ EA\ вернул\ FAILURE.\ Причины:}}
+\DoxyCodeLine{00237\ \textcolor{comment}{\ \ \ *\ \ \ -\/\ Вогнутость\ (минимум\ в\ центре\ вместо\ максимума)}}
+\DoxyCodeLine{00238\ \textcolor{comment}{\ \ \ *\ \ \ -\/\ Нулевые\ или\ отрицательные\ амплитуды}}
+\DoxyCodeLine{00239\ \textcolor{comment}{\ \ \ *\ \ \ -\/\ Числовая\ вырожденность}}
+\DoxyCodeLine{00240\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00241\ \textcolor{comment}{\ \ \ *\ QA\ не\ требует\ положительных\ амплитуд\ и\ не\ проверяет}}
+\DoxyCodeLine{00242\ \textcolor{comment}{\ \ \ *\ выпуклость\ —\ работает\ всегда\ (кроме\ совсем\ вырожденных\ случаев).}}
+\DoxyCodeLine{00243\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{00244\ \ \ *xe\ =\ \mbox{\hyperlink{discrqa_8h_a5cdf0c7b82518afc98773e8f323ddb3b}{discr3qa}}(A1,\ A2,\ A3,\ x1,\ x2,\ x3);}
+\DoxyCodeLine{00245\ \ \ \textcolor{keywordflow}{return}\ 1;\ \ \textcolor{comment}{/*\ QA\ fallback\ */}}
+\DoxyCodeLine{00246\ \}}
+
+\end{DoxyCode}
+\Hypertarget{discr__auto_8c_aff4b1fea96d16566196f7f7c44331547}\label{discr__auto_8c_aff4b1fea96d16566196f7f7c44331547} 
+\index{discr\_auto.c@{discr\_auto.c}!discr3\_extrap\_gauss@{discr3\_extrap\_gauss}}
+\index{discr3\_extrap\_gauss@{discr3\_extrap\_gauss}!discr\_auto.c@{discr\_auto.c}}
+\doxysubsubsection{\texorpdfstring{discr3\_extrap\_gauss()}{discr3\_extrap\_gauss()}}
+{\footnotesize\ttfamily int discr3\+\_\+extrap\+\_\+gauss (\begin{DoxyParamCaption}\item[{double}]{A1,  }\item[{double}]{A2,  }\item[{double}]{A3,  }\item[{double}]{x1,  }\item[{double}]{x2,  }\item[{double}]{x3,  }\item[{double \texorpdfstring{$\ast$}{*}}]{xe }\end{DoxyParamCaption})}
+
+
+
+Гауссова экстраполяция (E2) для монотонных случаев. 
+
+Алгоритм — как discr3ea, но без проверки выпуклости и с расширенным диапазоном допустимого вылета (2× вместо 0.\+5× от размера сетки).
+
+Логарифмирует амплитуды, аппроксимирует параболой в log-\/пространстве, находит вершину. Для монотонных данных вершина за пределами сетки — это ожидаемое и полезное поведение.
+
+Из исследования\+: E2 MAE = 0.\+148 для монотонных случаев, что в 2.\+2 раза лучше E1 (парабола, MAE = 0.\+324) и в 3.\+4 раза лучше E3 (градиент, MAE = 0.\+500).
+
+
+\begin{DoxyParams}{Аргументы}
+{\em A1} & амплитуда первой точки (должна быть \texorpdfstring{$>$}{>} 0) \\
+\hline
+{\em A2} & амплитуда второй точки (должна быть \texorpdfstring{$>$}{>} 0) \\
+\hline
+{\em A3} & амплитуда третьей точки (должна быть \texorpdfstring{$>$}{>} 0) \\
+\hline
+{\em x1} & координата первой точки \\
+\hline
+{\em x2} & координата второй точки \\
+\hline
+{\em x3} & координата третьей точки \\
+\hline
+{\em xe} & \mbox{[}out\mbox{]} оценка координаты (экстраполированная) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+0 — успех, 1 — ошибка (нулевые амплитуды, все равны) 
+\end{DoxyReturn}
+
+
+См. определение в файле \mbox{\hyperlink{discr__auto_8c_source}{discr\+\_\+auto.\+c}} строка \mbox{\hyperlink{discr__auto_8c_source_l00072}{72}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00075\ \{}
+\DoxyCodeLine{00076\ \ \ \mbox{\hyperlink{structax__pair__t}{ax\_pair\_t}}\ pts[3];}
+\DoxyCodeLine{00077\ \ \ \textcolor{keywordtype}{double}\ a1,\ a2,\ a3,\ f1,\ f2,\ f3;}
+\DoxyCodeLine{00078\ \ \ \textcolor{keywordtype}{double}\ z1,\ z2,\ z3;}
+\DoxyCodeLine{00079\ \ \ \textcolor{keywordtype}{double}\ a\_coef,\ b\_coef;}
+\DoxyCodeLine{00080\ \ \ \textcolor{keywordtype}{double}\ span;}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00082\ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00083\ \textcolor{comment}{\ \ \ *\ Шаг\ 1.\ Проверка:\ все\ амплитуды\ >\ 0}}
+\DoxyCodeLine{00084\ \textcolor{comment}{\ \ \ *\ (нужно\ для\ логарифмирования)}}
+\DoxyCodeLine{00085\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{00086\ \ \ \textcolor{keywordflow}{if}\ (A1\ <\ DBL\_EPSILON\ ||\ A2\ <\ DBL\_EPSILON\ ||\ A3\ <\ DBL\_EPSILON)\ \{}
+\DoxyCodeLine{00087\ \ \ \ \ *xe\ =\ x2;}
+\DoxyCodeLine{00088\ \ \ \ \ \textcolor{keywordflow}{return}\ EXIT\_FAILURE;}
+\DoxyCodeLine{00089\ \ \ \}}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00091\ \ \ \textcolor{comment}{/*\ Все\ амплитуды\ одинаковы\ →\ невозможно\ определить\ направление\ */}}
+\DoxyCodeLine{00092\ \ \ \textcolor{keywordflow}{if}\ (fabs(A1\ -\/\ A2)\ <\ DBL\_EPSILON\ \&\&\ fabs(A2\ -\/\ A3)\ <\ DBL\_EPSILON)\ \{}
+\DoxyCodeLine{00093\ \ \ \ \ *xe\ =\ x2;}
+\DoxyCodeLine{00094\ \ \ \ \ \textcolor{keywordflow}{return}\ EXIT\_FAILURE;}
+\DoxyCodeLine{00095\ \ \ \}}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00097\ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00098\ \textcolor{comment}{\ \ \ *\ Шаг\ 2.\ Сортировка\ по\ координатам\ (x\ возрастает)}}
+\DoxyCodeLine{00099\ \textcolor{comment}{\ \ \ *\ Это\ нужно\ чтобы\ формулы\ работали\ корректно}}
+\DoxyCodeLine{00100\ \textcolor{comment}{\ \ \ *\ независимо\ от\ порядка\ входных\ аргументов.}}
+\DoxyCodeLine{00101\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{00102\ \ \ pts[0].\mbox{\hyperlink{structax__pair__t_ad7c6644578c4bf26a9e255ae89cd8587}{a}}\ =\ A1;\ pts[0].\mbox{\hyperlink{structax__pair__t_a1f33e2dc3ddb82b069068b192567dc7e}{x}}\ =\ x1;}
+\DoxyCodeLine{00103\ \ \ pts[1].\mbox{\hyperlink{structax__pair__t_ad7c6644578c4bf26a9e255ae89cd8587}{a}}\ =\ A2;\ pts[1].\mbox{\hyperlink{structax__pair__t_a1f33e2dc3ddb82b069068b192567dc7e}{x}}\ =\ x2;}
+\DoxyCodeLine{00104\ \ \ pts[2].\mbox{\hyperlink{structax__pair__t_ad7c6644578c4bf26a9e255ae89cd8587}{a}}\ =\ A3;\ pts[2].\mbox{\hyperlink{structax__pair__t_a1f33e2dc3ddb82b069068b192567dc7e}{x}}\ =\ x3;}
+\DoxyCodeLine{00105\ \ \ qsort(pts,\ 3,\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{structax__pair__t}{ax\_pair\_t}}),\ \mbox{\hyperlink{discr__auto_8c_a2c8a868999c0d7f0acbb33842ce31507}{cmp\_by\_x}});}
+\DoxyCodeLine{00106\ }
+\DoxyCodeLine{00107\ \ \ a1\ =\ pts[0].\mbox{\hyperlink{structax__pair__t_ad7c6644578c4bf26a9e255ae89cd8587}{a}};\ f1\ =\ pts[0].\mbox{\hyperlink{structax__pair__t_a1f33e2dc3ddb82b069068b192567dc7e}{x}};}
+\DoxyCodeLine{00108\ \ \ a2\ =\ pts[1].\mbox{\hyperlink{structax__pair__t_ad7c6644578c4bf26a9e255ae89cd8587}{a}};\ f2\ =\ pts[1].\mbox{\hyperlink{structax__pair__t_a1f33e2dc3ddb82b069068b192567dc7e}{x}};}
+\DoxyCodeLine{00109\ \ \ a3\ =\ pts[2].\mbox{\hyperlink{structax__pair__t_ad7c6644578c4bf26a9e255ae89cd8587}{a}};\ f3\ =\ pts[2].\mbox{\hyperlink{structax__pair__t_a1f33e2dc3ddb82b069068b192567dc7e}{x}};}
+\DoxyCodeLine{00110\ }
+\DoxyCodeLine{00111\ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00112\ \textcolor{comment}{\ \ \ *\ Шаг\ 3.\ НЕ\ проверяем\ выпуклость!}}
+\DoxyCodeLine{00113\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00114\ \textcolor{comment}{\ \ \ *\ Это\ ГЛАВНОЕ\ отличие\ от\ discr3ea:}}
+\DoxyCodeLine{00115\ \textcolor{comment}{\ \ \ *\ -\/\ discr3ea\ проверяет\ что\ a2\ >\ a1\ и\ a2\ >\ a3\ (перегиб)}}
+\DoxyCodeLine{00116\ \textcolor{comment}{\ \ \ *\ \ \ и\ возвращает\ FAILURE\ для\ монотонных\ данных}}
+\DoxyCodeLine{00117\ \textcolor{comment}{\ \ \ *\ -\/\ Мы\ РАЗРЕШАЕМ\ монотонные\ данные,\ потому\ что}}
+\DoxyCodeLine{00118\ \textcolor{comment}{\ \ \ *\ \ \ вершина\ параболы\ в\ log-\/пространстве\ покажет}}
+\DoxyCodeLine{00119\ \textcolor{comment}{\ \ \ *\ \ \ КУДА\ и\ НАСКОЛЬКО\ далеко\ экстраполировать\ пик.}}
+\DoxyCodeLine{00120\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{00121\ }
+\DoxyCodeLine{00122\ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00123\ \textcolor{comment}{\ \ \ *\ Шаг\ 4.\ Логарифмирование}}
+\DoxyCodeLine{00124\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00125\ \textcolor{comment}{\ \ \ *\ Гауссиан\ y\ =\ A*exp(-\/a*(x-\/x0)\string^2)\ после\ логарифмирования}}
+\DoxyCodeLine{00126\ \textcolor{comment}{\ \ \ *\ становится\ параболой:\ ln(y)\ =\ ln(A)\ -\/\ a*(x-\/x0)\string^2}}
+\DoxyCodeLine{00127\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00128\ \textcolor{comment}{\ \ \ *\ Парабола\ в\ log-\/пространстве\ →\ вершина\ =\ x0\ (положение\ пика).}}
+\DoxyCodeLine{00129\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{00130\ \ \ z1\ =\ log(a1);}
+\DoxyCodeLine{00131\ \ \ z2\ =\ log(a2);}
+\DoxyCodeLine{00132\ \ \ z3\ =\ log(a3);}
+\DoxyCodeLine{00133\ }
+\DoxyCodeLine{00134\ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00135\ \textcolor{comment}{\ \ \ *\ Шаг\ 5.\ Коэффициенты\ параболы}}
+\DoxyCodeLine{00136\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00137\ \textcolor{comment}{\ \ \ *\ Парабола\ z(x)\ через\ 3\ точки\ (f1,z1),\ (f2,z2),\ (f3,z3):}}
+\DoxyCodeLine{00138\ \textcolor{comment}{\ \ \ *\ \ \ a\_coef\ =\ z1*(f2²-\/f3²)\ +\ z2*(f3²-\/f1²)\ +\ z3*(f1²-\/f2²)}}
+\DoxyCodeLine{00139\ \textcolor{comment}{\ \ \ *\ \ \ b\_coef\ =\ z1*(f2-\/f3)\ \ \ +\ z2*(f3-\/f1)\ \ \ \ +\ z3*(f1-\/f2)}}
+\DoxyCodeLine{00140\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00141\ \textcolor{comment}{\ \ \ *\ Вершина:\ xe\ =\ 0.5\ *\ a\_coef\ /\ b\_coef}}
+\DoxyCodeLine{00142\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{00143\ \ \ a\_coef\ =\ z1\ *\ (f2\ *\ f2\ -\/\ f3\ *\ f3)}
+\DoxyCodeLine{00144\ \ \ \ \ \ \ \ \ \ +\ z2\ *\ (f3\ *\ f3\ -\/\ f1\ *\ f1)}
+\DoxyCodeLine{00145\ \ \ \ \ \ \ \ \ \ +\ z3\ *\ (f1\ *\ f1\ -\/\ f2\ *\ f2);}
+\DoxyCodeLine{00146\ }
+\DoxyCodeLine{00147\ \ \ b\_coef\ =\ z1\ *\ (f2\ -\/\ f3)}
+\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ \ +\ z2\ *\ (f3\ -\/\ f1)}
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ \ +\ z3\ *\ (f1\ -\/\ f2);}
+\DoxyCodeLine{00150\ }
+\DoxyCodeLine{00151\ \ \ \textcolor{comment}{/*\ b\_coef\ ≈\ 0\ →\ парабола\ вырожденная,\ направление\ неопределено\ */}}
+\DoxyCodeLine{00152\ \ \ \textcolor{keywordflow}{if}\ (fabs(b\_coef)\ <\ DBL\_EPSILON)\ \{}
+\DoxyCodeLine{00153\ \ \ \ \ \textcolor{comment}{/*\ Экстраполируем\ в\ сторону\ наибольшей\ амплитуды\ */}}
+\DoxyCodeLine{00154\ \ \ \ \ \textcolor{keywordflow}{if}\ (a3\ >\ a1)}
+\DoxyCodeLine{00155\ \ \ \ \ \ \ *xe\ =\ f3\ +\ 0.5\ *\ (f3\ -\/\ f1);}
+\DoxyCodeLine{00156\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00157\ \ \ \ \ \ \ *xe\ =\ f1\ -\/\ 0.5\ *\ (f3\ -\/\ f1);}
+\DoxyCodeLine{00158\ \ \ \ \ \textcolor{keywordflow}{return}\ EXIT\_FAILURE;}
+\DoxyCodeLine{00159\ \ \ \}}
+\DoxyCodeLine{00160\ }
+\DoxyCodeLine{00161\ \ \ \textcolor{comment}{/*\ Вершина\ параболы\ в\ log-\/пространстве\ =\ оценка\ положения\ пика\ */}}
+\DoxyCodeLine{00162\ \ \ *xe\ =\ 0.5\ *\ a\_coef\ /\ b\_coef;}
+\DoxyCodeLine{00163\ }
+\DoxyCodeLine{00164\ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00165\ \textcolor{comment}{\ \ \ *\ Шаг\ 6.\ Ограничение\ вылета\ (clipping)}}
+\DoxyCodeLine{00166\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00167\ \textcolor{comment}{\ \ \ *\ Расширенный\ диапазон:\ ±2\ ×\ размер\_сетки\ (вместо\ ±0.5×\ в\ discr3ea).}}
+\DoxyCodeLine{00168\ \textcolor{comment}{\ \ \ *\ Это\ позволяет\ экстраполировать\ дальше,\ но\ не\ бесконечно\ далеко.}}
+\DoxyCodeLine{00169\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00170\ \textcolor{comment}{\ \ \ *\ Почему\ 2×?\ Из\ исследования:\ при\ вылете\ >\ 2×\ шага\ ошибка}}
+\DoxyCodeLine{00171\ \textcolor{comment}{\ \ \ *\ экстраполяции\ уже\ не\ уменьшается,\ а\ растёт.}}
+\DoxyCodeLine{00172\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{00173\ \ \ span\ =\ f3\ -\/\ f1;\ \ \textcolor{comment}{/*\ =\ 2\ ×\ шаг\_сетки\ для\ симметричной\ сетки\ */}}
+\DoxyCodeLine{00174\ }
+\DoxyCodeLine{00175\ \ \ \textcolor{keywordflow}{if}\ (*xe\ >\ f3\ +\ span)\ \{}
+\DoxyCodeLine{00176\ \ \ \ \ *xe\ =\ f3\ +\ span;}
+\DoxyCodeLine{00177\ \ \ \ \ \textcolor{keywordflow}{return}\ EXIT\_FAILURE;}
+\DoxyCodeLine{00178\ \ \ \}}
+\DoxyCodeLine{00179\ \ \ \textcolor{keywordflow}{if}\ (*xe\ <\ f1\ -\/\ span)\ \{}
+\DoxyCodeLine{00180\ \ \ \ \ *xe\ =\ f1\ -\/\ span;}
+\DoxyCodeLine{00181\ \ \ \ \ \textcolor{keywordflow}{return}\ EXIT\_FAILURE;}
+\DoxyCodeLine{00182\ \ \ \}}
+\DoxyCodeLine{00183\ }
+\DoxyCodeLine{00184\ \ \ \textcolor{keywordflow}{return}\ EXIT\_SUCCESS;}
+\DoxyCodeLine{00185\ \}}
+
+\end{DoxyCode}
+\Hypertarget{discr__auto_8c_a0fccaee4e2734f24cb735a57e89a706a}\label{discr__auto_8c_a0fccaee4e2734f24cb735a57e89a706a} 
+\index{discr\_auto.c@{discr\_auto.c}!discr\_is\_monotonic@{discr\_is\_monotonic}}
+\index{discr\_is\_monotonic@{discr\_is\_monotonic}!discr\_auto.c@{discr\_auto.c}}
+\doxysubsubsection{\texorpdfstring{discr\_is\_monotonic()}{discr\_is\_monotonic()}}
+{\footnotesize\ttfamily int discr\+\_\+is\+\_\+monotonic (\begin{DoxyParamCaption}\item[{double}]{A1,  }\item[{double}]{A2,  }\item[{double}]{A3 }\end{DoxyParamCaption})}
+
+
+
+Проверка монотонности трёх отсчётов. 
+
+Монотонные данные = нет локального максимума среди 3 точек. Это означает, что пик за пределами сетки.
+
+
+\begin{DoxyParams}{Аргументы}
+{\em A1} & амплитуда первой точки \\
+\hline
+{\em A2} & амплитуда второй точки \\
+\hline
+{\em A3} & амплитуда третьей точки \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+1 — монотонные (пик за сеткой), 0 — есть перегиб (пик внутри) 
+\end{DoxyReturn}
+
+
+См. определение в файле \mbox{\hyperlink{discr__auto_8c_source}{discr\+\_\+auto.\+c}} строка \mbox{\hyperlink{discr__auto_8c_source_l00035}{35}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00036\ \{}
+\DoxyCodeLine{00037\ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00038\ \textcolor{comment}{\ \ \ *\ Монотонные\ =\ все\ убывают\ ИЛИ\ все\ возрастают.}}
+\DoxyCodeLine{00039\ \textcolor{comment}{\ \ \ *\ Это\ значит,\ что\ среди\ A1,\ A2,\ A3\ нет\ локального\ максимума,}}
+\DoxyCodeLine{00040\ \textcolor{comment}{\ \ \ *\ т.е.\ пик\ ДН\ находится\ за\ пределами\ сетки\ из\ 3\ отсчётов.}}
+\DoxyCodeLine{00041\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00042\ \textcolor{comment}{\ \ \ *\ Примеры:}}
+\DoxyCodeLine{00043\ \textcolor{comment}{\ \ \ *\ \ \ A1=0.8,\ A2=0.6,\ A3=0.3\ →\ убывают\ →\ монотонные\ (пик\ слева)}}
+\DoxyCodeLine{00044\ \textcolor{comment}{\ \ \ *\ \ \ A1=0.3,\ A2=0.6,\ A3=0.8\ →\ возрастают\ →\ монотонные\ (пик\ справа)}}
+\DoxyCodeLine{00045\ \textcolor{comment}{\ \ \ *\ \ \ A1=0.6,\ A2=0.9,\ A3=0.7\ →\ перегиб\ →\ НЕ\ монотонные\ (пик\ внутри)}}
+\DoxyCodeLine{00046\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{00047\ \ \ \textcolor{keywordflow}{return}\ (A1\ >=\ A2\ \&\&\ A2\ >=\ A3)\ ||\ \ \textcolor{comment}{/*\ убывают\ (или\ равны)\ */}}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \ (A1\ <=\ A2\ \&\&\ A2\ <=\ A3);\ \ \ \ \ \textcolor{comment}{/*\ возрастают\ (или\ равны)\ */}}
+\DoxyCodeLine{00049\ \}}
+
+\end{DoxyCode}

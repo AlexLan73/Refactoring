@@ -1,0 +1,23 @@
+\doxysection{discrsd.\+c}
+\hypertarget{discrsd_8c_source}{}\label{discrsd_8c_source}\index{discrsd.c@{discrsd.c}}
+\mbox{\hyperlink{discrsd_8c}{См. документацию.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{discrsd_8c_source_l00001}00001\ }
+\DoxyCodeLine{\Hypertarget{discrsd_8c_source_l00013}00013\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{discrsd_8h}{discrsd.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{discrsd_8c_source_l00014}00014\ \textcolor{preprocessor}{\#include\ <math.h>}}
+\DoxyCodeLine{\Hypertarget{discrsd_8c_source_l00015}00015\ \textcolor{preprocessor}{\#include\ <float.h>}}
+\DoxyCodeLine{\Hypertarget{discrsd_8c_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{discrsd_8c_source_l00032}\mbox{\hyperlink{discrsd_8h_a7f2e5f7bf53d3c967fae01ec79a52dce}{00032}}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{discrsd_8c_a7f2e5f7bf53d3c967fae01ec79a52dce}{discr2sd}}(\textcolor{keywordtype}{double}\ c,\ \textcolor{keywordtype}{double}\ A1,\ \textcolor{keywordtype}{double}\ A2,}
+\DoxyCodeLine{\Hypertarget{discrsd_8c_source_l00033}00033\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ x1,\ \textcolor{keywordtype}{double}\ x2)}
+\DoxyCodeLine{\Hypertarget{discrsd_8c_source_l00034}00034\ \{}
+\DoxyCodeLine{\Hypertarget{discrsd_8c_source_l00035}00035\ \ \ \textcolor{keywordtype}{double}\ xc\ =\ (x1\ +\ x2)\ *\ 0.5;}
+\DoxyCodeLine{\Hypertarget{discrsd_8c_source_l00036}00036\ \ \ \textcolor{keywordtype}{double}\ sum\ =\ A2\ +\ A1;}
+\DoxyCodeLine{\Hypertarget{discrsd_8c_source_l00037}00037\ }
+\DoxyCodeLine{\Hypertarget{discrsd_8c_source_l00038}00038\ \ \ \textcolor{keywordflow}{if}\ (fabs(sum)\ <\ DBL\_EPSILON)}
+\DoxyCodeLine{\Hypertarget{discrsd_8c_source_l00039}00039\ \ \ \ \ \textcolor{keywordflow}{return}\ xc;}
+\DoxyCodeLine{\Hypertarget{discrsd_8c_source_l00040}00040\ }
+\DoxyCodeLine{\Hypertarget{discrsd_8c_source_l00041}00041\ \ \ \textcolor{keywordtype}{double}\ dx\ =\ c\ *\ ((A2\ -\/\ A1)\ /\ sum);}
+\DoxyCodeLine{\Hypertarget{discrsd_8c_source_l00042}00042\ \ \ \textcolor{keywordflow}{return}\ xc\ +\ dx;}
+\DoxyCodeLine{\Hypertarget{discrsd_8c_source_l00043}00043\ \}}
+
+\end{DoxyCode}

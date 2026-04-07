@@ -1,0 +1,85 @@
+\doxysection{Файл discrsd.\+c}
+\hypertarget{discrsd_8c}{}\label{discrsd_8c}\index{discrsd.c@{discrsd.c}}
+
+
+КППО / ТЗК. Дискриминатор — суммарно-\/разностный (Sum-\/\+Difference).  
+
+
+{\ttfamily \#include "{}discrsd.\+h"{}}\newline
+{\ttfamily \#include $<$math.\+h$>$}\newline
+{\ttfamily \#include $<$float.\+h$>$}\newline
+\doxysubsubsection*{Функции}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{discrsd_8c_a7f2e5f7bf53d3c967fae01ec79a52dce}{discr2sd}} (double c, double A1, double A2, double x1, double x2)
+\begin{DoxyCompactList}\small\item\em Двухточечный дискриминатор, суммарно-\/разностный. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Подробное описание}
+КППО / ТЗК. Дискриминатор — суммарно-\/разностный (Sum-\/\+Difference). 
+
+\begin{DoxyAuthor}{Автор}
+Федоров С.\+А. 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Дата}
+07.\+05.\+2010 
+\end{DoxyDate}
+Рефакторинг\+: Кодо, 2026-\/03-\/28 Изменения\+:
+\begin{DoxyItemize}
+\item ERR-\/005\+: добавлена защита от деления на 0 (A2+\+A1=0)
+\item STYLE\+: единые 2-\/пробельные отступы 
+\end{DoxyItemize}
+
+См. определение в файле \mbox{\hyperlink{discrsd_8c_source}{discrsd.\+c}}
+
+
+
+\doxysubsection{Функции}
+\Hypertarget{discrsd_8c_a7f2e5f7bf53d3c967fae01ec79a52dce}\label{discrsd_8c_a7f2e5f7bf53d3c967fae01ec79a52dce} 
+\index{discrsd.c@{discrsd.c}!discr2sd@{discr2sd}}
+\index{discr2sd@{discr2sd}!discrsd.c@{discrsd.c}}
+\doxysubsubsection{\texorpdfstring{discr2sd()}{discr2sd()}}
+{\footnotesize\ttfamily double discr2sd (\begin{DoxyParamCaption}\item[{double}]{c,  }\item[{double}]{A1,  }\item[{double}]{A2,  }\item[{double}]{x1,  }\item[{double}]{x2 }\end{DoxyParamCaption})}
+
+
+
+Двухточечный дискриминатор, суммарно-\/разностный. 
+
+Двухточечный дискриминатор, суммарно-\/разностный (Sum-\/\+Difference).
+
+Формулы\+: xc = (x1 + x2) / 2 dx = c \texorpdfstring{$\ast$}{*} (A2 -\/ A1) / (A2 + A1) xe = xc + dx
+
+
+\begin{DoxyParams}{Аргументы}
+{\em c} & коэффициент суммарно-\/разностного дискриминатора \\
+\hline
+{\em A1} & амплитуда первой точки \\
+\hline
+{\em A2} & амплитуда второй точки \\
+\hline
+{\em x1} & координата первой точки \\
+\hline
+{\em x2} & координата второй точки \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+оценка координаты; при A1+\+A2=0 возвращает середину (x1+x2)/2 
+\end{DoxyReturn}
+
+
+См. определение в файле \mbox{\hyperlink{discrsd_8c_source}{discrsd.\+c}} строка \mbox{\hyperlink{discrsd_8c_source_l00032}{32}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00034\ \{}
+\DoxyCodeLine{00035\ \ \ \textcolor{keywordtype}{double}\ xc\ =\ (x1\ +\ x2)\ *\ 0.5;}
+\DoxyCodeLine{00036\ \ \ \textcolor{keywordtype}{double}\ sum\ =\ A2\ +\ A1;}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \ \ \textcolor{keywordflow}{if}\ (fabs(sum)\ <\ DBL\_EPSILON)}
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keywordflow}{return}\ xc;}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \ \ \textcolor{keywordtype}{double}\ dx\ =\ c\ *\ ((A2\ -\/\ A1)\ /\ sum);}
+\DoxyCodeLine{00042\ \ \ \textcolor{keywordflow}{return}\ xc\ +\ dx;}
+\DoxyCodeLine{00043\ \}}
+
+\end{DoxyCode}

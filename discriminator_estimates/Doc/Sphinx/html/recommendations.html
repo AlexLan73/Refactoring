@@ -1,0 +1,882 @@
+<!doctype html>
+<html class="no-js" lang="ru" data-content_root="./">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Алфавитный указатель" href="genindex.html"><link rel="search" title="Поиск" href="search.html"><link rel="next" title="Визуальный разбор" href="visual.html"><link rel="prev" title="Сравнение методов" href="methods.html">
+
+    <!-- Generated with Sphinx 9.1.0 and Furo 2025.12.19 -->
+        <title>Рекомендации - Discriminator Estimates</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=acfd86a5" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=7bdb33bb" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=5fd99b8d" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f2f2f2;
+  --color-code-foreground: #1e1e1e;
+  --color-brand-primary: #1f4e79;
+  --color-brand-content: #1f4e79;
+  --color-admonition-background: #f0f9ff;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #60a5fa;
+  --color-brand-content: #93c5fd;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #60a5fa;
+  --color-brand-content: #93c5fd;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="index.html"><div class="brand">Discriminator Estimates</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
+  
+  <span class="sidebar-brand-text">Discriminator Estimates</span>
+  
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder="Поиск" name="q" aria-label="Поиск">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Основные разделы</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Обзор</a></li>
+<li class="toctree-l1"><a class="reference internal" href="formulas.html">Формулы</a></li>
+<li class="toctree-l1"><a class="reference internal" href="methods.html">Сравнение методов</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Рекомендации</a></li>
+<li class="toctree-l1"><a class="reference internal" href="visual.html">Визуальный разбор</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fft.html">FFT-дискриминаторы частоты</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tests.html">Тесты</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">C API Reference</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="_sources/recommendations.rst.txt" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div><div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="id1">
+<h1>Рекомендации<a class="headerlink" href="#id1" title="Ссылка на этот заголовок">¶</a></h1>
+<p class="rubric">Итоговые рекомендации — как найти частоту в зашумлённом сигнале</p>
+<p>Эта страница — концентрат всех выводов проекта 2026 года. Источник —
+подробный отчёт <code class="file docutils literal notranslate"><span class="pre">Doc/Frequency_Recommendations_2026-04-06.md</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Дата<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2026-04-06</p>
+</dd>
+<dt class="field-even">Автор<span class="colon">:</span></dt>
+<dd class="field-even"><p>Кодо (AI) + Alex</p>
+</dd>
+<dt class="field-odd">Статус<span class="colon">:</span></dt>
+<dd class="field-odd"><p>финальные рекомендации по итогам Монте-Карло</p>
+</dd>
+</dl>
+<hr class="docutils" />
+<section id="id2">
+<h2>Главная рекомендация — за 60 секунд<a class="headerlink" href="#id2" title="Ссылка на этот заголовок">¶</a></h2>
+<div class="admonition tip">
+<p class="admonition-title">Совет</p>
+<p><strong>Всегда используй</strong> <code class="docutils literal notranslate"><span class="pre">discr5ea</span></code> <strong>(МНК-Гауссиан по 5 точкам).</strong></p>
+<p><strong>Fallback:</strong> если какая-то <span class="math notranslate nohighlight">\(|X(k)| \leq 0\)</span> → переключись на
+<code class="docutils literal notranslate"><span class="pre">discr5qa</span></code>.</p>
+<p><strong>Обязательные требования:</strong></p>
+<ul class="simple">
+<li><p>Окно <strong>Hanning</strong> перед FFT</p></li>
+<li><p><strong>Zero-padding минимум ×2</strong></p></li>
+<li><p>5 точек вокруг максимума <span class="math notranslate nohighlight">\((k-2,\ldots, k+2)\)</span></p></li>
+</ul>
+</div>
+<figure class="align-center" id="id19">
+<a class="reference internal image-reference" href="_images/06_decision_tree.png"><img alt="Дерево решений — какой метод выбрать" src="_images/06_decision_tree.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Рис. 15 </span><span class="caption-text">Дерево решений: какой метод выбрать в зависимости от условий.</span><a class="headerlink" href="#id19" title="Ссылка на это изображение">¶</a></p>
+</figcaption>
+</figure>
+<section id="id3">
+<h3>Почему не нужен «гибрид»<a class="headerlink" href="#id3" title="Ссылка на этот заголовок">¶</a></h3>
+<p>Раньше думали: «при шуме один метод, при чистоте другой». На Hanning
+kernel <strong>гибрид не нужен</strong>:</p>
+<ul class="simple">
+<li><p>5EA и 5QA дают практически одинаковый результат (разница ~5%);</p></li>
+<li><p>Оба стабильно лучше любого 3-точечного метода;</p></li>
+<li><p>5EA чуть точнее на чистых данных, 5QA чуть точнее при сильном шуме —
+но разница исчезающая.</p></li>
+</ul>
+<p><strong>Один вызов. Никаких if-else по уровню шума.</strong></p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="id4">
+<h2>Главный эксперимент — кто победил<a class="headerlink" href="#id4" title="Ссылка на этот заголовок">¶</a></h2>
+<figure class="align-center" id="id20">
+<a class="reference internal image-reference" href="_images/04_methods_vs_snr.png"><img alt="5pt vs 3pt при разных SNR" src="_images/04_methods_vs_snr.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Рис. 16 </span><span class="caption-text">Монте-Карло: 5pt vs 3pt по медиане ошибки при разных SNR.</span><a class="headerlink" href="#id20" title="Ссылка на это изображение">¶</a></p>
+</figcaption>
+</figure>
+<p>Эксперимент: для каждого уровня SNR — 5000 × 21 = <strong>105 000 испытаний</strong>,
+случайный шум, случайное положение пика, окно Hanning, zp×2.</p>
+<section id="id5">
+<h3>Что видно на графике<a class="headerlink" href="#id5" title="Ссылка на этот заголовок">¶</a></h3>
+<ul class="simple">
+<li><p><strong>Серая пунктирная</strong> — EA3 (классика, 3 точки)</p></li>
+<li><p><strong>Оранжевая</strong> — 5QA (МНК-парабола, 5 точек)</p></li>
+<li><p><strong>Синяя жирная ★</strong> — 5EA (МНК-Гауссиан, 5 точек)</p></li>
+</ul>
+<p><strong>Главное наблюдение:</strong> обе 5-точечные кривые лежат <strong>ниже</strong>
+3-точечной EA3 <strong>при любом SNR</strong>. 5-точечные всегда лучше.</p>
+</section>
+<section id="id6">
+<h3>Выигрыш в цифрах<a class="headerlink" href="#id6" title="Ссылка на этот заголовок">¶</a></h3>
+<div class="table-wrapper colwidths-given docutils container">
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 40.0%" />
+<col style="width: 60.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>SNR (дБ)</p></th>
+<th class="head"><p>Выигрыш 5pt относительно EA3</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>40 (идеал)</p></td>
+<td><p><span class="math notranslate nohighlight">\(\times 1.4\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>30 (отлично)</p></td>
+<td><p><span class="math notranslate nohighlight">\(\times 1.8\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>25 (хорошо)</p></td>
+<td><p><span class="math notranslate nohighlight">\(\times 2.0\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>20 (норма)</p></td>
+<td><p><span class="math notranslate nohighlight">\(\times 2.0\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>15 (шумно)</p></td>
+<td><p><span class="math notranslate nohighlight">\(\times 1.7\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>10 (плохо)</p></td>
+<td><p><span class="math notranslate nohighlight">\(\times 1.2\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>5 (ужас)</p></td>
+<td><p><span class="math notranslate nohighlight">\(\times 1.2\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>5-точечные методы стабильно выигрывают в 1.2–2.0 раза.</strong></p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="id7">
+<h2>Что это значит в реальных герцах<a class="headerlink" href="#id7" title="Ссылка на этот заголовок">¶</a></h2>
+<figure class="align-center" id="id21">
+<a class="reference internal image-reference" href="_images/05_accuracy_in_hz.png"><img alt="Точность оценки в герцах при типичных параметрах радара" src="_images/05_accuracy_in_hz.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Рис. 17 </span><span class="caption-text">Точность оценки в реальных герцах при типичных параметрах радара
+(<span class="math notranslate nohighlight">\(f_s = 100\)</span> МГц, <span class="math notranslate nohighlight">\(N = 4\)</span> млн).</span><a class="headerlink" href="#id21" title="Ссылка на это изображение">¶</a></p>
+</figcaption>
+</figure>
+<section id="id8">
+<h3>При типичных условиях<a class="headerlink" href="#id8" title="Ссылка на этот заголовок">¶</a></h3>
+<p>Параметры: <span class="math notranslate nohighlight">\(f_s = 100\)</span> МГц, <span class="math notranslate nohighlight">\(N = 4M\)</span>, <span class="math notranslate nohighlight">\(\Delta f \approx 23.84\)</span>
+Гц, SNR = 20 дБ.</p>
+<div class="table-wrapper colwidths-given docutils container">
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 60.0%" />
+<col style="width: 40.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Метод</p></th>
+<th class="head"><p>Ошибка</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Без интерполяции (просто <code class="docutils literal notranslate"><span class="pre">argmax</span></code>)</p></td>
+<td><p>~12 Гц</p></td>
+</tr>
+<tr class="row-odd"><td><p>EA3 (классика, 3 точки)</p></td>
+<td><p>~1.2 Гц</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>5EA / 5QA ★ (наш выбор)</strong></p></td>
+<td><p><strong>~0.6 Гц</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p>Quinn 2nd (будущее, комплексные <span class="math notranslate nohighlight">\(X(k)\)</span>)</p></td>
+<td><p>~2.4 мГц</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">Улучшение в 20 раз</p>
+<p>Переход <strong>«argmax → 5EA» = улучшение в 20 раз</strong> без единого нового
+датчика — только за счёт правильной математики.</p>
+</div>
+</section>
+<section id="vs-snr">
+<h3>Точность vs SNR<a class="headerlink" href="#vs-snr" title="Ссылка на этот заголовок">¶</a></h3>
+<div class="table-wrapper docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>SNR (дБ)</p></th>
+<th class="head"><p>Ошибка 5EA/5QA</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>30</p></td>
+<td><p>≈ 0.21 Гц</p></td>
+</tr>
+<tr class="row-odd"><td><p>20</p></td>
+<td><p>≈ 0.61 Гц</p></td>
+</tr>
+<tr class="row-even"><td><p>10</p></td>
+<td><p>≈ 1.73 Гц</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Даже в очень шумных условиях (SNR = 10 дБ) мы <strong>в 7 раз точнее</strong>, чем
+без интерполяции.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="id9">
+<h2>Бонус: монотонная зона<a class="headerlink" href="#id9" title="Ссылка на этот заголовок">¶</a></h2>
+<figure class="align-center" id="id22">
+<a class="reference internal image-reference" href="_images/07_monotonic_zone.png"><img alt="Монотонная зона — 5pt держит пик в 4 раза дольше" src="_images/07_monotonic_zone.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Рис. 18 </span><span class="caption-text">Монотонная зона: 5pt-методы держат пик в 4 раза более широкой зоне.</span><a class="headerlink" href="#id22" title="Ссылка на это изображение">¶</a></p>
+</figcaption>
+</figure>
+<section id="id10">
+<h3>Что это<a class="headerlink" href="#id10" title="Ссылка на этот заголовок">¶</a></h3>
+<p>«Монотонная зона» — ситуация, когда истинный пик <strong>вышел за пределы
+окна</strong>, и в окне измерений амплитуды только растут или только убывают.</p>
+<div class="table-wrapper colwidths-given docutils container">
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 50.0%" />
+<col style="width: 50.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Метод</p></th>
+<th class="head"><p>Граница монотонной зоны</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>3pt (QA, EA)</p></td>
+<td><p><span class="math notranslate nohighlight">\(|x_0| &gt; 0.5\)</span> бина</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>5pt (5QA, 5EA)</strong></p></td>
+<td><p><span class="math notranslate nohighlight">\(|x_0| &gt; 2.0\)</span> бина</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>5pt прощает промах до 2 бинов</strong> — оно «дотягивает» правильное
+значение. То есть 5pt <strong>робастнее</strong> к небольшим сдвигам пика.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="id11">
+<h2>Почему именно 5 точек, а не 7 или 9<a class="headerlink" href="#id11" title="Ссылка на этот заголовок">¶</a></h2>
+<figure class="align-center" id="id23">
+<a class="reference internal image-reference" href="_images/08_why_5_points.png"><img alt="Сравнение 3/5/7/9 точек на Hanning kernel" src="_images/08_why_5_points.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Рис. 19 </span><span class="caption-text">Сравнение МНК 3/5/7/9 точек на Hanning kernel.</span><a class="headerlink" href="#id23" title="Ссылка на это изображение">¶</a></p>
+</figcaption>
+</figure>
+<p><strong>Результат Монте-Карло:</strong> <strong>7 и 9 точек почти не дают выигрыша</strong> на
+Hanning kernel. А при высоком SNR (≥ 25 дБ) <strong>7 и 9 даже хуже</strong>, чем 5.</p>
+<p>Hanning-пик — это <strong>колокол</strong> шириной ±2 бина. Крайние точки 7pt/9pt
+окон (±3, ±4 бина) попадают в <strong>хвосты</strong>, где:</p>
+<ul class="simple">
+<li><p>форма уже не параболическая (большой bias);</p></li>
+<li><p>амплитуды маленькие (плохое SNR).</p></li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Совет</p>
+<p>Для Hanning kernel <strong>5 точек = оптимум</strong>. Больше не нужно.</p>
+</div>
+</section>
+<hr class="docutils" />
+<section id="hanning">
+<h2>Парабола + Hanning = любовь<a class="headerlink" href="#hanning" title="Ссылка на этот заголовок">¶</a></h2>
+<figure class="align-center" id="id24">
+<a class="reference internal image-reference" href="_images/02_hanning_vs_parabola.png"><img alt="Парабола идеально ложится на Hanning kernel" src="_images/02_hanning_vs_parabola.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Рис. 20 </span><span class="caption-text">Слева — <code class="docutils literal notranslate"><span class="pre">sinc</span></code> vs <code class="docutils literal notranslate"><span class="pre">Hanning</span></code>. Справа — парабола идеально
+ложится на Hanning kernel.</span><a class="headerlink" href="#id24" title="Ссылка на это изображение">¶</a></p>
+</figcaption>
+</figure>
+<section id="id12">
+<h3>Левый график — форма пика<a class="headerlink" href="#id12" title="Ссылка на этот заголовок">¶</a></h3>
+<ul class="simple">
+<li><p><strong>Красная (sinc)</strong> — форма пика <strong>без</strong> окна. Острый, с «ушами»
+(боковыми лепестками −13 дБ).</p></li>
+<li><p><strong>Синяя (Hanning kernel)</strong> — форма пика <strong>с</strong> окном Hanning.
+Гладкий, колоколообразный, без уродливых «ушей».</p></li>
+</ul>
+</section>
+<section id="id13">
+<h3>Правый график — парабола на Hanning<a class="headerlink" href="#id13" title="Ссылка на этот заголовок">¶</a></h3>
+<p>5 точек на Hanning-пике + парабола <span class="math notranslate nohighlight">\(y = ax^2 + bx + c\)</span> → ошибка
+<strong>меньше 2.5%</strong> в пределах <span class="math notranslate nohighlight">\(\pm 0.7\)</span> бина от вершины.</p>
+<div class="note admonition">
+<p class="admonition-title">Гора в тумане</p>
+<p>У тебя 5 альтиметров, расставленных через равные промежутки. По их
+показаниям ты хочешь угадать, где <strong>самая высокая точка</strong> горы
+между приборами. Если форма горы — парабола (а Hanning kernel
+очень похож!), достаточно подогнать параболу к 5 точкам и взять
+её вершину. Это и есть наш метод.</p>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="zero-padding-2">
+<h2>Zero-padding ×2 — обязательное требование<a class="headerlink" href="#zero-padding-2" title="Ссылка на этот заголовок">¶</a></h2>
+<figure class="align-center" id="id25">
+<a class="reference internal image-reference" href="_images/03_zero_padding_effect.png"><img alt="Эффект zero-padding" src="_images/03_zero_padding_effect.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Рис. 21 </span><span class="caption-text">Эффект zero-padding на сетку бинов.</span><a class="headerlink" href="#id25" title="Ссылка на это изображение">¶</a></p>
+</figcaption>
+</figure>
+<section id="id14">
+<h3>Что это<a class="headerlink" href="#id14" title="Ссылка на этот заголовок">¶</a></h3>
+<p>Перед FFT дописываем нули к сигналу, чтобы общая длина стала в 2 раза
+больше. Сетка бинов FFT становится <strong>гуще</strong>, а форма Hanning kernel
+не меняется.</p>
+<div class="table-wrapper colwidths-given docutils container">
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 30.0%" />
+<col style="width: 30.0%" />
+<col style="width: 40.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Вариант</p></th>
+<th class="head"><p>Шаг бинов</p></th>
+<th class="head"><p>Макс. ошибка <code class="docutils literal notranslate"><span class="pre">argmax</span></code></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Без zero-padding</p></td>
+<td><p>1.0 бин</p></td>
+<td><p>±0.5 бина</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Zero-pad ×2 ★</strong></p></td>
+<td><p><strong>0.5 бина</strong></p></td>
+<td><p><strong>±0.25 бина</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>Zero-pad ×4</p></td>
+<td><p>0.25 бина</p></td>
+<td><p>±0.125 бина</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="id15">
+<h3>Зачем минимум ×2<a class="headerlink" href="#id15" title="Ссылка на этот заголовок">¶</a></h3>
+<p>При zp×2 все 5 точек 5EA/5QA попадают в <strong>главный лепесток</strong> Hanning,
+где парабола ложится идеально. При zp×1 крайние точки вылезают из
+главного лепестка → парабола больше не работает хорошо.</p>
+<p><strong>Экспериментальное подтверждение:</strong></p>
+<ul class="simple">
+<li><p>без zero-padding: ошибка 5QA = <strong>11.9%</strong></p></li>
+<li><p>с zp×2: ошибка 5QA = <strong>2.9%</strong></p></li>
+</ul>
+<p><strong>Разница в 4 раза.</strong></p>
+<div class="warning admonition">
+<p class="admonition-title">Важное уточнение</p>
+<p>Zero-padding <strong>не улучшает разрешение</strong> — два очень близких пика
+от него не станут различимыми. Разрешение определяется длиной
+<strong>оригинальной</strong> записи.</p>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="quick-reference">
+<h2>Quick reference<a class="headerlink" href="#quick-reference" title="Ссылка на этот заголовок">¶</a></h2>
+<section id="c">
+<h3>C-код (текущий модуль)<a class="headerlink" href="#c" title="Ссылка на этот заголовок">¶</a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;discr5ea.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;discr_common.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;complex.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span>
+
+<span class="c1">// ... после FFT и поиска k_max ...</span>
+
+<span class="kt">double</span><span class="w"> </span><span class="n">y</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span><span class="w"> </span><span class="n">xs</span><span class="p">[</span><span class="mi">5</span><span class="p">];</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">cabs</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">k_max</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="p">]);</span><span class="w">   </span><span class="c1">// |X(k-2)| .. |X(k+2)|</span>
+<span class="w">  </span><span class="n">xs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">double</span><span class="p">)(</span><span class="n">i</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span><span class="w">          </span><span class="c1">// {-2, -1, 0, 1, 2}</span>
+<span class="p">}</span>
+
+<span class="kt">double</span><span class="w"> </span><span class="n">delta</span><span class="p">;</span><span class="w">   </span><span class="c1">// суб-бинное смещение в единицах padded-шага</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">ok</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">discr5ea</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">xs</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">delta</span><span class="p">);</span><span class="w">   </span><span class="c1">// МНК-Гауссиан по 5 точкам</span>
+
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ok</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">EXIT_SUCCESS</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">// fallback: какая-то амплитуда ≤ 0 → 5QA по амплитудам</span>
+<span class="w">  </span><span class="n">discr5qa</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">xs</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">delta</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// Перевод в частоту</span>
+<span class="kt">double</span><span class="w"> </span><span class="n">f_hz</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">k_max</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">delta</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">fs</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">N_padded</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="python">
+<h3>Python-код (для тестов и прототипирования)<a class="headerlink" href="#python" title="Ссылка на этот заголовок">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy.signal.windows</span> <span class="kn">import</span> <span class="n">hann</span>
+
+<span class="k">def</span> <span class="nf">estimate_frequency</span><span class="p">(</span><span class="n">signal</span><span class="p">,</span> <span class="n">fs</span><span class="p">,</span> <span class="n">zero_pad</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">search_radius</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
+    <span class="n">M</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">signal</span><span class="p">)</span>
+    <span class="n">N_base</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">M</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">bit_length</span><span class="p">()</span>      <span class="c1"># до ближайшей степени 2</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="n">N_base</span> <span class="o">*</span> <span class="n">zero_pad</span>
+
+    <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fft</span><span class="p">(</span><span class="n">signal</span> <span class="o">*</span> <span class="n">hann</span><span class="p">(</span><span class="n">M</span><span class="p">),</span> <span class="n">n</span><span class="o">=</span><span class="n">N</span><span class="p">)</span>
+    <span class="n">X_mag</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">X</span><span class="p">[:</span><span class="n">N</span> <span class="o">//</span> <span class="mi">2</span><span class="p">])</span>
+
+    <span class="n">k_max</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">X_mag</span><span class="p">[:</span><span class="n">search_radius</span><span class="p">]))</span>
+
+    <span class="k">if</span> <span class="mi">2</span> <span class="o">&lt;=</span> <span class="n">k_max</span> <span class="o">&lt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">X_mag</span><span class="p">)</span> <span class="o">-</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">X_mag</span><span class="p">[</span><span class="n">k_max</span> <span class="o">-</span> <span class="mi">2</span> <span class="p">:</span> <span class="n">k_max</span> <span class="o">+</span> <span class="mi">3</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">y</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">):</span>
+            <span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>                    <span class="c1"># 5EA</span>
+            <span class="n">a</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">z</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">z</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">2</span><span class="o">*</span><span class="n">z</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">z</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">z</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span> <span class="o">/</span> <span class="mf">14.0</span>
+            <span class="n">b</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">z</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">z</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">z</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">z</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span> <span class="o">/</span> <span class="mf">10.0</span>
+        <span class="k">else</span><span class="p">:</span>                                <span class="c1"># 5QA fallback</span>
+            <span class="n">a</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">2</span><span class="o">*</span><span class="n">y</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">y</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">y</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span> <span class="o">/</span> <span class="mf">14.0</span>
+            <span class="n">b</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">y</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">y</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span> <span class="o">/</span> <span class="mf">10.0</span>
+        <span class="n">delta</span> <span class="o">=</span> <span class="o">-</span><span class="n">b</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">a</span><span class="p">)</span> <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mf">1e-30</span> <span class="k">else</span> <span class="mf">0.0</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">delta</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+    <span class="k">return</span> <span class="p">(</span><span class="n">k_max</span> <span class="o">+</span> <span class="n">delta</span><span class="p">)</span> <span class="o">*</span> <span class="n">fs</span> <span class="o">/</span> <span class="n">N</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="id16">
+<h2>Чек-лист перед релизом<a class="headerlink" href="#id16" title="Ссылка на этот заголовок">¶</a></h2>
+<div class="admonition note">
+<p class="admonition-title">Примечание</p>
+<ul class="simple">
+<li><p>[ ] Сигнал умножен на <strong>окно Hanning</strong> <strong>до</strong> FFT</p></li>
+<li><p>[ ] Используется <strong>zero-padding минимум ×2</strong> (<code class="docutils literal notranslate"><span class="pre">N</span> <span class="pre">=</span> <span class="pre">next_pow2(M)</span> <span class="pre">*</span> <span class="pre">2</span></code>)</p></li>
+<li><p>[ ] Грубый максимум <code class="docutils literal notranslate"><span class="pre">k_max</span></code> ищется в разумном диапазоне (<strong>не на краях</strong> FFT)</p></li>
+<li><p>[ ] Вокруг максимума есть <strong>минимум 2 точки слева и 2 справа</strong></p></li>
+<li><p>[ ] Для <code class="docutils literal notranslate"><span class="pre">discr5ea</span></code>: <strong>проверка</strong> <span class="math notranslate nohighlight">\(A_i &gt; 0\)</span> перед вызовом,
+иначе fallback на <code class="docutils literal notranslate"><span class="pre">discr5qa</span></code></p></li>
+<li><p>[ ] Результат переводится в Гц через <span class="math notranslate nohighlight">\((k_{\max} + \delta) \cdot f_s / N_{\text{padded}}\)</span></p></li>
+<li><p>[ ] Покрытие тестами: см. <a class="reference internal" href="tests.html"><span class="doc">Тесты</span></a></p></li>
+<li><p>[ ] Проверена точность на эталонных данных (sinc, Hanning kernel,
+реальные FFT)</p></li>
+</ul>
+</div>
+</section>
+<hr class="docutils" />
+<section id="quinn-2nd-pipeline">
+<h2>Что дальше — Quinn 2nd и комплексный pipeline<a class="headerlink" href="#quinn-2nd-pipeline" title="Ссылка на этот заголовок">¶</a></h2>
+<p>Наш текущий pipeline работает с <strong>магнитудой</strong> <span class="math notranslate nohighlight">\(|X(k)|\)</span> — мы
+выбрасываем фазу. Но фаза содержит <strong>половину информации</strong> о сигнале.</p>
+<section id="quinn-2nd-estimator">
+<h3>Quinn 2nd estimator — максимум точности<a class="headerlink" href="#quinn-2nd-estimator" title="Ссылка на этот заголовок">¶</a></h3>
+<p>Если в будущем pipeline сможет передавать комплексные <span class="math notranslate nohighlight">\(X(k)\)</span>
+(а не только магнитуду), можно использовать <strong>Quinn 2nd estimator</strong>:</p>
+<div class="table-wrapper colwidths-given docutils container">
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 40.0%" />
+<col style="width: 60.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Свойство</p></th>
+<th class="head"><p>Значение</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Точность</p></td>
+<td><p>достигает <strong>Cramér-Rao bound</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p>Точек</p></td>
+<td><p>3 бина (как у EA3)</p></td>
+</tr>
+<tr class="row-even"><td><p>Bias</p></td>
+<td><p><span class="math notranslate nohighlight">\(\pm 0.0001\)</span> бина (в 50× точнее 5EA)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Сложность</p></td>
+<td><p>~20 операций</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Это путь для модулей, где комплексные данные есть «из коробки».</p>
+</section>
+<section id="ipi-iterative-parabolic-interpolation-2025">
+<h3>IPI (Iterative Parabolic Interpolation, 2025)<a class="headerlink" href="#ipi-iterative-parabolic-interpolation-2025" title="Ссылка на этот заголовок">¶</a></h3>
+<p>Свежий итеративный метод. Достигает CRLB, но каждая итерация
+<span class="math notranslate nohighlight">\(\mathcal{O}(N)\)</span>. Для 1.3M точек это дорого.
+<strong>Для CPU pipeline неактуально.</strong></p>
+</section>
+<section id="czt-zoom-fft">
+<h3>CZT / Zoom FFT<a class="headerlink" href="#czt-zoom-fft" title="Ссылка на этот заголовок">¶</a></h3>
+<p>Альтернатива FFT: вычисляет спектр только в узкой полосе вокруг пика
+с любым разрешением. Если нужна <strong>экстремальная точность</strong> — вариант,
+но требует <span class="math notranslate nohighlight">\(\mathcal{O}(N \log N)\)</span> операций.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="id17">
+<h2>Самое главное, если коротко<a class="headerlink" href="#id17" title="Ссылка на этот заголовок">¶</a></h2>
+<div class="admonition tip">
+<p class="admonition-title">Совет</p>
+<p>Для задачи «найти частоту в зашумлённом сигнале» в текущем CPU-pipeline
+используй <code class="docutils literal notranslate"><span class="pre">discr5ea</span></code> (МНК-Гауссиан по 5 точкам) с fallback на
+<code class="docutils literal notranslate"><span class="pre">discr5qa</span></code> и обязательным zero-padding ×2.</p>
+<p>Это даст точность <strong>~0.6 Гц при SNR = 20 дБ</strong> — в 20 раз лучше,
+чем без интерполяции, и в 2 раза лучше, чем классическая
+3-точечная EA3.</p>
+<p>В будущем (когда появится доступ к комплексным <span class="math notranslate nohighlight">\(X(k)\)</span>) —
+перейти на Quinn 2nd для максимальной точности в ±2 мГц.</p>
+</div>
+</section>
+<hr class="docutils" />
+<section id="id18">
+<h2>Связанные ресурсы<a class="headerlink" href="#id18" title="Ссылка на этот заголовок">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="overview.html"><span class="doc">Обзор</span></a> — общее введение</p></li>
+<li><p><a class="reference internal" href="formulas.html"><span class="doc">Формулы</span></a> — полные математические формулы</p></li>
+<li><p><a class="reference internal" href="methods.html"><span class="doc">Сравнение методов</span></a> — сравнительный обзор методов</p></li>
+<li><p><a class="reference internal" href="visual.html"><span class="doc">Визуальный разбор</span></a> — визуальный разбор (GIF + 3D)</p></li>
+<li><p><a class="reference internal" href="fft.html"><span class="doc">FFT-дискриминаторы частоты</span></a> — применение к FFT-оценке частоты</p></li>
+<li><p><a class="reference internal" href="api.html"><span class="doc">C API Reference</span></a> — справочник C API</p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">Doc/Frequency_Recommendations_2026-04-06.md</span></code> — полный отчёт</p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">Doc/FFT_Frequency_Estimation.md</span></code> — справочник FFT-методов</p></li>
+</ul>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="visual.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Визуальный разбор</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="methods.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Сравнение методов</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2026, Кодо (AI) + Alex
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Рекомендации</a><ul>
+<li><a class="reference internal" href="#id2">Главная рекомендация — за 60 секунд</a><ul>
+<li><a class="reference internal" href="#id3">Почему не нужен «гибрид»</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id4">Главный эксперимент — кто победил</a><ul>
+<li><a class="reference internal" href="#id5">Что видно на графике</a></li>
+<li><a class="reference internal" href="#id6">Выигрыш в цифрах</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id7">Что это значит в реальных герцах</a><ul>
+<li><a class="reference internal" href="#id8">При типичных условиях</a></li>
+<li><a class="reference internal" href="#vs-snr">Точность vs SNR</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id9">Бонус: монотонная зона</a><ul>
+<li><a class="reference internal" href="#id10">Что это</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id11">Почему именно 5 точек, а не 7 или 9</a></li>
+<li><a class="reference internal" href="#hanning">Парабола + Hanning = любовь</a><ul>
+<li><a class="reference internal" href="#id12">Левый график — форма пика</a></li>
+<li><a class="reference internal" href="#id13">Правый график — парабола на Hanning</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#zero-padding-2">Zero-padding ×2 — обязательное требование</a><ul>
+<li><a class="reference internal" href="#id14">Что это</a></li>
+<li><a class="reference internal" href="#id15">Зачем минимум ×2</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#quick-reference">Quick reference</a><ul>
+<li><a class="reference internal" href="#c">C-код (текущий модуль)</a></li>
+<li><a class="reference internal" href="#python">Python-код (для тестов и прототипирования)</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id16">Чек-лист перед релизом</a></li>
+<li><a class="reference internal" href="#quinn-2nd-pipeline">Что дальше — Quinn 2nd и комплексный pipeline</a><ul>
+<li><a class="reference internal" href="#quinn-2nd-estimator">Quinn 2nd estimator — максимум точности</a></li>
+<li><a class="reference internal" href="#ipi-iterative-parabolic-interpolation-2025">IPI (Iterative Parabolic Interpolation, 2025)</a></li>
+<li><a class="reference internal" href="#czt-zoom-fft">CZT / Zoom FFT</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id17">Самое главное, если коротко</a></li>
+<li><a class="reference internal" href="#id18">Связанные ресурсы</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="_static/documentation_options.js?v=16c2fb31"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/scripts/furo.js?v=46bd48cc"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=df1a032d"></script>
+    <script src="_static/translations.js?v=cd1d70c9"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    </body>
+</html>

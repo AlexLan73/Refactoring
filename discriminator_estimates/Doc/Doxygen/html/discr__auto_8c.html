@@ -1,0 +1,580 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Discriminator Estimates (КППО/ТЗК): Файл discr_auto.c</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript">
+window.MathJax = {
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Discriminator Estimates (КППО/ТЗК)
+   </div>
+   <div id="projectbrief">Дискриминаторные оценки координат цели по отсчётам ДН антенны</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Поиск');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">Структуры данных</a> &#124;
+<a href="#func-members">Функции</a>  </div>
+  <div class="headertitle"><div class="title">Файл discr_auto.c</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Автоматический дискриминатор с экстраполяцией.  
+<a href="#details">Подробнее...</a></p>
+<div class="textblock"><code>#include &quot;<a class="el" href="discr__auto_8h_source.html">discr_auto.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="discrea_8h_source.html">discrea.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="discrqa_8h_source.html">discrqa.h</a>&quot;</code><br />
+<code>#include &lt;math.h&gt;</code><br />
+<code>#include &lt;float.h&gt;</code><br />
+<code>#include &lt;stdlib.h&gt;</code><br />
+</div>
+<p><a href="discr__auto_8c_source.html">См. исходные тексты.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Структуры данных</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structax__pair__t.html">ax_pair_t</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Структура для сортировки пар (амплитуда, координата) по x.  <a href="structax__pair__t.html#details">Подробнее...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Функции</h2></td></tr>
+<tr class="memitem:a0fccaee4e2734f24cb735a57e89a706a" id="r_a0fccaee4e2734f24cb735a57e89a706a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="discr__auto_8c.html#a0fccaee4e2734f24cb735a57e89a706a">discr_is_monotonic</a> (double A1, double A2, double A3)</td></tr>
+<tr class="memdesc:a0fccaee4e2734f24cb735a57e89a706a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Проверка монотонности трёх отсчётов.  <br /></td></tr>
+<tr class="separator:a0fccaee4e2734f24cb735a57e89a706a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2c8a868999c0d7f0acbb33842ce31507" id="r_a2c8a868999c0d7f0acbb33842ce31507"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="discr__auto_8c.html#a2c8a868999c0d7f0acbb33842ce31507">cmp_by_x</a> (const void *p1, const void *p2)</td></tr>
+<tr class="separator:a2c8a868999c0d7f0acbb33842ce31507"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aff4b1fea96d16566196f7f7c44331547" id="r_aff4b1fea96d16566196f7f7c44331547"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="discr__auto_8c.html#aff4b1fea96d16566196f7f7c44331547">discr3_extrap_gauss</a> (double A1, double A2, double A3, double x1, double x2, double x3, double *xe)</td></tr>
+<tr class="memdesc:aff4b1fea96d16566196f7f7c44331547"><td class="mdescLeft">&#160;</td><td class="mdescRight">Гауссова экстраполяция (E2) для монотонных случаев.  <br /></td></tr>
+<tr class="separator:aff4b1fea96d16566196f7f7c44331547"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a99aa3243f4143e13f9e1a2fda43c714e" id="r_a99aa3243f4143e13f9e1a2fda43c714e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="discr__auto_8c.html#a99aa3243f4143e13f9e1a2fda43c714e">discr3_auto</a> (double A1, double A2, double A3, double x1, double x2, double x3, double *xe)</td></tr>
+<tr class="memdesc:a99aa3243f4143e13f9e1a2fda43c714e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Автоматический дискриминатор с переключением.  <br /></td></tr>
+<tr class="separator:a99aa3243f4143e13f9e1a2fda43c714e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Подробное описание</h2>
+<div class="textblock"><p>Автоматический дискриминатор с экстраполяцией. </p>
+<dl class="section author"><dt>Автор</dt><dd>Кодо (AI Assistant) </dd></dl>
+<dl class="section date"><dt>Дата</dt><dd>2026-04-02 </dd></dl>
+<p>Реализует стратегию автопереключения на основе результатов аналитического исследования (analysis/REPORT.md):</p>
+<p>Нормальный случай (есть перегиб): EA → QA fallback EA даёт MAE = 0.005 (0.5% шага сетки)</p>
+<p>Монотонный случай (пик за сеткой): E2 (Гауссова экстраполяция) E2 даёт MAE = 0.148, что в 2-3 раза лучше прямого EA</p>
+<p>E2 — это тот же алгоритм что и EA (логарифмирование + парабола), но БЕЗ проверки на выпуклость и с расширенным clipping (2× вместо 0.5×). Это позволяет вершине параболы оказаться далеко за сеткой — что и нужно. </p>
+
+<p class="definition">См. определение в файле <a class="el" href="discr__auto_8c_source.html">discr_auto.c</a></p>
+</div><h2 class="groupheader">Функции</h2>
+<a id="a2c8a868999c0d7f0acbb33842ce31507" name="a2c8a868999c0d7f0acbb33842ce31507"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2c8a868999c0d7f0acbb33842ce31507">&#9670;&#160;</a></span>cmp_by_x()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static int cmp_by_x </td>
+          <td>(</td>
+          <td class="paramtype">const void *&#160;</td>
+          <td class="paramname"><em>p1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const void *&#160;</td>
+          <td class="paramname"><em>p2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">См. определение в файле <a class="el" href="discr__auto_8c_source.html">discr_auto.c</a> строка <a class="el" href="discr__auto_8c_source.html#l00063">63</a></p>
+<div class="fragment"><div class="line"><span class="lineno">   64</span>{</div>
+<div class="line"><span class="lineno">   65</span>  <span class="keyword">const</span> <a class="code hl_struct" href="structax__pair__t.html">ax_pair_t</a> *a = (<span class="keyword">const</span> <a class="code hl_struct" href="structax__pair__t.html">ax_pair_t</a> *)p1;</div>
+<div class="line"><span class="lineno">   66</span>  <span class="keyword">const</span> <a class="code hl_struct" href="structax__pair__t.html">ax_pair_t</a> *b = (<span class="keyword">const</span> <a class="code hl_struct" href="structax__pair__t.html">ax_pair_t</a> *)p2;</div>
+<div class="line"><span class="lineno">   67</span>  <span class="keywordflow">if</span> (a-&gt;<a class="code hl_variable" href="structax__pair__t.html#a1f33e2dc3ddb82b069068b192567dc7e">x</a> &lt; b-&gt;<a class="code hl_variable" href="structax__pair__t.html#a1f33e2dc3ddb82b069068b192567dc7e">x</a>) <span class="keywordflow">return</span> -1;</div>
+<div class="line"><span class="lineno">   68</span>  <span class="keywordflow">if</span> (a-&gt;<a class="code hl_variable" href="structax__pair__t.html#a1f33e2dc3ddb82b069068b192567dc7e">x</a> &gt; b-&gt;<a class="code hl_variable" href="structax__pair__t.html#a1f33e2dc3ddb82b069068b192567dc7e">x</a>) <span class="keywordflow">return</span>  1;</div>
+<div class="line"><span class="lineno">   69</span>  <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">   70</span>}</div>
+<div class="ttc" id="astructax__pair__t_html"><div class="ttname"><a href="structax__pair__t.html">ax_pair_t</a></div><div class="ttdoc">Структура для сортировки пар (амплитуда, координата) по x.</div><div class="ttdef"><b>Definition</b> <a href="discr__auto_8c_source.html#l00058">discr_auto.c:58</a></div></div>
+<div class="ttc" id="astructax__pair__t_html_a1f33e2dc3ddb82b069068b192567dc7e"><div class="ttname"><a href="structax__pair__t.html#a1f33e2dc3ddb82b069068b192567dc7e">ax_pair_t::x</a></div><div class="ttdeci">double x</div><div class="ttdef"><b>Definition</b> <a href="discr__auto_8c_source.html#l00060">discr_auto.c:60</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a99aa3243f4143e13f9e1a2fda43c714e" name="a99aa3243f4143e13f9e1a2fda43c714e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a99aa3243f4143e13f9e1a2fda43c714e">&#9670;&#160;</a></span>discr3_auto()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int discr3_auto </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>A1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>A2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>A3</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>x1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>x2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>x3</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double *&#160;</td>
+          <td class="paramname"><em>xe</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Автоматический дискриминатор с переключением. </p>
+<p>Алгоритм выбора: </p><div class="fragment"><div class="line"><span class="keywordflow">if</span> (is_monotonic(A1, A2, A3)):</div>
+<div class="line">    xe = extrap_gauss(...)        <span class="comment">// E2 — Гауссова экстраполяция</span></div>
+<div class="line">else:</div>
+<div class="line">    ret = <a class="code hl_function" href="discrea_8h.html#a1d0a905788c41a528b49032ecb9c2748">discr3ea</a>(...)           <span class="comment">// EA — экспоненциальный (лучший)</span></div>
+<div class="line">    if (ret == FAILURE):</div>
+<div class="line">        xe = <a class="code hl_function" href="discrqa_8h.html#a5cdf0c7b82518afc98773e8f323ddb3b">discr3qa</a>(...)        <span class="comment">// QA — квадратичный (fallback)</span></div>
+<div class="ttc" id="adiscrea_8h_html_a1d0a905788c41a528b49032ecb9c2748"><div class="ttname"><a href="discrea_8h.html#a1d0a905788c41a528b49032ecb9c2748">discr3ea</a></div><div class="ttdeci">int discr3ea(double A1, double A2, double A3, double x1, double x2, double x3, double *xe)</div><div class="ttdoc">Трехточечный дискриминатор, экспоненциальная аппроксимация (Exponential).</div><div class="ttdef"><b>Definition</b> <a href="discrea_8c_source.html#l00050">discrea.c:50</a></div></div>
+<div class="ttc" id="adiscrqa_8h_html_a5cdf0c7b82518afc98773e8f323ddb3b"><div class="ttname"><a href="discrqa_8h.html#a5cdf0c7b82518afc98773e8f323ddb3b">discr3qa</a></div><div class="ttdeci">double discr3qa(double A1, double A2, double A3, double x1, double x2, double x3)</div><div class="ttdoc">Трехточечный дискриминатор, аппроксимация квадратичной зависимостью (Quadratic).</div><div class="ttdef"><b>Definition</b> <a href="discrqa_8c_source.html#l00039">discrqa.c:39</a></div></div>
+</div><!-- fragment --><dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">A1</td><td>амплитуда первой точки </td></tr>
+    <tr><td class="paramname">A2</td><td>амплитуда второй точки </td></tr>
+    <tr><td class="paramname">A3</td><td>амплитуда третьей точки </td></tr>
+    <tr><td class="paramname">x1</td><td>координата первой точки </td></tr>
+    <tr><td class="paramname">x2</td><td>координата второй точки </td></tr>
+    <tr><td class="paramname">x3</td><td>координата третьей точки </td></tr>
+    <tr><td class="paramname">xe</td><td>[out] оценка координаты </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>0 — EA успех, 1 — использован QA fallback, 2 — использована экстраполяция E2, 3 — экстраполяция E2 не сошлась (xe = x2) </dd></dl>
+
+<p class="definition">См. определение в файле <a class="el" href="discr__auto_8c_source.html">discr_auto.c</a> строка <a class="el" href="discr__auto_8c_source.html#l00191">191</a></p>
+<div class="fragment"><div class="line"><span class="lineno">  194</span>{</div>
+<div class="line"><span class="lineno">  195</span>  <span class="keywordtype">int</span> ret;</div>
+<div class="line"><span class="lineno">  196</span> </div>
+<div class="line"><span class="lineno">  197</span>  <span class="comment">/*</span></div>
+<div class="line"><span class="lineno">  198</span><span class="comment">   * Ветка 1: МОНОТОННЫЕ данные (пик за сеткой)</span></div>
+<div class="line"><span class="lineno">  199</span><span class="comment">   *</span></div>
+<div class="line"><span class="lineno">  200</span><span class="comment">   * Когда A1 ≥ A2 ≥ A3 или A1 ≤ A2 ≤ A3, среди 3 отсчётов</span></div>
+<div class="line"><span class="lineno">  201</span><span class="comment">   * нет перегиба — пик ДН находится за пределами сетки.</span></div>
+<div class="line"><span class="lineno">  202</span><span class="comment">   *</span></div>
+<div class="line"><span class="lineno">  203</span><span class="comment">   * Стандартные дискриминаторы в этом случае:</span></div>
+<div class="line"><span class="lineno">  204</span><span class="comment">   *   CG: MAE = 0.46 (почти случайная оценка)</span></div>
+<div class="line"><span class="lineno">  205</span><span class="comment">   *   QA: MAE = 0.32, MaxErr = 1.23 (парабола улетает!)</span></div>
+<div class="line"><span class="lineno">  206</span><span class="comment">   *   EA: возвращает FAILURE, ставит xe = краевой отсчёт</span></div>
+<div class="line"><span class="lineno">  207</span><span class="comment">   *</span></div>
+<div class="line"><span class="lineno">  208</span><span class="comment">   * Гауссова экстраполяция (E2): MAE = 0.148</span></div>
+<div class="line"><span class="lineno">  209</span><span class="comment">   *   → в 2-3 раза лучше любого стандартного метода!</span></div>
+<div class="line"><span class="lineno">  210</span><span class="comment">   */</span></div>
+<div class="line"><span class="lineno">  211</span>  <span class="keywordflow">if</span> (<a class="code hl_function" href="discr__auto_8c.html#a0fccaee4e2734f24cb735a57e89a706a">discr_is_monotonic</a>(A1, A2, A3)) {</div>
+<div class="line"><span class="lineno">  212</span>    ret = <a class="code hl_function" href="discr__auto_8c.html#aff4b1fea96d16566196f7f7c44331547">discr3_extrap_gauss</a>(A1, A2, A3, x1, x2, x3, xe);</div>
+<div class="line"><span class="lineno">  213</span>    <span class="keywordflow">return</span> (ret == EXIT_SUCCESS) ? 2 : 3;</div>
+<div class="line"><span class="lineno">  214</span>    <span class="comment">/* 2 = E2 сработала, 3 = E2 не смогла (нули, вырожденность) */</span></div>
+<div class="line"><span class="lineno">  215</span>  }</div>
+<div class="line"><span class="lineno">  216</span> </div>
+<div class="line"><span class="lineno">  217</span>  <span class="comment">/*</span></div>
+<div class="line"><span class="lineno">  218</span><span class="comment">   * Ветка 2: НОРМАЛЬНЫЕ данные (пик внутри сетки)</span></div>
+<div class="line"><span class="lineno">  219</span><span class="comment">   *</span></div>
+<div class="line"><span class="lineno">  220</span><span class="comment">   * EA (экспоненциальный): MAE = 0.005 в нормальной зоне</span></div>
+<div class="line"><span class="lineno">  221</span><span class="comment">   *   Лучший метод! Использует log-параболу, точнее QA.</span></div>
+<div class="line"><span class="lineno">  222</span><span class="comment">   *</span></div>
+<div class="line"><span class="lineno">  223</span><span class="comment">   * Если EA вернёт FAILURE (вогнутость, нули), переходим на QA.</span></div>
+<div class="line"><span class="lineno">  224</span><span class="comment">   * QA: MAE = 0.006 — почти так же точен, но без ограничений</span></div>
+<div class="line"><span class="lineno">  225</span><span class="comment">   *     на знак амплитуд и выпуклость.</span></div>
+<div class="line"><span class="lineno">  226</span><span class="comment">   */</span></div>
+<div class="line"><span class="lineno">  227</span>  ret = <a class="code hl_function" href="discrea_8h.html#a1d0a905788c41a528b49032ecb9c2748">discr3ea</a>(A1, A2, A3, x1, x2, x3, xe);</div>
+<div class="line"><span class="lineno">  228</span> </div>
+<div class="line"><span class="lineno">  229</span>  <span class="keywordflow">if</span> (ret == EXIT_SUCCESS) {</div>
+<div class="line"><span class="lineno">  230</span>    <span class="keywordflow">return</span> 0;  <span class="comment">/* EA справился — лучший результат */</span></div>
+<div class="line"><span class="lineno">  231</span>  }</div>
+<div class="line"><span class="lineno">  232</span> </div>
+<div class="line"><span class="lineno">  233</span>  <span class="comment">/*</span></div>
+<div class="line"><span class="lineno">  234</span><span class="comment">   * Ветка 3: FALLBACK на QA</span></div>
+<div class="line"><span class="lineno">  235</span><span class="comment">   *</span></div>
+<div class="line"><span class="lineno">  236</span><span class="comment">   * EA вернул FAILURE. Причины:</span></div>
+<div class="line"><span class="lineno">  237</span><span class="comment">   *   - Вогнутость (минимум в центре вместо максимума)</span></div>
+<div class="line"><span class="lineno">  238</span><span class="comment">   *   - Нулевые или отрицательные амплитуды</span></div>
+<div class="line"><span class="lineno">  239</span><span class="comment">   *   - Числовая вырожденность</span></div>
+<div class="line"><span class="lineno">  240</span><span class="comment">   *</span></div>
+<div class="line"><span class="lineno">  241</span><span class="comment">   * QA не требует положительных амплитуд и не проверяет</span></div>
+<div class="line"><span class="lineno">  242</span><span class="comment">   * выпуклость — работает всегда (кроме совсем вырожденных случаев).</span></div>
+<div class="line"><span class="lineno">  243</span><span class="comment">   */</span></div>
+<div class="line"><span class="lineno">  244</span>  *xe = <a class="code hl_function" href="discrqa_8h.html#a5cdf0c7b82518afc98773e8f323ddb3b">discr3qa</a>(A1, A2, A3, x1, x2, x3);</div>
+<div class="line"><span class="lineno">  245</span>  <span class="keywordflow">return</span> 1;  <span class="comment">/* QA fallback */</span></div>
+<div class="line"><span class="lineno">  246</span>}</div>
+<div class="ttc" id="adiscr__auto_8c_html_a0fccaee4e2734f24cb735a57e89a706a"><div class="ttname"><a href="discr__auto_8c.html#a0fccaee4e2734f24cb735a57e89a706a">discr_is_monotonic</a></div><div class="ttdeci">int discr_is_monotonic(double A1, double A2, double A3)</div><div class="ttdoc">Проверка монотонности трёх отсчётов.</div><div class="ttdef"><b>Definition</b> <a href="discr__auto_8c_source.html#l00035">discr_auto.c:35</a></div></div>
+<div class="ttc" id="adiscr__auto_8c_html_aff4b1fea96d16566196f7f7c44331547"><div class="ttname"><a href="discr__auto_8c.html#aff4b1fea96d16566196f7f7c44331547">discr3_extrap_gauss</a></div><div class="ttdeci">int discr3_extrap_gauss(double A1, double A2, double A3, double x1, double x2, double x3, double *xe)</div><div class="ttdoc">Гауссова экстраполяция (E2) для монотонных случаев.</div><div class="ttdef"><b>Definition</b> <a href="discr__auto_8c_source.html#l00072">discr_auto.c:72</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="aff4b1fea96d16566196f7f7c44331547" name="aff4b1fea96d16566196f7f7c44331547"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aff4b1fea96d16566196f7f7c44331547">&#9670;&#160;</a></span>discr3_extrap_gauss()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int discr3_extrap_gauss </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>A1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>A2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>A3</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>x1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>x2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>x3</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double *&#160;</td>
+          <td class="paramname"><em>xe</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Гауссова экстраполяция (E2) для монотонных случаев. </p>
+<p>Алгоритм — как discr3ea, но без проверки выпуклости и с расширенным диапазоном допустимого вылета (2× вместо 0.5× от размера сетки).</p>
+<p>Логарифмирует амплитуды, аппроксимирует параболой в log-пространстве, находит вершину. Для монотонных данных вершина за пределами сетки — это ожидаемое и полезное поведение.</p>
+<p>Из исследования: E2 MAE = 0.148 для монотонных случаев, что в 2.2 раза лучше E1 (парабола, MAE = 0.324) и в 3.4 раза лучше E3 (градиент, MAE = 0.500).</p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">A1</td><td>амплитуда первой точки (должна быть &gt; 0) </td></tr>
+    <tr><td class="paramname">A2</td><td>амплитуда второй точки (должна быть &gt; 0) </td></tr>
+    <tr><td class="paramname">A3</td><td>амплитуда третьей точки (должна быть &gt; 0) </td></tr>
+    <tr><td class="paramname">x1</td><td>координата первой точки </td></tr>
+    <tr><td class="paramname">x2</td><td>координата второй точки </td></tr>
+    <tr><td class="paramname">x3</td><td>координата третьей точки </td></tr>
+    <tr><td class="paramname">xe</td><td>[out] оценка координаты (экстраполированная) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>0 — успех, 1 — ошибка (нулевые амплитуды, все равны) </dd></dl>
+
+<p class="definition">См. определение в файле <a class="el" href="discr__auto_8c_source.html">discr_auto.c</a> строка <a class="el" href="discr__auto_8c_source.html#l00072">72</a></p>
+<div class="fragment"><div class="line"><span class="lineno">   75</span>{</div>
+<div class="line"><span class="lineno">   76</span>  <a class="code hl_struct" href="structax__pair__t.html">ax_pair_t</a> pts[3];</div>
+<div class="line"><span class="lineno">   77</span>  <span class="keywordtype">double</span> a1, a2, a3, f1, f2, f3;</div>
+<div class="line"><span class="lineno">   78</span>  <span class="keywordtype">double</span> z1, z2, z3;</div>
+<div class="line"><span class="lineno">   79</span>  <span class="keywordtype">double</span> a_coef, b_coef;</div>
+<div class="line"><span class="lineno">   80</span>  <span class="keywordtype">double</span> span;</div>
+<div class="line"><span class="lineno">   81</span> </div>
+<div class="line"><span class="lineno">   82</span>  <span class="comment">/*</span></div>
+<div class="line"><span class="lineno">   83</span><span class="comment">   * Шаг 1. Проверка: все амплитуды &gt; 0</span></div>
+<div class="line"><span class="lineno">   84</span><span class="comment">   * (нужно для логарифмирования)</span></div>
+<div class="line"><span class="lineno">   85</span><span class="comment">   */</span></div>
+<div class="line"><span class="lineno">   86</span>  <span class="keywordflow">if</span> (A1 &lt; DBL_EPSILON || A2 &lt; DBL_EPSILON || A3 &lt; DBL_EPSILON) {</div>
+<div class="line"><span class="lineno">   87</span>    *xe = x2;</div>
+<div class="line"><span class="lineno">   88</span>    <span class="keywordflow">return</span> EXIT_FAILURE;</div>
+<div class="line"><span class="lineno">   89</span>  }</div>
+<div class="line"><span class="lineno">   90</span> </div>
+<div class="line"><span class="lineno">   91</span>  <span class="comment">/* Все амплитуды одинаковы → невозможно определить направление */</span></div>
+<div class="line"><span class="lineno">   92</span>  <span class="keywordflow">if</span> (fabs(A1 - A2) &lt; DBL_EPSILON &amp;&amp; fabs(A2 - A3) &lt; DBL_EPSILON) {</div>
+<div class="line"><span class="lineno">   93</span>    *xe = x2;</div>
+<div class="line"><span class="lineno">   94</span>    <span class="keywordflow">return</span> EXIT_FAILURE;</div>
+<div class="line"><span class="lineno">   95</span>  }</div>
+<div class="line"><span class="lineno">   96</span> </div>
+<div class="line"><span class="lineno">   97</span>  <span class="comment">/*</span></div>
+<div class="line"><span class="lineno">   98</span><span class="comment">   * Шаг 2. Сортировка по координатам (x возрастает)</span></div>
+<div class="line"><span class="lineno">   99</span><span class="comment">   * Это нужно чтобы формулы работали корректно</span></div>
+<div class="line"><span class="lineno">  100</span><span class="comment">   * независимо от порядка входных аргументов.</span></div>
+<div class="line"><span class="lineno">  101</span><span class="comment">   */</span></div>
+<div class="line"><span class="lineno">  102</span>  pts[0].<a class="code hl_variable" href="structax__pair__t.html#ad7c6644578c4bf26a9e255ae89cd8587">a</a> = A1; pts[0].<a class="code hl_variable" href="structax__pair__t.html#a1f33e2dc3ddb82b069068b192567dc7e">x</a> = x1;</div>
+<div class="line"><span class="lineno">  103</span>  pts[1].<a class="code hl_variable" href="structax__pair__t.html#ad7c6644578c4bf26a9e255ae89cd8587">a</a> = A2; pts[1].<a class="code hl_variable" href="structax__pair__t.html#a1f33e2dc3ddb82b069068b192567dc7e">x</a> = x2;</div>
+<div class="line"><span class="lineno">  104</span>  pts[2].<a class="code hl_variable" href="structax__pair__t.html#ad7c6644578c4bf26a9e255ae89cd8587">a</a> = A3; pts[2].<a class="code hl_variable" href="structax__pair__t.html#a1f33e2dc3ddb82b069068b192567dc7e">x</a> = x3;</div>
+<div class="line"><span class="lineno">  105</span>  qsort(pts, 3, <span class="keyword">sizeof</span>(<a class="code hl_struct" href="structax__pair__t.html">ax_pair_t</a>), <a class="code hl_function" href="discr__auto_8c.html#a2c8a868999c0d7f0acbb33842ce31507">cmp_by_x</a>);</div>
+<div class="line"><span class="lineno">  106</span> </div>
+<div class="line"><span class="lineno">  107</span>  a1 = pts[0].<a class="code hl_variable" href="structax__pair__t.html#ad7c6644578c4bf26a9e255ae89cd8587">a</a>; f1 = pts[0].<a class="code hl_variable" href="structax__pair__t.html#a1f33e2dc3ddb82b069068b192567dc7e">x</a>;</div>
+<div class="line"><span class="lineno">  108</span>  a2 = pts[1].<a class="code hl_variable" href="structax__pair__t.html#ad7c6644578c4bf26a9e255ae89cd8587">a</a>; f2 = pts[1].<a class="code hl_variable" href="structax__pair__t.html#a1f33e2dc3ddb82b069068b192567dc7e">x</a>;</div>
+<div class="line"><span class="lineno">  109</span>  a3 = pts[2].<a class="code hl_variable" href="structax__pair__t.html#ad7c6644578c4bf26a9e255ae89cd8587">a</a>; f3 = pts[2].<a class="code hl_variable" href="structax__pair__t.html#a1f33e2dc3ddb82b069068b192567dc7e">x</a>;</div>
+<div class="line"><span class="lineno">  110</span> </div>
+<div class="line"><span class="lineno">  111</span>  <span class="comment">/*</span></div>
+<div class="line"><span class="lineno">  112</span><span class="comment">   * Шаг 3. НЕ проверяем выпуклость!</span></div>
+<div class="line"><span class="lineno">  113</span><span class="comment">   *</span></div>
+<div class="line"><span class="lineno">  114</span><span class="comment">   * Это ГЛАВНОЕ отличие от discr3ea:</span></div>
+<div class="line"><span class="lineno">  115</span><span class="comment">   * - discr3ea проверяет что a2 &gt; a1 и a2 &gt; a3 (перегиб)</span></div>
+<div class="line"><span class="lineno">  116</span><span class="comment">   *   и возвращает FAILURE для монотонных данных</span></div>
+<div class="line"><span class="lineno">  117</span><span class="comment">   * - Мы РАЗРЕШАЕМ монотонные данные, потому что</span></div>
+<div class="line"><span class="lineno">  118</span><span class="comment">   *   вершина параболы в log-пространстве покажет</span></div>
+<div class="line"><span class="lineno">  119</span><span class="comment">   *   КУДА и НАСКОЛЬКО далеко экстраполировать пик.</span></div>
+<div class="line"><span class="lineno">  120</span><span class="comment">   */</span></div>
+<div class="line"><span class="lineno">  121</span> </div>
+<div class="line"><span class="lineno">  122</span>  <span class="comment">/*</span></div>
+<div class="line"><span class="lineno">  123</span><span class="comment">   * Шаг 4. Логарифмирование</span></div>
+<div class="line"><span class="lineno">  124</span><span class="comment">   *</span></div>
+<div class="line"><span class="lineno">  125</span><span class="comment">   * Гауссиан y = A*exp(-a*(x-x0)^2) после логарифмирования</span></div>
+<div class="line"><span class="lineno">  126</span><span class="comment">   * становится параболой: ln(y) = ln(A) - a*(x-x0)^2</span></div>
+<div class="line"><span class="lineno">  127</span><span class="comment">   *</span></div>
+<div class="line"><span class="lineno">  128</span><span class="comment">   * Парабола в log-пространстве → вершина = x0 (положение пика).</span></div>
+<div class="line"><span class="lineno">  129</span><span class="comment">   */</span></div>
+<div class="line"><span class="lineno">  130</span>  z1 = log(a1);</div>
+<div class="line"><span class="lineno">  131</span>  z2 = log(a2);</div>
+<div class="line"><span class="lineno">  132</span>  z3 = log(a3);</div>
+<div class="line"><span class="lineno">  133</span> </div>
+<div class="line"><span class="lineno">  134</span>  <span class="comment">/*</span></div>
+<div class="line"><span class="lineno">  135</span><span class="comment">   * Шаг 5. Коэффициенты параболы</span></div>
+<div class="line"><span class="lineno">  136</span><span class="comment">   *</span></div>
+<div class="line"><span class="lineno">  137</span><span class="comment">   * Парабола z(x) через 3 точки (f1,z1), (f2,z2), (f3,z3):</span></div>
+<div class="line"><span class="lineno">  138</span><span class="comment">   *   a_coef = z1*(f2²-f3²) + z2*(f3²-f1²) + z3*(f1²-f2²)</span></div>
+<div class="line"><span class="lineno">  139</span><span class="comment">   *   b_coef = z1*(f2-f3)   + z2*(f3-f1)    + z3*(f1-f2)</span></div>
+<div class="line"><span class="lineno">  140</span><span class="comment">   *</span></div>
+<div class="line"><span class="lineno">  141</span><span class="comment">   * Вершина: xe = 0.5 * a_coef / b_coef</span></div>
+<div class="line"><span class="lineno">  142</span><span class="comment">   */</span></div>
+<div class="line"><span class="lineno">  143</span>  a_coef = z1 * (f2 * f2 - f3 * f3)</div>
+<div class="line"><span class="lineno">  144</span>         + z2 * (f3 * f3 - f1 * f1)</div>
+<div class="line"><span class="lineno">  145</span>         + z3 * (f1 * f1 - f2 * f2);</div>
+<div class="line"><span class="lineno">  146</span> </div>
+<div class="line"><span class="lineno">  147</span>  b_coef = z1 * (f2 - f3)</div>
+<div class="line"><span class="lineno">  148</span>         + z2 * (f3 - f1)</div>
+<div class="line"><span class="lineno">  149</span>         + z3 * (f1 - f2);</div>
+<div class="line"><span class="lineno">  150</span> </div>
+<div class="line"><span class="lineno">  151</span>  <span class="comment">/* b_coef ≈ 0 → парабола вырожденная, направление неопределено */</span></div>
+<div class="line"><span class="lineno">  152</span>  <span class="keywordflow">if</span> (fabs(b_coef) &lt; DBL_EPSILON) {</div>
+<div class="line"><span class="lineno">  153</span>    <span class="comment">/* Экстраполируем в сторону наибольшей амплитуды */</span></div>
+<div class="line"><span class="lineno">  154</span>    <span class="keywordflow">if</span> (a3 &gt; a1)</div>
+<div class="line"><span class="lineno">  155</span>      *xe = f3 + 0.5 * (f3 - f1);</div>
+<div class="line"><span class="lineno">  156</span>    <span class="keywordflow">else</span></div>
+<div class="line"><span class="lineno">  157</span>      *xe = f1 - 0.5 * (f3 - f1);</div>
+<div class="line"><span class="lineno">  158</span>    <span class="keywordflow">return</span> EXIT_FAILURE;</div>
+<div class="line"><span class="lineno">  159</span>  }</div>
+<div class="line"><span class="lineno">  160</span> </div>
+<div class="line"><span class="lineno">  161</span>  <span class="comment">/* Вершина параболы в log-пространстве = оценка положения пика */</span></div>
+<div class="line"><span class="lineno">  162</span>  *xe = 0.5 * a_coef / b_coef;</div>
+<div class="line"><span class="lineno">  163</span> </div>
+<div class="line"><span class="lineno">  164</span>  <span class="comment">/*</span></div>
+<div class="line"><span class="lineno">  165</span><span class="comment">   * Шаг 6. Ограничение вылета (clipping)</span></div>
+<div class="line"><span class="lineno">  166</span><span class="comment">   *</span></div>
+<div class="line"><span class="lineno">  167</span><span class="comment">   * Расширенный диапазон: ±2 × размер_сетки (вместо ±0.5× в discr3ea).</span></div>
+<div class="line"><span class="lineno">  168</span><span class="comment">   * Это позволяет экстраполировать дальше, но не бесконечно далеко.</span></div>
+<div class="line"><span class="lineno">  169</span><span class="comment">   *</span></div>
+<div class="line"><span class="lineno">  170</span><span class="comment">   * Почему 2×? Из исследования: при вылете &gt; 2× шага ошибка</span></div>
+<div class="line"><span class="lineno">  171</span><span class="comment">   * экстраполяции уже не уменьшается, а растёт.</span></div>
+<div class="line"><span class="lineno">  172</span><span class="comment">   */</span></div>
+<div class="line"><span class="lineno">  173</span>  span = f3 - f1;  <span class="comment">/* = 2 × шаг_сетки для симметричной сетки */</span></div>
+<div class="line"><span class="lineno">  174</span> </div>
+<div class="line"><span class="lineno">  175</span>  <span class="keywordflow">if</span> (*xe &gt; f3 + span) {</div>
+<div class="line"><span class="lineno">  176</span>    *xe = f3 + span;</div>
+<div class="line"><span class="lineno">  177</span>    <span class="keywordflow">return</span> EXIT_FAILURE;</div>
+<div class="line"><span class="lineno">  178</span>  }</div>
+<div class="line"><span class="lineno">  179</span>  <span class="keywordflow">if</span> (*xe &lt; f1 - span) {</div>
+<div class="line"><span class="lineno">  180</span>    *xe = f1 - span;</div>
+<div class="line"><span class="lineno">  181</span>    <span class="keywordflow">return</span> EXIT_FAILURE;</div>
+<div class="line"><span class="lineno">  182</span>  }</div>
+<div class="line"><span class="lineno">  183</span> </div>
+<div class="line"><span class="lineno">  184</span>  <span class="keywordflow">return</span> EXIT_SUCCESS;</div>
+<div class="line"><span class="lineno">  185</span>}</div>
+<div class="ttc" id="adiscr__auto_8c_html_a2c8a868999c0d7f0acbb33842ce31507"><div class="ttname"><a href="discr__auto_8c.html#a2c8a868999c0d7f0acbb33842ce31507">cmp_by_x</a></div><div class="ttdeci">static int cmp_by_x(const void *p1, const void *p2)</div><div class="ttdef"><b>Definition</b> <a href="discr__auto_8c_source.html#l00063">discr_auto.c:63</a></div></div>
+<div class="ttc" id="astructax__pair__t_html_ad7c6644578c4bf26a9e255ae89cd8587"><div class="ttname"><a href="structax__pair__t.html#ad7c6644578c4bf26a9e255ae89cd8587">ax_pair_t::a</a></div><div class="ttdeci">double a</div><div class="ttdef"><b>Definition</b> <a href="discr__auto_8c_source.html#l00059">discr_auto.c:59</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a0fccaee4e2734f24cb735a57e89a706a" name="a0fccaee4e2734f24cb735a57e89a706a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0fccaee4e2734f24cb735a57e89a706a">&#9670;&#160;</a></span>discr_is_monotonic()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int discr_is_monotonic </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>A1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>A2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>A3</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Проверка монотонности трёх отсчётов. </p>
+<p>Монотонные данные = нет локального максимума среди 3 точек. Это означает, что пик за пределами сетки.</p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">A1</td><td>амплитуда первой точки </td></tr>
+    <tr><td class="paramname">A2</td><td>амплитуда второй точки </td></tr>
+    <tr><td class="paramname">A3</td><td>амплитуда третьей точки </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>1 — монотонные (пик за сеткой), 0 — есть перегиб (пик внутри) </dd></dl>
+
+<p class="definition">См. определение в файле <a class="el" href="discr__auto_8c_source.html">discr_auto.c</a> строка <a class="el" href="discr__auto_8c_source.html#l00035">35</a></p>
+<div class="fragment"><div class="line"><span class="lineno">   36</span>{</div>
+<div class="line"><span class="lineno">   37</span>  <span class="comment">/*</span></div>
+<div class="line"><span class="lineno">   38</span><span class="comment">   * Монотонные = все убывают ИЛИ все возрастают.</span></div>
+<div class="line"><span class="lineno">   39</span><span class="comment">   * Это значит, что среди A1, A2, A3 нет локального максимума,</span></div>
+<div class="line"><span class="lineno">   40</span><span class="comment">   * т.е. пик ДН находится за пределами сетки из 3 отсчётов.</span></div>
+<div class="line"><span class="lineno">   41</span><span class="comment">   *</span></div>
+<div class="line"><span class="lineno">   42</span><span class="comment">   * Примеры:</span></div>
+<div class="line"><span class="lineno">   43</span><span class="comment">   *   A1=0.8, A2=0.6, A3=0.3 → убывают → монотонные (пик слева)</span></div>
+<div class="line"><span class="lineno">   44</span><span class="comment">   *   A1=0.3, A2=0.6, A3=0.8 → возрастают → монотонные (пик справа)</span></div>
+<div class="line"><span class="lineno">   45</span><span class="comment">   *   A1=0.6, A2=0.9, A3=0.7 → перегиб → НЕ монотонные (пик внутри)</span></div>
+<div class="line"><span class="lineno">   46</span><span class="comment">   */</span></div>
+<div class="line"><span class="lineno">   47</span>  <span class="keywordflow">return</span> (A1 &gt;= A2 &amp;&amp; A2 &gt;= A3) ||  <span class="comment">/* убывают (или равны) */</span></div>
+<div class="line"><span class="lineno">   48</span>         (A1 &lt;= A2 &amp;&amp; A2 &lt;= A3);     <span class="comment">/* возрастают (или равны) */</span></div>
+<div class="line"><span class="lineno">   49</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8
+</small></address>
+</body>
+</html>

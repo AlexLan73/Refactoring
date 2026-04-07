@@ -39,7 +39,7 @@ plt.style.use("dark_background")
 rng = np.random.default_rng(seed=42)
 
 OUT_RESULTS = ANALYSIS_DIR / "results"
-OUT_PLOTS = ANALYSIS_DIR / "plots" / "2d"
+OUT_PLOTS = MODULE_DIR / "Doc" / "plots" / "3_noise"
 OUT_RESULTS.mkdir(parents=True, exist_ok=True)
 OUT_PLOTS.mkdir(parents=True, exist_ok=True)
 

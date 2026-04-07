@@ -1,0 +1,173 @@
+\doxysection{Файл discrcg.\+c}
+\hypertarget{discrcg_8c}{}\label{discrcg_8c}\index{discrcg.c@{discrcg.c}}
+
+
+КППО / ТЗК. Дискриминатор — центр тяжести (Center of Gravity).  
+
+
+{\ttfamily \#include "{}discrcg.\+h"{}}\newline
+{\ttfamily \#include $<$math.\+h$>$}\newline
+{\ttfamily \#include $<$float.\+h$>$}\newline
+\doxysubsubsection*{Функции}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{discrcg_8c_a2f34219caf8080f3d9a219cfb4a5e7c0}{discr2cg}} (double A1, double A2, double x1, double x2)
+\begin{DoxyCompactList}\small\item\em Двухточечный дискриминатор, центр тяжести. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{discrcg_8c_ab3655559ca8de2c4fa17fc6341fad94c}{discr3cg}} (double A1, double A2, double A3, double x1, double x2, double x3)
+\begin{DoxyCompactList}\small\item\em Трехточечный дискриминатор, центр тяжести. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{discrcg_8c_a9ad0e5b9b43b3c30b233cf174c5688d3}{discrncg}} (const double \texorpdfstring{$\ast$}{*}A, const double \texorpdfstring{$\ast$}{*}x, unsigned int N)
+\begin{DoxyCompactList}\small\item\em Дискриминатор для произвольного числа точек, центр тяжести. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Подробное описание}
+КППО / ТЗК. Дискриминатор — центр тяжести (Center of Gravity). 
+
+\begin{DoxyAuthor}{Автор}
+Федоров С.\+А. 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Дата}
+07.\+05.\+2010 
+\end{DoxyDate}
+Рефакторинг\+: Кодо, 2026-\/03-\/28 Изменения\+:
+\begin{DoxyItemize}
+\item ERR-\/005\+: добавлена защита от деления на 0 (A1+\+A2=0, As=0)
+\item STYLE\+: единые 2-\/пробельные отступы, пробелы вокруг операторов 
+\end{DoxyItemize}
+
+См. определение в файле \mbox{\hyperlink{discrcg_8c_source}{discrcg.\+c}}
+
+
+
+\doxysubsection{Функции}
+\Hypertarget{discrcg_8c_a2f34219caf8080f3d9a219cfb4a5e7c0}\label{discrcg_8c_a2f34219caf8080f3d9a219cfb4a5e7c0} 
+\index{discrcg.c@{discrcg.c}!discr2cg@{discr2cg}}
+\index{discr2cg@{discr2cg}!discrcg.c@{discrcg.c}}
+\doxysubsubsection{\texorpdfstring{discr2cg()}{discr2cg()}}
+{\footnotesize\ttfamily double discr2cg (\begin{DoxyParamCaption}\item[{double}]{A1,  }\item[{double}]{A2,  }\item[{double}]{x1,  }\item[{double}]{x2 }\end{DoxyParamCaption})}
+
+
+
+Двухточечный дискриминатор, центр тяжести. 
+
+Формула\+: xe = (A1\texorpdfstring{$\ast$}{*}x1 + A2\texorpdfstring{$\ast$}{*}x2) / (A1 + A2)
+
+
+\begin{DoxyParams}{Аргументы}
+{\em A1} & амплитуда первой точки \\
+\hline
+{\em A2} & амплитуда второй точки \\
+\hline
+{\em x1} & координата первой точки \\
+\hline
+{\em x2} & координата второй точки \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+оценка координаты; при A1+\+A2=0 возвращает середину (x1+x2)/2 
+\end{DoxyReturn}
+
+
+См. определение в файле \mbox{\hyperlink{discrcg_8c_source}{discrcg.\+c}} строка \mbox{\hyperlink{discrcg_8c_source_l00028}{28}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00030\ \{}
+\DoxyCodeLine{00031\ \ \ \textcolor{keywordtype}{double}\ sum\ =\ A1\ +\ A2;}
+\DoxyCodeLine{00032\ \ \ \textcolor{keywordflow}{if}\ (fabs(sum)\ <\ DBL\_EPSILON)}
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keywordflow}{return}\ (x1\ +\ x2)\ *\ 0.5;}
+\DoxyCodeLine{00034\ \ \ \textcolor{keywordflow}{return}\ (A1\ *\ x1\ +\ A2\ *\ x2)\ /\ sum;}
+\DoxyCodeLine{00035\ \}}
+
+\end{DoxyCode}
+\Hypertarget{discrcg_8c_ab3655559ca8de2c4fa17fc6341fad94c}\label{discrcg_8c_ab3655559ca8de2c4fa17fc6341fad94c} 
+\index{discrcg.c@{discrcg.c}!discr3cg@{discr3cg}}
+\index{discr3cg@{discr3cg}!discrcg.c@{discrcg.c}}
+\doxysubsubsection{\texorpdfstring{discr3cg()}{discr3cg()}}
+{\footnotesize\ttfamily double discr3cg (\begin{DoxyParamCaption}\item[{double}]{A1,  }\item[{double}]{A2,  }\item[{double}]{A3,  }\item[{double}]{x1,  }\item[{double}]{x2,  }\item[{double}]{x3 }\end{DoxyParamCaption})}
+
+
+
+Трехточечный дискриминатор, центр тяжести. 
+
+Формула\+: xe = (A1\texorpdfstring{$\ast$}{*}x1 + A2\texorpdfstring{$\ast$}{*}x2 + A3\texorpdfstring{$\ast$}{*}x3) / (A1 + A2 + A3)
+
+
+\begin{DoxyParams}{Аргументы}
+{\em A1} & амплитуда первой точки \\
+\hline
+{\em A2} & амплитуда второй точки \\
+\hline
+{\em A3} & амплитуда третьей точки \\
+\hline
+{\em x1} & координата первой точки \\
+\hline
+{\em x2} & координата второй точки \\
+\hline
+{\em x3} & координата третьей точки \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+оценка координаты; при сумме=0 возвращает x2 (центральная точка) 
+\end{DoxyReturn}
+
+
+См. определение в файле \mbox{\hyperlink{discrcg_8c_source}{discrcg.\+c}} строка \mbox{\hyperlink{discrcg_8c_source_l00050}{50}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00052\ \{}
+\DoxyCodeLine{00053\ \ \ \textcolor{keywordtype}{double}\ sum\ =\ A1\ +\ A2\ +\ A3;}
+\DoxyCodeLine{00054\ \ \ \textcolor{keywordflow}{if}\ (fabs(sum)\ <\ DBL\_EPSILON)}
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keywordflow}{return}\ x2;}
+\DoxyCodeLine{00056\ \ \ \textcolor{keywordflow}{return}\ (A1\ *\ x1\ +\ A2\ *\ x2\ +\ A3\ *\ x3)\ /\ sum;}
+\DoxyCodeLine{00057\ \}}
+
+\end{DoxyCode}
+\Hypertarget{discrcg_8c_a9ad0e5b9b43b3c30b233cf174c5688d3}\label{discrcg_8c_a9ad0e5b9b43b3c30b233cf174c5688d3} 
+\index{discrcg.c@{discrcg.c}!discrncg@{discrncg}}
+\index{discrncg@{discrncg}!discrcg.c@{discrcg.c}}
+\doxysubsubsection{\texorpdfstring{discrncg()}{discrncg()}}
+{\footnotesize\ttfamily double discrncg (\begin{DoxyParamCaption}\item[{const double \texorpdfstring{$\ast$}{*}}]{A,  }\item[{const double \texorpdfstring{$\ast$}{*}}]{x,  }\item[{unsigned int}]{N }\end{DoxyParamCaption})}
+
+
+
+Дискриминатор для произвольного числа точек, центр тяжести. 
+
+Формула\+: xe = sum(\+A\mbox{[}i\mbox{]}\texorpdfstring{$\ast$}{*}x\mbox{[}i\mbox{]}) / sum(\+A\mbox{[}i\mbox{]})
+
+
+\begin{DoxyParams}{Аргументы}
+{\em A} & массив амплитуд точек (N элементов) \\
+\hline
+{\em x} & массив координат точек (N элементов) \\
+\hline
+{\em N} & число точек \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+оценка координаты; при sum(\+A)=0 возвращает x\mbox{[}N/2\mbox{]} 
+\end{DoxyReturn}
+
+
+См. определение в файле \mbox{\hyperlink{discrcg_8c_source}{discrcg.\+c}} строка \mbox{\hyperlink{discrcg_8c_source_l00069}{69}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00070\ \{}
+\DoxyCodeLine{00071\ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ n;}
+\DoxyCodeLine{00072\ \ \ \textcolor{keywordtype}{double}\ Axs\ =\ 0.0,\ As\ =\ 0.0;}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00074\ \ \ \textcolor{keywordflow}{for}\ (n\ =\ 0;\ n\ <\ N;\ n++)\ \{}
+\DoxyCodeLine{00075\ \ \ \ \ As\ +=\ A[n];}
+\DoxyCodeLine{00076\ \ \ \ \ Axs\ +=\ A[n]\ *\ x[n];}
+\DoxyCodeLine{00077\ \ \ \}}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \ \ \textcolor{keywordflow}{if}\ (fabs(As)\ <\ DBL\_EPSILON)\ \{}
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{keywordflow}{if}\ (N\ >\ 0)}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ x[N\ /\ 2];}
+\DoxyCodeLine{00082\ \ \ \ \ \textcolor{keywordflow}{return}\ 0.0;}
+\DoxyCodeLine{00083\ \ \ \}}
+\DoxyCodeLine{00084\ \ \ \textcolor{keywordflow}{return}\ Axs\ /\ As;}
+\DoxyCodeLine{00085\ \}}
+
+\end{DoxyCode}

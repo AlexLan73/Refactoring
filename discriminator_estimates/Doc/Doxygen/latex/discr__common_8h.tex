@@ -1,0 +1,526 @@
+\doxysection{Файл discr\+\_\+common.\+h}
+\hypertarget{discr__common_8h}{}\label{discr__common_8h}\index{discr\_common.h@{discr\_common.h}}
+
+
+Комплекс программ первичной обработки (КППО). Программа вычисления текущих замеров координат (ТЗК). Обертки для дискриминаторных оценок.  
+
+
+{\ttfamily \#include "{}discr\+\_\+types.\+h"{}}\newline
+\doxysubsubsection*{Функции}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{discr__common_8h_af4df1b14fa693f96ea5413c1eb0d12a5}{discr2}} (double maz\mbox{[}2\mbox{]}\mbox{[}2\mbox{]}, double mel\mbox{[}2\mbox{]}\mbox{[}2\mbox{]}, double mval\mbox{[}2\mbox{]}\mbox{[}2\mbox{]}, double \texorpdfstring{$\ast$}{*}az, double \texorpdfstring{$\ast$}{*}el, double \texorpdfstring{$\ast$}{*}val)
+\begin{DoxyCompactList}\small\item\em Двухточечный дискриминатор (обёртка), центр тяжести. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{discr__common_8h_ac4d4e1deafa0bcc5b3c0ba33b1190c43}{discr3\+\_\+}} (double maz\mbox{[}3\mbox{]}\mbox{[}3\mbox{]}, double mel\mbox{[}3\mbox{]}\mbox{[}3\mbox{]}, double mval\mbox{[}3\mbox{]}\mbox{[}3\mbox{]}, \mbox{\hyperlink{discr__types_8h_aaf88ae4f33b415b82feb394eade4a8da}{DISCRTYPE}} discrtype, double dx, double lambda, double \texorpdfstring{$\ast$}{*}az, double \texorpdfstring{$\ast$}{*}el, double \texorpdfstring{$\ast$}{*}val)
+\begin{DoxyCompactList}\small\item\em Адаптер трехточечного дискриминатора для статических массивов 3x3. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{discr__common_8h_ada0fa80ec1c0edd0e0135de4d4a01c5d}{discr3}} (double \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}maz, double \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}mel, double \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}mval, int ndnx, int ndny, \mbox{\hyperlink{discr__types_8h_aaf88ae4f33b415b82feb394eade4a8da}{DISCRTYPE}} discrtype, double dx, double lambda, double \texorpdfstring{$\ast$}{*}az, double \texorpdfstring{$\ast$}{*}el, double \texorpdfstring{$\ast$}{*}val)
+\begin{DoxyCompactList}\small\item\em Трехточечный дискриминатор (обёртка). \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{discr__common_8h_ab26c38a3820da7bc179b57f8bd8faa04}{checkuse3d}} (double \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}maz, double \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}mel, double \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}mval, int ndnx, int ndny)
+\begin{DoxyCompactList}\small\item\em Проверка на возможность использования 3-\/точечного дискриминатора. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{discr__common_8h_a71fe9d3f7b4098569040fa293a6cf0b7}{conv3to2}} (double maz3\mbox{[}3\mbox{]}\mbox{[}3\mbox{]}, double mel3\mbox{[}3\mbox{]}\mbox{[}3\mbox{]}, double mval3\mbox{[}3\mbox{]}\mbox{[}3\mbox{]}, double maz2\mbox{[}2\mbox{]}\mbox{[}2\mbox{]}, double mel2\mbox{[}2\mbox{]}\mbox{[}2\mbox{]}, double mval2\mbox{[}2\mbox{]}\mbox{[}2\mbox{]})
+\begin{DoxyCompactList}\small\item\em Выделение подматрицы 2x2 из 3x3 для перехода на 2-\/точечный дискриминатор. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Подробное описание}
+Комплекс программ первичной обработки (КППО). Программа вычисления текущих замеров координат (ТЗК). Обертки для дискриминаторных оценок. 
+
+\begin{DoxyAuthor}{Автор}
+Керский Е.\+В. 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Дата}
+06.\+07.\+2017 
+\end{DoxyDate}
+
+
+См. определение в файле \mbox{\hyperlink{discr__common_8h_source}{discr\+\_\+common.\+h}}
+
+
+
+\doxysubsection{Функции}
+\Hypertarget{discr__common_8h_ab26c38a3820da7bc179b57f8bd8faa04}\label{discr__common_8h_ab26c38a3820da7bc179b57f8bd8faa04} 
+\index{discr\_common.h@{discr\_common.h}!checkuse3d@{checkuse3d}}
+\index{checkuse3d@{checkuse3d}!discr\_common.h@{discr\_common.h}}
+\doxysubsubsection{\texorpdfstring{checkuse3d()}{checkuse3d()}}
+{\footnotesize\ttfamily int checkuse3d (\begin{DoxyParamCaption}\item[{double \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{maz,  }\item[{double \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{mel,  }\item[{double \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{mval,  }\item[{int}]{ndnx,  }\item[{int}]{ndny }\end{DoxyParamCaption})}
+
+
+
+Проверка на возможность использования 3-\/точечного дискриминатора. 
+
+Проверяет, что все амплитуды в матрице $ N_x \times N_y $ строго положительны ( $ A_{ij} > \varepsilon $).
+
+
+\begin{DoxyParams}{Аргументы}
+{\em maz} & \mbox{[}in\mbox{]} массив азимутальных координат (не используется, для совместимости) \\
+\hline
+{\em mel} & \mbox{[}in\mbox{]} массив угломестных координат (не используется, для совместимости) \\
+\hline
+{\em mval} & \mbox{[}in\mbox{]} массив амплитуд \\
+\hline
+{\em ndnx} & \mbox{[}in\mbox{]} число ДН по оси X \\
+\hline
+{\em ndny} & \mbox{[}in\mbox{]} число ДН по оси Y \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+1 — можно использовать, 0 — нельзя (есть нулевые/отрицательные амплитуды)
+\end{DoxyReturn}
+Проверяет что все амплитуды положительны.
+
+
+\begin{DoxyParams}{Аргументы}
+{\em maz} & \mbox{[}in\mbox{]} массив азимутальных координат (не используется, для совместимости) \\
+\hline
+{\em mel} & \mbox{[}in\mbox{]} массив угломестных координат (не используется, для совместимости) \\
+\hline
+{\em mval} & \mbox{[}in\mbox{]} массив амплитуд \\
+\hline
+{\em ndnx} & \mbox{[}in\mbox{]} число ДН по оси X \\
+\hline
+{\em ndny} & \mbox{[}in\mbox{]} число ДН по оси Y \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+1 — можно использовать, 0 — нельзя 
+\end{DoxyReturn}
+
+
+См. определение в файле \mbox{\hyperlink{discr__common_8c_source}{discr\+\_\+common.\+c}} строка \mbox{\hyperlink{discr__common_8c_source_l00192}{192}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00193\ \{}
+\DoxyCodeLine{00194\ \ \ \textcolor{keywordtype}{int}\ i,\ j;}
+\DoxyCodeLine{00195\ \ \ (void)maz;}
+\DoxyCodeLine{00196\ \ \ (void)mel;}
+\DoxyCodeLine{00197\ }
+\DoxyCodeLine{00198\ \ \ \textcolor{keywordflow}{for}\ (i\ =\ 0;\ i\ <\ ndnx;\ i++)}
+\DoxyCodeLine{00199\ \ \ \ \ \textcolor{keywordflow}{for}\ (j\ =\ 0;\ j\ <\ ndny;\ j++)}
+\DoxyCodeLine{00200\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (mval[i][j]\ <\ DBL\_EPSILON)\ \ \textcolor{comment}{/*\ ERR-\/004\ fix:\ was\ FLT\_EPSILON\ */}}
+\DoxyCodeLine{00201\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{00202\ \ \ \textcolor{keywordflow}{return}\ 1;}
+\DoxyCodeLine{00203\ \}}
+
+\end{DoxyCode}
+\Hypertarget{discr__common_8h_a71fe9d3f7b4098569040fa293a6cf0b7}\label{discr__common_8h_a71fe9d3f7b4098569040fa293a6cf0b7} 
+\index{discr\_common.h@{discr\_common.h}!conv3to2@{conv3to2}}
+\index{conv3to2@{conv3to2}!discr\_common.h@{discr\_common.h}}
+\doxysubsubsection{\texorpdfstring{conv3to2()}{conv3to2()}}
+{\footnotesize\ttfamily int conv3to2 (\begin{DoxyParamCaption}\item[{double}]{maz3\mbox{[}3\mbox{]}\mbox{[}3\mbox{]},  }\item[{double}]{mel3\mbox{[}3\mbox{]}\mbox{[}3\mbox{]},  }\item[{double}]{mval3\mbox{[}3\mbox{]}\mbox{[}3\mbox{]},  }\item[{double}]{maz2\mbox{[}2\mbox{]}\mbox{[}2\mbox{]},  }\item[{double}]{mel2\mbox{[}2\mbox{]}\mbox{[}2\mbox{]},  }\item[{double}]{mval2\mbox{[}2\mbox{]}\mbox{[}2\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Выделение подматрицы 2x2 из 3x3 для перехода на 2-\/точечный дискриминатор. 
+
+Перебирает все 4 квадранта 2x2 внутри матрицы 3x3 и выбирает тот, в котором суммарная амплитуда максимальна. Используется когда 3-\/точечный дискриминатор невозможен (\doxylink{discr__common_8c_ab26c38a3820da7bc179b57f8bd8faa04}{checkuse3d()} вернул 0).
+
+
+\begin{DoxyParams}{Аргументы}
+{\em maz3} & \mbox{[}in\mbox{]} азимутальные координаты 3x3 \\
+\hline
+{\em mel3} & \mbox{[}in\mbox{]} угломестные координаты 3x3 \\
+\hline
+{\em mval3} & \mbox{[}in\mbox{]} амплитуды 3x3 \\
+\hline
+{\em maz2} & \mbox{[}out\mbox{]} азимутальные координаты 2x2 \\
+\hline
+{\em mel2} & \mbox{[}out\mbox{]} угломестные координаты 2x2 \\
+\hline
+{\em mval2} & \mbox{[}out\mbox{]} амплитуды 2x2 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+0 — успех
+\end{DoxyReturn}
+Выбирает квадрант 2x2 с максимальной суммарной амплитудой. Используется когда 3-\/точечный дискриминатор невозможен (checkuse3d вернул 0, вогнутость и т.\+д.).
+
+
+\begin{DoxyParams}{Аргументы}
+{\em maz3} & \mbox{[}in\mbox{]} азимутальные координаты 3x3 \\
+\hline
+{\em mel3} & \mbox{[}in\mbox{]} угломестные координаты 3x3 \\
+\hline
+{\em mval3} & \mbox{[}in\mbox{]} амплитуды 3x3 \\
+\hline
+{\em maz2} & \mbox{[}out\mbox{]} азимутальные координаты 2x2 \\
+\hline
+{\em mel2} & \mbox{[}out\mbox{]} угломестные координаты 2x2 \\
+\hline
+{\em mval2} & \mbox{[}out\mbox{]} амплитуды 2x2 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+0 — успех 
+\end{DoxyReturn}
+
+
+См. определение в файле \mbox{\hyperlink{discr__common_8c_source}{discr\+\_\+common.\+c}} строка \mbox{\hyperlink{discr__common_8c_source_l00249}{249}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00251\ \{}
+\DoxyCodeLine{00252\ \ \ \textcolor{keywordtype}{int}\ bestR\ =\ 0,\ bestC\ =\ 0;}
+\DoxyCodeLine{00253\ \ \ \textcolor{keywordtype}{double}\ bestSum\ =\ -\/1.0;}
+\DoxyCodeLine{00254\ \ \ \textcolor{keywordtype}{int}\ r,\ c,\ i,\ j;}
+\DoxyCodeLine{00255\ }
+\DoxyCodeLine{00256\ \ \ \textcolor{comment}{/*\ Перебираем\ все\ 4\ квадранта\ 2x2\ (смещения:\ (0,0),\ (0,1),\ (1,0),\ (1,1))\ */}}
+\DoxyCodeLine{00257\ \ \ \textcolor{keywordflow}{for}\ (r\ =\ 0;\ r\ <\ 2;\ r++)\ \{}
+\DoxyCodeLine{00258\ \ \ \ \ \textcolor{keywordflow}{for}\ (c\ =\ 0;\ c\ <\ 2;\ c++)\ \{}
+\DoxyCodeLine{00259\ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ sum\ =\ mval3[r][c]\ \ \ \ \ +\ mval3[r][c\ +\ 1]}
+\DoxyCodeLine{00260\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ +\ mval3[r\ +\ 1][c]\ +\ mval3[r\ +\ 1][c\ +\ 1];}
+\DoxyCodeLine{00261\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (sum\ >\ bestSum)\ \{}
+\DoxyCodeLine{00262\ \ \ \ \ \ \ \ \ bestSum\ =\ sum;}
+\DoxyCodeLine{00263\ \ \ \ \ \ \ \ \ bestR\ =\ r;}
+\DoxyCodeLine{00264\ \ \ \ \ \ \ \ \ bestC\ =\ c;}
+\DoxyCodeLine{00265\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00266\ \ \ \ \ \}}
+\DoxyCodeLine{00267\ \ \ \}}
+\DoxyCodeLine{00268\ }
+\DoxyCodeLine{00269\ \ \ \textcolor{comment}{/*\ Копируем\ выбранный\ квадрант\ */}}
+\DoxyCodeLine{00270\ \ \ \textcolor{keywordflow}{for}\ (i\ =\ 0;\ i\ <\ 2;\ i++)\ \{}
+\DoxyCodeLine{00271\ \ \ \ \ \textcolor{keywordflow}{for}\ (j\ =\ 0;\ j\ <\ 2;\ j++)\ \{}
+\DoxyCodeLine{00272\ \ \ \ \ \ \ maz2[i][j]\ \ =\ maz3[bestR\ +\ i][bestC\ +\ j];}
+\DoxyCodeLine{00273\ \ \ \ \ \ \ mel2[i][j]\ \ =\ mel3[bestR\ +\ i][bestC\ +\ j];}
+\DoxyCodeLine{00274\ \ \ \ \ \ \ mval2[i][j]\ =\ mval3[bestR\ +\ i][bestC\ +\ j];}
+\DoxyCodeLine{00275\ \ \ \ \ \}}
+\DoxyCodeLine{00276\ \ \ \}}
+\DoxyCodeLine{00277\ }
+\DoxyCodeLine{00278\ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{00279\ \}}
+
+\end{DoxyCode}
+\Hypertarget{discr__common_8h_af4df1b14fa693f96ea5413c1eb0d12a5}\label{discr__common_8h_af4df1b14fa693f96ea5413c1eb0d12a5} 
+\index{discr\_common.h@{discr\_common.h}!discr2@{discr2}}
+\index{discr2@{discr2}!discr\_common.h@{discr\_common.h}}
+\doxysubsubsection{\texorpdfstring{discr2()}{discr2()}}
+{\footnotesize\ttfamily int discr2 (\begin{DoxyParamCaption}\item[{double}]{maz\mbox{[}2\mbox{]}\mbox{[}2\mbox{]},  }\item[{double}]{mel\mbox{[}2\mbox{]}\mbox{[}2\mbox{]},  }\item[{double}]{mval\mbox{[}2\mbox{]}\mbox{[}2\mbox{]},  }\item[{double \texorpdfstring{$\ast$}{*}}]{az,  }\item[{double \texorpdfstring{$\ast$}{*}}]{el,  }\item[{double \texorpdfstring{$\ast$}{*}}]{val }\end{DoxyParamCaption})}
+
+
+
+Двухточечный дискриминатор (обёртка), центр тяжести. 
+
+Принимает матрицы 2x2 координат и амплитуд ДН. Находит строку/столбец с максимумом и оценивает азимут и угол места через \doxylink{discrcg_8h_a2f34219caf8080f3d9a219cfb4a5e7c0}{discr2cg()}.
+
+
+\begin{DoxyParams}{Аргументы}
+{\em maz} & \mbox{[}in\mbox{]} массив азимутальных координат 2x2 \\
+\hline
+{\em mel} & \mbox{[}in\mbox{]} массив угломестных координат 2x2 \\
+\hline
+{\em mval} & \mbox{[}in\mbox{]} массив амплитуд 2x2 \\
+\hline
+{\em az} & \mbox{[}out\mbox{]} уточнённая координата азимута \\
+\hline
+{\em el} & \mbox{[}out\mbox{]} уточнённая координата угла места \\
+\hline
+{\em val} & \mbox{[}out\mbox{]} уточнённое значение амплитуды \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+0 — норма, -\/1 — ошибка (амплитуда \texorpdfstring{$<$}{<}= 0)
+\end{DoxyReturn}
+Принимает матрицы 2x2 координат и амплитуд ДН. Находит строку/столбец с максимумом и оценивает az, el через \doxylink{discrcg_8h_a2f34219caf8080f3d9a219cfb4a5e7c0}{discr2cg()}.
+
+
+\begin{DoxyParams}{Аргументы}
+{\em maz} & \mbox{[}in\mbox{]} массив азимутальных координат 2x2 \\
+\hline
+{\em mel} & \mbox{[}in\mbox{]} массив угломестных координат 2x2 \\
+\hline
+{\em mval} & \mbox{[}in\mbox{]} массив амплитуд 2x2 \\
+\hline
+{\em az} & \mbox{[}out\mbox{]} уточнённая координата азимута \\
+\hline
+{\em el} & \mbox{[}out\mbox{]} уточнённая координата угла места \\
+\hline
+{\em val} & \mbox{[}out\mbox{]} уточнённое значение амплитуды \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+0 — норма, -\/1 — ошибка 
+\end{DoxyReturn}
+
+
+См. определение в файле \mbox{\hyperlink{discr__common_8c_source}{discr\+\_\+common.\+c}} строка \mbox{\hyperlink{discr__common_8c_source_l00043}{43}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00045\ \{}
+\DoxyCodeLine{00046\ \ \ \textcolor{keywordtype}{int}\ maxRow\ =\ 0,\ maxCol\ =\ 0;}
+\DoxyCodeLine{00047\ \ \ \textcolor{keywordtype}{double}\ maxAmpl\ =\ -\/1.0;}
+\DoxyCodeLine{00048\ \ \ \textcolor{keywordtype}{int}\ i,\ j;}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \ \ \textcolor{comment}{/*\ Проверка:\ все\ амплитуды\ должны\ быть\ положительны\ */}}
+\DoxyCodeLine{00051\ \ \ \textcolor{keywordflow}{for}\ (i\ =\ 0;\ i\ <\ 2;\ ++i)}
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keywordflow}{for}\ (j\ =\ 0;\ j\ <\ 2;\ ++j)}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (mval[i][j]\ <\ DBL\_EPSILON)\ \{}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ *az\ =\ 0.0;\ *el\ =\ 0.0;\ *val\ =\ 0.0;}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/1;}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \ \ \textcolor{comment}{/*\ Поиск\ максимума\ */}}
+\DoxyCodeLine{00059\ \ \ \textcolor{keywordflow}{for}\ (i\ =\ 0;\ i\ <\ 2;\ ++i)}
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keywordflow}{for}\ (j\ =\ 0;\ j\ <\ 2;\ ++j)}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (mval[i][j]\ >\ maxAmpl)\ \{}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ maxRow\ =\ i;}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ maxCol\ =\ j;}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ maxAmpl\ =\ mval[i][j];}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ \ \ \textcolor{comment}{/*\ Оценка\ по\ азимуту\ (по\ строке\ maxRow)\ */}}
+\DoxyCodeLine{00068\ \ \ *az\ =\ \mbox{\hyperlink{discrcg_8h_a2f34219caf8080f3d9a219cfb4a5e7c0}{discr2cg}}(mval[maxRow][0],\ mval[maxRow][1],}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ maz[maxRow][0],\ \ maz[maxRow][1]);}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00071\ \ \ \textcolor{comment}{/*\ Оценка\ по\ углу\ места\ (по\ столбцу\ maxCol)\ */}}
+\DoxyCodeLine{00072\ \ \ *el\ =\ \mbox{\hyperlink{discrcg_8h_a2f34219caf8080f3d9a219cfb4a5e7c0}{discr2cg}}(mval[0][maxCol],\ mval[1][maxCol],}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mel[0][maxCol],\ \ mel[1][maxCol]);}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00075\ \ \ *val\ =\ maxAmpl;}
+\DoxyCodeLine{00076\ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{00077\ \}}
+
+\end{DoxyCode}
+\Hypertarget{discr__common_8h_ada0fa80ec1c0edd0e0135de4d4a01c5d}\label{discr__common_8h_ada0fa80ec1c0edd0e0135de4d4a01c5d} 
+\index{discr\_common.h@{discr\_common.h}!discr3@{discr3}}
+\index{discr3@{discr3}!discr\_common.h@{discr\_common.h}}
+\doxysubsubsection{\texorpdfstring{discr3()}{discr3()}}
+{\footnotesize\ttfamily int discr3 (\begin{DoxyParamCaption}\item[{double \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{maz,  }\item[{double \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{mel,  }\item[{double \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{mval,  }\item[{int}]{ndnx,  }\item[{int}]{ndny,  }\item[{\mbox{\hyperlink{discr__types_8h_aaf88ae4f33b415b82feb394eade4a8da}{DISCRTYPE}}}]{discrtype,  }\item[{double}]{dx,  }\item[{double}]{lambda,  }\item[{double \texorpdfstring{$\ast$}{*}}]{az,  }\item[{double \texorpdfstring{$\ast$}{*}}]{el,  }\item[{double \texorpdfstring{$\ast$}{*}}]{val }\end{DoxyParamCaption})}
+
+
+
+Трехточечный дискриминатор (обёртка). 
+
+Принимает матрицы $ N_x \times N_y $ координат и амплитуд ДН, находит строку/столбец с максимумом и вычисляет оценку координат. Для типов DT\+\_\+\+QA и DT\+\_\+\+EA координаты масштабируются коэффициентом\+:  \[
+  c = \frac{2\pi \cdot dx}{\lambda}
+\]
+
+Поддерживает типы\+: DT\+\_\+\+CG, DT\+\_\+\+QA, DT\+\_\+\+EA.
+
+\begin{DoxyWarning}{Предупреждения}
+Функция НЕ модифицирует входные массивы maz, mel.
+\end{DoxyWarning}
+
+\begin{DoxyParams}{Аргументы}
+{\em maz} & \mbox{[}in\mbox{]} массив азимутальных координат \\
+\hline
+{\em mel} & \mbox{[}in\mbox{]} массив угломестных координат \\
+\hline
+{\em mval} & \mbox{[}in\mbox{]} массив амплитуд \\
+\hline
+{\em ndnx} & \mbox{[}in\mbox{]} число ДН по оси X \\
+\hline
+{\em ndny} & \mbox{[}in\mbox{]} число ДН по оси Y \\
+\hline
+{\em discrtype} & \mbox{[}in\mbox{]} тип дискриминатора (DT\+\_\+\+CG, DT\+\_\+\+QA, DT\+\_\+\+EA) \\
+\hline
+{\em dx} & \mbox{[}in\mbox{]} шаг по углу \\
+\hline
+{\em lambda} & \mbox{[}in\mbox{]} длина волны \\
+\hline
+{\em az} & \mbox{[}out\mbox{]} уточнённая координата азимута \\
+\hline
+{\em el} & \mbox{[}out\mbox{]} уточнённая координата угла места \\
+\hline
+{\em val} & \mbox{[}out\mbox{]} уточнённое значение амплитуды \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+0 — норма, -\/1 — нельзя использовать 3-\/точ., -\/2 — неизвестный тип
+\end{DoxyReturn}
+Принимает матрицы ndnx x ndny координат и амплитуд ДН. Поддерживает типы\+: DT\+\_\+\+CG, DT\+\_\+\+QA, DT\+\_\+\+EA.
+
+\begin{DoxyWarning}{Предупреждения}
+Функция НЕ модифицирует входные массивы maz, mel (исправлено в рефакторинге, ERR-\/003).
+\end{DoxyWarning}
+
+\begin{DoxyParams}{Аргументы}
+{\em maz} & \mbox{[}in\mbox{]} массив азимутальных координат \\
+\hline
+{\em mel} & \mbox{[}in\mbox{]} массив угломестных координат \\
+\hline
+{\em mval} & \mbox{[}in\mbox{]} массив амплитуд \\
+\hline
+{\em ndnx} & \mbox{[}in\mbox{]} число ДН по оси X \\
+\hline
+{\em ndny} & \mbox{[}in\mbox{]} число ДН по оси Y \\
+\hline
+{\em discrtype} & \mbox{[}in\mbox{]} тип дискриминатора (DT\+\_\+\+CG, DT\+\_\+\+QA, DT\+\_\+\+EA) \\
+\hline
+{\em dx} & \mbox{[}in\mbox{]} шаг по углу (используется для DT\+\_\+\+QA, DT\+\_\+\+EA) \\
+\hline
+{\em lambda} & \mbox{[}in\mbox{]} длина волны (используется для DT\+\_\+\+QA, DT\+\_\+\+EA) \\
+\hline
+{\em az} & \mbox{[}out\mbox{]} уточнённая координата азимута \\
+\hline
+{\em el} & \mbox{[}out\mbox{]} уточнённая координата угла места \\
+\hline
+{\em val} & \mbox{[}out\mbox{]} уточнённое значение амплитуды \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+0 — норма, -\/1 — нельзя использовать 3-\/точ., -\/2 — неизвестный тип 
+\end{DoxyReturn}
+
+
+См. определение в файле \mbox{\hyperlink{discr__common_8c_source}{discr\+\_\+common.\+c}} строка \mbox{\hyperlink{discr__common_8c_source_l00101}{101}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00104\ \{}
+\DoxyCodeLine{00105\ \ \ \textcolor{keywordtype}{double}\ aztmp\ =\ 0.0,\ eltmp\ =\ 0.0,\ valaz\ =\ 0.0,\ valel\ =\ 0.0;}
+\DoxyCodeLine{00106\ \ \ \textcolor{keywordtype}{int}\ maxRow\ =\ 0,\ maxCol\ =\ 0;}
+\DoxyCodeLine{00107\ \ \ \textcolor{keywordtype}{double}\ maxAmpl\ =\ -\/1.0;}
+\DoxyCodeLine{00108\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ c\ =\ 2.0\ *\ M\_PI\ *\ dx\ /\ lambda;}
+\DoxyCodeLine{00109\ \ \ \textcolor{keywordtype}{int}\ i,\ j;}
+\DoxyCodeLine{00110\ }
+\DoxyCodeLine{00111\ \ \ \textcolor{comment}{/*\ Проверка\ на\ возможность\ использования\ 3-\/точечного\ дискриминатора\ */}}
+\DoxyCodeLine{00112\ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{discr__common_8c_ab26c38a3820da7bc179b57f8bd8faa04}{checkuse3d}}(maz,\ mel,\ mval,\ ndnx,\ ndny))}
+\DoxyCodeLine{00113\ \ \ \ \ \textcolor{keywordflow}{return}\ -\/1;}
+\DoxyCodeLine{00114\ }
+\DoxyCodeLine{00115\ \ \ \textcolor{comment}{/*\ Поиск\ строки\ и\ столбца\ с\ максимальной\ амплитудой\ */}}
+\DoxyCodeLine{00116\ \ \ \textcolor{keywordflow}{for}\ (i\ =\ 0;\ i\ <\ ndnx;\ ++i)}
+\DoxyCodeLine{00117\ \ \ \ \ \textcolor{keywordflow}{for}\ (j\ =\ 0;\ j\ <\ ndny;\ ++j)}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (mval[i][j]\ >\ maxAmpl)\ \{}
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ maxRow\ =\ i;}
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ maxCol\ =\ j;}
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ maxAmpl\ =\ mval[i][j];}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00123\ }
+\DoxyCodeLine{00124\ \ \ \textcolor{keywordflow}{switch}\ (discrtype)\ \{}
+\DoxyCodeLine{00125\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{discr__types_8h_aaf88ae4f33b415b82feb394eade4a8daae2da9b2700939ec4ed72deb5b7210922}{DT\_CG}}:}
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \textcolor{comment}{/*\ ERR-\/006\ fix:\ добавлена\ поддержка\ центра\ тяжести\ */}}
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (ndny\ >=\ 3)\ \{}
+\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ aztmp\ =\ \mbox{\hyperlink{discrcg_8h_ab3655559ca8de2c4fa17fc6341fad94c}{discr3cg}}(mval[maxRow][0],\ mval[maxRow][1],\ mval[maxRow][2],}
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ maz[maxRow][0],\ \ maz[maxRow][1],\ \ maz[maxRow][2]);}
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (ndnx\ >=\ 3)\ \{}
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ eltmp\ =\ \mbox{\hyperlink{discrcg_8h_ab3655559ca8de2c4fa17fc6341fad94c}{discr3cg}}(mval[0][maxCol],\ mval[1][maxCol],\ mval[2][maxCol],}
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mel[0][maxCol],\ \ mel[1][maxCol],\ \ mel[2][maxCol]);}
+\DoxyCodeLine{00134\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00135\ \ \ \ \ \ \ *val\ =\ maxAmpl;}
+\DoxyCodeLine{00136\ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00137\ }
+\DoxyCodeLine{00138\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{discr__types_8h_aaf88ae4f33b415b82feb394eade4a8daac62b9c6de522c4e07d7a5db1f7a8a450}{DT\_QA}}:}
+\DoxyCodeLine{00139\ \ \ \ \ \ \ \textcolor{comment}{/*\ ERR-\/003\ fix:\ координаты\ умножаем\ на\ c\ локально,\ не\ модифицируя\ входные\ данные\ */}}
+\DoxyCodeLine{00140\ \ \ \ \ \ \ aztmp\ =\ \mbox{\hyperlink{discrqa_8h_a5cdf0c7b82518afc98773e8f323ddb3b}{discr3qa}}(mval[maxRow][0],\ mval[maxRow][1],\ mval[maxRow][2],}
+\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ maz[maxRow][0]\ *\ c,\ maz[maxRow][1]\ *\ c,\ maz[maxRow][2]\ *\ c);}
+\DoxyCodeLine{00142\ \ \ \ \ \ \ eltmp\ =\ \mbox{\hyperlink{discrqa_8h_a5cdf0c7b82518afc98773e8f323ddb3b}{discr3qa}}(mval[0][maxCol],\ mval[1][maxCol],\ mval[2][maxCol],}
+\DoxyCodeLine{00143\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mel[0][maxCol]\ *\ c,\ mel[1][maxCol]\ *\ c,\ mel[2][maxCol]\ *\ c);}
+\DoxyCodeLine{00144\ \ \ \ \ \ \ *val\ =\ maxAmpl;}
+\DoxyCodeLine{00145\ \ \ \ \ \ \ \textcolor{comment}{/*\ Обратное\ преобразование\ из\ масштабированных\ координат\ */}}
+\DoxyCodeLine{00146\ \ \ \ \ \ \ *az\ =\ aztmp\ /\ c;}
+\DoxyCodeLine{00147\ \ \ \ \ \ \ *el\ =\ eltmp\ /\ c;}
+\DoxyCodeLine{00148\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{00149\ }
+\DoxyCodeLine{00150\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{discr__types_8h_aaf88ae4f33b415b82feb394eade4a8daa9a8bffd804f7f397ac94141de14fc707}{DT\_EA}}:}
+\DoxyCodeLine{00151\ \ \ \ \ \ \ \textcolor{comment}{/*\ ERR-\/003\ fix:\ координаты\ умножаем\ на\ c\ локально\ */}}
+\DoxyCodeLine{00152\ \ \ \ \ \ \ \mbox{\hyperlink{discrea_8h_a1d0a905788c41a528b49032ecb9c2748}{discr3ea}}(mval[maxRow][0],\ mval[maxRow][1],\ mval[maxRow][2],}
+\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ maz[maxRow][0]\ *\ c,\ maz[maxRow][1]\ *\ c,\ maz[maxRow][2]\ *\ c,\ \&aztmp);}
+\DoxyCodeLine{00154\ \ \ \ \ \ \ \mbox{\hyperlink{discrea_8h_a1d0a905788c41a528b49032ecb9c2748}{discr3ea}}(mval[0][maxCol],\ mval[1][maxCol],\ mval[2][maxCol],}
+\DoxyCodeLine{00155\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mel[0][maxCol]\ *\ c,\ mel[1][maxCol]\ *\ c,\ mel[2][maxCol]\ *\ c,\ \&eltmp);}
+\DoxyCodeLine{00156\ }
+\DoxyCodeLine{00157\ \ \ \ \ \ \ valaz\ =\ \mbox{\hyperlink{discrea_8h_aeaf78c0e3173b3e10d91f87f58a171d0}{discr3eaY}}(mval[maxRow][0],\ mval[maxRow][1],}
+\DoxyCodeLine{00158\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ maz[maxRow][0]\ *\ c,\ maz[maxRow][1]\ *\ c,\ aztmp);}
+\DoxyCodeLine{00159\ \ \ \ \ \ \ valel\ =\ \mbox{\hyperlink{discrea_8h_aeaf78c0e3173b3e10d91f87f58a171d0}{discr3eaY}}(mval[0][maxCol],\ mval[1][maxCol],}
+\DoxyCodeLine{00160\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mel[0][maxCol]\ *\ c,\ mel[1][maxCol]\ *\ c,\ eltmp);}
+\DoxyCodeLine{00161\ }
+\DoxyCodeLine{00162\ \ \ \ \ \ \ *val\ =\ (valaz\ >\ valel)\ ?\ valaz\ :\ valel;}
+\DoxyCodeLine{00163\ \ \ \ \ \ \ *val\ =\ (maxAmpl\ >\ *val)\ ?\ maxAmpl\ :\ *val;}
+\DoxyCodeLine{00164\ \ \ \ \ \ \ \textcolor{comment}{/*\ Обратное\ преобразование\ */}}
+\DoxyCodeLine{00165\ \ \ \ \ \ \ *az\ =\ aztmp\ /\ c;}
+\DoxyCodeLine{00166\ \ \ \ \ \ \ *el\ =\ eltmp\ /\ c;}
+\DoxyCodeLine{00167\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{00168\ }
+\DoxyCodeLine{00169\ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{00170\ \ \ \ \ \ \ *az\ =\ 0.0;\ *el\ =\ 0.0;\ *val\ =\ 0.0;}
+\DoxyCodeLine{00171\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/2;}
+\DoxyCodeLine{00172\ \ \ \}}
+\DoxyCodeLine{00173\ }
+\DoxyCodeLine{00174\ \ \ \textcolor{comment}{/*\ Для\ DT\_CG\ —\ координаты\ не\ масштабируются\ */}}
+\DoxyCodeLine{00175\ \ \ *az\ =\ aztmp;}
+\DoxyCodeLine{00176\ \ \ *el\ =\ eltmp;}
+\DoxyCodeLine{00177\ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{00178\ \}}
+
+\end{DoxyCode}
+\Hypertarget{discr__common_8h_ac4d4e1deafa0bcc5b3c0ba33b1190c43}\label{discr__common_8h_ac4d4e1deafa0bcc5b3c0ba33b1190c43} 
+\index{discr\_common.h@{discr\_common.h}!discr3\_@{discr3\_}}
+\index{discr3\_@{discr3\_}!discr\_common.h@{discr\_common.h}}
+\doxysubsubsection{\texorpdfstring{discr3\_()}{discr3\_()}}
+{\footnotesize\ttfamily int discr3\+\_\+ (\begin{DoxyParamCaption}\item[{double}]{maz\mbox{[}3\mbox{]}\mbox{[}3\mbox{]},  }\item[{double}]{mel\mbox{[}3\mbox{]}\mbox{[}3\mbox{]},  }\item[{double}]{mval\mbox{[}3\mbox{]}\mbox{[}3\mbox{]},  }\item[{\mbox{\hyperlink{discr__types_8h_aaf88ae4f33b415b82feb394eade4a8da}{DISCRTYPE}}}]{discrtype,  }\item[{double}]{dx,  }\item[{double}]{lambda,  }\item[{double \texorpdfstring{$\ast$}{*}}]{az,  }\item[{double \texorpdfstring{$\ast$}{*}}]{el,  }\item[{double \texorpdfstring{$\ast$}{*}}]{val }\end{DoxyParamCaption})}
+
+
+
+Адаптер трехточечного дискриминатора для статических массивов 3x3. 
+
+Преобразует массивы {\ttfamily double}\mbox{[}3\mbox{]}\mbox{[}3\mbox{]} в {\ttfamily double\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}} и вызывает \doxylink{discr__common_8h_ada0fa80ec1c0edd0e0135de4d4a01c5d}{discr3()}.
+
+
+\begin{DoxyParams}{Аргументы}
+{\em maz} & \mbox{[}in\mbox{]} массив азимутальных координат 3x3 \\
+\hline
+{\em mel} & \mbox{[}in\mbox{]} массив угломестных координат 3x3 \\
+\hline
+{\em mval} & \mbox{[}in\mbox{]} массив амплитуд 3x3 \\
+\hline
+{\em discrtype} & \mbox{[}in\mbox{]} тип дискриминатора (DT\+\_\+\+CG, DT\+\_\+\+QA, DT\+\_\+\+EA) \\
+\hline
+{\em dx} & \mbox{[}in\mbox{]} шаг по углу \\
+\hline
+{\em lambda} & \mbox{[}in\mbox{]} длина волны \\
+\hline
+{\em az} & \mbox{[}out\mbox{]} уточнённая координата азимута \\
+\hline
+{\em el} & \mbox{[}out\mbox{]} уточнённая координата угла места \\
+\hline
+{\em val} & \mbox{[}out\mbox{]} уточнённое значение амплитуды \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+0 — норма, -\/1 — ошибка, -\/2 — неизвестный тип
+\end{DoxyReturn}
+Адаптер трехточечного дискриминатора для статических массивов 3x3.
+
+Преобразует массивы double\mbox{[}3\mbox{]}\mbox{[}3\mbox{]} в double\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*} для вызова \doxylink{discr__common_8h_ada0fa80ec1c0edd0e0135de4d4a01c5d}{discr3()}.
+
+
+\begin{DoxyParams}{Аргументы}
+{\em maz} & \mbox{[}in\mbox{]} массив азимутальных координат 3x3 \\
+\hline
+{\em mel} & \mbox{[}in\mbox{]} массив угломестных координат 3x3 \\
+\hline
+{\em mval} & \mbox{[}in\mbox{]} массив амплитуд 3x3 \\
+\hline
+{\em discrtype} & \mbox{[}in\mbox{]} тип дискриминатора \\
+\hline
+{\em dx} & \mbox{[}in\mbox{]} шаг по углу \\
+\hline
+{\em lambda} & \mbox{[}in\mbox{]} длина волны \\
+\hline
+{\em az} & \mbox{[}out\mbox{]} уточнённая координата азимута \\
+\hline
+{\em el} & \mbox{[}out\mbox{]} уточнённая координата угла места \\
+\hline
+{\em val} & \mbox{[}out\mbox{]} уточнённое значение амплитуды \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+0 — норма, -\/1 — ошибка, -\/2 — неизвестный тип 
+\end{DoxyReturn}
+
+
+См. определение в файле \mbox{\hyperlink{discr__common_8c_source}{discr\+\_\+common.\+c}} строка \mbox{\hyperlink{discr__common_8c_source_l00221}{221}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00224\ \{}
+\DoxyCodeLine{00225\ \ \ \textcolor{keywordtype}{double}\ *pmaz[3]\ \ =\ \{\ \&maz[0][0],\ \ \&maz[1][0],\ \ \&maz[2][0]\ \};}
+\DoxyCodeLine{00226\ \ \ \textcolor{keywordtype}{double}\ *pmel[3]\ \ =\ \{\ \&mel[0][0],\ \ \&mel[1][0],\ \ \&mel[2][0]\ \};}
+\DoxyCodeLine{00227\ \ \ \textcolor{keywordtype}{double}\ *pmval[3]\ =\ \{\ \&mval[0][0],\ \&mval[1][0],\ \&mval[2][0]\ \};}
+\DoxyCodeLine{00228\ }
+\DoxyCodeLine{00229\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{discr__common_8c_ada0fa80ec1c0edd0e0135de4d4a01c5d}{discr3}}(pmaz,\ pmel,\ pmval,\ 3,\ 3,}
+\DoxyCodeLine{00230\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ discrtype,\ dx,\ lambda,}
+\DoxyCodeLine{00231\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ az,\ el,\ val);}
+\DoxyCodeLine{00232\ \}}
+
+\end{DoxyCode}

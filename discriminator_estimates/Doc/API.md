@@ -1,7 +1,7 @@
 # discriminator_estimates -- Справочник API
 
 > Модуль дискриминаторных оценок координат.
-> Язык: C (C17). Заголовки: `discr_types.h`, `discrcg.h`, `discrsd.h`, `discrqa.h`, `discrea.h`, `discr_common.h`.
+> Язык: C (C17). Заголовки: `discr_types.h`, `discrcg.h`, `discrsd.h`, `discrqa.h`, `discrea.h`, `discr_common.h`, `discr5ea.h`, `discr_auto.h`.
 
 ---
 
@@ -19,12 +19,20 @@
 - [EA -- Экспоненциальная аппроксимация (discrea.h)](#ea----экспоненциальная-аппроксимация)
   - [discr3ea](#discr3ea)
   - [discr3eaY](#discr3eay)
-- [Обертки (discr_common.h)](#обёртки)
+- [МНК 5-точечные (discr5ea.h)](#мнк-5-точечные)
+  - [discr5ea](#discr5ea)
+  - [discr5qa](#discr5qa)
+- [Автоматический дискриминатор (discr_auto.h)](#автоматический-дискриминатор)
+  - [discr_is_monotonic](#discr_is_monotonic)
+  - [discr3_extrap_gauss](#discr3_extrap_gauss)
+  - [discr3_auto](#discr3_auto)
+- [Обёртки (discr_common.h)](#обёртки)
   - [discr2](#discr2)
   - [discr3](#discr3)
   - [discr3_](#discr3_)
   - [checkuse3d](#checkuse3d)
   - [conv3to2](#conv3to2)
+- [Python API (common.py)](#python-api)
 
 ---
 
@@ -638,6 +646,196 @@ discr2(maz2, mel2, mval2, &az, &el, &val);
 
 ---
 
+---
+
+## МНК 5-точечные
+
+Заголовок: `discr5ea.h` | Реализация: `discr5ea.c`
+
+МНК-дискриминаторы по 5 равноотстоящим отсчётам. Используют метод наименьших квадратов для аппроксимации переопределённой системы (5 уравнений, 3 неизвестных). Более устойчивы к шуму, чем 3-точечные методы.
+
+### discr5ea
+
+Пятиточечный дискриминатор, МНК-гауссова аппроксимация (LSQ Gaussian 5pt).
+
+```c
+int discr5ea(const double A[5], const double x[5], double *xe);
+```
+
+**Параметры:**
+
+| Имя | Тип | Описание |
+|-----|-----|----------|
+| `A` | `const double[5]` | Массив амплитуд [A1..A5], центральная = A[2] |
+| `x` | `const double[5]` | Массив координат (равноотстоящие) |
+| `xe` | `double*` | [out] Оценка координаты |
+
+**Возвращает:** `int` -- `EXIT_SUCCESS` (0) при успехе, `EXIT_FAILURE` (1) при ошибке.
+
+**Алгоритм:** Логарифмирует амплитуды (`z = ln(A)`), затем МНК-парабола по нормированным координатам `{-2, -1, 0, 1, 2}`:
+
+```
+a = (2z1 - z2 - 2z3 - z4 + 2z5) / 14
+b = (-2z1 - z2 + z4 + 2z5) / 10
+xe = x3 + h * (-b / (2*a))
+```
+
+**Условие ошибки:** любая `A[i] <= 0`, нулевой шаг сетки, или парабола не вогнутая (`a >= 0`).
+
+**Пример:**
+
+```c
+#include "discr5ea.h"
+
+double A[5] = {0.5, 0.85, 1.0, 0.90, 0.6};
+double x[5] = {-2.0, -1.0, 0.0, 1.0, 2.0};
+double xe;
+int rc = discr5ea(A, x, &xe);
+// rc = EXIT_SUCCESS, xe ~ 0.0
+```
+
+---
+
+### discr5qa
+
+Пятиточечный дискриминатор, МНК-параболическая аппроксимация (LSQ Parabolic 5pt).
+
+```c
+int discr5qa(const double A[5], const double x[5], double *xe);
+```
+
+**Параметры:** аналогично `discr5ea`.
+
+**Возвращает:** `int` -- `EXIT_SUCCESS` (0) при успехе, `EXIT_FAILURE` (1) при ошибке.
+
+**Алгоритм:** Как `discr5ea`, но аппроксимирует непосредственно амплитуды (без логарифмирования):
+
+```
+a = (2A1 - A2 - 2A3 - A4 + 2A5) / 14
+b = (-2A1 - A2 + A4 + 2A5) / 10
+xe = x3 + h * (-b / (2*a))
+```
+
+**Пример:**
+
+```c
+#include "discr5ea.h"
+
+double A[5] = {0.5, 0.85, 1.0, 0.90, 0.6};
+double x[5] = {-2.0, -1.0, 0.0, 1.0, 2.0};
+double xe;
+int rc = discr5qa(A, x, &xe);
+// rc = EXIT_SUCCESS, xe ~ 0.0 (менее точно чем discr5ea для гауссоподобных ДН)
+```
+
+---
+
+## Автоматический дискриминатор
+
+Заголовок: `discr_auto.h` | Реализация: `discr_auto.c`
+
+Решает проблему **монотонных данных** — когда пик ДН находится за пределами окна из 3 отсчётов (67% реальных случаев). В этом режиме стандартные 3-точечные методы (EA, QA) дают ошибки > 25% шага сетки.
+
+### discr_is_monotonic
+
+Проверка монотонности трёх отсчётов.
+
+```c
+int discr_is_monotonic(double A1, double A2, double A3);
+```
+
+**Параметры:** `A1`, `A2`, `A3` -- амплитуды трёх точек.
+
+**Возвращает:** `int` -- `1` если монотонные (пик за сеткой), `0` если есть перегиб (пик внутри).
+
+**Пример:**
+
+```c
+#include "discr_auto.h"
+
+// Монотонные: пик правее сетки
+if (discr_is_monotonic(2.1, 4.5, 7.8)) {
+    printf("Пик за пределами сетки!\n");
+}
+```
+
+---
+
+### discr3_extrap_gauss
+
+Гауссова экстраполяция (E2) для монотонных случаев.
+
+```c
+int discr3_extrap_gauss(double A1, double A2, double A3,
+                        double x1, double x2, double x3,
+                        double *xe);
+```
+
+**Параметры:**
+
+| Имя | Тип | Описание |
+|-----|-----|----------|
+| `A1`, `A2`, `A3` | `double` | Амплитуды (должны быть > 0) |
+| `x1`, `x2`, `x3` | `double` | Координаты точек |
+| `xe` | `double*` | [out] Экстраполированная оценка |
+
+**Возвращает:** `int` -- `0` при успехе, `1` при ошибке (нулевые амплитуды).
+
+**Алгоритм:** Как `discr3ea`, но без проверки выпуклости и с расширенным допуском вылета (2× вместо 0.5× от размера сетки). MAE = 0.148 для монотонных случаев (в 2.2 раза лучше параболической экстраполяции).
+
+---
+
+### discr3_auto
+
+Автоматический дискриминатор с переключением.
+
+```c
+int discr3_auto(double A1, double A2, double A3,
+                double x1, double x2, double x3,
+                double *xe);
+```
+
+**Параметры:**
+
+| Имя | Тип | Описание |
+|-----|-----|----------|
+| `A1`, `A2`, `A3` | `double` | Амплитуды трёх точек |
+| `x1`, `x2`, `x3` | `double` | Координаты точек |
+| `xe` | `double*` | [out] Оценка координаты |
+
+**Возвращает:** `int` -- код режима:
+- `0` -- EA успех (нормальный режим, лучший результат)
+- `1` -- использован QA как fallback (EA не сошёлся)
+- `2` -- использована гауссова экстраполяция E2 (монотонный режим)
+- `3` -- E2 не сошлась, возвращает `x2`
+
+**Алгоритм выбора:**
+
+```
+if (is_monotonic):
+    xe = extrap_gauss(...)    // E2 — гауссова экстраполяция
+else:
+    ret = discr3ea(...)       // EA — лучший метод
+    if (ret == FAILURE):
+        xe = discr3qa(...)    // QA — fallback
+```
+
+**Пример:**
+
+```c
+#include "discr_auto.h"
+
+double xe;
+int mode = discr3_auto(2.1, 4.5, 7.8, -1.0, 0.0, 1.0, &xe);
+if (mode == 2) {
+    printf("Монотонный режим, экстраполяция: xe = %.4f\n", xe);
+} else if (mode == 0) {
+    printf("EA успех: xe = %.4f\n", xe);
+}
+```
+
+---
+
 ## Типовой сценарий использования
 
 ```
@@ -658,4 +856,72 @@ discr2(maz2, mel2, mval2, &az, &el, &val);
 
 ---
 
-*Сгенерировано: 2026-03-28 | Модуль: discriminator_estimates*
+## Python API
+
+Файл: `test_python/analysis/common.py`
+
+Эталонные Python-реализации всех дискриминаторов для анализа и проверки C-библиотеки.
+
+### Таблица функций
+
+| Функция | Аналог C | Описание |
+|---------|----------|----------|
+| `ref_cg_2pt(A1, A2, x1, x2)` | `discr2cg` | CG 2-точечный |
+| `ref_cg_3pt(A, x)` | `discr3cg` | CG 3-точечный (массивы) |
+| `ref_sd(c, A1, A2, x1, x2)` | `discr2sd` | SD 2-точечный |
+| `ref_qa(A, x)` | `discr3qa` | QA 3-точечный (массивы) |
+| `ref_ea(A, x)` | `discr3ea` | EA через `scipy.curve_fit` (для анализа) |
+| `ref_ea_c(A1, A2, A3, x1, x2, x3)` | `discr3ea` | EA точный порт C-алгоритма |
+| `ref_auto(A, x)` | `discr3_auto` | AUTO с переключением режимов |
+| `ref_5ea(A, x)` | `discr5ea` | МНК-гауссов 5-точечный |
+| `ref_5qa(A, x)` | `discr5qa` | МНК-параболический 5-точечный |
+
+Функции `ref_7ea`, `ref_7qa`, `ref_9ea`, `ref_9qa` доступны в `test_python/analysis/09_lsq_compare.py`:
+
+| Функция | Точек | Коэффициенты МНК (знаменатель) |
+|---------|-------|--------------------------------|
+| `ref_7qa(A, x)` | 7 | a: знам. 84, b: знам. 28 |
+| `ref_7ea(A, x)` | 7 | log(A) → 7QA |
+| `ref_9qa(A, x)` | 9 | a: знам. 924, b: знам. 60 |
+| `ref_9ea(A, x)` | 9 | log(A) → 9QA |
+
+### Вспомогательные функции
+
+| Функция | Описание |
+|---------|----------|
+| `sinc(x)` | sinc(x) = sin(x)/x (ненормализованный, для ДН антенны) |
+| `hanning_kernel(x)` | Форма пика FFT после Hanning-окна |
+| `is_monotonic(A1, A2, A3)` | True если пик вне 3-точечного окна |
+| `select_top2(A, x)` | Выбрать 2 отсчёта с максимальными амплитудами |
+| `classify_zone(x0)` | Классифицировать: 'normal' / 'boundary' / 'extreme' |
+| `load_discr_lib()` | Загрузить C-библиотеку через ctypes |
+
+### Загрузка C-библиотеки (ctypes)
+
+```python
+from test_python.analysis.common import load_discr_lib
+import ctypes
+
+lib = load_discr_lib()
+
+# discr3qa (возвращает double)
+lib.discr3qa.restype  = ctypes.c_double
+lib.discr3qa.argtypes = [ctypes.c_double] * 6
+xe = lib.discr3qa(A1, A2, A3, x1, x2, x3)
+
+# discr5ea (возвращает int, xe через указатель)
+lib.discr5ea.restype  = ctypes.c_int
+lib.discr5ea.argtypes = [
+    ctypes.POINTER(ctypes.c_double),  # A[5]
+    ctypes.POINTER(ctypes.c_double),  # x[5]
+    ctypes.POINTER(ctypes.c_double),  # xe
+]
+A_arr = (ctypes.c_double * 5)(*A_list)
+x_arr = (ctypes.c_double * 5)(*x_list)
+xe_out = ctypes.c_double(0.0)
+rc = lib.discr5ea(A_arr, x_arr, ctypes.byref(xe_out))
+```
+
+---
+
+*Обновлено: 2026-04-06 | Модуль: discriminator_estimates*

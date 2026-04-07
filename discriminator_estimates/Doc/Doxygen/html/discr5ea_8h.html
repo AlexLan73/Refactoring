@@ -1,0 +1,341 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Discriminator Estimates (КППО/ТЗК): Файл discr5ea.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript">
+window.MathJax = {
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Discriminator Estimates (КППО/ТЗК)
+   </div>
+   <div id="projectbrief">Дискриминаторные оценки координат цели по отсчётам ДН антенны</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Поиск');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Функции</a>  </div>
+  <div class="headertitle"><div class="title">Файл discr5ea.h</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Комплекс программ первичной обработки (КППО). Программа вычисления текущих замеров координат (ТЗК). Дискриминатор. МНК-гауссова аппроксимация по 5 точкам.  
+<a href="#details">Подробнее...</a></p>
+
+<p><a href="discr5ea_8h_source.html">См. исходные тексты.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Функции</h2></td></tr>
+<tr class="memitem:a7a40e781923ce2b7e9f823d6966a99d3" id="r_a7a40e781923ce2b7e9f823d6966a99d3"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="discr5ea_8h.html#a7a40e781923ce2b7e9f823d6966a99d3">discr5ea</a> (const double A[5], const double x[5], double *xe)</td></tr>
+<tr class="memdesc:a7a40e781923ce2b7e9f823d6966a99d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Пятиточечный дискриминатор, МНК-гауссова аппроксимация (LSQ Gaussian 5pt).  <br /></td></tr>
+<tr class="separator:a7a40e781923ce2b7e9f823d6966a99d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac785bc2874e4a806c56a89d6232d1f34" id="r_ac785bc2874e4a806c56a89d6232d1f34"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="discr5ea_8h.html#ac785bc2874e4a806c56a89d6232d1f34">discr5qa</a> (const double A[5], const double x[5], double *xe)</td></tr>
+<tr class="memdesc:ac785bc2874e4a806c56a89d6232d1f34"><td class="mdescLeft">&#160;</td><td class="mdescRight">Пятиточечный дискриминатор, МНК-параболическая аппроксимация (LSQ Parabolic 5pt).  <br /></td></tr>
+<tr class="separator:ac785bc2874e4a806c56a89d6232d1f34"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Подробное описание</h2>
+<div class="textblock"><p>Комплекс программ первичной обработки (КППО). Программа вычисления текущих замеров координат (ТЗК). Дискриминатор. МНК-гауссова аппроксимация по 5 точкам. </p>
+<dl class="section author"><dt>Автор</dt><dd>Кодо (AI), Alex </dd></dl>
+<dl class="section date"><dt>Дата</dt><dd>03.04.2026 </dd></dl>
+
+<p class="definition">См. определение в файле <a class="el" href="discr5ea_8h_source.html">discr5ea.h</a></p>
+</div><h2 class="groupheader">Функции</h2>
+<a id="a7a40e781923ce2b7e9f823d6966a99d3" name="a7a40e781923ce2b7e9f823d6966a99d3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7a40e781923ce2b7e9f823d6966a99d3">&#9670;&#160;</a></span>discr5ea()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int discr5ea </td>
+          <td>(</td>
+          <td class="paramtype">const double&#160;</td>
+          <td class="paramname"><em>A</em>[5], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double&#160;</td>
+          <td class="paramname"><em>x</em>[5], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double *&#160;</td>
+          <td class="paramname"><em>xe</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Пятиточечный дискриминатор, МНК-гауссова аппроксимация (LSQ Gaussian 5pt). </p>
+<p>Аппроксимирует 5 равноотстоящих отсчётов гауссианом методом наименьших квадратов:  </p><p class="formulaDsp">
+\[
+  y = A_{max} \exp\!\bigl(-a\,(x - x_0)^2\bigr)
+\]
+</p>
+<p>Алгоритм:</p><ol type="1">
+<li>Логарифмирование: \( z_i = \ln A_i \)</li>
+<li>МНК-параболическая аппроксимация \( z(x) = a\,x^2 + b\,x + c \) по 5 равноотстоящим точкам (переопределённая система 5 уравнений, 3 неизвестных)</li>
+<li>Вершина параболы: \( x_e = -b / (2a) \)</li>
+</ol>
+<p>Формулы МНК для нормированных координат \( \{-2, -1, 0, 1, 2\} \):  </p><p class="formulaDsp">
+\[
+  a = \frac{2z_1 - z_2 - 2z_3 - z_4 + 2z_5}{14}
+\]
+</p>
+  <p class="formulaDsp">
+\[
+  b = \frac{-2z_1 - z_2 + z_4 + 2z_5}{10}
+\]
+</p>
+  <p class="formulaDsp">
+\[
+  x_e = x_3 + h \cdot \frac{-b}{2a}
+\]
+</p>
+<p>Преимущества перед discr3ea:</p><ul>
+<li>Устойчивость к шуму за счёт сглаживания (5 точек → 3 параметра)</li>
+<li>Гауссова модель хорошо приближает sinc(x) вблизи пика</li>
+</ul>
+<dl class="section warning"><dt>Предупреждения</dt><dd>Все амплитуды должны быть строго положительны ( \( A_i &gt; 0 \)). </dd>
+<dd>
+Точки должны быть равноотстоящими (постоянный шаг h).</dd></dl>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">A</td><td>массив из 5 амплитуд [A1, A2, A3, A4, A5], центральная = A[2] </td></tr>
+    <tr><td class="paramname">x</td><td>массив из 5 координат [x1, x2, x3, x4, x5], равноотстоящие </td></tr>
+    <tr><td class="paramname">xe</td><td>[out] оценка координаты \( x_e \) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>EXIT_SUCCESS (0) при успехе, EXIT_FAILURE (1) при ошибке (при ошибке *xe содержит приближённое значение) </dd></dl>
+
+<p class="definition">См. определение в файле <a class="el" href="discr5ea_8c_source.html">discr5ea.c</a> строка <a class="el" href="discr5ea_8c_source.html#l00061">61</a></p>
+<div class="fragment"><div class="line"><span class="lineno">   62</span>{</div>
+<div class="line"><span class="lineno">   63</span>  <span class="keywordtype">double</span> z[5];</div>
+<div class="line"><span class="lineno">   64</span>  <span class="keywordtype">double</span> h, peak;</div>
+<div class="line"><span class="lineno">   65</span>  <span class="keywordtype">int</span> i, rc;</div>
+<div class="line"><span class="lineno">   66</span> </div>
+<div class="line"><span class="lineno">   67</span>  <span class="comment">/* Шаг сетки (берём из первых двух точек) */</span></div>
+<div class="line"><span class="lineno">   68</span>  h = x[1] - x[0];</div>
+<div class="line"><span class="lineno">   69</span>  <span class="keywordflow">if</span> (fabs(h) &lt; DBL_EPSILON) {</div>
+<div class="line"><span class="lineno">   70</span>    *xe = x[2];</div>
+<div class="line"><span class="lineno">   71</span>    <span class="keywordflow">return</span> EXIT_FAILURE;</div>
+<div class="line"><span class="lineno">   72</span>  }</div>
+<div class="line"><span class="lineno">   73</span> </div>
+<div class="line"><span class="lineno">   74</span>  <span class="comment">/* Проверка: все амплитуды положительны */</span></div>
+<div class="line"><span class="lineno">   75</span>  <span class="keywordflow">for</span> (i = 0; i &lt; 5; i++) {</div>
+<div class="line"><span class="lineno">   76</span>    <span class="keywordflow">if</span> (A[i] &lt; DBL_EPSILON) {</div>
+<div class="line"><span class="lineno">   77</span>      *xe = x[2];</div>
+<div class="line"><span class="lineno">   78</span>      <span class="keywordflow">return</span> EXIT_FAILURE;</div>
+<div class="line"><span class="lineno">   79</span>    }</div>
+<div class="line"><span class="lineno">   80</span>  }</div>
+<div class="line"><span class="lineno">   81</span> </div>
+<div class="line"><span class="lineno">   82</span>  <span class="comment">/* Проверка: не все равны */</span></div>
+<div class="line"><span class="lineno">   83</span>  {</div>
+<div class="line"><span class="lineno">   84</span>    <span class="keywordtype">int</span> all_equal = 1;</div>
+<div class="line"><span class="lineno">   85</span>    <span class="keywordflow">for</span> (i = 1; i &lt; 5; i++) {</div>
+<div class="line"><span class="lineno">   86</span>      <span class="keywordflow">if</span> (fabs(A[i] - A[0]) &gt; DBL_EPSILON) {</div>
+<div class="line"><span class="lineno">   87</span>        all_equal = 0;</div>
+<div class="line"><span class="lineno">   88</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">   89</span>      }</div>
+<div class="line"><span class="lineno">   90</span>    }</div>
+<div class="line"><span class="lineno">   91</span>    <span class="keywordflow">if</span> (all_equal) {</div>
+<div class="line"><span class="lineno">   92</span>      *xe = x[2];</div>
+<div class="line"><span class="lineno">   93</span>      <span class="keywordflow">return</span> EXIT_FAILURE;</div>
+<div class="line"><span class="lineno">   94</span>    }</div>
+<div class="line"><span class="lineno">   95</span>  }</div>
+<div class="line"><span class="lineno">   96</span> </div>
+<div class="line"><span class="lineno">   97</span>  <span class="comment">/* Логарифмирование */</span></div>
+<div class="line"><span class="lineno">   98</span>  <span class="keywordflow">for</span> (i = 0; i &lt; 5; i++) {</div>
+<div class="line"><span class="lineno">   99</span>    z[i] = log(A[i]);</div>
+<div class="line"><span class="lineno">  100</span>  }</div>
+<div class="line"><span class="lineno">  101</span> </div>
+<div class="line"><span class="lineno">  102</span>  <span class="comment">/* МНК-оценка вершины параболы в лог-масштабе */</span></div>
+<div class="line"><span class="lineno">  103</span>  rc = <a class="code hl_function" href="discr5ea_8c.html#a695d9751025b7ccf92e589506c5bfa50">lsq5_peak</a>(z, &amp;peak);</div>
+<div class="line"><span class="lineno">  104</span> </div>
+<div class="line"><span class="lineno">  105</span>  <span class="comment">/* Обратная нормировка: центр = x[2], шаг = h */</span></div>
+<div class="line"><span class="lineno">  106</span>  *xe = x[2] + h * peak;</div>
+<div class="line"><span class="lineno">  107</span> </div>
+<div class="line"><span class="lineno">  108</span>  <span class="keywordflow">return</span> rc;</div>
+<div class="line"><span class="lineno">  109</span>}</div>
+<div class="ttc" id="adiscr5ea_8c_html_a695d9751025b7ccf92e589506c5bfa50"><div class="ttname"><a href="discr5ea_8c.html#a695d9751025b7ccf92e589506c5bfa50">lsq5_peak</a></div><div class="ttdeci">static int lsq5_peak(const double y[5], double *peak)</div><div class="ttdoc">Внутренняя функция: МНК-параболическая оценка вершины по 5 значениям yi.</div><div class="ttdef"><b>Definition</b> <a href="discr5ea_8c_source.html#l00036">discr5ea.c:36</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ac785bc2874e4a806c56a89d6232d1f34" name="ac785bc2874e4a806c56a89d6232d1f34"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac785bc2874e4a806c56a89d6232d1f34">&#9670;&#160;</a></span>discr5qa()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int discr5qa </td>
+          <td>(</td>
+          <td class="paramtype">const double&#160;</td>
+          <td class="paramname"><em>A</em>[5], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double&#160;</td>
+          <td class="paramname"><em>x</em>[5], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double *&#160;</td>
+          <td class="paramname"><em>xe</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Пятиточечный дискриминатор, МНК-параболическая аппроксимация (LSQ Parabolic 5pt). </p>
+<p>Аналогичен discr5ea, но работает напрямую с амплитудами (без логарифмирования).</p>
+<p>Формулы МНК для нормированных координат \( \{-2, -1, 0, 1, 2\} \):  </p><p class="formulaDsp">
+\[
+  a = \frac{2A_1 - A_2 - 2A_3 - A_4 + 2A_5}{14}
+\]
+</p>
+  <p class="formulaDsp">
+\[
+  b = \frac{-2A_1 - A_2 + A_4 + 2A_5}{10}
+\]
+</p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">A</td><td>массив из 5 амплитуд [A1, A2, A3, A4, A5] </td></tr>
+    <tr><td class="paramname">x</td><td>массив из 5 координат [x1, x2, x3, x4, x5], равноотстоящие </td></tr>
+    <tr><td class="paramname">xe</td><td>[out] оценка координаты \( x_e \) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>EXIT_SUCCESS (0) при успехе, EXIT_FAILURE (1) при ошибке </dd></dl>
+
+<p class="definition">См. определение в файле <a class="el" href="discr5ea_8c_source.html">discr5ea.c</a> строка <a class="el" href="discr5ea_8c_source.html#l00112">112</a></p>
+<div class="fragment"><div class="line"><span class="lineno">  113</span>{</div>
+<div class="line"><span class="lineno">  114</span>  <span class="keywordtype">double</span> h, peak;</div>
+<div class="line"><span class="lineno">  115</span>  <span class="keywordtype">int</span> rc;</div>
+<div class="line"><span class="lineno">  116</span> </div>
+<div class="line"><span class="lineno">  117</span>  <span class="comment">/* Шаг сетки */</span></div>
+<div class="line"><span class="lineno">  118</span>  h = x[1] - x[0];</div>
+<div class="line"><span class="lineno">  119</span>  <span class="keywordflow">if</span> (fabs(h) &lt; DBL_EPSILON) {</div>
+<div class="line"><span class="lineno">  120</span>    *xe = x[2];</div>
+<div class="line"><span class="lineno">  121</span>    <span class="keywordflow">return</span> EXIT_FAILURE;</div>
+<div class="line"><span class="lineno">  122</span>  }</div>
+<div class="line"><span class="lineno">  123</span> </div>
+<div class="line"><span class="lineno">  124</span>  <span class="comment">/* Проверка: не все равны */</span></div>
+<div class="line"><span class="lineno">  125</span>  {</div>
+<div class="line"><span class="lineno">  126</span>    <span class="keywordtype">int</span> all_equal = 1;</div>
+<div class="line"><span class="lineno">  127</span>    <span class="keywordtype">int</span> i;</div>
+<div class="line"><span class="lineno">  128</span>    <span class="keywordflow">for</span> (i = 1; i &lt; 5; i++) {</div>
+<div class="line"><span class="lineno">  129</span>      <span class="keywordflow">if</span> (fabs(A[i] - A[0]) &gt; DBL_EPSILON) {</div>
+<div class="line"><span class="lineno">  130</span>        all_equal = 0;</div>
+<div class="line"><span class="lineno">  131</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  132</span>      }</div>
+<div class="line"><span class="lineno">  133</span>    }</div>
+<div class="line"><span class="lineno">  134</span>    <span class="keywordflow">if</span> (all_equal) {</div>
+<div class="line"><span class="lineno">  135</span>      *xe = x[2];</div>
+<div class="line"><span class="lineno">  136</span>      <span class="keywordflow">return</span> EXIT_FAILURE;</div>
+<div class="line"><span class="lineno">  137</span>    }</div>
+<div class="line"><span class="lineno">  138</span>  }</div>
+<div class="line"><span class="lineno">  139</span> </div>
+<div class="line"><span class="lineno">  140</span>  <span class="comment">/* МНК-оценка вершины параболы в линейном масштабе */</span></div>
+<div class="line"><span class="lineno">  141</span>  rc = <a class="code hl_function" href="discr5ea_8c.html#a695d9751025b7ccf92e589506c5bfa50">lsq5_peak</a>(A, &amp;peak);</div>
+<div class="line"><span class="lineno">  142</span> </div>
+<div class="line"><span class="lineno">  143</span>  <span class="comment">/* Обратная нормировка */</span></div>
+<div class="line"><span class="lineno">  144</span>  *xe = x[2] + h * peak;</div>
+<div class="line"><span class="lineno">  145</span> </div>
+<div class="line"><span class="lineno">  146</span>  <span class="keywordflow">return</span> rc;</div>
+<div class="line"><span class="lineno">  147</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8
+</small></address>
+</body>
+</html>

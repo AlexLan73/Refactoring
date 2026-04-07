@@ -1,0 +1,206 @@
+\doxysection{Визуальный разбор методов}
+\hypertarget{methods_visual_page}{}\label{methods_visual_page}\index{Визуальный разбор методов@{Визуальный разбор методов}}
+\hypertarget{methods_visual_page_autotoc_md71}{}\doxysubsection{\texorpdfstring{Поведение дискриминаторов «вживую» — анимации, 3\+D-\/карты и контуры}{Поведение дискриминаторов «вживую» — анимации, 3D-карты и контуры}}\label{methods_visual_page_autotoc_md71}
+\begin{quote}
+Самый быстрый способ понять, как ведут себя методы — посмотреть, как они реагируют на движущийся пик и нарастающий шум. На этой странице собраны все наглядные иллюстрации модуля. \end{quote}
+\hypertarget{methods_visual_page_autotoc_md72}{}\doxysubsection{\texorpdfstring{$<$/blockquote$>$}{</blockquote>}}\label{methods_visual_page_autotoc_md72}
+\hypertarget{methods_visual_page_autotoc_md73}{}\doxysubsection{\texorpdfstring{Раздел 1. GIF-\/анимации — поведение в динамике}{Раздел 1. GIF-анимации — поведение в динамике}}\label{methods_visual_page_autotoc_md73}
+\hypertarget{methods_visual_page_autotoc_md74}{}\doxysubsubsection{\texorpdfstring{Sweep по всей зоне — все методы вместе}{Sweep по всей зоне — все методы вместе}}\label{methods_visual_page_autotoc_md74}
+
+
+{\bfseries{Что происходит на кадре\+:}}
+\begin{DoxyItemize}
+\item по горизонтали — координата;
+\item голубая кривая — sinc/\+Hanning kernel с движущимся пиком;
+\item зелёный пунктир — {\bfseries{истинное}} положение пика $ x_0 $;
+\item цветные вертикальные линии — оценки разных методов;
+\item крайние точки слева/справа — отсчёты, которые «видит» алгоритм.
+\end{DoxyItemize}
+
+{\bfseries{На что смотреть\+:}}
+\begin{DoxyItemize}
+\item В {\bfseries{центральной зоне}} ( $ |x_0| \le 0.5 $ шага) — все методы вместе.
+\item Ближе к краям — 3-\/точечные методы (CG, SD, QA, EA) {\bfseries{разбегаются}}\+: пик уходит из их «зоны видимости».
+\item 5-\/точечные (5QA, 5EA) держат пик намного дольше и не отрываются от зелёной пунктирной линии.
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+\hypertarget{methods_visual_page_autotoc_md76}{}\doxysubsubsection{\texorpdfstring{Крупный план — нормальная зона}{Крупный план — нормальная зона}}\label{methods_visual_page_autotoc_md76}
+
+
+То же самое, но {\bfseries{крупным планом}}, в пределах нормальной зоны $ |x_0| \le 1 $ шаг. Здесь видно даже мелкие различия между методами\+:
+\begin{DoxyItemize}
+\item EA сидит почти на самой зелёной линии,
+\item QA немного дрожит относительно неё,
+\item CG/\+SD ощутимо смещены.
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+\hypertarget{methods_visual_page_autotoc_md78}{}\doxysubsubsection{\texorpdfstring{Нарастание шума}{Нарастание шума}}\label{methods_visual_page_autotoc_md78}
+
+
+{\bfseries{Что происходит\+:}} пик стоит на месте, а шум плавно нарастает (SNR с 40 дБ падает до 0 дБ). Каждый кадр — новая случайная реализация шума.
+
+{\bfseries{На что смотреть\+:}}
+\begin{DoxyItemize}
+\item При {\bfseries{высоком SNR}} все оценки сидят рядом с истинным пиком.
+\item При {\bfseries{низком SNR}} оценки начинают «дрожать». Чем стабильнее метод — тем меньше амплитуда дрожания.
+\item 5EA / 5QA дрожат заметно меньше, чем 3-\/точечные собратья — это визуальное подтверждение их шумоустойчивости из \doxylink{recommendations_page}{Итоговые рекомендации}.
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+\hypertarget{methods_visual_page_autotoc_md80}{}\doxysubsubsection{\texorpdfstring{Резкое изменение пика}{Резкое изменение пика}}\label{methods_visual_page_autotoc_md80}
+
+
+Тестируем переходный процесс\+: пик {\bfseries{мгновенно}} скачет с одной координаты на другую. Никакого сглаживания между кадрами — каждый кадр это новый независимый замер.
+
+{\bfseries{Что показывает\+:}} все методы {\bfseries{немедленно}} реагируют (нет инерции — дискриминаторы не имеют памяти). Полезно как контроль того, что в реализации нет случайной фильтрации.
+
+\DoxyHorRuler{0}
+\hypertarget{methods_visual_page_autotoc_md82}{}\doxysubsubsection{\texorpdfstring{Авто-\/демо всех сценариев}{Авто-демо всех сценариев}}\label{methods_visual_page_autotoc_md82}
+
+
+Все три сценария подряд в одном GIF-\/файле — удобно для презентаций. Подробное объяснение каждого фрагмента — в трёх разделах выше.
+
+\DoxyHorRuler{0}
+\hypertarget{methods_visual_page_autotoc_md84}{}\doxysubsection{\texorpdfstring{Раздел 2. Карты точности — 3\+D и heatmap}{Раздел 2. Карты точности — 3D и heatmap}}\label{methods_visual_page_autotoc_md84}
+\hypertarget{methods_visual_page_autotoc_md85}{}\doxysubsubsection{\texorpdfstring{5\+EA\+: точность как функция (x0, SNR)}{5EA: точность как функция (x0, SNR)}}\label{methods_visual_page_autotoc_md85}
+Это {\bfseries{самая важная карта}} — показывает, как ведёт себя рекомендуемый метод 5EA в {\bfseries{двумерном пространстве}} ключевых параметров\+: смещение пика $ x_0 $ и уровень шума SNR.
+
+
+
+
+
+{\bfseries{Что видно\+:}}
+
+
+\begin{DoxyItemize}
+\item {\bfseries{Левая нижняя зона}} (малый $ x_0 $, высокий SNR) — тёмная = маленькая ошибка. Это идеальные условия\+: пик по центру окна, шум слабый.
+\item {\bfseries{Правая зона}} (большой $ x_0 $) — резкий рост ошибки. Это {\bfseries{монотонная зона}} (пик вышел за пределы 3-\/точечного окна).
+\item {\bfseries{Верхняя зона}} (низкий SNR) — ошибка растёт при любом $ x_0 $\+: шум слишком сильный.
+\item {\bfseries{Голубая линия}} на 3D-\/поверхности — граница монотонной зоны для 3pt методов. Правее этой линии 5EA продолжает работать, а QA(3pt) уже сыплется.
+\end{DoxyItemize}
+
+{\bfseries{Практический вывод\+:}} чтобы получить ошибку \texorpdfstring{$<$}{<} 0.\+05 шага, нужно одновременно\+:
+\begin{DoxyItemize}
+\item удерживать {\bfseries{SNR \texorpdfstring{$>$}{>} 15 дБ}} И
+\item держать \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*} $ |x_0| < 1.5 $ шага\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*} от центра окна.
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+\hypertarget{methods_visual_page_autotoc_md87}{}\doxysubsubsection{\texorpdfstring{Сравнение 4 классических методов на одной картинке}{Сравнение 4 классических методов на одной картинке}}\label{methods_visual_page_autotoc_md87}
+
+
+Четыре 3D-\/поверхности рядом. Сравниваем — у какого метода «долина» {\bfseries{глубже}} (меньше ошибка) и {\bfseries{шире}} (больше допустимый диапазон $ x_0 $).
+
+{\bfseries{Типичный вывод\+:}}
+\begin{DoxyItemize}
+\item {\bfseries{EA}} — самая глубокая долина (точнее всех на чистом сигнале);
+\item {\bfseries{CG}} — самая широкая, но мелкая (грубо, но устойчиво);
+\item {\bfseries{QA}} — промежуточный вариант;
+\item {\bfseries{SD}} — нестабилен при неправильном выборе коэффициента $ c $.
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+\hypertarget{methods_visual_page_autotoc_md89}{}\doxysubsubsection{\texorpdfstring{Тепловые карты по отдельным методам}{Тепловые карты по отдельным методам}}\label{methods_visual_page_autotoc_md89}
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{4}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ CG   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ SD   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ QA   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ EA    }\\\cline{1-4}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ CG   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ SD   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ QA   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ EA    }\\\cline{1-4}
+\endhead
+   &   &   &   \\\cline{1-4}
+\end{longtabu}
+
+
+Тёмная горизонтальная полоса = {\bfseries{оптимальный диапазон шага сетки}} $ d $. Именно эту полосу нужно искать, выбирая шаг под свою задачу.
+
+\DoxyHorRuler{0}
+\hypertarget{methods_visual_page_autotoc_md91}{}\doxysubsection{\texorpdfstring{Раздел 3. Чистый сигнал — точность на эталоне}{Раздел 3. Чистый сигнал — точность на эталоне}}\label{methods_visual_page_autotoc_md91}
+\hypertarget{methods_visual_page_autotoc_md92}{}\doxysubsubsection{\texorpdfstring{Все дискриминаторы на sinc(x − 0.\+25)}{Все дискриминаторы на sinc(x − 0.25)}}\label{methods_visual_page_autotoc_md92}
+
+
+Что нарисовано\+:
+\begin{DoxyItemize}
+\item {\bfseries{Голубая линия}} — sinc(x − 0.\+25), реалистичная ДН антенны;
+\item {\bfseries{Жёлтые точки}} — 3 отсчёта на сетке \{−1, 0, +1\};
+\item {\bfseries{Вертикальные линии}} — оценки CG / QA / EA / 5EA;
+\item {\bfseries{Зелёная пунктирная}} — истинное положение пика $ x_0 = 0.25 $.
+\end{DoxyItemize}
+
+EA и 5EA сидят почти на самой зелёной линии. CG ощутимо левее.
+
+\DoxyHorRuler{0}
+\hypertarget{methods_visual_page_autotoc_md94}{}\doxysubsubsection{\texorpdfstring{МНК-\/5 на Hanning kernel}{МНК-5 на Hanning kernel}}\label{methods_visual_page_autotoc_md94}
+
+
+Тот же эксперимент, но на {\bfseries{Hanning kernel}} (форма пика после FFT с Hanning-\/окном). 5 точек, две оценки 5QA / 5EA, обе очень близки к истинному значению.
+
+Это визуальное подтверждение тезиса «парабола + Hanning = любовь» из \doxylink{recommendations_page}{Итоговые рекомендации}.
+
+\DoxyHorRuler{0}
+\hypertarget{methods_visual_page_autotoc_md96}{}\doxysubsubsection{\texorpdfstring{Ошибка vs смещение пика — sweep}{Ошибка vs смещение пика — sweep}}\label{methods_visual_page_autotoc_md96}
+
+
+Базовый бенчмарк. По горизонтали — истинное смещение пика $ x_0 $, по вертикали — модуль ошибки. {\bfseries{Чем ниже кривая, тем точнее метод.}}
+
+Наблюдения\+:
+\begin{DoxyItemize}
+\item {\bfseries{CG}} и {\bfseries{SD}} — почти линейно растут (классическая систематическая ошибка взвешенного среднего);
+\item {\bfseries{QA}} — почти 0 в нормальной зоне, потом резкий рост;
+\item {\bfseries{EA}} — самая низкая в нормальной зоне.
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+\hypertarget{methods_visual_page_autotoc_md98}{}\doxysubsubsection{\texorpdfstring{МНК 5/7/9 точек — без шума}{МНК 5/7/9 точек — без шума}}\label{methods_visual_page_autotoc_md98}
+
+
+Главное наблюдение\+: {\bfseries{EA-\/кривые в \texorpdfstring{$\sim$}{\string~}10× ниже QA-\/кривых}} при любом числе точек. Логарифмирование амплитуд (т.\+е. подгонка гауссиана вместо параболы) действительно даёт большой выигрыш на Hanning kernel.
+
+\DoxyHorRuler{0}
+\hypertarget{methods_visual_page_autotoc_md100}{}\doxysubsection{\texorpdfstring{Раздел 4. С шумом — устойчивость}{Раздел 4. С шумом — устойчивость}}\label{methods_visual_page_autotoc_md100}
+\hypertarget{methods_visual_page_autotoc_md101}{}\doxysubsubsection{\texorpdfstring{Базовые методы под Монте-\/Карло шумом}{Базовые методы под Монте-Карло шумом}}\label{methods_visual_page_autotoc_md101}
+
+
+
+
+При снижении SNR оценки разлетаются. Метод с меньшим СКО = более стабильный.
+
+\DoxyHorRuler{0}
+\hypertarget{methods_visual_page_autotoc_md103}{}\doxysubsubsection{\texorpdfstring{5pt vs 3pt под шумом — Hanning}{5pt vs 3pt под шумом — Hanning}}\label{methods_visual_page_autotoc_md103}
+
+
+5pt-\/методы выигрывают {\bfseries{всегда}} — а особенно при SNR \texorpdfstring{$<$}{<} 20 дБ.
+
+\DoxyHorRuler{0}
+\hypertarget{methods_visual_page_autotoc_md105}{}\doxysubsubsection{\texorpdfstring{МНК 5 / 7 / 9 точек под шумом}{МНК 5 / 7 / 9 точек под шумом}}\label{methods_visual_page_autotoc_md105}
+
+
+
+
+При SNR \texorpdfstring{$>$}{>} 20 дБ — все примерно одинаково. При SNR \texorpdfstring{$<$}{<} 15 дБ — 7pt и 9pt заметно лучше. {\bfseries{Но это редкие условия}} — для типичного радара 5pt оптимум, см. \doxylink{recommendations_page}{Итоговые рекомендации}.
+
+\DoxyHorRuler{0}
+\hypertarget{methods_visual_page_autotoc_md107}{}\doxysubsection{\texorpdfstring{Раздел 5. Монотонная зона}{Раздел 5. Монотонная зона}}\label{methods_visual_page_autotoc_md107}
+
+
+
+
+
+
+{\bfseries{Главный вывод по серии\+:}} в монотонной зоне (пик за пределами окна) 3-\/точечные методы сильно ошибаются, а 5-\/точечные продолжают работать. Подробнее — раздел «Монотонная зона» на странице \doxylink{recommendations_page}{Итоговые рекомендации}.
+
+\DoxyHorRuler{0}
+\hypertarget{methods_visual_page_autotoc_md109}{}\doxysubsection{\texorpdfstring{Куда дальше}{Куда дальше}}\label{methods_visual_page_autotoc_md109}
+
+\begin{DoxyItemize}
+\item \doxylink{formulas_page}{Математические формулы} — Все формулы CG / SD / QA / EA / 5QA / 5EA
+\item \doxylink{recommendations_page}{Итоговые рекомендации} — Итоговые рекомендации + дерево решений
+\item \doxylink{tests_page}{Тестирование} — Описание тестового покрытия
+\item \doxylink{fft_page}{FFT-\/дискриминаторы частоты} — Применение к оценке частоты по спектру FFT
+\item {\ttfamily Doc/plots/\+README.\+md} — полный гайд по всем графикам с пояснениями 
+\end{DoxyItemize}

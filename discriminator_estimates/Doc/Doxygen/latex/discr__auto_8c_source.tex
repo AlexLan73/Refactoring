@@ -1,0 +1,228 @@
+\doxysection{discr\+\_\+auto.\+c}
+\hypertarget{discr__auto_8c_source}{}\label{discr__auto_8c_source}\index{discr\_auto.c@{discr\_auto.c}}
+\mbox{\hyperlink{discr__auto_8c}{См. документацию.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00001}00001\ }
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00023}00023\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{discr__auto_8h}{discr\_auto.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00024}00024\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{discrea_8h}{discrea.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00025}00025\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{discrqa_8h}{discrqa.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00026}00026\ }
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00027}00027\ \textcolor{preprocessor}{\#include\ <math.h>}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00028}00028\ \textcolor{preprocessor}{\#include\ <float.h>}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00029}00029\ \textcolor{preprocessor}{\#include\ <stdlib.h>}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00031}00031\ \textcolor{comment}{/*\ ═══════════════════════════════════════════════════════════════════\ */}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00032}00032\ \textcolor{comment}{/*\ \ discr\_is\_monotonic\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00033}00033\ \textcolor{comment}{/*\ ═══════════════════════════════════════════════════════════════════\ */}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00034}00034\ }
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00035}\mbox{\hyperlink{discr__auto_8h_a0fccaee4e2734f24cb735a57e89a706a}{00035}}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{discr__auto_8c_a0fccaee4e2734f24cb735a57e89a706a}{discr\_is\_monotonic}}(\textcolor{keywordtype}{double}\ A1,\ \textcolor{keywordtype}{double}\ A2,\ \textcolor{keywordtype}{double}\ A3)}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00036}00036\ \{}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00037}00037\ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00038}00038\ \textcolor{comment}{\ \ \ *\ Монотонные\ =\ все\ убывают\ ИЛИ\ все\ возрастают.}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00039}00039\ \textcolor{comment}{\ \ \ *\ Это\ значит,\ что\ среди\ A1,\ A2,\ A3\ нет\ локального\ максимума,}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00040}00040\ \textcolor{comment}{\ \ \ *\ т.е.\ пик\ ДН\ находится\ за\ пределами\ сетки\ из\ 3\ отсчётов.}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00041}00041\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00042}00042\ \textcolor{comment}{\ \ \ *\ Примеры:}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00043}00043\ \textcolor{comment}{\ \ \ *\ \ \ A1=0.8,\ A2=0.6,\ A3=0.3\ →\ убывают\ →\ монотонные\ (пик\ слева)}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00044}00044\ \textcolor{comment}{\ \ \ *\ \ \ A1=0.3,\ A2=0.6,\ A3=0.8\ →\ возрастают\ →\ монотонные\ (пик\ справа)}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00045}00045\ \textcolor{comment}{\ \ \ *\ \ \ A1=0.6,\ A2=0.9,\ A3=0.7\ →\ перегиб\ →\ НЕ\ монотонные\ (пик\ внутри)}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00046}00046\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00047}00047\ \ \ \textcolor{keywordflow}{return}\ (A1\ >=\ A2\ \&\&\ A2\ >=\ A3)\ ||\ \ \textcolor{comment}{/*\ убывают\ (или\ равны)\ */}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00048}00048\ \ \ \ \ \ \ \ \ \ (A1\ <=\ A2\ \&\&\ A2\ <=\ A3);\ \ \ \ \ \textcolor{comment}{/*\ возрастают\ (или\ равны)\ */}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00049}00049\ \}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00050}00050\ }
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00051}00051\ \textcolor{comment}{/*\ ═══════════════════════════════════════════════════════════════════\ */}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00052}00052\ \textcolor{comment}{/*\ \ discr3\_extrap\_gauss\ —\ Гауссова\ экстраполяция\ (метод\ E2)\ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00053}00053\ \textcolor{comment}{/*\ ═══════════════════════════════════════════════════════════════════\ */}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00054}00054\ }
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00058}\mbox{\hyperlink{structax__pair__t}{00058}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00059}\mbox{\hyperlink{structax__pair__t_ad7c6644578c4bf26a9e255ae89cd8587}{00059}}\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{structax__pair__t_ad7c6644578c4bf26a9e255ae89cd8587}{a}};}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00060}\mbox{\hyperlink{structax__pair__t_a1f33e2dc3ddb82b069068b192567dc7e}{00060}}\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{structax__pair__t_a1f33e2dc3ddb82b069068b192567dc7e}{x}};}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00061}00061\ \}\ \mbox{\hyperlink{structax__pair__t}{ax\_pair\_t}};}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00062}00062\ }
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00063}\mbox{\hyperlink{discr__auto_8c_a2c8a868999c0d7f0acbb33842ce31507}{00063}}\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{discr__auto_8c_a2c8a868999c0d7f0acbb33842ce31507}{cmp\_by\_x}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{void}\ *p1,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{void}\ *p2)}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00064}00064\ \{}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00065}00065\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structax__pair__t}{ax\_pair\_t}}\ *a\ =\ (\textcolor{keyword}{const}\ \mbox{\hyperlink{structax__pair__t}{ax\_pair\_t}}\ *)p1;}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00066}00066\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structax__pair__t}{ax\_pair\_t}}\ *b\ =\ (\textcolor{keyword}{const}\ \mbox{\hyperlink{structax__pair__t}{ax\_pair\_t}}\ *)p2;}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00067}00067\ \ \ \textcolor{keywordflow}{if}\ (a-\/>\mbox{\hyperlink{structax__pair__t_a1f33e2dc3ddb82b069068b192567dc7e}{x}}\ <\ b-\/>\mbox{\hyperlink{structax__pair__t_a1f33e2dc3ddb82b069068b192567dc7e}{x}})\ \textcolor{keywordflow}{return}\ -\/1;}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00068}00068\ \ \ \textcolor{keywordflow}{if}\ (a-\/>\mbox{\hyperlink{structax__pair__t_a1f33e2dc3ddb82b069068b192567dc7e}{x}}\ >\ b-\/>\mbox{\hyperlink{structax__pair__t_a1f33e2dc3ddb82b069068b192567dc7e}{x}})\ \textcolor{keywordflow}{return}\ \ 1;}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00069}00069\ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00070}00070\ \}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00071}00071\ }
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00072}\mbox{\hyperlink{discr__auto_8h_aff4b1fea96d16566196f7f7c44331547}{00072}}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{discr__auto_8c_aff4b1fea96d16566196f7f7c44331547}{discr3\_extrap\_gauss}}(\textcolor{keywordtype}{double}\ A1,\ \textcolor{keywordtype}{double}\ A2,\ \textcolor{keywordtype}{double}\ A3,}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00073}00073\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ x1,\ \textcolor{keywordtype}{double}\ x2,\ \textcolor{keywordtype}{double}\ x3,}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00074}00074\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ *xe)}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00075}00075\ \{}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00076}00076\ \ \ \mbox{\hyperlink{structax__pair__t}{ax\_pair\_t}}\ pts[3];}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00077}00077\ \ \ \textcolor{keywordtype}{double}\ a1,\ a2,\ a3,\ f1,\ f2,\ f3;}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00078}00078\ \ \ \textcolor{keywordtype}{double}\ z1,\ z2,\ z3;}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00079}00079\ \ \ \textcolor{keywordtype}{double}\ a\_coef,\ b\_coef;}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00080}00080\ \ \ \textcolor{keywordtype}{double}\ span;}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00081}00081\ }
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00082}00082\ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00083}00083\ \textcolor{comment}{\ \ \ *\ Шаг\ 1.\ Проверка:\ все\ амплитуды\ >\ 0}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00084}00084\ \textcolor{comment}{\ \ \ *\ (нужно\ для\ логарифмирования)}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00085}00085\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00086}00086\ \ \ \textcolor{keywordflow}{if}\ (A1\ <\ DBL\_EPSILON\ ||\ A2\ <\ DBL\_EPSILON\ ||\ A3\ <\ DBL\_EPSILON)\ \{}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00087}00087\ \ \ \ \ *xe\ =\ x2;}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00088}00088\ \ \ \ \ \textcolor{keywordflow}{return}\ EXIT\_FAILURE;}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00089}00089\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00090}00090\ }
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00091}00091\ \ \ \textcolor{comment}{/*\ Все\ амплитуды\ одинаковы\ →\ невозможно\ определить\ направление\ */}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00092}00092\ \ \ \textcolor{keywordflow}{if}\ (fabs(A1\ -\/\ A2)\ <\ DBL\_EPSILON\ \&\&\ fabs(A2\ -\/\ A3)\ <\ DBL\_EPSILON)\ \{}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00093}00093\ \ \ \ \ *xe\ =\ x2;}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00094}00094\ \ \ \ \ \textcolor{keywordflow}{return}\ EXIT\_FAILURE;}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00095}00095\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00096}00096\ }
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00097}00097\ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00098}00098\ \textcolor{comment}{\ \ \ *\ Шаг\ 2.\ Сортировка\ по\ координатам\ (x\ возрастает)}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00099}00099\ \textcolor{comment}{\ \ \ *\ Это\ нужно\ чтобы\ формулы\ работали\ корректно}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00100}00100\ \textcolor{comment}{\ \ \ *\ независимо\ от\ порядка\ входных\ аргументов.}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00101}00101\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00102}00102\ \ \ pts[0].\mbox{\hyperlink{structax__pair__t_ad7c6644578c4bf26a9e255ae89cd8587}{a}}\ =\ A1;\ pts[0].\mbox{\hyperlink{structax__pair__t_a1f33e2dc3ddb82b069068b192567dc7e}{x}}\ =\ x1;}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00103}00103\ \ \ pts[1].\mbox{\hyperlink{structax__pair__t_ad7c6644578c4bf26a9e255ae89cd8587}{a}}\ =\ A2;\ pts[1].\mbox{\hyperlink{structax__pair__t_a1f33e2dc3ddb82b069068b192567dc7e}{x}}\ =\ x2;}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00104}00104\ \ \ pts[2].\mbox{\hyperlink{structax__pair__t_ad7c6644578c4bf26a9e255ae89cd8587}{a}}\ =\ A3;\ pts[2].\mbox{\hyperlink{structax__pair__t_a1f33e2dc3ddb82b069068b192567dc7e}{x}}\ =\ x3;}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00105}00105\ \ \ qsort(pts,\ 3,\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{structax__pair__t}{ax\_pair\_t}}),\ \mbox{\hyperlink{discr__auto_8c_a2c8a868999c0d7f0acbb33842ce31507}{cmp\_by\_x}});}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00106}00106\ }
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00107}00107\ \ \ a1\ =\ pts[0].\mbox{\hyperlink{structax__pair__t_ad7c6644578c4bf26a9e255ae89cd8587}{a}};\ f1\ =\ pts[0].\mbox{\hyperlink{structax__pair__t_a1f33e2dc3ddb82b069068b192567dc7e}{x}};}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00108}00108\ \ \ a2\ =\ pts[1].\mbox{\hyperlink{structax__pair__t_ad7c6644578c4bf26a9e255ae89cd8587}{a}};\ f2\ =\ pts[1].\mbox{\hyperlink{structax__pair__t_a1f33e2dc3ddb82b069068b192567dc7e}{x}};}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00109}00109\ \ \ a3\ =\ pts[2].\mbox{\hyperlink{structax__pair__t_ad7c6644578c4bf26a9e255ae89cd8587}{a}};\ f3\ =\ pts[2].\mbox{\hyperlink{structax__pair__t_a1f33e2dc3ddb82b069068b192567dc7e}{x}};}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00110}00110\ }
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00111}00111\ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00112}00112\ \textcolor{comment}{\ \ \ *\ Шаг\ 3.\ НЕ\ проверяем\ выпуклость!}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00113}00113\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00114}00114\ \textcolor{comment}{\ \ \ *\ Это\ ГЛАВНОЕ\ отличие\ от\ discr3ea:}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00115}00115\ \textcolor{comment}{\ \ \ *\ -\/\ discr3ea\ проверяет\ что\ a2\ >\ a1\ и\ a2\ >\ a3\ (перегиб)}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00116}00116\ \textcolor{comment}{\ \ \ *\ \ \ и\ возвращает\ FAILURE\ для\ монотонных\ данных}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00117}00117\ \textcolor{comment}{\ \ \ *\ -\/\ Мы\ РАЗРЕШАЕМ\ монотонные\ данные,\ потому\ что}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00118}00118\ \textcolor{comment}{\ \ \ *\ \ \ вершина\ параболы\ в\ log-\/пространстве\ покажет}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00119}00119\ \textcolor{comment}{\ \ \ *\ \ \ КУДА\ и\ НАСКОЛЬКО\ далеко\ экстраполировать\ пик.}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00120}00120\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00121}00121\ }
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00122}00122\ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00123}00123\ \textcolor{comment}{\ \ \ *\ Шаг\ 4.\ Логарифмирование}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00124}00124\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00125}00125\ \textcolor{comment}{\ \ \ *\ Гауссиан\ y\ =\ A*exp(-\/a*(x-\/x0)\string^2)\ после\ логарифмирования}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00126}00126\ \textcolor{comment}{\ \ \ *\ становится\ параболой:\ ln(y)\ =\ ln(A)\ -\/\ a*(x-\/x0)\string^2}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00127}00127\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00128}00128\ \textcolor{comment}{\ \ \ *\ Парабола\ в\ log-\/пространстве\ →\ вершина\ =\ x0\ (положение\ пика).}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00129}00129\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00130}00130\ \ \ z1\ =\ log(a1);}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00131}00131\ \ \ z2\ =\ log(a2);}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00132}00132\ \ \ z3\ =\ log(a3);}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00133}00133\ }
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00134}00134\ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00135}00135\ \textcolor{comment}{\ \ \ *\ Шаг\ 5.\ Коэффициенты\ параболы}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00136}00136\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00137}00137\ \textcolor{comment}{\ \ \ *\ Парабола\ z(x)\ через\ 3\ точки\ (f1,z1),\ (f2,z2),\ (f3,z3):}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00138}00138\ \textcolor{comment}{\ \ \ *\ \ \ a\_coef\ =\ z1*(f2²-\/f3²)\ +\ z2*(f3²-\/f1²)\ +\ z3*(f1²-\/f2²)}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00139}00139\ \textcolor{comment}{\ \ \ *\ \ \ b\_coef\ =\ z1*(f2-\/f3)\ \ \ +\ z2*(f3-\/f1)\ \ \ \ +\ z3*(f1-\/f2)}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00140}00140\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00141}00141\ \textcolor{comment}{\ \ \ *\ Вершина:\ xe\ =\ 0.5\ *\ a\_coef\ /\ b\_coef}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00142}00142\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00143}00143\ \ \ a\_coef\ =\ z1\ *\ (f2\ *\ f2\ -\/\ f3\ *\ f3)}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00144}00144\ \ \ \ \ \ \ \ \ \ +\ z2\ *\ (f3\ *\ f3\ -\/\ f1\ *\ f1)}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00145}00145\ \ \ \ \ \ \ \ \ \ +\ z3\ *\ (f1\ *\ f1\ -\/\ f2\ *\ f2);}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00146}00146\ }
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00147}00147\ \ \ b\_coef\ =\ z1\ *\ (f2\ -\/\ f3)}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00148}00148\ \ \ \ \ \ \ \ \ \ +\ z2\ *\ (f3\ -\/\ f1)}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00149}00149\ \ \ \ \ \ \ \ \ \ +\ z3\ *\ (f1\ -\/\ f2);}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00150}00150\ }
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00151}00151\ \ \ \textcolor{comment}{/*\ b\_coef\ ≈\ 0\ →\ парабола\ вырожденная,\ направление\ неопределено\ */}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00152}00152\ \ \ \textcolor{keywordflow}{if}\ (fabs(b\_coef)\ <\ DBL\_EPSILON)\ \{}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00153}00153\ \ \ \ \ \textcolor{comment}{/*\ Экстраполируем\ в\ сторону\ наибольшей\ амплитуды\ */}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00154}00154\ \ \ \ \ \textcolor{keywordflow}{if}\ (a3\ >\ a1)}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00155}00155\ \ \ \ \ \ \ *xe\ =\ f3\ +\ 0.5\ *\ (f3\ -\/\ f1);}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00156}00156\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00157}00157\ \ \ \ \ \ \ *xe\ =\ f1\ -\/\ 0.5\ *\ (f3\ -\/\ f1);}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00158}00158\ \ \ \ \ \textcolor{keywordflow}{return}\ EXIT\_FAILURE;}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00159}00159\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00160}00160\ }
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00161}00161\ \ \ \textcolor{comment}{/*\ Вершина\ параболы\ в\ log-\/пространстве\ =\ оценка\ положения\ пика\ */}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00162}00162\ \ \ *xe\ =\ 0.5\ *\ a\_coef\ /\ b\_coef;}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00163}00163\ }
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00164}00164\ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00165}00165\ \textcolor{comment}{\ \ \ *\ Шаг\ 6.\ Ограничение\ вылета\ (clipping)}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00166}00166\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00167}00167\ \textcolor{comment}{\ \ \ *\ Расширенный\ диапазон:\ ±2\ ×\ размер\_сетки\ (вместо\ ±0.5×\ в\ discr3ea).}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00168}00168\ \textcolor{comment}{\ \ \ *\ Это\ позволяет\ экстраполировать\ дальше,\ но\ не\ бесконечно\ далеко.}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00169}00169\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00170}00170\ \textcolor{comment}{\ \ \ *\ Почему\ 2×?\ Из\ исследования:\ при\ вылете\ >\ 2×\ шага\ ошибка}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00171}00171\ \textcolor{comment}{\ \ \ *\ экстраполяции\ уже\ не\ уменьшается,\ а\ растёт.}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00172}00172\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00173}00173\ \ \ span\ =\ f3\ -\/\ f1;\ \ \textcolor{comment}{/*\ =\ 2\ ×\ шаг\_сетки\ для\ симметричной\ сетки\ */}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00174}00174\ }
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00175}00175\ \ \ \textcolor{keywordflow}{if}\ (*xe\ >\ f3\ +\ span)\ \{}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00176}00176\ \ \ \ \ *xe\ =\ f3\ +\ span;}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00177}00177\ \ \ \ \ \textcolor{keywordflow}{return}\ EXIT\_FAILURE;}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00178}00178\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00179}00179\ \ \ \textcolor{keywordflow}{if}\ (*xe\ <\ f1\ -\/\ span)\ \{}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00180}00180\ \ \ \ \ *xe\ =\ f1\ -\/\ span;}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00181}00181\ \ \ \ \ \textcolor{keywordflow}{return}\ EXIT\_FAILURE;}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00182}00182\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00183}00183\ }
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00184}00184\ \ \ \textcolor{keywordflow}{return}\ EXIT\_SUCCESS;}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00185}00185\ \}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00186}00186\ }
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00187}00187\ \textcolor{comment}{/*\ ═══════════════════════════════════════════════════════════════════\ */}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00188}00188\ \textcolor{comment}{/*\ \ discr3\_auto\ —\ автоматический\ дискриминатор\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00189}00189\ \textcolor{comment}{/*\ ═══════════════════════════════════════════════════════════════════\ */}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00190}00190\ }
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00191}\mbox{\hyperlink{discr__auto_8h_a99aa3243f4143e13f9e1a2fda43c714e}{00191}}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{discr__auto_8c_a99aa3243f4143e13f9e1a2fda43c714e}{discr3\_auto}}(\textcolor{keywordtype}{double}\ A1,\ \textcolor{keywordtype}{double}\ A2,\ \textcolor{keywordtype}{double}\ A3,}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00192}00192\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ x1,\ \textcolor{keywordtype}{double}\ x2,\ \textcolor{keywordtype}{double}\ x3,}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00193}00193\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ *xe)}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00194}00194\ \{}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00195}00195\ \ \ \textcolor{keywordtype}{int}\ ret;}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00196}00196\ }
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00197}00197\ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00198}00198\ \textcolor{comment}{\ \ \ *\ Ветка\ 1:\ МОНОТОННЫЕ\ данные\ (пик\ за\ сеткой)}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00199}00199\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00200}00200\ \textcolor{comment}{\ \ \ *\ Когда\ A1\ ≥\ A2\ ≥\ A3\ или\ A1\ ≤\ A2\ ≤\ A3,\ среди\ 3\ отсчётов}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00201}00201\ \textcolor{comment}{\ \ \ *\ нет\ перегиба\ —\ пик\ ДН\ находится\ за\ пределами\ сетки.}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00202}00202\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00203}00203\ \textcolor{comment}{\ \ \ *\ Стандартные\ дискриминаторы\ в\ этом\ случае:}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00204}00204\ \textcolor{comment}{\ \ \ *\ \ \ CG:\ MAE\ =\ 0.46\ (почти\ случайная\ оценка)}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00205}00205\ \textcolor{comment}{\ \ \ *\ \ \ QA:\ MAE\ =\ 0.32,\ MaxErr\ =\ 1.23\ (парабола\ улетает!)}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00206}00206\ \textcolor{comment}{\ \ \ *\ \ \ EA:\ возвращает\ FAILURE,\ ставит\ xe\ =\ краевой\ отсчёт}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00207}00207\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00208}00208\ \textcolor{comment}{\ \ \ *\ Гауссова\ экстраполяция\ (E2):\ MAE\ =\ 0.148}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00209}00209\ \textcolor{comment}{\ \ \ *\ \ \ →\ в\ 2-\/3\ раза\ лучше\ любого\ стандартного\ метода!}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00210}00210\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00211}00211\ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{discr__auto_8c_a0fccaee4e2734f24cb735a57e89a706a}{discr\_is\_monotonic}}(A1,\ A2,\ A3))\ \{}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00212}00212\ \ \ \ \ ret\ =\ \mbox{\hyperlink{discr__auto_8c_aff4b1fea96d16566196f7f7c44331547}{discr3\_extrap\_gauss}}(A1,\ A2,\ A3,\ x1,\ x2,\ x3,\ xe);}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00213}00213\ \ \ \ \ \textcolor{keywordflow}{return}\ (ret\ ==\ EXIT\_SUCCESS)\ ?\ 2\ :\ 3;}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00214}00214\ \ \ \ \ \textcolor{comment}{/*\ 2\ =\ E2\ сработала,\ 3\ =\ E2\ не\ смогла\ (нули,\ вырожденность)\ */}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00215}00215\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00216}00216\ }
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00217}00217\ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00218}00218\ \textcolor{comment}{\ \ \ *\ Ветка\ 2:\ НОРМАЛЬНЫЕ\ данные\ (пик\ внутри\ сетки)}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00219}00219\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00220}00220\ \textcolor{comment}{\ \ \ *\ EA\ (экспоненциальный):\ MAE\ =\ 0.005\ в\ нормальной\ зоне}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00221}00221\ \textcolor{comment}{\ \ \ *\ \ \ Лучший\ метод!\ Использует\ log-\/параболу,\ точнее\ QA.}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00222}00222\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00223}00223\ \textcolor{comment}{\ \ \ *\ Если\ EA\ вернёт\ FAILURE\ (вогнутость,\ нули),\ переходим\ на\ QA.}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00224}00224\ \textcolor{comment}{\ \ \ *\ QA:\ MAE\ =\ 0.006\ —\ почти\ так\ же\ точен,\ но\ без\ ограничений}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00225}00225\ \textcolor{comment}{\ \ \ *\ \ \ \ \ на\ знак\ амплитуд\ и\ выпуклость.}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00226}00226\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00227}00227\ \ \ ret\ =\ \mbox{\hyperlink{discrea_8h_a1d0a905788c41a528b49032ecb9c2748}{discr3ea}}(A1,\ A2,\ A3,\ x1,\ x2,\ x3,\ xe);}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00228}00228\ }
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00229}00229\ \ \ \textcolor{keywordflow}{if}\ (ret\ ==\ EXIT\_SUCCESS)\ \{}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00230}00230\ \ \ \ \ \textcolor{keywordflow}{return}\ 0;\ \ \textcolor{comment}{/*\ EA\ справился\ —\ лучший\ результат\ */}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00231}00231\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00232}00232\ }
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00233}00233\ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00234}00234\ \textcolor{comment}{\ \ \ *\ Ветка\ 3:\ FALLBACK\ на\ QA}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00235}00235\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00236}00236\ \textcolor{comment}{\ \ \ *\ EA\ вернул\ FAILURE.\ Причины:}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00237}00237\ \textcolor{comment}{\ \ \ *\ \ \ -\/\ Вогнутость\ (минимум\ в\ центре\ вместо\ максимума)}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00238}00238\ \textcolor{comment}{\ \ \ *\ \ \ -\/\ Нулевые\ или\ отрицательные\ амплитуды}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00239}00239\ \textcolor{comment}{\ \ \ *\ \ \ -\/\ Числовая\ вырожденность}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00240}00240\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00241}00241\ \textcolor{comment}{\ \ \ *\ QA\ не\ требует\ положительных\ амплитуд\ и\ не\ проверяет}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00242}00242\ \textcolor{comment}{\ \ \ *\ выпуклость\ —\ работает\ всегда\ (кроме\ совсем\ вырожденных\ случаев).}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00243}00243\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00244}00244\ \ \ *xe\ =\ \mbox{\hyperlink{discrqa_8h_a5cdf0c7b82518afc98773e8f323ddb3b}{discr3qa}}(A1,\ A2,\ A3,\ x1,\ x2,\ x3);}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00245}00245\ \ \ \textcolor{keywordflow}{return}\ 1;\ \ \textcolor{comment}{/*\ QA\ fallback\ */}}
+\DoxyCodeLine{\Hypertarget{discr__auto_8c_source_l00246}00246\ \}}
+
+\end{DoxyCode}

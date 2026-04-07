@@ -1,0 +1,127 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Discriminator Estimates (КППО/ТЗК): Исходный файл discr_auto.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript">
+window.MathJax = {
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Discriminator Estimates (КППО/ТЗК)
+   </div>
+   <div id="projectbrief">Дискриминаторные оценки координат цели по отсчётам ДН антенны</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Поиск');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function() { init_codefold(0); });
+/* @license-end */
+</script>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle"><div class="title">discr_auto.h</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="discr__auto_8h.html">См. документацию.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span> </div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="preprocessor">#ifndef DISCR_AUTO_H</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="preprocessor">#define DISCR_AUTO_H</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="keywordtype">int</span> <a class="code hl_function" href="discr__auto_8h.html#a0fccaee4e2734f24cb735a57e89a706a">discr_is_monotonic</a>(<span class="keywordtype">double</span> A1, <span class="keywordtype">double</span> A2, <span class="keywordtype">double</span> A3);</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="keywordtype">int</span> <a class="code hl_function" href="discr__auto_8h.html#aff4b1fea96d16566196f7f7c44331547">discr3_extrap_gauss</a>(<span class="keywordtype">double</span> A1, <span class="keywordtype">double</span> A2, <span class="keywordtype">double</span> A3,</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>                        <span class="keywordtype">double</span> x1, <span class="keywordtype">double</span> x2, <span class="keywordtype">double</span> x3,</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>                        <span class="keywordtype">double</span> *xe);</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span><span class="keywordtype">int</span> <a class="code hl_function" href="discr__auto_8h.html#a99aa3243f4143e13f9e1a2fda43c714e">discr3_auto</a>(<span class="keywordtype">double</span> A1, <span class="keywordtype">double</span> A2, <span class="keywordtype">double</span> A3,</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>                <span class="keywordtype">double</span> x1, <span class="keywordtype">double</span> x2, <span class="keywordtype">double</span> x3,</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>                <span class="keywordtype">double</span> *xe);</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span> </div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span><span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>}</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span> </div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span><span class="preprocessor">#endif </span><span class="comment">/* DISCR_AUTO_H */</span><span class="preprocessor"></span></div>
+<div class="ttc" id="adiscr__auto_8h_html_a0fccaee4e2734f24cb735a57e89a706a"><div class="ttname"><a href="discr__auto_8h.html#a0fccaee4e2734f24cb735a57e89a706a">discr_is_monotonic</a></div><div class="ttdeci">int discr_is_monotonic(double A1, double A2, double A3)</div><div class="ttdoc">Проверка монотонности трёх отсчётов.</div><div class="ttdef"><b>Definition</b> <a href="discr__auto_8c_source.html#l00035">discr_auto.c:35</a></div></div>
+<div class="ttc" id="adiscr__auto_8h_html_a99aa3243f4143e13f9e1a2fda43c714e"><div class="ttname"><a href="discr__auto_8h.html#a99aa3243f4143e13f9e1a2fda43c714e">discr3_auto</a></div><div class="ttdeci">int discr3_auto(double A1, double A2, double A3, double x1, double x2, double x3, double *xe)</div><div class="ttdoc">Автоматический дискриминатор с переключением.</div><div class="ttdef"><b>Definition</b> <a href="discr__auto_8c_source.html#l00191">discr_auto.c:191</a></div></div>
+<div class="ttc" id="adiscr__auto_8h_html_aff4b1fea96d16566196f7f7c44331547"><div class="ttname"><a href="discr__auto_8h.html#aff4b1fea96d16566196f7f7c44331547">discr3_extrap_gauss</a></div><div class="ttdeci">int discr3_extrap_gauss(double A1, double A2, double A3, double x1, double x2, double x3, double *xe)</div><div class="ttdoc">Гауссова экстраполяция (E2) для монотонных случаев.</div><div class="ttdef"><b>Definition</b> <a href="discr__auto_8c_source.html#l00072">discr_auto.c:72</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8
+</small></address>
+</body>
+</html>

@@ -1,0 +1,46 @@
+\doxysection{discrcg.\+c}
+\hypertarget{discrcg_8c_source}{}\label{discrcg_8c_source}\index{discrcg.c@{discrcg.c}}
+\mbox{\hyperlink{discrcg_8c}{См. документацию.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{discrcg_8c_source_l00001}00001\ }
+\DoxyCodeLine{\Hypertarget{discrcg_8c_source_l00013}00013\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{discrcg_8h}{discrcg.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{discrcg_8c_source_l00014}00014\ \textcolor{preprocessor}{\#include\ <math.h>}}
+\DoxyCodeLine{\Hypertarget{discrcg_8c_source_l00015}00015\ \textcolor{preprocessor}{\#include\ <float.h>}}
+\DoxyCodeLine{\Hypertarget{discrcg_8c_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{discrcg_8c_source_l00028}\mbox{\hyperlink{discrcg_8h_a2f34219caf8080f3d9a219cfb4a5e7c0}{00028}}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{discrcg_8c_a2f34219caf8080f3d9a219cfb4a5e7c0}{discr2cg}}(\textcolor{keywordtype}{double}\ A1,\ \textcolor{keywordtype}{double}\ A2,}
+\DoxyCodeLine{\Hypertarget{discrcg_8c_source_l00029}00029\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ x1,\ \textcolor{keywordtype}{double}\ x2)}
+\DoxyCodeLine{\Hypertarget{discrcg_8c_source_l00030}00030\ \{}
+\DoxyCodeLine{\Hypertarget{discrcg_8c_source_l00031}00031\ \ \ \textcolor{keywordtype}{double}\ sum\ =\ A1\ +\ A2;}
+\DoxyCodeLine{\Hypertarget{discrcg_8c_source_l00032}00032\ \ \ \textcolor{keywordflow}{if}\ (fabs(sum)\ <\ DBL\_EPSILON)}
+\DoxyCodeLine{\Hypertarget{discrcg_8c_source_l00033}00033\ \ \ \ \ \textcolor{keywordflow}{return}\ (x1\ +\ x2)\ *\ 0.5;}
+\DoxyCodeLine{\Hypertarget{discrcg_8c_source_l00034}00034\ \ \ \textcolor{keywordflow}{return}\ (A1\ *\ x1\ +\ A2\ *\ x2)\ /\ sum;}
+\DoxyCodeLine{\Hypertarget{discrcg_8c_source_l00035}00035\ \}}
+\DoxyCodeLine{\Hypertarget{discrcg_8c_source_l00036}00036\ }
+\DoxyCodeLine{\Hypertarget{discrcg_8c_source_l00050}\mbox{\hyperlink{discrcg_8h_ab3655559ca8de2c4fa17fc6341fad94c}{00050}}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{discrcg_8c_ab3655559ca8de2c4fa17fc6341fad94c}{discr3cg}}(\textcolor{keywordtype}{double}\ A1,\ \textcolor{keywordtype}{double}\ A2,\ \textcolor{keywordtype}{double}\ A3,}
+\DoxyCodeLine{\Hypertarget{discrcg_8c_source_l00051}00051\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ x1,\ \textcolor{keywordtype}{double}\ x2,\ \textcolor{keywordtype}{double}\ x3)}
+\DoxyCodeLine{\Hypertarget{discrcg_8c_source_l00052}00052\ \{}
+\DoxyCodeLine{\Hypertarget{discrcg_8c_source_l00053}00053\ \ \ \textcolor{keywordtype}{double}\ sum\ =\ A1\ +\ A2\ +\ A3;}
+\DoxyCodeLine{\Hypertarget{discrcg_8c_source_l00054}00054\ \ \ \textcolor{keywordflow}{if}\ (fabs(sum)\ <\ DBL\_EPSILON)}
+\DoxyCodeLine{\Hypertarget{discrcg_8c_source_l00055}00055\ \ \ \ \ \textcolor{keywordflow}{return}\ x2;}
+\DoxyCodeLine{\Hypertarget{discrcg_8c_source_l00056}00056\ \ \ \textcolor{keywordflow}{return}\ (A1\ *\ x1\ +\ A2\ *\ x2\ +\ A3\ *\ x3)\ /\ sum;}
+\DoxyCodeLine{\Hypertarget{discrcg_8c_source_l00057}00057\ \}}
+\DoxyCodeLine{\Hypertarget{discrcg_8c_source_l00058}00058\ }
+\DoxyCodeLine{\Hypertarget{discrcg_8c_source_l00069}\mbox{\hyperlink{discrcg_8h_a9ad0e5b9b43b3c30b233cf174c5688d3}{00069}}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{discrcg_8c_a9ad0e5b9b43b3c30b233cf174c5688d3}{discrncg}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ *A,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ *x,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ N)}
+\DoxyCodeLine{\Hypertarget{discrcg_8c_source_l00070}00070\ \{}
+\DoxyCodeLine{\Hypertarget{discrcg_8c_source_l00071}00071\ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ n;}
+\DoxyCodeLine{\Hypertarget{discrcg_8c_source_l00072}00072\ \ \ \textcolor{keywordtype}{double}\ Axs\ =\ 0.0,\ As\ =\ 0.0;}
+\DoxyCodeLine{\Hypertarget{discrcg_8c_source_l00073}00073\ }
+\DoxyCodeLine{\Hypertarget{discrcg_8c_source_l00074}00074\ \ \ \textcolor{keywordflow}{for}\ (n\ =\ 0;\ n\ <\ N;\ n++)\ \{}
+\DoxyCodeLine{\Hypertarget{discrcg_8c_source_l00075}00075\ \ \ \ \ As\ +=\ A[n];}
+\DoxyCodeLine{\Hypertarget{discrcg_8c_source_l00076}00076\ \ \ \ \ Axs\ +=\ A[n]\ *\ x[n];}
+\DoxyCodeLine{\Hypertarget{discrcg_8c_source_l00077}00077\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{discrcg_8c_source_l00078}00078\ }
+\DoxyCodeLine{\Hypertarget{discrcg_8c_source_l00079}00079\ \ \ \textcolor{keywordflow}{if}\ (fabs(As)\ <\ DBL\_EPSILON)\ \{}
+\DoxyCodeLine{\Hypertarget{discrcg_8c_source_l00080}00080\ \ \ \ \ \textcolor{keywordflow}{if}\ (N\ >\ 0)}
+\DoxyCodeLine{\Hypertarget{discrcg_8c_source_l00081}00081\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ x[N\ /\ 2];}
+\DoxyCodeLine{\Hypertarget{discrcg_8c_source_l00082}00082\ \ \ \ \ \textcolor{keywordflow}{return}\ 0.0;}
+\DoxyCodeLine{\Hypertarget{discrcg_8c_source_l00083}00083\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{discrcg_8c_source_l00084}00084\ \ \ \textcolor{keywordflow}{return}\ Axs\ /\ As;}
+\DoxyCodeLine{\Hypertarget{discrcg_8c_source_l00085}00085\ \}}
+
+\end{DoxyCode}

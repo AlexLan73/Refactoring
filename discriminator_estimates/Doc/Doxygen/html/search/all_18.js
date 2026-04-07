@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['бины_20k_201_20k_20k_201_0',['3-точечные (бины k-1, k, k+1)',['../fft_page.html#autotoc_md4',1,'']]],
-  ['быстрый_20старт_1',['Быстрый старт',['../index.html#autotoc_md44',1,'']]]
+  ['of_20gravity_0',['1. Центр тяжести (CG — Center of Gravity)',['../formulas_page.html#autotoc_md17',1,'']]]
 ];

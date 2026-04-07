@@ -1,0 +1,113 @@
+\doxysection{Файл discrqa.\+c}
+\hypertarget{discrqa_8c}{}\label{discrqa_8c}\index{discrqa.c@{discrqa.c}}
+
+
+КППО / ТЗК. Дискриминатор — квадратичная аппроксимация (Quadratic).  
+
+
+{\ttfamily \#include "{}discrqa.\+h"{}}\newline
+{\ttfamily \#include $<$float.\+h$>$}\newline
+{\ttfamily \#include $<$math.\+h$>$}\newline
+\doxysubsubsection*{Функции}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{discrqa_8c_a5cdf0c7b82518afc98773e8f323ddb3b}{discr3qa}} (double A1, double A2, double A3, double x1, double x2, double x3)
+\begin{DoxyCompactList}\small\item\em Трехточечный дискриминатор, аппроксимация квадратичной зависимостью. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Подробное описание}
+КППО / ТЗК. Дискриминатор — квадратичная аппроксимация (Quadratic). 
+
+\begin{DoxyAuthor}{Автор}
+Федоров С.\+А. 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Дата}
+07.\+05.\+2010 
+\end{DoxyDate}
+Рефакторинг\+: Кодо, 2026-\/03-\/28 Изменения\+:
+\begin{DoxyItemize}
+\item ERR-\/004\+: FLT\+\_\+\+EPSILON заменён на DBL\+\_\+\+EPSILON для double
+\item STYLE-\/001\+: табуляции заменены на 2 пробела
+\item STYLE-\/003\+: добавлены пробелы вокруг операторов 
+\end{DoxyItemize}
+
+См. определение в файле \mbox{\hyperlink{discrqa_8c_source}{discrqa.\+c}}
+
+
+
+\doxysubsection{Функции}
+\Hypertarget{discrqa_8c_a5cdf0c7b82518afc98773e8f323ddb3b}\label{discrqa_8c_a5cdf0c7b82518afc98773e8f323ddb3b} 
+\index{discrqa.c@{discrqa.c}!discr3qa@{discr3qa}}
+\index{discr3qa@{discr3qa}!discrqa.c@{discrqa.c}}
+\doxysubsubsection{\texorpdfstring{discr3qa()}{discr3qa()}}
+{\footnotesize\ttfamily double discr3qa (\begin{DoxyParamCaption}\item[{double}]{A1,  }\item[{double}]{A2,  }\item[{double}]{A3,  }\item[{double}]{x1,  }\item[{double}]{x2,  }\item[{double}]{x3 }\end{DoxyParamCaption})}
+
+
+
+Трехточечный дискриминатор, аппроксимация квадратичной зависимостью. 
+
+Трехточечный дискриминатор, аппроксимация квадратичной зависимостью (Quadratic).
+
+Аппроксимирует 3 точки параболой y = a\texorpdfstring{$\ast$}{*}x² + b\texorpdfstring{$\ast$}{*}x + c и находит вершину.
+
+Формулы\+: Ao = (A2 -\/ A1) / (A2 -\/ A3) xe = 0.\+5 \texorpdfstring{$\ast$}{*} ((Ao-\/1)\texorpdfstring{$\ast$}{*}x2² -\/ Ao\texorpdfstring{$\ast$}{*}x3² + x1²) / ((Ao-\/1)\texorpdfstring{$\ast$}{*}x2 -\/ Ao\texorpdfstring{$\ast$}{*}x3 + x1)
+
+Граничные случаи\+:
+\begin{DoxyItemize}
+\item A2 = A3\+: если A1 = A2 → x2; если A1 \texorpdfstring{$>$}{>} A2 → x1; иначе → (x2+x3)/2
+\item A1 = A2\+: если A3 \texorpdfstring{$>$}{>} A2 → x3; иначе → (x1+x2)/2
+\end{DoxyItemize}
+
+
+\begin{DoxyParams}{Аргументы}
+{\em A1} & амплитуда первой точки \\
+\hline
+{\em A2} & амплитуда второй точки \\
+\hline
+{\em A3} & амплитуда третьей точки \\
+\hline
+{\em x1} & координата первой точки \\
+\hline
+{\em x2} & координата второй точки \\
+\hline
+{\em x3} & координата третьей точки \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+оценка координаты 
+\end{DoxyReturn}
+
+
+См. определение в файле \mbox{\hyperlink{discrqa_8c_source}{discrqa.\+c}} строка \mbox{\hyperlink{discrqa_8c_source_l00039}{39}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00041\ \{}
+\DoxyCodeLine{00042\ \ \ \textcolor{keywordflow}{if}\ (fabs(A2\ -\/\ A3)\ <\ DBL\_EPSILON)\ \{}
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordflow}{if}\ (fabs(A2\ -\/\ A1)\ <\ DBL\_EPSILON)}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ x2;}
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordflow}{if}\ (A1\ >\ A2)}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ x1;}
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0.5\ *\ (x3\ +\ x2);}
+\DoxyCodeLine{00049\ \ \ \}}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \ \ \textcolor{keywordflow}{if}\ (fabs(A2\ -\/\ A1)\ <\ DBL\_EPSILON)\ \{}
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keywordflow}{if}\ (A3\ >\ A2)}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ x3;}
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0.5\ *\ (x1\ +\ x2);}
+\DoxyCodeLine{00056\ \ \ \}}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \ \ \{}
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ Ao\ =\ (A2\ -\/\ A1)\ /\ (A2\ -\/\ A3);}
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keywordtype}{double}\ denom\ =\ (Ao\ -\/\ 1.0)\ *\ x2\ -\/\ Ao\ *\ x3\ +\ x1;}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keywordflow}{if}\ (fabs(denom)\ <\ DBL\_EPSILON)}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ x2;}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keywordflow}{return}\ 0.5\ *\ ((Ao\ -\/\ 1.0)\ *\ x2\ *\ x2\ -\/\ Ao\ *\ x3\ *\ x3\ +\ x1\ *\ x1)\ /\ denom;}
+\DoxyCodeLine{00066\ \ \ \}}
+\DoxyCodeLine{00067\ \}}
+
+\end{DoxyCode}

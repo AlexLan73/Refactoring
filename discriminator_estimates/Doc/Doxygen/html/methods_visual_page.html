@@ -1,0 +1,337 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Discriminator Estimates (КППО/ТЗК): Визуальный разбор методов</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript">
+window.MathJax = {
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Discriminator Estimates (КППО/ТЗК)
+   </div>
+   <div id="projectbrief">Дискриминаторные оценки координат цели по отсчётам ДН антенны</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Поиск');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="index.html">Главная страница</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div><div class="header">
+  <div class="headertitle"><div class="title">Визуальный разбор методов</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><h1><a class="anchor" id="autotoc_md71"></a>
+Поведение дискриминаторов «вживую» — анимации, 3D-карты и контуры</h1>
+<blockquote class="doxtable">
+<p>&zwj;Самый быстрый способ понять, как ведут себя методы — посмотреть, как они реагируют на движущийся пик и нарастающий шум. На этой странице собраны все наглядные иллюстрации модуля. </p>
+</blockquote>
+<h1><a class="anchor" id="autotoc_md72"></a>
+&lt;/blockquote&gt;</h1>
+<h1><a class="anchor" id="autotoc_md73"></a>
+Раздел 1. GIF-анимации — поведение в динамике</h1>
+<h2><a class="anchor" id="autotoc_md74"></a>
+Sweep по всей зоне — все методы вместе</h2>
+<div class="image">
+<img src="sweep_all.gif" alt=""/>
+<div class="caption">
+Sweep по всей зоне: пик плавно движется через окно, видно где методы расходятся</div></div>
+<p><b>Что происходит на кадре:</b></p><ul>
+<li>по горизонтали — координата;</li>
+<li>голубая кривая — sinc/Hanning kernel с движущимся пиком;</li>
+<li>зелёный пунктир — <b>истинное</b> положение пика \( x_0 \);</li>
+<li>цветные вертикальные линии — оценки разных методов;</li>
+<li>крайние точки слева/справа — отсчёты, которые «видит» алгоритм.</li>
+</ul>
+<p><b>На что смотреть:</b></p><ul>
+<li>В <b>центральной зоне</b> ( \( |x_0| \le 0.5 \) шага) — все методы вместе.</li>
+<li>Ближе к краям — 3-точечные методы (CG, SD, QA, EA) <b>разбегаются</b>: пик уходит из их «зоны видимости».</li>
+<li>5-точечные (5QA, 5EA) держат пик намного дольше и не отрываются от зелёной пунктирной линии.</li>
+</ul>
+<hr  />
+<h2><a class="anchor" id="autotoc_md76"></a>
+Крупный план — нормальная зона</h2>
+<div class="image">
+<img src="sweep_zoom_normal.gif" alt=""/>
+<div class="caption">
+Sweep с zoom: только нормальная зона ±1 шаг — видны субшаговые различия</div></div>
+<p>То же самое, но <b>крупным планом</b>, в пределах нормальной зоны \( |x_0| \le 1 \) шаг. Здесь видно даже мелкие различия между методами:</p><ul>
+<li>EA сидит почти на самой зелёной линии,</li>
+<li>QA немного дрожит относительно неё,</li>
+<li>CG/SD ощутимо смещены.</li>
+</ul>
+<hr  />
+<h2><a class="anchor" id="autotoc_md78"></a>
+Нарастание шума</h2>
+<div class="image">
+<img src="noise_ramp.gif" alt=""/>
+<div class="caption">
+Шум постепенно нарастает: SNR падает с 40 дБ до 0 дБ</div></div>
+<p><b>Что происходит:</b> пик стоит на месте, а шум плавно нарастает (SNR с 40 дБ падает до 0 дБ). Каждый кадр — новая случайная реализация шума.</p>
+<p><b>На что смотреть:</b></p><ul>
+<li>При <b>высоком SNR</b> все оценки сидят рядом с истинным пиком.</li>
+<li>При <b>низком SNR</b> оценки начинают «дрожать». Чем стабильнее метод — тем меньше амплитуда дрожания.</li>
+<li>5EA / 5QA дрожат заметно меньше, чем 3-точечные собратья — это визуальное подтверждение их шумоустойчивости из <a class="el" href="recommendations_page.html">Итоговые рекомендации</a>.</li>
+</ul>
+<hr  />
+<h2><a class="anchor" id="autotoc_md80"></a>
+Резкое изменение пика</h2>
+<div class="image">
+<img src="step_change.gif" alt=""/>
+<div class="caption">
+Step-change: пик мгновенно прыгает на новую позицию</div></div>
+<p>Тестируем переходный процесс: пик <b>мгновенно</b> скачет с одной координаты на другую. Никакого сглаживания между кадрами — каждый кадр это новый независимый замер.</p>
+<p><b>Что показывает:</b> все методы <b>немедленно</b> реагируют (нет инерции — дискриминаторы не имеют памяти). Полезно как контроль того, что в реализации нет случайной фильтрации.</p>
+<hr  />
+<h2><a class="anchor" id="autotoc_md82"></a>
+Авто-демо всех сценариев</h2>
+<div class="image">
+<img src="auto_demo.gif" alt=""/>
+<div class="caption">
+Auto-demo: sweep + нарастание шума + step-change подряд</div></div>
+<p>Все три сценария подряд в одном GIF-файле — удобно для презентаций. Подробное объяснение каждого фрагмента — в трёх разделах выше.</p>
+<hr  />
+<h1><a class="anchor" id="autotoc_md84"></a>
+Раздел 2. Карты точности — 3D и heatmap</h1>
+<h2><a class="anchor" id="autotoc_md85"></a>
+5EA: точность как функция (x0, SNR)</h2>
+<p>Это <b>самая важная карта</b> — показывает, как ведёт себя рекомендуемый метод 5EA в <b>двумерном пространстве</b> ключевых параметров: смещение пика \( x_0 \) и уровень шума SNR.</p>
+<div class="image">
+<img src="surface_5ea_x0_snr.png" alt=""/>
+<div class="caption">
+3D-поверхность 5EA: ось X — x0, ось Y — SNR, высота — медианная ошибка</div></div>
+<div class="image">
+<img src="heatmap_5ea_x0_snr.png" alt=""/>
+<div class="caption">
+Тепловая карта 5EA: вид сверху на ту же поверхность</div></div>
+<p><b>Что видно:</b></p>
+<ul>
+<li><b>Левая нижняя зона</b> (малый \( x_0 \), высокий SNR) — тёмная = маленькая ошибка. Это идеальные условия: пик по центру окна, шум слабый.</li>
+<li><b>Правая зона</b> (большой \( x_0 \)) — резкий рост ошибки. Это <b>монотонная зона</b> (пик вышел за пределы 3-точечного окна).</li>
+<li><b>Верхняя зона</b> (низкий SNR) — ошибка растёт при любом \( x_0 \): шум слишком сильный.</li>
+<li><b>Голубая линия</b> на 3D-поверхности — граница монотонной зоны для 3pt методов. Правее этой линии 5EA продолжает работать, а QA(3pt) уже сыплется.</li>
+</ul>
+<p><b>Практический вывод:</b> чтобы получить ошибку &lt; 0.05 шага, нужно одновременно:</p><ul>
+<li>удерживать <b>SNR &gt; 15 дБ</b> И</li>
+<li>держать ** \( |x_0| &lt; 1.5 \) шага** от центра окна.</li>
+</ul>
+<hr  />
+<h2><a class="anchor" id="autotoc_md87"></a>
+Сравнение 4 классических методов на одной картинке</h2>
+<div class="image">
+<img src="surface_all_methods.png" alt=""/>
+<div class="caption">
+4 поверхности: CG / SD / QA / EA как функция (x0, шаг сетки d)</div></div>
+<p>Четыре 3D-поверхности рядом. Сравниваем — у какого метода «долина» <b>глубже</b> (меньше ошибка) и <b>шире</b> (больше допустимый диапазон \( x_0 \)).</p>
+<p><b>Типичный вывод:</b></p><ul>
+<li><b>EA</b> — самая глубокая долина (точнее всех на чистом сигнале);</li>
+<li><b>CG</b> — самая широкая, но мелкая (грубо, но устойчиво);</li>
+<li><b>QA</b> — промежуточный вариант;</li>
+<li><b>SD</b> — нестабилен при неправильном выборе коэффициента \( c \).</li>
+</ul>
+<hr  />
+<h2><a class="anchor" id="autotoc_md89"></a>
+Тепловые карты по отдельным методам</h2>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">CG   </th><th class="markdownTableHeadNone">SD   </th><th class="markdownTableHeadNone">QA   </th><th class="markdownTableHeadNone">EA    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><div class="image">
+<img src="heatmap_error_cg.png" alt=""/>
+<div class="caption">
+CG</div></div>
+   </td><td class="markdownTableBodyNone"><div class="image">
+<img src="heatmap_error_sd.png" alt=""/>
+<div class="caption">
+SD</div></div>
+   </td><td class="markdownTableBodyNone"><div class="image">
+<img src="heatmap_error_qa.png" alt=""/>
+<div class="caption">
+QA</div></div>
+   </td><td class="markdownTableBodyNone"><div class="image">
+<img src="heatmap_error_ea.png" alt=""/>
+<div class="caption">
+EA</div></div>
+   </td></tr>
+</table>
+<p>Тёмная горизонтальная полоса = <b>оптимальный диапазон шага сетки</b> \( d \). Именно эту полосу нужно искать, выбирая шаг под свою задачу.</p>
+<hr  />
+<h1><a class="anchor" id="autotoc_md91"></a>
+Раздел 3. Чистый сигнал — точность на эталоне</h1>
+<h2><a class="anchor" id="autotoc_md92"></a>
+Все дискриминаторы на sinc(x − 0.25)</h2>
+<div class="image">
+<img src="sinc_discriminator_estimates.png" alt=""/>
+<div class="caption">
+sinc(x − 0.25): голубая ДН, жёлтые отсчёты, вертикальные оценки</div></div>
+<p>Что нарисовано:</p><ul>
+<li><b>Голубая линия</b> — sinc(x − 0.25), реалистичная ДН антенны;</li>
+<li><b>Жёлтые точки</b> — 3 отсчёта на сетке {−1, 0, +1};</li>
+<li><b>Вертикальные линии</b> — оценки CG / QA / EA / 5EA;</li>
+<li><b>Зелёная пунктирная</b> — истинное положение пика \( x_0 = 0.25 \).</li>
+</ul>
+<p>EA и 5EA сидят почти на самой зелёной линии. CG ощутимо левее.</p>
+<hr  />
+<h2><a class="anchor" id="autotoc_md94"></a>
+МНК-5 на Hanning kernel</h2>
+<div class="image">
+<img src="hanning_5pt_estimates.png" alt=""/>
+<div class="caption">
+5QA и 5EA на Hanning kernel: парабола идеально ложится на колокол</div></div>
+<p>Тот же эксперимент, но на <b>Hanning kernel</b> (форма пика после FFT с Hanning-окном). 5 точек, две оценки 5QA / 5EA, обе очень близки к истинному значению.</p>
+<p>Это визуальное подтверждение тезиса «парабола + Hanning = любовь» из <a class="el" href="recommendations_page.html">Итоговые рекомендации</a>.</p>
+<hr  />
+<h2><a class="anchor" id="autotoc_md96"></a>
+Ошибка vs смещение пика — sweep</h2>
+<div class="image">
+<img src="error_vs_shift.png" alt=""/>
+<div class="caption">
+Ошибка |xe − x0| vs истинное x0 — все методы на одном графике</div></div>
+<p>Базовый бенчмарк. По горизонтали — истинное смещение пика \( x_0 \), по вертикали — модуль ошибки. <b>Чем ниже кривая, тем точнее метод.</b></p>
+<p>Наблюдения:</p><ul>
+<li><b>CG</b> и <b>SD</b> — почти линейно растут (классическая систематическая ошибка взвешенного среднего);</li>
+<li><b>QA</b> — почти 0 в нормальной зоне, потом резкий рост;</li>
+<li><b>EA</b> — самая низкая в нормальной зоне.</li>
+</ul>
+<hr  />
+<h2><a class="anchor" id="autotoc_md98"></a>
+МНК 5/7/9 точек — без шума</h2>
+<div class="image">
+<img src="lsq_abs_error_vs_x0.png" alt=""/>
+<div class="caption">
+МНК 5/7/9 точек, абсолютная ошибка vs x0, лог. шкала Y</div></div>
+<p>Главное наблюдение: <b>EA-кривые в ~10× ниже QA-кривых</b> при любом числе точек. Логарифмирование амплитуд (т.е. подгонка гауссиана вместо параболы) действительно даёт большой выигрыш на Hanning kernel.</p>
+<hr  />
+<h1><a class="anchor" id="autotoc_md100"></a>
+Раздел 4. С шумом — устойчивость</h1>
+<h2><a class="anchor" id="autotoc_md101"></a>
+Базовые методы под Монте-Карло шумом</h2>
+<div class="image">
+<img src="noise_error_vs_snr.png" alt=""/>
+<div class="caption">
+CG/SD/QA/EA: средняя ошибка vs SNR (Монте-Карло)</div></div>
+<div class="image">
+<img src="noise_std_vs_snr.png" alt=""/>
+<div class="caption">
+CG/SD/QA/EA: СКО ошибки vs SNR — насколько разлетаются оценки</div></div>
+<p>При снижении SNR оценки разлетаются. Метод с меньшим СКО = более стабильный.</p>
+<hr  />
+<h2><a class="anchor" id="autotoc_md103"></a>
+5pt vs 3pt под шумом — Hanning</h2>
+<div class="image">
+<img src="hanning_noise_robustness.png" alt=""/>
+<div class="caption">
+Hanning kernel: 5pt vs 3pt — средняя ошибка и СКО vs SNR</div></div>
+<p>5pt-методы выигрывают <b>всегда</b> — а особенно при SNR &lt; 20 дБ.</p>
+<hr  />
+<h2><a class="anchor" id="autotoc_md105"></a>
+МНК 5 / 7 / 9 точек под шумом</h2>
+<div class="image">
+<img src="lsq_error_vs_snr.png" alt=""/>
+<div class="caption">
+МНК 5/7/9: медиана ошибки vs SNR</div></div>
+<div class="image">
+<img src="lsq_gain_vs_snr.png" alt=""/>
+<div class="caption">
+Выигрыш N-pt относительно 5EA: где имеет смысл брать больше точек</div></div>
+<p>При SNR &gt; 20 дБ — все примерно одинаково. При SNR &lt; 15 дБ — 7pt и 9pt заметно лучше. <b>Но это редкие условия</b> — для типичного радара 5pt оптимум, см. <a class="el" href="recommendations_page.html">Итоговые рекомендации</a>.</p>
+<hr  />
+<h1><a class="anchor" id="autotoc_md107"></a>
+Раздел 5. Монотонная зона</h1>
+<div class="image">
+<img src="monotonic_example.png" alt=""/>
+<div class="caption">
+Три сценария: нормальный / переходный / монотонный — как они выглядят</div></div>
+<div class="image">
+<img src="monotonic_bias.png" alt=""/>
+<div class="caption">
+Монотонная зона: bias QA(3pt) vs 5QA vs 5EA</div></div>
+<div class="image">
+<img src="monotonic_error_vs_snr.png" alt=""/>
+<div class="caption">
+Монотонная зона + шум: 5EA значительно точнее QA(3pt)</div></div>
+<p><b>Главный вывод по серии:</b> в монотонной зоне (пик за пределами окна) 3-точечные методы сильно ошибаются, а 5-точечные продолжают работать. Подробнее — раздел «Монотонная зона» на странице <a class="el" href="recommendations_page.html">Итоговые рекомендации</a>.</p>
+<hr  />
+<h1><a class="anchor" id="autotoc_md109"></a>
+Куда дальше</h1>
+<ul>
+<li><a class="el" href="formulas_page.html">Математические формулы</a> — Все формулы CG / SD / QA / EA / 5QA / 5EA</li>
+<li><a class="el" href="recommendations_page.html">Итоговые рекомендации</a> — Итоговые рекомендации + дерево решений</li>
+<li><a class="el" href="tests_page.html">Тестирование</a> — Описание тестового покрытия</li>
+<li><a class="el" href="fft_page.html">FFT-дискриминаторы частоты</a> — Применение к оценке частоты по спектру FFT</li>
+<li><code>Doc/plots/README.md</code> — полный гайд по всем графикам с пояснениями </li>
+</ul>
+</div></div><!-- contents -->
+</div><!-- PageDoc -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8
+</small></address>
+</body>
+</html>

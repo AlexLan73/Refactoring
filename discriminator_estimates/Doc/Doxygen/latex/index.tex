@@ -1,0 +1,228 @@
+\chapter{Главная страница}
+\hypertarget{index}{}\label{index}\index{Главная страница@{Главная страница}}
+\label{index_mainpage}%
+\Hypertarget{index_mainpage}%
+ \hypertarget{index_autotoc_md45}{}\doxysection{\texorpdfstring{Дискриминаторные оценки координат (КППО / ТЗК)}{Дискриминаторные оценки координат (КППО / ТЗК)}}\label{index_autotoc_md45}
+\begin{quote}
+{\bfseries{Модуль\+:}} {\ttfamily discriminator\+\_\+estimates} {\bfseries{Организация\+:}} ОАО НПК НИИДАР {\bfseries{Авторы\+:}} Федоров С.\+А., Добродумов А.\+Б., Керский Е.\+В. {\bfseries{Рефакторинг и расширение\+:}} Кодо (AI-\/ассистент) + Alex, 2026 {\bfseries{Версия документации\+:}} 2026-\/04-\/06 \end{quote}
+\hypertarget{index_autotoc_md46}{}\doxysection{\texorpdfstring{$<$/blockquote$>$}{</blockquote>}}\label{index_autotoc_md46}
+
+
+\DoxyHorRuler{0}
+\hypertarget{index_autotoc_md48}{}\doxysection{\texorpdfstring{Что это и зачем}{Что это и зачем}}\label{index_autotoc_md48}
+Эта библиотека отвечает на один очень практичный вопрос\+:
+
+\begin{quote}
+{\bfseries{«У меня есть несколько точек измерения сигнала. Где находится истинный максимум — между точками?»}} \end{quote}
+Под «точками» понимаются\+:
+\begin{DoxyItemize}
+\item отсчёты диаграммы направленности (ДН) антенны для оценки {\bfseries{угловых координат цели}} в РЛС;
+\item бины спектра FFT для оценки {\bfseries{точной частоты}} одиночного гармонического сигнала в зашумлённой записи.
+\end{DoxyItemize}
+
+В обоих случаях математика одинаковая, и здесь собраны {\bfseries{6 проверенных методов}} — от классических 2-\/точечных до новых 5-\/точечных МНК-\/аппроксимаций.\hypertarget{index_autotoc_md49}{}\doxysubsection{\texorpdfstring{Аналогия из жизни}{Аналогия из жизни}}\label{index_autotoc_md49}
+\begin{quote}
+Представь, что ты стоишь на стадионе в шумной толпе и пытаешься услышать, на какой ноте поёт один конкретный певец. Толпа — это шум. Голос певца — наш полезный сигнал. У тебя есть три-\/пять микрофонов, расставленных по частотной шкале — каждый «слышит» немного по-\/разному. Задача\+: по этим 3–5 числам угадать, где {\bfseries{точно}} находится голос певца.
+
+То, чем занимается этот модуль — это и есть «найти певца в толпе». \end{quote}
+Подробное объяснение для чайника + полная теория есть в файле {\ttfamily Doc/\+Frequency\+\_\+\+Recommendations\+\_\+2026-\/04-\/06.\+md} (на этом же документе и основан большой раздел \doxylink{recommendations_page}{Итоговые рекомендации}).
+
+\DoxyHorRuler{0}
+\hypertarget{index_autotoc_md51}{}\doxysection{\texorpdfstring{Содержание документации}{Содержание документации}}\label{index_autotoc_md51}
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ \#   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Раздел   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Описание    }\\\cline{1-3}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ \#   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Раздел   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Описание    }\\\cline{1-3}
+\endhead
+1   &\doxylink{index_mainpage}{Главная}   &Назначение, методы, навигация    \\\cline{1-3}
+2   &\doxylink{formulas_page}{Формулы}   &Полный математический вывод (CG, SD, QA, EA, 5QA, 5EA)    \\\cline{1-3}
+3   &\doxylink{methods_visual_page}{Визуальный разбор}   &GIF-\/анимации, 3D-\/карты, поведение методов    \\\cline{1-3}
+4   &\doxylink{recommendations_page}{Итоговые рекомендации}   &Что использовать на практике + дерево решений    \\\cline{1-3}
+5   &\doxylink{tests_page}{Тестирование}   &C++ / GTest / Python — 77+ тестов    \\\cline{1-3}
+6   &\doxylink{fft_page}{FFT-\/дискриминаторы}   &Применение к оценке частоты по спектру   \\\cline{1-3}
+\end{longtabu}
+
+
+{\bfseries{Файлы C API\+:}} {\ttfamily \doxylink{discrcg_8h}{discrcg.\+h}}, {\ttfamily \doxylink{discrsd_8h}{discrsd.\+h}}, {\ttfamily \doxylink{discrqa_8h}{discrqa.\+h}}, {\ttfamily \doxylink{discrea_8h}{discrea.\+h}}, {\ttfamily \doxylink{discr5ea_8h}{discr5ea.\+h}}, {\ttfamily \doxylink{discr__auto_8h}{discr\+\_\+auto.\+h}}, {\ttfamily \doxylink{discr__common_8h}{discr\+\_\+common.\+h}}, {\ttfamily \doxylink{discr__types_8h}{discr\+\_\+types.\+h}}.
+
+\DoxyHorRuler{0}
+\hypertarget{index_autotoc_md53}{}\doxysection{\texorpdfstring{Главная рекомендация (на одну страницу)}{Главная рекомендация (на одну страницу)}}\label{index_autotoc_md53}
+
+
+\begin{quote}
+{\bfseries{Если кратко\+:}} для FFT-\/задачи (поиск частоты) используй \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}{\ttfamily discr5ea} с fallback на {\ttfamily discr5qa}\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*} и обязательным {\ttfamily zero-\/padding ×2} с окном Hanning.
+
+\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}Это даёт ошибку \texorpdfstring{$\sim$}{\string~}0.6 Гц при SNR = 20 дБ для типичного радара ({\ttfamily fs = 100 МГц}, {\ttfamily N = 4M}) — в 20 раз лучше, чем без интерполяции, и в 2 раза лучше классического 3-\/точечного {\ttfamily discr3ea}.\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*} \end{quote}
+Подробное обоснование — на странице \doxylink{recommendations_page}{Итоговые рекомендации}.
+
+\DoxyHorRuler{0}
+\hypertarget{index_autotoc_md55}{}\doxysection{\texorpdfstring{Демонстрация работы}{Демонстрация работы}}\label{index_autotoc_md55}
+
+
+Что видно на анимации\+:
+\begin{DoxyItemize}
+\item {\bfseries{зелёный пунктир}} — истинное положение пика (то, что надо найти);
+\item {\bfseries{цветные вертикальные линии}} — оценки разных методов;
+\item {\bfseries{точки сверху}} — отсчёты, которые «видит» алгоритм;
+\item хорошие методы сидят рядом с зелёной линией, плохие — далеко.
+\end{DoxyItemize}
+
+Больше анимаций — на странице \doxylink{methods_visual_page}{Визуальный разбор методов}.
+
+\DoxyHorRuler{0}
+\hypertarget{index_autotoc_md57}{}\doxysection{\texorpdfstring{Шесть методов одним взглядом}{Шесть методов одним взглядом}}\label{index_autotoc_md57}
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{6}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Метод   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Файл   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Точек   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Идея   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Краткая формула   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Когда хорош    }\\\cline{1-6}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Метод   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Файл   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Точек   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Идея   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Краткая формула   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Когда хорош    }\\\cline{1-6}
+\endhead
+{\bfseries{CG}}   &{\ttfamily \doxylink{discrcg_8h}{discrcg.\+h}}   &2…N   &Центр тяжести   &$ x_e = \frac{\sum A_i x_i}{\sum A_i} $   &Грубая оценка    \\\cline{1-6}
+{\bfseries{SD}}   &{\ttfamily \doxylink{discrsd_8h}{discrsd.\+h}}   &2   &Сумма-\/разность (моноимпульсный)   &$ x_e = x_c + c \cdot \frac{A_2 - A_1}{A_2 + A_1} $   &2 канала, моноимпульс    \\\cline{1-6}
+{\bfseries{QA}}   &{\ttfamily \doxylink{discrqa_8h}{discrqa.\+h}}   &3   &Парабола по 3 точкам   &$ x_e = -\frac{b}{2a} $   &Параболоподобный пик    \\\cline{1-6}
+{\bfseries{EA}}   &{\ttfamily \doxylink{discrea_8h}{discrea.\+h}}   &3   &Парабола в {\ttfamily log}-\/масштабе (Гауссиан)   &$ x_e = \alpha / (2\beta) $   &Гауссовый пик    \\\cline{1-6}
+{\bfseries{5QA}} ★   &{\ttfamily \doxylink{discr5ea_8h}{discr5ea.\+h}}   &5   &МНК-\/парабола по 5 точкам   &$ a = \dfrac{2y_1 - y_2 - 2y_3 - y_4 + 2y_5}{14} $   &Шум, Hanning kernel    \\\cline{1-6}
+{\bfseries{5EA}} ★★   &{\ttfamily \doxylink{discr5ea_8h}{discr5ea.\+h}}   &5   &МНК-\/Гауссиан по 5 точкам   &то же, но $ z_i = \ln y_i $   &{\bfseries{Универсал, FFT}}   \\\cline{1-6}
+\end{longtabu}
+
+
+★ — добавлено при рефакторинге 2026, ★★ — {\bfseries{рекомендуемый по умолчанию}} для FFT.
+
+
+
+Полные формулы и вывод — на странице \doxylink{formulas_page}{Математические формулы}.
+
+\DoxyHorRuler{0}
+\hypertarget{index_autotoc_md59}{}\doxysection{\texorpdfstring{Быстрый старт}{Быстрый старт}}\label{index_autotoc_md59}
+\hypertarget{index_autotoc_md60}{}\doxysubsection{\texorpdfstring{C\+: суб-\/бинная оценка частоты по 5 точкам спектра (рекомендация)}{C: суб-бинная оценка частоты по 5 точкам спектра (рекомендация)}}\label{index_autotoc_md60}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{discr5ea_8h}{discr5ea.h}}"{}}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <complex.h>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ X[]\ \ \ \ —\ комплексный\ спектр\ после\ FFT\ (длина\ N\_padded)}}
+\DoxyCodeLine{\textcolor{comment}{//\ k\_max\ \ —\ индекс\ максимума\ |X(k)|\ (грубая\ оценка)}}
+\DoxyCodeLine{\textcolor{comment}{//\ fs\ \ \ \ \ —\ частота\ дискретизации\ [Гц]}}
+\DoxyCodeLine{\textcolor{comment}{//\ N\_padded\ —\ длина\ FFT\ с\ zero-\/padding\ ×2}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{double}\ y[5],\ xs[5];}
+\DoxyCodeLine{\textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ 5;\ ++i)\ \{}
+\DoxyCodeLine{\ \ y[i]\ \ =\ cabs(X[k\_max\ -\/\ 2\ +\ i]);\ \ \ \textcolor{comment}{//\ |X(k-\/2)|\ ..\ |X(k+2)|}}
+\DoxyCodeLine{\ \ xs[i]\ =\ (double)(i\ -\/\ 2);\ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \{-\/2,\ -\/1,\ 0,\ 1,\ 2\}}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{double}\ delta;}
+\DoxyCodeLine{\textcolor{keywordtype}{int}\ ok\ =\ \mbox{\hyperlink{discr5ea_8h_a7a40e781923ce2b7e9f823d6966a99d3}{discr5ea}}(y,\ xs,\ \&delta);\ \ \ \textcolor{comment}{//\ МНК-\/Гауссиан\ по\ 5\ точкам}}
+\DoxyCodeLine{\textcolor{keywordflow}{if}\ (ok\ !=\ 0)\ \{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ fallback:\ какая-\/то\ |X(k)|\ ≤\ 0\ →\ 5QA\ по\ амплитудам}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{discr5ea_8h_ac785bc2874e4a806c56a89d6232d1f34}{discr5qa}}(y,\ xs,\ \&delta);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{double}\ f\_hz\ =\ (k\_max\ +\ delta)\ *\ fs\ /\ (\textcolor{keywordtype}{double})N\_padded;}
+
+\end{DoxyCode}
+\hypertarget{index_autotoc_md61}{}\doxysubsection{\texorpdfstring{C\+: классический 3-\/точечный QA на угловой ДН}{C: классический 3-точечный QA на угловой ДН}}\label{index_autotoc_md61}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{discrqa_8h}{discrqa.h}}"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{double}\ A1\ =\ 0.75,\ A2\ =\ 2.75,\ A3\ =\ 2.75;}
+\DoxyCodeLine{\textcolor{keywordtype}{double}\ x1\ =\ -\/1.0,\ x2\ =\ 0.0,\ \ x3\ =\ 1.0;}
+\DoxyCodeLine{\textcolor{keywordtype}{double}\ xe\ =\ \mbox{\hyperlink{discrqa_8h_a5cdf0c7b82518afc98773e8f323ddb3b}{discr3qa}}(A1,\ A2,\ A3,\ x1,\ x2,\ x3);}
+\DoxyCodeLine{\textcolor{comment}{//\ xe\ ≈\ 0.5\ —\ оценка\ положения\ пика\ между\ точками}}
+
+\end{DoxyCode}
+\hypertarget{index_autotoc_md62}{}\doxysubsection{\texorpdfstring{C\+: автоматический выбор с защитой от монотонной зоны}{C: автоматический выбор с защитой от монотонной зоны}}\label{index_autotoc_md62}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{discr__auto_8h}{discr\_auto.h}}"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{double}\ xe;}
+\DoxyCodeLine{\textcolor{keywordtype}{int}\ how\ =\ \mbox{\hyperlink{discr__auto_8h_a99aa3243f4143e13f9e1a2fda43c714e}{discr3\_auto}}(A1,\ A2,\ A3,\ x1,\ x2,\ x3,\ \&xe);}
+\DoxyCodeLine{\textcolor{comment}{//\ how\ ==\ 0\ →\ EA\ использован\ \ \ (нормальный\ случай)}}
+\DoxyCodeLine{\textcolor{comment}{//\ how\ ==\ 1\ →\ QA\ fallback\ \ \ \ \ \ (EA\ не\ сошёлся)}}
+\DoxyCodeLine{\textcolor{comment}{//\ how\ ==\ 2\ →\ E2\ экстраполяция\ (монотонные\ данные)}}
+\DoxyCodeLine{\textcolor{comment}{//\ how\ ==\ 3\ →\ E2\ не\ сошёлся\ \ \ \ (xe\ =\ x2)}}
+
+\end{DoxyCode}
+
+
+\DoxyHorRuler{0}
+\hypertarget{index_autotoc_md64}{}\doxysection{\texorpdfstring{Структура модуля}{Структура модуля}}\label{index_autotoc_md64}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{discriminator\_estimates/}
+\DoxyCodeLine{├──\ include/\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ←\ публичный\ C\ API\ (8\ заголовков)}
+\DoxyCodeLine{│\ \ \ ├──\ discrcg.h\ \ \ \ \ \ \ \ \ \ \ \ ←\ Центр\ тяжести}
+\DoxyCodeLine{│\ \ \ ├──\ discrsd.h\ \ \ \ \ \ \ \ \ \ \ \ ←\ Сумма-\/разность}
+\DoxyCodeLine{│\ \ \ ├──\ discrqa.h\ \ \ \ \ \ \ \ \ \ \ \ ←\ Парабола\ (3pt)}
+\DoxyCodeLine{│\ \ \ ├──\ discrea.h\ \ \ \ \ \ \ \ \ \ \ \ ←\ Гауссиан\ (3pt)}
+\DoxyCodeLine{│\ \ \ ├──\ discr5ea.h\ \ \ \ \ \ \ \ \ \ \ ←\ МНК\ 5pt:\ 5QA\ +\ 5EA\ \ ★\ новое}
+\DoxyCodeLine{│\ \ \ ├──\ discr\_auto.h\ \ \ \ \ \ \ \ \ ←\ Авто-\/выбор\ +\ extrap\ ★\ новое}
+\DoxyCodeLine{│\ \ \ ├──\ discr\_common.h\ \ \ \ \ \ \ ←\ Обёртки\ discr2/discr3}
+\DoxyCodeLine{│\ \ \ └──\ discr\_types.h\ \ \ \ \ \ \ \ ←\ DISCRTYPE\ enum}
+\DoxyCodeLine{├──\ src/\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ←\ реализация\ (.c)}
+\DoxyCodeLine{├──\ test\_cpp/\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ←\ простые\ C++\ тесты}
+\DoxyCodeLine{├──\ test\_gtest/\ \ \ \ \ \ \ \ \ \ \ \ \ \ ←\ Google\ Test\ (40+\ тестов)}
+\DoxyCodeLine{├──\ test\_python/\ \ \ \ \ \ \ \ \ \ \ \ \ ←\ Python\ тесты\ +\ графики}
+\DoxyCodeLine{└──\ Doc/}
+\DoxyCodeLine{\ \ \ \ ├──\ API.md\ \ Full.md\ \ Quick.md\ \ \ ←\ markdown-\/документация}
+\DoxyCodeLine{\ \ \ \ ├──\ Doxygen/\ \ \ \ \ \ \ \ \ \ \ \ \ ←\ вы\ здесь}
+\DoxyCodeLine{\ \ \ \ ├──\ plots/\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ←\ все\ графики\ и\ анимации}
+\DoxyCodeLine{\ \ \ \ │\ \ \ ├──\ 1\_animation/\ \ \ \ \ ←\ .gif}
+\DoxyCodeLine{\ \ \ \ │\ \ \ ├──\ 2\_no\_noise/\ \ \ \ \ \ ←\ чистый\ сигнал}
+\DoxyCodeLine{\ \ \ \ │\ \ \ ├──\ 3\_noise/\ \ \ \ \ \ \ \ \ ←\ Монте-\/Карло\ с\ шумом}
+\DoxyCodeLine{\ \ \ \ │\ \ \ ├──\ 4\_3d/\ \ \ \ \ \ \ \ \ \ \ \ ←\ 3D-\/карты,\ heatmap}
+\DoxyCodeLine{\ \ \ \ │\ \ \ └──\ 5\_recommendations/\ ←\ итоговые\ иллюстрации}
+\DoxyCodeLine{\ \ \ \ └──\ Review/\ \ \ \ \ \ \ \ \ \ \ \ \ \ ←\ история\ рефакторинга}
+
+\end{DoxyCode}
+
+
+\DoxyHorRuler{0}
+\hypertarget{index_autotoc_md66}{}\doxysection{\texorpdfstring{Ссылки и дополнительные ресурсы}{Ссылки и дополнительные ресурсы}}\label{index_autotoc_md66}
+\hypertarget{index_autotoc_md67}{}\doxysubsection{\texorpdfstring{Внутри проекта}{Внутри проекта}}\label{index_autotoc_md67}
+
+\begin{DoxyItemize}
+\item \doxylink{formulas_page}{Математические формулы} — Полные формулы всех 6 методов (CG, SD, QA, EA, 5QA, 5EA)
+\item \doxylink{methods_visual_page}{Визуальный разбор методов} — Визуальный разбор\+: GIF, 3D-\/карты, поведение
+\item \doxylink{recommendations_page}{Итоговые рекомендации} — Итоговые рекомендации + дерево решений
+\item \doxylink{tests_page}{Тестирование} — Тестирование (C++ / GTest / Python — 77+ тестов)
+\item \doxylink{fft_page}{FFT-\/дискриминаторы частоты} — FFT-\/дискриминаторы частоты
+\end{DoxyItemize}\hypertarget{index_autotoc_md68}{}\doxysubsection{\texorpdfstring{Markdown-\/документы (вне Doxygen)}{Markdown-документы (вне Doxygen)}}\label{index_autotoc_md68}
+Эти файлы лежат рядом с Doxygen-\/документацией, в каталоге {\ttfamily Doc/}\+:
+
+
+\begin{DoxyItemize}
+\item {\ttfamily Doc/\+API.\+md} — справочник публичного API
+\item {\ttfamily Doc/\+Full.\+md} — полная документация модуля
+\item {\ttfamily Doc/\+Quick.\+md} — быстрый старт
+\item {\ttfamily Doc/\+Frequency\+\_\+\+Recommendations\+\_\+2026-\/04-\/06.\+md} — итоговый отчёт «как найти частоту в шуме» (на котором построена \doxylink{recommendations_page}{Итоговые рекомендации})
+\item {\ttfamily Doc/\+FFT\+\_\+\+Frequency\+\_\+\+Estimation.\+md} — справочник по FFT-\/методам суб-\/бинной оценки
+\item {\ttfamily Doc/plots/\+README.\+md} — описание всех графиков с пояснениями
+\end{DoxyItemize}\hypertarget{index_autotoc_md69}{}\doxysubsection{\texorpdfstring{Внешние источники}{Внешние источники}}\label{index_autotoc_md69}
+
+\begin{DoxyEnumerate}
+\item Gasior, Gonzalez (CERN, 2004) — \href{https://mgasior.web.cern.ch/pap/FFT_resol_note.pdf}{\texttt{ Improving FFT frequency measurement resolution by parabolic and Gaussian interpolation}}
+\item Julius O. Smith III — \href{https://www.dsprelated.com/freebooks/sasp/Quadratic_Interpolation_Spectral_Peaks.html}{\texttt{ Quadratic Interpolation of Spectral Peaks}}
+\item Quinn, B.\+G. (IEEE TSP, 1994, 1997) — оригинальные статьи по Quinn estimators
+\item Candan, Ç. (2011) — Fine resolution frequency estimation from three DFT samples
+\end{DoxyEnumerate}
+
+\DoxyHorRuler{0}
+
+
+ \input{formulas_page}
+\input{methods_visual_page}
+\input{recommendations_page}
+\input{tests_page}
+\input{fft_page}

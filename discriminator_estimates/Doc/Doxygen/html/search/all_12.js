@@ -1,6 +1,8 @@
 var searchData=
 [
-  ['primer_20m_0',['Оценка частоты по FFT-спектру (из Primer.m)',['../fft_page.html#autotoc_md0',1,'']]],
-  ['python_1',['Python',['../tests_page.html#autotoc_md66',1,'']]],
-  ['python_20тесты_20tt_20test_5fpython_20tt_20—_207_20тестов_203_20графика_2',['3. Python тесты (&lt;tt&gt;test_python/&lt;/tt&gt;) — 7 тестов + 3 графика',['../tests_page.html#autotoc_md58',1,'']]]
+  ['hanning_0',['hanning',['../recommendations_page.html#autotoc_md132',1,'Правый график — парабола на Hanning'],['../methods_visual_page.html#autotoc_md103',1,'5pt vs 3pt под шумом — Hanning']]],
+  ['hanning_20любовь_1',['Парабола + Hanning = любовь',['../recommendations_page.html#autotoc_md130',1,'']]],
+  ['hanning_20kernel_2',['МНК-5 на Hanning kernel',['../methods_visual_page.html#autotoc_md94',1,'']]],
+  ['hanning_20kernel_20zp×2_20105_20000_20испытаний_3',['Вердикт по результатам Монте-Карло (Hanning kernel, zp×2, 105 000 испытаний)',['../formulas_page.html#autotoc_md42',1,'']]],
+  ['heatmap_4',['Раздел 2. Карты точности — 3D и heatmap',['../methods_visual_page.html#autotoc_md84',1,'']]]
 ];

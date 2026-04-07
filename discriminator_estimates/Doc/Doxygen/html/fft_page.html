@@ -90,6 +90,9 @@ $(function() {
 <div class="textblock"><h1><a class="anchor" id="autotoc_md0"></a>
 Оценка частоты по FFT-спектру (из Primer.m)</h1>
 <p>Дискриминаторы модуля применяются не только для оценки угловых координат по ДН антенны, но и для <b>точной оценки частоты</b> по FFT-спектру комплексного сигнала.</p>
+<blockquote class="doxtable">
+<p>&zwj;<b>Рекомендация для современного pipeline:</b> для CPU FFT-задачи наилучшим выбором является **<code>discr5ea</code> (МНК-Гауссиан по 5 точкам)** с fallback на <code>discr5qa</code> и обязательным <code>zero-padding ×2</code> + окном Hanning. Это даёт ошибку ~0.6 Гц при SNR = 20 дБ — в 20 раз лучше argmax и в 2 раза лучше классической 3-точечной EA3. Полное обоснование, дерево решений и Quick reference — на странице <a class="el" href="recommendations_page.html">Итоговые рекомендации</a>. </p>
+</blockquote>
 <h2><a class="anchor" id="autotoc_md1"></a>
 Сигнал</h2>
 <p class="formulaDsp">

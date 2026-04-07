@@ -1,0 +1,269 @@
+\doxysection{Файл discrea.\+c}
+\hypertarget{discrea_8c}{}\label{discrea_8c}\index{discrea.c@{discrea.c}}
+
+
+КППО / ТЗК. Дискриминатор — экспоненциальная аппроксимация (Exponential).  
+
+
+{\ttfamily \#include $<$float.\+h$>$}\newline
+{\ttfamily \#include $<$math.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include "{}discrea.\+h"{}}\newline
+\doxysubsubsection*{Структуры данных}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structaxstr__t}{axstr\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Структура для сортировки пар (амплитуда, координата). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Функции}
+\begin{DoxyCompactItemize}
+\item 
+static int \mbox{\hyperlink{discrea_8c_a3da7a19413de8b894b042ac61bc441e4}{compare\+\_\+by\+\_\+x}} (const void \texorpdfstring{$\ast$}{*}p1, const void \texorpdfstring{$\ast$}{*}p2)
+\begin{DoxyCompactList}\small\item\em Сортировка пар (амплитуда, координата) по возрастанию координаты. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{discrea_8c_a1d0a905788c41a528b49032ecb9c2748}{discr3ea}} (double A1, double A2, double A3, double x1, double x2, double x3, double \texorpdfstring{$\ast$}{*}xe)
+\begin{DoxyCompactList}\small\item\em Трехточечный дискриминатор, экспоненциальная аппроксимация. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{discrea_8c_aeaf78c0e3173b3e10d91f87f58a171d0}{discr3eaY}} (double A1, double A2, double x1, double x2, double xe)
+\begin{DoxyCompactList}\small\item\em Уточнение амплитуды по экспоненциальной аппроксимации. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Подробное описание}
+КППО / ТЗК. Дискриминатор — экспоненциальная аппроксимация (Exponential). 
+
+\begin{DoxyAuthor}{Автор}
+Добродумов А.\+Б. 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Дата}
+15.\+04.\+2012 
+\end{DoxyDate}
+Аппроксимация отсчётов ДН функцией y = A\+\_\+max \texorpdfstring{$\ast$}{*} exp(-\/a\texorpdfstring{$\ast$}{*}(x -\/ x0)²) для нахождения координаты максимума x0.
+
+Рефакторинг\+: Кодо, 2026-\/03-\/28 Изменения\+:
+\begin{DoxyItemize}
+\item ERR-\/002\+: static ax\mbox{[}3\mbox{]} перенесена в локальную переменную (thread-\/safety)
+\item STYLE\+: единые 2-\/пробельные отступы 
+\end{DoxyItemize}
+
+См. определение в файле \mbox{\hyperlink{discrea_8c_source}{discrea.\+c}}
+
+
+
+\doxysubsection{Функции}
+\Hypertarget{discrea_8c_a3da7a19413de8b894b042ac61bc441e4}\label{discrea_8c_a3da7a19413de8b894b042ac61bc441e4} 
+\index{discrea.c@{discrea.c}!compare\_by\_x@{compare\_by\_x}}
+\index{compare\_by\_x@{compare\_by\_x}!discrea.c@{discrea.c}}
+\doxysubsubsection{\texorpdfstring{compare\_by\_x()}{compare\_by\_x()}}
+{\footnotesize\ttfamily static int compare\+\_\+by\+\_\+x (\begin{DoxyParamCaption}\item[{const void \texorpdfstring{$\ast$}{*}}]{p1,  }\item[{const void \texorpdfstring{$\ast$}{*}}]{p2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Сортировка пар (амплитуда, координата) по возрастанию координаты. 
+
+
+
+См. определение в файле \mbox{\hyperlink{discrea_8c_source}{discrea.\+c}} строка \mbox{\hyperlink{discrea_8c_source_l00176}{176}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00177\ \{}
+\DoxyCodeLine{00178\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structaxstr__t}{axstr\_t}}\ *ax1\ =\ (\textcolor{keyword}{const}\ \mbox{\hyperlink{structaxstr__t}{axstr\_t}}\ *)p1;}
+\DoxyCodeLine{00179\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structaxstr__t}{axstr\_t}}\ *ax2\ =\ (\textcolor{keyword}{const}\ \mbox{\hyperlink{structaxstr__t}{axstr\_t}}\ *)p2;}
+\DoxyCodeLine{00180\ }
+\DoxyCodeLine{00181\ \ \ \textcolor{keywordflow}{if}\ (ax1-\/>\mbox{\hyperlink{structaxstr__t_a33b12c05f89f90d477279098cb64908d}{x}}\ <\ ax2-\/>\mbox{\hyperlink{structaxstr__t_a33b12c05f89f90d477279098cb64908d}{x}})}
+\DoxyCodeLine{00182\ \ \ \ \ \textcolor{keywordflow}{return}\ -\/1;}
+\DoxyCodeLine{00183\ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (ax1-\/>\mbox{\hyperlink{structaxstr__t_a33b12c05f89f90d477279098cb64908d}{x}}\ >\ ax2-\/>\mbox{\hyperlink{structaxstr__t_a33b12c05f89f90d477279098cb64908d}{x}})}
+\DoxyCodeLine{00184\ \ \ \ \ \textcolor{keywordflow}{return}\ 1;}
+\DoxyCodeLine{00185\ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{00186\ \}}
+
+\end{DoxyCode}
+\Hypertarget{discrea_8c_a1d0a905788c41a528b49032ecb9c2748}\label{discrea_8c_a1d0a905788c41a528b49032ecb9c2748} 
+\index{discrea.c@{discrea.c}!discr3ea@{discr3ea}}
+\index{discr3ea@{discr3ea}!discrea.c@{discrea.c}}
+\doxysubsubsection{\texorpdfstring{discr3ea()}{discr3ea()}}
+{\footnotesize\ttfamily int discr3ea (\begin{DoxyParamCaption}\item[{double}]{A1,  }\item[{double}]{A2,  }\item[{double}]{A3,  }\item[{double}]{x1,  }\item[{double}]{x2,  }\item[{double}]{x3,  }\item[{double \texorpdfstring{$\ast$}{*}}]{xe }\end{DoxyParamCaption})}
+
+
+
+Трехточечный дискриминатор, экспоненциальная аппроксимация. 
+
+Трехточечный дискриминатор, экспоненциальная аппроксимация (Exponential).
+
+Алгоритм\+:
+\begin{DoxyEnumerate}
+\item Проверка входных данных (ненулевые амплитуды, не все равны)
+\item Сортировка по координате (x должна возрастать)
+\item Проверка на выпуклость (максимум должен быть в центре)
+\item Логарифмирование\+: z = ln(\+A), аппроксимация параболой z(x)
+\item Вершина параболы\+: xe = 0.\+5 \texorpdfstring{$\ast$}{*} a / b
+\item Ограничение на вылет за пределы зондирования
+\end{DoxyEnumerate}
+
+
+\begin{DoxyParams}{Аргументы}
+{\em A1} & амплитуда первой точки (должна быть \texorpdfstring{$>$}{>} 0) \\
+\hline
+{\em A2} & амплитуда второй точки (должна быть \texorpdfstring{$>$}{>} 0) \\
+\hline
+{\em A3} & амплитуда третьей точки (должна быть \texorpdfstring{$>$}{>} 0) \\
+\hline
+{\em x1} & координата первой точки \\
+\hline
+{\em x2} & координата второй точки \\
+\hline
+{\em x3} & координата третьей точки \\
+\hline
+{\em xe} & \mbox{[}out\mbox{]} оценка координаты \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+EXIT\+\_\+\+SUCCESS (0) при успехе, EXIT\+\_\+\+FAILURE (1) при ошибке (при ошибке \texorpdfstring{$\ast$}{*}xe содержит приближённое значение) 
+\end{DoxyReturn}
+
+
+См. определение в файле \mbox{\hyperlink{discrea_8c_source}{discrea.\+c}} строка \mbox{\hyperlink{discrea_8c_source_l00050}{50}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00052\ \{}
+\DoxyCodeLine{00053\ \ \ \textcolor{keywordtype}{double}\ a\ =\ 0.0,\ b\ =\ 0.0;}
+\DoxyCodeLine{00054\ \ \ \textcolor{keywordtype}{double}\ z1,\ z2,\ z3;}
+\DoxyCodeLine{00055\ \ \ \textcolor{keywordtype}{double}\ f1,\ f2,\ f3;}
+\DoxyCodeLine{00056\ \ \ \textcolor{keywordtype}{double}\ a1,\ a2,\ a3,\ a12,\ a23,\ a13;}
+\DoxyCodeLine{00057\ \ \ \textcolor{comment}{/*\ ERR-\/002\ fix:\ локальная\ переменная\ вместо\ static\ */}}
+\DoxyCodeLine{00058\ \ \ \mbox{\hyperlink{structaxstr__t}{axstr\_t}}\ ax[3];}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \ \ \textcolor{comment}{/*\ Проверка:\ все\ амплитуды\ должны\ быть\ положительны\ */}}
+\DoxyCodeLine{00061\ \ \ \textcolor{keywordflow}{if}\ (A1\ <\ DBL\_EPSILON\ ||\ A2\ <\ DBL\_EPSILON\ ||\ A3\ <\ DBL\_EPSILON)\ \{}
+\DoxyCodeLine{00062\ \ \ \ \ *xe\ =\ x2;}
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keywordflow}{return}\ EXIT\_FAILURE;}
+\DoxyCodeLine{00064\ \ \ \}}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00066\ \ \ \textcolor{comment}{/*\ Проверка:\ не\ все\ амплитуды\ равны\ */}}
+\DoxyCodeLine{00067\ \ \ \textcolor{keywordflow}{if}\ ((fabs(A1\ -\/\ A2)\ <\ DBL\_EPSILON)\ \&\&\ (fabs(A2\ -\/\ A3)\ <\ DBL\_EPSILON))\ \{}
+\DoxyCodeLine{00068\ \ \ \ \ *xe\ =\ x2;}
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keywordflow}{return}\ EXIT\_FAILURE;}
+\DoxyCodeLine{00070\ \ \ \}}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00072\ \ \ \textcolor{comment}{/*\ Сортировка\ по\ координате\ (x\ должна\ возрастать)\ */}}
+\DoxyCodeLine{00073\ \ \ ax[0].\mbox{\hyperlink{structaxstr__t_ad0ebf0e44c5b4d91881919a56737ff86}{a}}\ =\ A1;\ ax[0].\mbox{\hyperlink{structaxstr__t_a33b12c05f89f90d477279098cb64908d}{x}}\ =\ x1;}
+\DoxyCodeLine{00074\ \ \ ax[1].\mbox{\hyperlink{structaxstr__t_ad0ebf0e44c5b4d91881919a56737ff86}{a}}\ =\ A2;\ ax[1].\mbox{\hyperlink{structaxstr__t_a33b12c05f89f90d477279098cb64908d}{x}}\ =\ x2;}
+\DoxyCodeLine{00075\ \ \ ax[2].\mbox{\hyperlink{structaxstr__t_ad0ebf0e44c5b4d91881919a56737ff86}{a}}\ =\ A3;\ ax[2].\mbox{\hyperlink{structaxstr__t_a33b12c05f89f90d477279098cb64908d}{x}}\ =\ x3;}
+\DoxyCodeLine{00076\ \ \ qsort(ax,\ 3,\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{structaxstr__t}{axstr\_t}}),\ \mbox{\hyperlink{discrea_8c_a3da7a19413de8b894b042ac61bc441e4}{compare\_by\_x}});}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00078\ \ \ a1\ =\ ax[0].\mbox{\hyperlink{structaxstr__t_ad0ebf0e44c5b4d91881919a56737ff86}{a}};\ a2\ =\ ax[1].\mbox{\hyperlink{structaxstr__t_ad0ebf0e44c5b4d91881919a56737ff86}{a}};\ a3\ =\ ax[2].\mbox{\hyperlink{structaxstr__t_ad0ebf0e44c5b4d91881919a56737ff86}{a}};}
+\DoxyCodeLine{00079\ \ \ f1\ =\ ax[0].\mbox{\hyperlink{structaxstr__t_a33b12c05f89f90d477279098cb64908d}{x}};\ f2\ =\ ax[1].\mbox{\hyperlink{structaxstr__t_a33b12c05f89f90d477279098cb64908d}{x}};\ f3\ =\ ax[2].\mbox{\hyperlink{structaxstr__t_a33b12c05f89f90d477279098cb64908d}{x}};}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00081\ \ \ \textcolor{comment}{/*\ Проверка\ на\ выпуклость:\ максимум\ должен\ быть\ в\ центре\ */}}
+\DoxyCodeLine{00082\ \ \ a12\ =\ a1\ -\/\ a2;}
+\DoxyCodeLine{00083\ \ \ a23\ =\ a2\ -\/\ a3;}
+\DoxyCodeLine{00084\ \ \ a13\ =\ a1\ -\/\ a3;}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00086\ \ \ \textcolor{comment}{/*\ Вогнутость:\ максимум\ справа\ (например\ 2,\ 4,\ 8)\ */}}
+\DoxyCodeLine{00087\ \ \ \textcolor{keywordflow}{if}\ ((a12\ <\ 0\ \&\&\ a23\ <\ 0\ \&\&\ a12\ >\ a23)\ ||}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ (a12\ >\ 0\ \&\&\ a23\ <\ 0\ \&\&\ a13\ <\ 0))\ \{}
+\DoxyCodeLine{00089\ \ \ \ \ *xe\ =\ x3;}
+\DoxyCodeLine{00090\ \ \ \ \ \textcolor{keywordflow}{return}\ EXIT\_FAILURE;}
+\DoxyCodeLine{00091\ \ \ \}}
+\DoxyCodeLine{00092\ \ \ \textcolor{comment}{/*\ Вогнутость:\ максимум\ слева\ (например\ 8,\ 4,\ 2)\ */}}
+\DoxyCodeLine{00093\ \ \ \textcolor{keywordflow}{if}\ ((a12\ >\ 0\ \&\&\ a23\ >\ 0\ \&\&\ a12\ >\ a23)\ ||}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ (a12\ >\ 0\ \&\&\ a23\ <\ 0\ \&\&\ a13\ >\ 0))\ \{}
+\DoxyCodeLine{00095\ \ \ \ \ *xe\ =\ x1;}
+\DoxyCodeLine{00096\ \ \ \ \ \textcolor{keywordflow}{return}\ EXIT\_FAILURE;}
+\DoxyCodeLine{00097\ \ \ \}}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00099\ \ \ \textcolor{comment}{/*\ Логарифмирование\ */}}
+\DoxyCodeLine{00100\ \ \ z1\ =\ log(a1);}
+\DoxyCodeLine{00101\ \ \ z2\ =\ log(a2);}
+\DoxyCodeLine{00102\ \ \ z3\ =\ log(a3);}
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00104\ \ \ \textcolor{comment}{/*\ Коэффициенты\ параболы\ z(x)\ =\ a\ +\ b*x\ +\ ...\ */}}
+\DoxyCodeLine{00105\ \ \ a\ =\ z1\ *\ (f2\ *\ f2\ -\/\ f3\ *\ f3)\ +\ z2\ *\ (f3\ *\ f3\ -\/\ f1\ *\ f1)\ +\ z3\ *\ (f1\ *\ f1\ -\/\ f2\ *\ f2);}
+\DoxyCodeLine{00106\ \ \ b\ =\ z1\ *\ (f2\ -\/\ f3)\ +\ z2\ *\ (f3\ -\/\ f1)\ +\ z3\ *\ (f1\ -\/\ f2);}
+\DoxyCodeLine{00107\ }
+\DoxyCodeLine{00108\ \ \ \textcolor{keywordflow}{if}\ (fabs(b)\ <\ DBL\_EPSILON)\ \{}
+\DoxyCodeLine{00109\ \ \ \ \ \textcolor{keywordflow}{if}\ (a\ *\ b\ >=\ 0)\ \{}
+\DoxyCodeLine{00110\ \ \ \ \ \ \ *xe\ =\ f3\ +\ 0.5\ *\ (f3\ -\/\ f1);}
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ EXIT\_FAILURE;}
+\DoxyCodeLine{00112\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00113\ \ \ \ \ \ \ *xe\ =\ f1\ -\/\ 0.5\ *\ (f3\ -\/\ f1);}
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ EXIT\_FAILURE;}
+\DoxyCodeLine{00115\ \ \ \ \ \}}
+\DoxyCodeLine{00116\ \ \ \}}
+\DoxyCodeLine{00117\ }
+\DoxyCodeLine{00118\ \ \ \textcolor{comment}{/*\ Вершина\ параболы\ */}}
+\DoxyCodeLine{00119\ \ \ *xe\ =\ 0.5\ *\ a\ /\ b;}
+\DoxyCodeLine{00120\ }
+\DoxyCodeLine{00121\ \ \ \textcolor{comment}{/*\ Ограничение\ на\ вылет\ за\ пределы\ зондирования\ */}}
+\DoxyCodeLine{00122\ \ \ \textcolor{keywordflow}{if}\ (*xe\ >\ f3\ +\ 0.5\ *\ (f3\ -\/\ f1))\ \{}
+\DoxyCodeLine{00123\ \ \ \ \ *xe\ =\ f3\ +\ 0.5\ *\ (f3\ -\/\ f1);}
+\DoxyCodeLine{00124\ \ \ \ \ \textcolor{keywordflow}{return}\ EXIT\_FAILURE;}
+\DoxyCodeLine{00125\ \ \ \}}
+\DoxyCodeLine{00126\ \ \ \textcolor{keywordflow}{if}\ (*xe\ <\ f1\ -\/\ 0.5\ *\ (f3\ -\/\ f1))\ \{}
+\DoxyCodeLine{00127\ \ \ \ \ *xe\ =\ f1\ -\/\ 0.5\ *\ (f3\ -\/\ f1);}
+\DoxyCodeLine{00128\ \ \ \ \ \textcolor{keywordflow}{return}\ EXIT\_FAILURE;}
+\DoxyCodeLine{00129\ \ \ \}}
+\DoxyCodeLine{00130\ }
+\DoxyCodeLine{00131\ \ \ \textcolor{keywordflow}{return}\ EXIT\_SUCCESS;}
+\DoxyCodeLine{00132\ \}}
+
+\end{DoxyCode}
+\Hypertarget{discrea_8c_aeaf78c0e3173b3e10d91f87f58a171d0}\label{discrea_8c_aeaf78c0e3173b3e10d91f87f58a171d0} 
+\index{discrea.c@{discrea.c}!discr3eaY@{discr3eaY}}
+\index{discr3eaY@{discr3eaY}!discrea.c@{discrea.c}}
+\doxysubsubsection{\texorpdfstring{discr3eaY()}{discr3eaY()}}
+{\footnotesize\ttfamily double discr3eaY (\begin{DoxyParamCaption}\item[{double}]{A1,  }\item[{double}]{A2,  }\item[{double}]{x1,  }\item[{double}]{x2,  }\item[{double}]{xe }\end{DoxyParamCaption})}
+
+
+
+Уточнение амплитуды по экспоненциальной аппроксимации. 
+
+Формула\+: ye = A2 \texorpdfstring{$\ast$}{*} exp(a0 \texorpdfstring{$\ast$}{*} (x2 -\/ xe)²)
+
+
+\begin{DoxyParams}{Аргументы}
+{\em A1} & амплитуда первой точки \\
+\hline
+{\em A2} & амплитуда второй точки \\
+\hline
+{\em x1} & координата первой точки \\
+\hline
+{\em x2} & координата второй точки \\
+\hline
+{\em xe} & вычисленная координата (результат discr3ea) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+уточнённое значение амплитуды 
+\end{DoxyReturn}
+
+
+См. определение в файле \mbox{\hyperlink{discrea_8c_source}{discrea.\+c}} строка \mbox{\hyperlink{discrea_8c_source_l00146}{146}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00147\ \{}
+\DoxyCodeLine{00148\ \ \ \textcolor{keywordtype}{double}\ ye,\ yMax;}
+\DoxyCodeLine{00149\ \ \ \textcolor{keywordtype}{double}\ z1,\ z2;}
+\DoxyCodeLine{00150\ \ \ \textcolor{keywordtype}{double}\ a0,\ dxe;}
+\DoxyCodeLine{00151\ }
+\DoxyCodeLine{00152\ \ \ \textcolor{keywordflow}{if}\ (A1\ <\ DBL\_EPSILON\ ||\ A2\ <\ DBL\_EPSILON)}
+\DoxyCodeLine{00153\ \ \ \ \ \textcolor{keywordflow}{return}\ 0.0;}
+\DoxyCodeLine{00154\ }
+\DoxyCodeLine{00155\ \ \ yMax\ =\ (A1\ >\ A2)\ ?\ A1\ :\ A2;}
+\DoxyCodeLine{00156\ }
+\DoxyCodeLine{00157\ \ \ z1\ =\ log(A1);}
+\DoxyCodeLine{00158\ \ \ z2\ =\ log(A2);}
+\DoxyCodeLine{00159\ }
+\DoxyCodeLine{00160\ \ \ a0\ =\ (2.0\ *\ xe\ *\ (x1\ -\/\ x2)\ -\/\ x1\ *\ x1\ +\ x2\ *\ x2);}
+\DoxyCodeLine{00161\ }
+\DoxyCodeLine{00162\ \ \ \textcolor{keywordflow}{if}\ (fabs(a0)\ <\ DBL\_EPSILON)}
+\DoxyCodeLine{00163\ \ \ \ \ \textcolor{keywordflow}{return}\ yMax;}
+\DoxyCodeLine{00164\ }
+\DoxyCodeLine{00165\ \ \ a0\ =\ (z1\ -\/\ z2)\ /\ a0;}
+\DoxyCodeLine{00166\ }
+\DoxyCodeLine{00167\ \ \ dxe\ =\ x2\ -\/\ xe;}
+\DoxyCodeLine{00168\ \ \ ye\ =\ A2\ *\ exp(a0\ *\ dxe\ *\ dxe);}
+\DoxyCodeLine{00169\ }
+\DoxyCodeLine{00170\ \ \ \textcolor{keywordflow}{return}\ ye;}
+\DoxyCodeLine{00171\ \}}
+
+\end{DoxyCode}

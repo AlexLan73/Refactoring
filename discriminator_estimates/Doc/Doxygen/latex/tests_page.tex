@@ -1,0 +1,235 @@
+\doxysection{Тестирование}
+\hypertarget{tests_page}{}\label{tests_page}\index{Тестирование@{Тестирование}}
+\begin{quote}
+{\bfseries{Связанные страницы\+:}} \doxylink{formulas_page}{Математические формулы} (формулы методов), \doxylink{methods_visual_page}{Визуальный разбор методов} (визуальный разбор), \doxylink{recommendations_page}{Итоговые рекомендации} (итоговые рекомендации). \end{quote}
+\hypertarget{tests_page_autotoc_md152}{}\doxysubsection{\texorpdfstring{4 вида тестов — 77+ тестов}{4 вида тестов — 77+ тестов}}\label{tests_page_autotoc_md152}
+Все тесты используют экспериментальные данные, моделирующие ДН антенны\+:
+
+\[
+\text{sinc}(x - x_0) = \frac{\sin(x - x_0)}{x - x_0}
+\]
+
+где $ x_0 $ — истинное смещение пика (цели) относительно центра сетки.
+
+\DoxyHorRuler{0}
+\hypertarget{tests_page_autotoc_md154}{}\doxysubsection{\texorpdfstring{1. Простые C++ тесты ($<$tt$>$test\+\_\+cpp/$<$/tt$>$) — 27 тестов}{1. Простые C++ тесты (<tt>test\_cpp/</tt>) — 27 тестов}}\label{tests_page_autotoc_md154}
+{\bfseries{Фреймворк}}\+: без фреймворка, assert + std\+::cout {\bfseries{Запуск}}\+: {\ttfamily ./build/test\+\_\+discr}
+
+Быстрые тесты для разработчиков C/\+C++. Не требуют внешних зависимостей.\hypertarget{tests_page_autotoc_md155}{}\doxysubsubsection{\texorpdfstring{Структура}{Структура}}\label{tests_page_autotoc_md155}
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Файл   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Тестов   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Что проверяет    }\\\cline{1-3}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Файл   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Тестов   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Что проверяет    }\\\cline{1-3}
+\endhead
+{\ttfamily test\+\_\+discr\+\_\+cg.\+hpp}   &7   &CG\+: 2/3/\+N-\/точечный, деление на 0    \\\cline{1-3}
+{\ttfamily test\+\_\+discr\+\_\+sd.\+hpp}   &3   &SD\+: базовый, смещение, деление на 0    \\\cline{1-3}
+{\ttfamily test\+\_\+discr\+\_\+qa.\+hpp}   &5   &QA\+: парабола, граничные A1=A2, A2=A3    \\\cline{1-3}
+{\ttfamily test\+\_\+discr\+\_\+ea.\+hpp}   &6   &EA\+: гауссиан, вогнутость, нулевые ампл.    \\\cline{1-3}
+{\ttfamily test\+\_\+discr\+\_\+common.\+hpp}   &6   &Обёртки\+: discr2, discr3\+\_\+, conv3to2   \\\cline{1-3}
+\end{longtabu}
+\hypertarget{tests_page_autotoc_md156}{}\doxysubsubsection{\texorpdfstring{Паттерн теста}{Паттерн теста}}\label{tests_page_autotoc_md156}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{extern}\ \textcolor{stringliteral}{"{}C"{}}\ \{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{discrcg_8h}{discrcg.h}}"{}}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <cassert>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ test\_symmetric()\ \{}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{double}\ r\ =\ \mbox{\hyperlink{discrcg_8h_ab3655559ca8de2c4fa17fc6341fad94c}{discr3cg}}(1.0,\ 3.0,\ 1.0,\ -\/1.0,\ 0.0,\ 1.0);}
+\DoxyCodeLine{\ \ assert(fabs(r\ -\/\ 0.0)\ <\ 1e-\/12);}
+\DoxyCodeLine{\ \ std::cout\ <<\ \textcolor{stringliteral}{"{}[PASS]\ discr3cg:\ symmetric\ -\/>\ center\(\backslash\)n"{}};}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\hypertarget{tests_page_autotoc_md157}{}\doxysubsubsection{\texorpdfstring{Результат}{Результат}}\label{tests_page_autotoc_md157}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{===\ CG\ Tests\ ===}
+\DoxyCodeLine{[PASS]\ discr2cg:\ equal\ amplitudes\ -\/>\ midpoint}
+\DoxyCodeLine{[PASS]\ discr2cg:\ dominant\ A2\ -\/>\ near\ x2}
+\DoxyCodeLine{[PASS]\ discr2cg:\ zero\ amplitudes\ -\/>\ midpoint\ (ERR-\/005)}
+\DoxyCodeLine{...}
+\DoxyCodeLine{========================================}
+\DoxyCodeLine{ALL\ DISCRIMINATOR\ TESTS\ COMPLETE\ (27/27)}
+\DoxyCodeLine{========================================}
+
+\end{DoxyCode}
+
+
+\DoxyHorRuler{0}
+\hypertarget{tests_page_autotoc_md159}{}\doxysubsection{\texorpdfstring{2. Google Test ($<$tt$>$test\+\_\+gtest/$<$/tt$>$) — 40 тестов}{2. Google Test (<tt>test\_gtest/</tt>) — 40 тестов}}\label{tests_page_autotoc_md159}
+{\bfseries{Фреймворк}}\+: Google Test v1.\+15.\+2 (CMake Fetch\+Content) {\bfseries{Запуск}}\+: {\ttfamily ./build/test\+\_\+discr\+\_\+gtest} или {\ttfamily ctest -\/-\/test-\/dir build}
+
+Полные тесты с подробной диагностикой. Используют {\bfseries{sinc(x)}} данные — реалистичные отсчёты ДН антенны с разными смещениями пика.\hypertarget{tests_page_autotoc_md160}{}\doxysubsubsection{\texorpdfstring{Структура}{Структура}}\label{tests_page_autotoc_md160}
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Файл   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Тестов   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Данные    }\\\cline{1-3}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Файл   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Тестов   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Данные    }\\\cline{1-3}
+\endhead
+{\ttfamily test\+\_\+discr\+\_\+cg\+\_\+gtest.\+cpp}   &11   &sinc(x), sinc(x-\/0.\+3), 5 точек    \\\cline{1-3}
+{\ttfamily test\+\_\+discr\+\_\+sd\+\_\+gtest.\+cpp}   &5   &sinc(x), sinc(x-\/0.\+2)    \\\cline{1-3}
+{\ttfamily test\+\_\+discr\+\_\+qa\+\_\+gtest.\+cpp}   &8   &sinc(x-\/0.\+2), sinc(x-\/0.\+4) мелкая сетка    \\\cline{1-3}
+{\ttfamily test\+\_\+discr\+\_\+ea\+\_\+gtest.\+cpp}   &9   &гауссиан, sinc(x-\/0.\+2), вогнутость    \\\cline{1-3}
+{\ttfamily test\+\_\+discr\+\_\+common\+\_\+gtest.\+cpp}   &7   &sinc(x)\texorpdfstring{$\ast$}{*}sinc(y) 3x3, ERR-\/003 побочные эффекты   \\\cline{1-3}
+\end{longtabu}
+\hypertarget{tests_page_autotoc_md161}{}\doxysubsubsection{\texorpdfstring{Ключевые тесты}{Ключевые тесты}}\label{tests_page_autotoc_md161}
+{\bfseries{Проверка точности на sinc(x-\/0.\+2)\+:}} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{TEST(Discr3QA,\ SincData\_Peak\_at\_02)\ \{}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{double}\ x0\ =\ 0.2;}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{double}\ A1\ =\ sinc(-\/1.0\ -\/\ x0);}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{double}\ A2\ =\ sinc(0.0\ -\/\ x0);}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{double}\ A3\ =\ sinc(1.0\ -\/\ x0);}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{double}\ r\ =\ \mbox{\hyperlink{discrqa_8h_a5cdf0c7b82518afc98773e8f323ddb3b}{discr3qa}}(A1,\ A2,\ A3,\ -\/1.0,\ 0.0,\ 1.0);}
+\DoxyCodeLine{\ \ EXPECT\_NEAR(r,\ x0,\ 0.15);\ \ \textcolor{comment}{//\ QA:\ ±0.1\ шага}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+{\bfseries{Проверка ERR-\/003 (нет побочных эффектов)\+:}} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{TEST(Discr3,\ QA\_NoSideEffect\_ERR003)\ \{}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{double}\ maz\_before\ =\ maz[0][0];}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{discr__common_8h_ac4d4e1deafa0bcc5b3c0ba33b1190c43}{discr3\_}}(maz,\ mel,\ mval,\ \mbox{\hyperlink{discr__types_8h_aaf88ae4f33b415b82feb394eade4a8daac62b9c6de522c4e07d7a5db1f7a8a450}{DT\_QA}},\ 0.1,\ 0.03,\ \&az,\ \&el,\ \&val);}
+\DoxyCodeLine{\ \ EXPECT\_DOUBLE\_EQ(maz[0][0],\ maz\_before);\ \ \textcolor{comment}{//\ входные\ данные\ НЕ\ изменены}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+\DoxyHorRuler{0}
+\hypertarget{tests_page_autotoc_md163}{}\doxysubsection{\texorpdfstring{3. Python тесты ($<$tt$>$test\+\_\+python/$<$/tt$>$) — 7 тестов + 3 графика}{3. Python тесты (<tt>test\_python/</tt>) — 7 тестов + 3 графика}}\label{tests_page_autotoc_md163}
+{\bfseries{Фреймворк}}\+: Py\+Core (Test\+Runner + Data\+Validator) {\bfseries{Запуск}}\+: {\ttfamily python test\+\_\+python/test\+\_\+discriminators.\+py} {\bfseries{Графики}}\+: {\ttfamily python test\+\_\+python/test\+\_\+discriminators\+\_\+plot.\+py}
+
+Тесты с визуализацией и сравнением с эталонами Num\+Py/\+Sci\+Py.\hypertarget{tests_page_autotoc_md164}{}\doxysubsubsection{\texorpdfstring{Эталонные реализации}{Эталонные реализации}}\label{tests_page_autotoc_md164}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{\#\ CG\ —\ numpy\ weighted\ average:}}
+\DoxyCodeLine{\textcolor{keyword}{def\ }ref\_cg(A,\ x):}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{return}\ np.average(x,\ weights=A)}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{\#\ QA\ —\ вершина\ параболы\ через\ polyfit:}}
+\DoxyCodeLine{\textcolor{keyword}{def\ }ref\_qa(A,\ x):}
+\DoxyCodeLine{\ \ \ \ coeffs\ =\ np.polyfit(x,\ A,\ 2)}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{return}\ -\/coeffs[1]\ /\ (2.0\ *\ coeffs[0])}
+
+\end{DoxyCode}
+\hypertarget{tests_page_autotoc_md165}{}\doxysubsubsection{\texorpdfstring{Результат сравнения точности}{Результат сравнения точности}}\label{tests_page_autotoc_md165}
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Метод   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Средняя ошибка   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Точность    }\\\cline{1-3}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Метод   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Средняя ошибка   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Точность    }\\\cline{1-3}
+\endhead
+CG   &0.\+172   &±0.3 шага    \\\cline{1-3}
+QA   &0.\+007   &±0.1 шага   \\\cline{1-3}
+\end{longtabu}
+
+
+{\bfseries{QA в 25 раз точнее CG!}}\hypertarget{tests_page_autotoc_md166}{}\doxysubsubsection{\texorpdfstring{Графики}{Графики}}\label{tests_page_autotoc_md166}
+
+
+График показывает\+:
+\begin{DoxyItemize}
+\item Голубая линия — sinc(x -\/ 0.\+25) (ДН антенны, пик смещён на 0.\+25)
+\item Жёлтые точки — 3 отсчёта на сетке \{-\/1, 0, +1\}
+\item Вертикальные линии — оценки дискриминаторов
+\item Зелёная пунктирная — истинное положение пика
+\end{DoxyItemize}
+
+
+
+График показывает зависимость абсолютной ошибки от смещения пика\+:
+\begin{DoxyItemize}
+\item CG (красный) и SD (фиолетовый) — линейный рост ошибки
+\item QA (бирюзовый) — ошибка \texorpdfstring{$<$}{<} 0.\+02 при любом смещении
+\item EA (жёлтый) — самая маленькая ошибка
+\end{DoxyItemize}
+
+
+
+Влияние шага сетки на точность\+:
+\begin{DoxyItemize}
+\item При мелкой сетке (\texorpdfstring{$<$}{<} 0.\+5) все методы точны
+\item При крупной сетке (\texorpdfstring{$>$}{>} 1.\+5) EA значительно лучше остальных
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+\hypertarget{tests_page_autotoc_md168}{}\doxysubsection{\texorpdfstring{Сборка и запуск}{Сборка и запуск}}\label{tests_page_autotoc_md168}
+\hypertarget{tests_page_autotoc_md169}{}\doxysubsubsection{\texorpdfstring{Простые C++ тесты}{Простые C++ тесты}}\label{tests_page_autotoc_md169}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{g++\ -\/std=c++17\ -\/Iinclude\ test\_cpp/test\_main.cpp\ -\/Lbuild\ -\/ldiscr\ -\/lm\ -\/o\ test\_discr}
+\DoxyCodeLine{./test\_discr}
+
+\end{DoxyCode}
+\hypertarget{tests_page_autotoc_md170}{}\doxysubsubsection{\texorpdfstring{Google Test}{Google Test}}\label{tests_page_autotoc_md170}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cd\ build}
+\DoxyCodeLine{cmake\ ..\ -\/G\ Ninja}
+\DoxyCodeLine{cmake\ -\/-\/build\ .}
+\DoxyCodeLine{./test\_discr\_gtest}
+\DoxyCodeLine{ctest\ \ \#\ или\ так}
+
+\end{DoxyCode}
+\hypertarget{tests_page_autotoc_md171}{}\doxysubsubsection{\texorpdfstring{Python}{Python}}\label{tests_page_autotoc_md171}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{python\ test\_python/test\_discriminators.py\ \ \ \ \ \ \ \#\ sinc(x)\ тесты}
+\DoxyCodeLine{python\ test\_python/test\_discriminators\_plot.py\ \ \ \#\ sinc(x)\ графики\ →\ Doc/plots/}
+\DoxyCodeLine{python\ test\_python/test\_fft\_frequency.py\ \ \ \ \ \ \ \ \ \#\ FFT\ тесты\ (10\ проверок)}
+\DoxyCodeLine{python\ test\_python/test\_fft\_frequency\_plot.py\ \ \ \ \#\ FFT\ графики\ →\ Doc/plots/}
+
+\end{DoxyCode}
+
+
+\DoxyHorRuler{0}
+\hypertarget{tests_page_autotoc_md173}{}\doxysubsection{\texorpdfstring{4. FFT-\/дискриминаторы частоты ($<$tt$>$test\+\_\+python/$<$/tt$>$) — 10 тестов + 2 графика}{4. FFT-дискриминаторы частоты (<tt>test\_python/</tt>) — 10 тестов + 2 графика}}\label{tests_page_autotoc_md173}
+{\bfseries{Фреймворк}}\+: Py\+Core (Test\+Runner) {\bfseries{Запуск}}\+: {\ttfamily python test\+\_\+python/test\+\_\+fft\+\_\+frequency.\+py}
+
+Тестирование дискриминаторов в задаче оценки частоты по FFT-\/спектру (воспроизведение Mat\+Lab Primer.\+m + fcalcdelay.\+m).\hypertarget{tests_page_autotoc_md174}{}\doxysubsubsection{\texorpdfstring{Тестовые группы}{Тестовые группы}}\label{tests_page_autotoc_md174}
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Класс   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Тестов   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Что проверяет    }\\\cline{1-3}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Класс   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Тестов   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Что проверяет    }\\\cline{1-3}
+\endhead
+{\ttfamily Test\+FFTBasic}   &4   &Симметрия (fsin=0), смещённый пик, все 5 методов    \\\cline{1-3}
+{\ttfamily Test\+FFTSweep}   &4   &Монотонность ДХ, макс. ошибка \texorpdfstring{$<$}{<} 10 кГц, знак оценки    \\\cline{1-3}
+{\ttfamily Test\+FFTCompare}   &2   &EXP лучше SQR лучше LAY; таблица точности   \\\cline{1-3}
+\end{longtabu}
+\hypertarget{tests_page_autotoc_md175}{}\doxysubsubsection{\texorpdfstring{Результат}{Результат}}\label{tests_page_autotoc_md175}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{[PASS]\ \ TestFFTBasic.test\_exp\_at\_center}
+\DoxyCodeLine{[PASS]\ \ TestFFTBasic.test\_exp\_shifted:\ f\_est=98575,\ err=4825\ Hz}
+\DoxyCodeLine{[PASS]\ \ TestFFTSweep.test\_exp\_monotonic\ (17\ pts)}
+\DoxyCodeLine{[PASS]\ \ TestFFTCompare.test\_exp\_best:\ EXP(2902)\ <\ SQR(13553)\ <\ LAY(22933)}
+\DoxyCodeLine{Total:\ 10\ passed,\ 0\ failed,\ 0\ skipped}
+
+\end{DoxyCode}
+\hypertarget{tests_page_autotoc_md176}{}\doxysubsubsection{\texorpdfstring{Графики FFT}{Графики FFT}}\label{tests_page_autotoc_md176}
+
+
+ 

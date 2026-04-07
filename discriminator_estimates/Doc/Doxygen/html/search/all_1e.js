@@ -1,9 +1,6 @@
 var searchData=
 [
-  ['квадратичная_20аппроксимация_20qa_20—_20quadratic_20approximation_0',['3. Квадратичная аппроксимация (QA — Quadratic Approximation)',['../formulas_page.html#autotoc_md25',1,'']]],
-  ['ключевые_20тесты_1',['Ключевые тесты',['../tests_page.html#autotoc_md56',1,'']]],
-  ['координат_2',['4 метода оценки координат',['../index.html#autotoc_md40',1,'']]],
-  ['координат_20кппо_20тзк_3',['Дискриминаторные оценки координат (КППО / ТЗК)',['../index.html#autotoc_md33',1,'']]],
-  ['коэффициент_20пересчёта_4',['5. Обёртка discr3() — коэффициент пересчёта',['../formulas_page.html#autotoc_md32',1,'']]],
-  ['кппо_20тзк_5',['Дискриминаторные оценки координат (КППО / ТЗК)',['../index.html#autotoc_md33',1,'']]]
+  ['vs_20смещение_20пика_20—_20sweep_0',['Ошибка vs смещение пика — sweep',['../methods_visual_page.html#autotoc_md96',1,'']]],
+  ['vs_203pt_20под_20шумом_20—_20hanning_1',['5pt vs 3pt под шумом — Hanning',['../methods_visual_page.html#autotoc_md103',1,'']]],
+  ['vs_20snr_2',['vs snr',['../recommendations_page.html#autotoc_md116',1,'Левый график — ошибка vs SNR'],['../recommendations_page.html#autotoc_md121',1,'Правый график — точность vs SNR']]]
 ];

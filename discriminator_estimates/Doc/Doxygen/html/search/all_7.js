@@ -1,6 +1,9 @@
 var searchData=
 [
-  ['a_0',['a',['../structaxstr__t.html#ad0ebf0e44c5b4d91881919a56737ff86',1,'axstr_t']]],
-  ['approximation_1',['approximation',['../formulas_page.html#autotoc_md25',1,'3. Квадратичная аппроксимация (QA — Quadratic Approximation)'],['../formulas_page.html#autotoc_md28',1,'4. Экспоненциальная аппроксимация (EA — Exponential Approximation)']]],
-  ['axstr_5ft_2',['axstr_t',['../structaxstr__t.html',1,'']]]
+  ['7_20или_209_0',['Почему именно 5 точек, а не 7 или 9',['../recommendations_page.html#autotoc_md127',1,'']]],
+  ['7_20сравнение_20всех_20методов_1',['7. Сравнение всех методов',['../formulas_page.html#autotoc_md40',1,'']]],
+  ['7_20тестов_203_20графика_2',['3. Python тесты (&lt;tt&gt;test_python/&lt;/tt&gt;) — 7 тестов + 3 графика',['../tests_page.html#autotoc_md163',1,'']]],
+  ['7_209_20точек_20под_20шумом_3',['МНК 5 / 7 / 9 точек под шумом',['../methods_visual_page.html#autotoc_md105',1,'']]],
+  ['7_209_20точек_20—_20без_20шума_4',['МНК 5/7/9 точек — без шума',['../methods_visual_page.html#autotoc_md98',1,'']]],
+  ['77_20тестов_5',['4 вида тестов — 77+ тестов',['../tests_page.html#autotoc_md152',1,'']]]
 ];

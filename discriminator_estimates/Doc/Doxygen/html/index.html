@@ -84,97 +84,222 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p><a class="anchor" id="mainpage"></a> </p>
-<h1><a class="anchor" id="autotoc_md33"></a>
+<h1><a class="anchor" id="autotoc_md45"></a>
 Дискриминаторные оценки координат (КППО / ТЗК)</h1>
 <blockquote class="doxtable">
-<p>&zwj;<b>Модуль</b>: discriminator_estimates <b>Организация</b>: ОАО НПК НИИДАР <b>Авторы</b>: Федоров С.А., Добродумов А.Б., Керский Е.В. <b>Рефакторинг</b>: Кодо (AI-ассистент), 2026-03-28 </p>
+<p>&zwj;<b>Модуль:</b> <code>discriminator_estimates</code> <b>Организация:</b> ОАО НПК НИИДАР <b>Авторы:</b> Федоров С.А., Добродумов А.Б., Керский Е.В. <b>Рефакторинг и расширение:</b> Кодо (AI-ассистент) + Alex, 2026 <b>Версия документации:</b> 2026-04-06 </p>
 </blockquote>
-<h1><a class="anchor" id="autotoc_md34"></a>
+<h1><a class="anchor" id="autotoc_md46"></a>
 &lt;/blockquote&gt;</h1>
-<h1><a class="anchor" id="autotoc_md35"></a>
-Содержание</h1>
+<div class="image">
+<img src="01_pipeline.png" alt=""/>
+<div class="caption">
+Полный pipeline обработки сигнала: от сырых отсчётов до точной частоты</div></div>
+<hr  />
+<h1><a class="anchor" id="autotoc_md48"></a>
+Что это и зачем</h1>
+<p>Эта библиотека отвечает на один очень практичный вопрос:</p>
+<blockquote class="doxtable">
+<p>&zwj;<b>«У меня есть несколько точек измерения сигнала. Где находится истинный максимум — между точками?»</b> </p>
+</blockquote>
+<p>Под «точками» понимаются:</p><ul>
+<li>отсчёты диаграммы направленности (ДН) антенны для оценки <b>угловых координат цели</b> в РЛС;</li>
+<li>бины спектра FFT для оценки <b>точной частоты</b> одиночного гармонического сигнала в зашумлённой записи.</li>
+</ul>
+<p>В обоих случаях математика одинаковая, и здесь собраны <b>6 проверенных методов</b> — от классических 2-точечных до новых 5-точечных МНК-аппроксимаций.</p>
+<h2><a class="anchor" id="autotoc_md49"></a>
+Аналогия из жизни</h2>
+<blockquote class="doxtable">
+<p>&zwj;Представь, что ты стоишь на стадионе в шумной толпе и пытаешься услышать, на какой ноте поёт один конкретный певец. Толпа — это шум. Голос певца — наш полезный сигнал. У тебя есть три-пять микрофонов, расставленных по частотной шкале — каждый «слышит» немного по-разному. Задача: по этим 3–5 числам угадать, где <b>точно</b> находится голос певца.</p>
+<p>То, чем занимается этот модуль — это и есть «найти певца в толпе». </p>
+</blockquote>
+<p>Подробное объяснение для чайника + полная теория есть в файле <code>Doc/Frequency_Recommendations_2026-04-06.md</code> (на этом же документе и основан большой раздел <a class="el" href="recommendations_page.html">Итоговые рекомендации</a>).</p>
+<hr  />
+<h1><a class="anchor" id="autotoc_md51"></a>
+Содержание документации</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">#   </th><th class="markdownTableHeadNone">Раздел   </th><th class="markdownTableHeadNone">Описание    </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">1   </td><td class="markdownTableBodyNone"><a class="el" href="index.html#mainpage">Главная</a>   </td><td class="markdownTableBodyNone">Назначение, методы, быстрый старт    </td></tr>
+<td class="markdownTableBodyNone">1   </td><td class="markdownTableBodyNone"><a class="el" href="index.html#mainpage">Главная</a>   </td><td class="markdownTableBodyNone">Назначение, методы, навигация    </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">2   </td><td class="markdownTableBodyNone"><a class="el" href="formulas_page.html">Формулы</a>   </td><td class="markdownTableBodyNone">Математический вывод всех 4 методов (MathJax)    </td></tr>
+<td class="markdownTableBodyNone">2   </td><td class="markdownTableBodyNone"><a class="el" href="formulas_page.html">Формулы</a>   </td><td class="markdownTableBodyNone">Полный математический вывод (CG, SD, QA, EA, 5QA, 5EA)    </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">3   </td><td class="markdownTableBodyNone"><a class="el" href="tests_page.html">Тестирование</a>   </td><td class="markdownTableBodyNone">C++ / GTest / Python / FFT — 77+ тестов    </td></tr>
+<td class="markdownTableBodyNone">3   </td><td class="markdownTableBodyNone"><a class="el" href="methods_visual_page.html">Визуальный разбор</a>   </td><td class="markdownTableBodyNone">GIF-анимации, 3D-карты, поведение методов    </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">4   </td><td class="markdownTableBodyNone"><a class="el" href="fft_page.html">FFT-дискриминаторы</a>   </td><td class="markdownTableBodyNone">Оценка частоты по спектру (Primer.m)    </td></tr>
+<td class="markdownTableBodyNone">4   </td><td class="markdownTableBodyNone"><a class="el" href="recommendations_page.html">Итоговые рекомендации</a>   </td><td class="markdownTableBodyNone">Что использовать на практике + дерево решений    </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">-   </td><td class="markdownTableBodyNone"><b>Файлы</b>   </td><td class="markdownTableBodyNone">C API: <a class="el" href="discrcg_8h.html" title="Комплекс программ первичной обработки (КППО). Программа вычисления текущих замеров координат (ТЗК)....">discrcg.h</a>, <a class="el" href="discrsd_8h.html" title="Комплекс программ первичной обработки (КППО). Программа вычисления текущих замеров координат (ТЗК)....">discrsd.h</a>, <a class="el" href="discrqa_8h.html" title="Комплекс программ первичной обработки (КППО). Программа вычисления текущих замеров координат (ТЗК)....">discrqa.h</a>, <a class="el" href="discrea_8h.html" title="Комплекс программ первичной обработки (КППО). Программа вычисления текущих замеров координат (ТЗК)....">discrea.h</a>, <a class="el" href="discr__common_8h.html" title="Комплекс программ первичной обработки (КППО). Программа вычисления текущих замеров координат (ТЗК)....">discr_common.h</a>   </td></tr>
+<td class="markdownTableBodyNone">5   </td><td class="markdownTableBodyNone"><a class="el" href="tests_page.html">Тестирование</a>   </td><td class="markdownTableBodyNone">C++ / GTest / Python — 77+ тестов    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">6   </td><td class="markdownTableBodyNone"><a class="el" href="fft_page.html">FFT-дискриминаторы</a>   </td><td class="markdownTableBodyNone">Применение к оценке частоты по спектру   </td></tr>
 </table>
+<p><b>Файлы C API:</b> <code><a class="el" href="discrcg_8h.html" title="Комплекс программ первичной обработки (КППО). Программа вычисления текущих замеров координат (ТЗК)....">discrcg.h</a></code>, <code><a class="el" href="discrsd_8h.html" title="Комплекс программ первичной обработки (КППО). Программа вычисления текущих замеров координат (ТЗК)....">discrsd.h</a></code>, <code><a class="el" href="discrqa_8h.html" title="Комплекс программ первичной обработки (КППО). Программа вычисления текущих замеров координат (ТЗК)....">discrqa.h</a></code>, <code><a class="el" href="discrea_8h.html" title="Комплекс программ первичной обработки (КППО). Программа вычисления текущих замеров координат (ТЗК)....">discrea.h</a></code>, <code><a class="el" href="discr5ea_8h.html" title="Комплекс программ первичной обработки (КППО). Программа вычисления текущих замеров координат (ТЗК)....">discr5ea.h</a></code>, <code><a class="el" href="discr__auto_8h.html" title="Автоматический выбор дискриминатора с экстраполяцией.">discr_auto.h</a></code>, <code><a class="el" href="discr__common_8h.html" title="Комплекс программ первичной обработки (КППО). Программа вычисления текущих замеров координат (ТЗК)....">discr_common.h</a></code>, <code><a class="el" href="discr__types_8h.html" title="Комплекс программ первичной обработки (КППО). Программа вычисления текущих замеров координат (ТЗК)....">discr_types.h</a></code>.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md37"></a>
-Назначение</h1>
-<p>Библиотека реализует <b>дискриминаторные оценки координат цели</b> по отсчётам диаграммы направленности (ДН) антенны. Применяется в КППО для ТЗК.</p>
-<h1><a class="anchor" id="autotoc_md38"></a>
-Физический смысл</h1>
-<p>Диаграмма направленности антенны описывается функцией, близкой к:</p>
-<p class="formulaDsp">
-\[
-\text{sinc}(x) = \frac{\sin(x)}{x}
-\]
-</p>
-<p>Антенна "смотрит" в несколько направлений (2-3 луча) и измеряет амплитуду. По отсчётам дискриминатор оценивает <b>истинное положение цели</b> между лучами.</p>
+<h1><a class="anchor" id="autotoc_md53"></a>
+Главная рекомендация (на одну страницу)</h1>
+<div class="image">
+<img src="06_decision_tree.png" alt=""/>
+<div class="caption">
+Дерево решений: какой метод выбрать</div></div>
+<blockquote class="doxtable">
+<p>&zwj;<b>Если кратко:</b> для FFT-задачи (поиск частоты) используй **<code>discr5ea</code> с fallback на <code>discr5qa</code>** и обязательным <code>zero-padding ×2</code> с окном Hanning.</p>
+<p>**Это даёт ошибку ~0.6 Гц при SNR = 20 дБ для типичного радара (<code>fs = 100 МГц</code>, <code>N = 4M</code>) — в 20 раз лучше, чем без интерполяции, и в 2 раза лучше классического 3-точечного <code>discr3ea</code>.** </p>
+</blockquote>
+<p>Подробное обоснование — на странице <a class="el" href="recommendations_page.html">Итоговые рекомендации</a>.</p>
+<hr  />
+<h1><a class="anchor" id="autotoc_md55"></a>
+Демонстрация работы</h1>
+<div class="image">
+<img src="auto_demo.gif" alt=""/>
+<div class="caption">
+Анимация: автоматический выбор метода в разных сценариях (sweep + шум + step)</div></div>
+<p>Что видно на анимации:</p><ul>
+<li><b>зелёный пунктир</b> — истинное положение пика (то, что надо найти);</li>
+<li><b>цветные вертикальные линии</b> — оценки разных методов;</li>
+<li><b>точки сверху</b> — отсчёты, которые «видит» алгоритм;</li>
+<li>хорошие методы сидят рядом с зелёной линией, плохие — далеко.</li>
+</ul>
+<p>Больше анимаций — на странице <a class="el" href="methods_visual_page.html">Визуальный разбор методов</a>.</p>
+<hr  />
+<h1><a class="anchor" id="autotoc_md57"></a>
+Шесть методов одним взглядом</h1>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Метод   </th><th class="markdownTableHeadNone">Файл   </th><th class="markdownTableHeadNone">Точек   </th><th class="markdownTableHeadNone">Идея   </th><th class="markdownTableHeadNone">Краткая формула   </th><th class="markdownTableHeadNone">Когда хорош    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><b>CG</b>   </td><td class="markdownTableBodyNone"><code><a class="el" href="discrcg_8h.html" title="Комплекс программ первичной обработки (КППО). Программа вычисления текущих замеров координат (ТЗК)....">discrcg.h</a></code>   </td><td class="markdownTableBodyNone">2…N   </td><td class="markdownTableBodyNone">Центр тяжести   </td><td class="markdownTableBodyNone">\( x_e = \frac{\sum A_i x_i}{\sum A_i} \)   </td><td class="markdownTableBodyNone">Грубая оценка    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><b>SD</b>   </td><td class="markdownTableBodyNone"><code><a class="el" href="discrsd_8h.html" title="Комплекс программ первичной обработки (КППО). Программа вычисления текущих замеров координат (ТЗК)....">discrsd.h</a></code>   </td><td class="markdownTableBodyNone">2   </td><td class="markdownTableBodyNone">Сумма-разность (моноимпульсный)   </td><td class="markdownTableBodyNone">\( x_e = x_c + c \cdot \frac{A_2 - A_1}{A_2 + A_1} \)   </td><td class="markdownTableBodyNone">2 канала, моноимпульс    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><b>QA</b>   </td><td class="markdownTableBodyNone"><code><a class="el" href="discrqa_8h.html" title="Комплекс программ первичной обработки (КППО). Программа вычисления текущих замеров координат (ТЗК)....">discrqa.h</a></code>   </td><td class="markdownTableBodyNone">3   </td><td class="markdownTableBodyNone">Парабола по 3 точкам   </td><td class="markdownTableBodyNone">\( x_e = -\frac{b}{2a} \)   </td><td class="markdownTableBodyNone">Параболоподобный пик    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><b>EA</b>   </td><td class="markdownTableBodyNone"><code><a class="el" href="discrea_8h.html" title="Комплекс программ первичной обработки (КППО). Программа вычисления текущих замеров координат (ТЗК)....">discrea.h</a></code>   </td><td class="markdownTableBodyNone">3   </td><td class="markdownTableBodyNone">Парабола в <code>log</code>-масштабе (Гауссиан)   </td><td class="markdownTableBodyNone">\( x_e = \alpha / (2\beta) \)   </td><td class="markdownTableBodyNone">Гауссовый пик    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><b>5QA</b> ★   </td><td class="markdownTableBodyNone"><code><a class="el" href="discr5ea_8h.html" title="Комплекс программ первичной обработки (КППО). Программа вычисления текущих замеров координат (ТЗК)....">discr5ea.h</a></code>   </td><td class="markdownTableBodyNone">5   </td><td class="markdownTableBodyNone">МНК-парабола по 5 точкам   </td><td class="markdownTableBodyNone">\( a = \dfrac{2y_1 - y_2 - 2y_3 - y_4 + 2y_5}{14} \)   </td><td class="markdownTableBodyNone">Шум, Hanning kernel    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><b>5EA</b> ★★   </td><td class="markdownTableBodyNone"><code><a class="el" href="discr5ea_8h.html" title="Комплекс программ первичной обработки (КППО). Программа вычисления текущих замеров координат (ТЗК)....">discr5ea.h</a></code>   </td><td class="markdownTableBodyNone">5   </td><td class="markdownTableBodyNone">МНК-Гауссиан по 5 точкам   </td><td class="markdownTableBodyNone">то же, но \( z_i = \ln y_i \)   </td><td class="markdownTableBodyNone"><b>Универсал, FFT</b>   </td></tr>
+</table>
+<p>★ — добавлено при рефакторинге 2026, ★★ — <b>рекомендуемый по умолчанию</b> для FFT.</p>
 <div class="image">
 <img src="sinc_discriminator_estimates.png" alt=""/>
 <div class="caption">
-Рис. 1: Оценки дискриминаторов на sinc(x)</div></div>
+Дискриминаторы на эталонном сигнале sinc(x − 0.25)</div></div>
+<p>Полные формулы и вывод — на странице <a class="el" href="formulas_page.html">Математические формулы</a>.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md40"></a>
-4 метода оценки координат</h1>
-<table class="markdownTable">
-<tr class="markdownTableHead">
-<th class="markdownTableHeadNone">Метод   </th><th class="markdownTableHeadNone">Код   </th><th class="markdownTableHeadNone">Точность   </th><th class="markdownTableHeadNone">Файл   </th><th class="markdownTableHeadNone">Описание    </th></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">Центр тяжести   </td><td class="markdownTableBodyNone"><code>DT_CG</code>   </td><td class="markdownTableBodyNone">±0.3 шага   </td><td class="markdownTableBodyNone"><a class="el" href="discrcg_8c.html" title="КППО / ТЗК. Дискриминатор — центр тяжести (Center of Gravity).">discrcg.c</a>   </td><td class="markdownTableBodyNone">Взвешенное среднее    </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">Суммарно-разностный   </td><td class="markdownTableBodyNone"><code>DT_SD</code>   </td><td class="markdownTableBodyNone">±0.2 шага   </td><td class="markdownTableBodyNone"><a class="el" href="discrsd_8c.html" title="КППО / ТЗК. Дискриминатор — суммарно-разностный (Sum-Difference).">discrsd.c</a>   </td><td class="markdownTableBodyNone">Моноимпульсный    </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">Квадратичная   </td><td class="markdownTableBodyNone"><code>DT_QA</code>   </td><td class="markdownTableBodyNone">±0.1 шага   </td><td class="markdownTableBodyNone"><a class="el" href="discrqa_8c.html" title="КППО / ТЗК. Дискриминатор — квадратичная аппроксимация (Quadratic).">discrqa.c</a>   </td><td class="markdownTableBodyNone">Парабола через 3 точки    </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">Экспоненциальная   </td><td class="markdownTableBodyNone"><code>DT_EA</code>   </td><td class="markdownTableBodyNone">±0.05 шага   </td><td class="markdownTableBodyNone"><a class="el" href="discrea_8c.html" title="КППО / ТЗК. Дискриминатор — экспоненциальная аппроксимация (Exponential).">discrea.c</a>   </td><td class="markdownTableBodyNone">Гауссова кривая   </td></tr>
-</table>
-<div class="image">
-<img src="error_vs_shift.png" alt=""/>
-<div class="caption">
-Рис. 2: Ошибки дискриминаторов при разных смещениях пика</div></div>
-<hr  />
-<h1><a class="anchor" id="autotoc_md42"></a>
-FFT-применение: оценка частоты по спектру</h1>
-<p>Те же дискриминаторы (CG, SD, QA/SQR, EA/EXP) применяются для <b>оценки частоты по FFT-спектру</b> комплексного сигнала. Дополнительно реализован метод Jacobsen (LAY).</p>
-<div class="image">
-<img src="fft_primer_m.png" alt=""/>
-<div class="caption">
-Рис. 3: FFT-дискриминаторы — sweep 65 точек (Primer.m)</div></div>
-<p>Подробнее: <a class="el" href="fft_page.html">FFT-дискриминаторы частоты</a></p>
-<hr  />
-<h1><a class="anchor" id="autotoc_md44"></a>
+<h1><a class="anchor" id="autotoc_md59"></a>
 Быстрый старт</h1>
-<p><b>C (3-точечный QA дискриминатор):</b> </p><div class="fragment"><div class="line"><span class="preprocessor">#include &quot;<a class="code" href="discrqa_8h.html">discrqa.h</a>&quot;</span></div>
+<h2><a class="anchor" id="autotoc_md60"></a>
+C: суб-бинная оценка частоты по 5 точкам спектра (рекомендация)</h2>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &quot;<a class="code" href="discr5ea_8h.html">discr5ea.h</a>&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;complex.h&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// X[]    — комплексный спектр после FFT (длина N_padded)</span></div>
+<div class="line"><span class="comment">// k_max  — индекс максимума |X(k)| (грубая оценка)</span></div>
+<div class="line"><span class="comment">// fs     — частота дискретизации [Гц]</span></div>
+<div class="line"><span class="comment">// N_padded — длина FFT с zero-padding ×2</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">double</span> y[5], xs[5];</div>
+<div class="line"><span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; 5; ++i) {</div>
+<div class="line">  y[i]  = cabs(X[k_max - 2 + i]);   <span class="comment">// |X(k-2)| .. |X(k+2)|</span></div>
+<div class="line">  xs[i] = (double)(i - 2);          <span class="comment">// {-2, -1, 0, 1, 2}</span></div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">double</span> delta;</div>
+<div class="line"><span class="keywordtype">int</span> ok = <a class="code hl_function" href="discr5ea_8h.html#a7a40e781923ce2b7e9f823d6966a99d3">discr5ea</a>(y, xs, &amp;delta);   <span class="comment">// МНК-Гауссиан по 5 точкам</span></div>
+<div class="line"><span class="keywordflow">if</span> (ok != 0) {</div>
+<div class="line">  <span class="comment">// fallback: какая-то |X(k)| ≤ 0 → 5QA по амплитудам</span></div>
+<div class="line">  <a class="code hl_function" href="discr5ea_8h.html#ac785bc2874e4a806c56a89d6232d1f34">discr5qa</a>(y, xs, &amp;delta);</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">double</span> f_hz = (k_max + delta) * fs / (<span class="keywordtype">double</span>)N_padded;</div>
+<div class="ttc" id="adiscr5ea_8h_html"><div class="ttname"><a href="discr5ea_8h.html">discr5ea.h</a></div><div class="ttdoc">Комплекс программ первичной обработки (КППО). Программа вычисления текущих замеров координат (ТЗК)....</div></div>
+<div class="ttc" id="adiscr5ea_8h_html_a7a40e781923ce2b7e9f823d6966a99d3"><div class="ttname"><a href="discr5ea_8h.html#a7a40e781923ce2b7e9f823d6966a99d3">discr5ea</a></div><div class="ttdeci">int discr5ea(const double A[5], const double x[5], double *xe)</div><div class="ttdoc">Пятиточечный дискриминатор, МНК-гауссова аппроксимация (LSQ Gaussian 5pt).</div><div class="ttdef"><b>Definition</b> <a href="discr5ea_8c_source.html#l00061">discr5ea.c:61</a></div></div>
+<div class="ttc" id="adiscr5ea_8h_html_ac785bc2874e4a806c56a89d6232d1f34"><div class="ttname"><a href="discr5ea_8h.html#ac785bc2874e4a806c56a89d6232d1f34">discr5qa</a></div><div class="ttdeci">int discr5qa(const double A[5], const double x[5], double *xe)</div><div class="ttdoc">Пятиточечный дискриминатор, МНК-параболическая аппроксимация (LSQ Parabolic 5pt).</div><div class="ttdef"><b>Definition</b> <a href="discr5ea_8c_source.html#l00112">discr5ea.c:112</a></div></div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md61"></a>
+C: классический 3-точечный QA на угловой ДН</h2>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &quot;<a class="code" href="discrqa_8h.html">discrqa.h</a>&quot;</span></div>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">double</span> A1 = 0.75, A2 = 2.75, A3 = 2.75;</div>
-<div class="line"><span class="keywordtype">double</span> x1 = -1.0, x2 = 0.0, x3 = 1.0;</div>
+<div class="line"><span class="keywordtype">double</span> x1 = -1.0, x2 = 0.0,  x3 = 1.0;</div>
 <div class="line"><span class="keywordtype">double</span> xe = <a class="code hl_function" href="discrqa_8h.html#a5cdf0c7b82518afc98773e8f323ddb3b">discr3qa</a>(A1, A2, A3, x1, x2, x3);</div>
-<div class="line"><span class="comment">// xe ~ 0.5</span></div>
+<div class="line"><span class="comment">// xe ≈ 0.5 — оценка положения пика между точками</span></div>
 <div class="ttc" id="adiscrqa_8h_html"><div class="ttname"><a href="discrqa_8h.html">discrqa.h</a></div><div class="ttdoc">Комплекс программ первичной обработки (КППО). Программа вычисления текущих замеров координат (ТЗК)....</div></div>
 <div class="ttc" id="adiscrqa_8h_html_a5cdf0c7b82518afc98773e8f323ddb3b"><div class="ttname"><a href="discrqa_8h.html#a5cdf0c7b82518afc98773e8f323ddb3b">discr3qa</a></div><div class="ttdeci">double discr3qa(double A1, double A2, double A3, double x1, double x2, double x3)</div><div class="ttdoc">Трехточечный дискриминатор, аппроксимация квадратичной зависимостью (Quadratic).</div><div class="ttdef"><b>Definition</b> <a href="discrqa_8c_source.html#l00039">discrqa.c:39</a></div></div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md62"></a>
+C: автоматический выбор с защитой от монотонной зоны</h2>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &quot;<a class="code" href="discr__auto_8h.html">discr_auto.h</a>&quot;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">double</span> xe;</div>
+<div class="line"><span class="keywordtype">int</span> how = <a class="code hl_function" href="discr__auto_8h.html#a99aa3243f4143e13f9e1a2fda43c714e">discr3_auto</a>(A1, A2, A3, x1, x2, x3, &amp;xe);</div>
+<div class="line"><span class="comment">// how == 0 → EA использован   (нормальный случай)</span></div>
+<div class="line"><span class="comment">// how == 1 → QA fallback      (EA не сошёлся)</span></div>
+<div class="line"><span class="comment">// how == 2 → E2 экстраполяция (монотонные данные)</span></div>
+<div class="line"><span class="comment">// how == 3 → E2 не сошёлся    (xe = x2)</span></div>
+<div class="ttc" id="adiscr__auto_8h_html"><div class="ttname"><a href="discr__auto_8h.html">discr_auto.h</a></div><div class="ttdoc">Автоматический выбор дискриминатора с экстраполяцией.</div></div>
+<div class="ttc" id="adiscr__auto_8h_html_a99aa3243f4143e13f9e1a2fda43c714e"><div class="ttname"><a href="discr__auto_8h.html#a99aa3243f4143e13f9e1a2fda43c714e">discr3_auto</a></div><div class="ttdeci">int discr3_auto(double A1, double A2, double A3, double x1, double x2, double x3, double *xe)</div><div class="ttdoc">Автоматический дискриминатор с переключением.</div><div class="ttdef"><b>Definition</b> <a href="discr__auto_8c_source.html#l00191">discr_auto.c:191</a></div></div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md46"></a>
-Навигация</h1>
+<h1><a class="anchor" id="autotoc_md64"></a>
+Структура модуля</h1>
+<div class="fragment"><div class="line">discriminator_estimates/</div>
+<div class="line">├── include/                 ← публичный C API (8 заголовков)</div>
+<div class="line">│   ├── discrcg.h            ← Центр тяжести</div>
+<div class="line">│   ├── discrsd.h            ← Сумма-разность</div>
+<div class="line">│   ├── discrqa.h            ← Парабола (3pt)</div>
+<div class="line">│   ├── discrea.h            ← Гауссиан (3pt)</div>
+<div class="line">│   ├── discr5ea.h           ← МНК 5pt: 5QA + 5EA  ★ новое</div>
+<div class="line">│   ├── discr_auto.h         ← Авто-выбор + extrap ★ новое</div>
+<div class="line">│   ├── discr_common.h       ← Обёртки discr2/discr3</div>
+<div class="line">│   └── discr_types.h        ← DISCRTYPE enum</div>
+<div class="line">├── src/                     ← реализация (.c)</div>
+<div class="line">├── test_cpp/                ← простые C++ тесты</div>
+<div class="line">├── test_gtest/              ← Google Test (40+ тестов)</div>
+<div class="line">├── test_python/             ← Python тесты + графики</div>
+<div class="line">└── Doc/</div>
+<div class="line">    ├── API.md  Full.md  Quick.md   ← markdown-документация</div>
+<div class="line">    ├── Doxygen/             ← вы здесь</div>
+<div class="line">    ├── plots/               ← все графики и анимации</div>
+<div class="line">    │   ├── 1_animation/     ← .gif</div>
+<div class="line">    │   ├── 2_no_noise/      ← чистый сигнал</div>
+<div class="line">    │   ├── 3_noise/         ← Монте-Карло с шумом</div>
+<div class="line">    │   ├── 4_3d/            ← 3D-карты, heatmap</div>
+<div class="line">    │   └── 5_recommendations/ ← итоговые иллюстрации</div>
+<div class="line">    └── Review/              ← история рефакторинга</div>
+</div><!-- fragment --><hr  />
+<h1><a class="anchor" id="autotoc_md66"></a>
+Ссылки и дополнительные ресурсы</h1>
+<h2><a class="anchor" id="autotoc_md67"></a>
+Внутри проекта</h2>
 <ul>
-<li><a class="el" href="formulas_page.html">Математические формулы</a></li>
-<li><a class="el" href="tests_page.html">Тестирование (C++ / GTest / Python)</a></li>
-<li><a class="el" href="fft_page.html">FFT-дискриминаторы частоты</a></li>
+<li><a class="el" href="formulas_page.html">Математические формулы</a> — Полные формулы всех 6 методов (CG, SD, QA, EA, 5QA, 5EA)</li>
+<li><a class="el" href="methods_visual_page.html">Визуальный разбор методов</a> — Визуальный разбор: GIF, 3D-карты, поведение</li>
+<li><a class="el" href="recommendations_page.html">Итоговые рекомендации</a> — Итоговые рекомендации + дерево решений</li>
+<li><a class="el" href="tests_page.html">Тестирование</a> — Тестирование (C++ / GTest / Python — 77+ тестов)</li>
+<li><a class="el" href="fft_page.html">FFT-дискриминаторы частоты</a> — FFT-дискриминаторы частоты</li>
 </ul>
+<h2><a class="anchor" id="autotoc_md68"></a>
+Markdown-документы (вне Doxygen)</h2>
+<p>Эти файлы лежат рядом с Doxygen-документацией, в каталоге <code>Doc/</code>:</p>
+<ul>
+<li><code>Doc/API.md</code> — справочник публичного API</li>
+<li><code>Doc/Full.md</code> — полная документация модуля</li>
+<li><code>Doc/Quick.md</code> — быстрый старт</li>
+<li><code>Doc/Frequency_Recommendations_2026-04-06.md</code> — итоговый отчёт «как найти частоту в шуме» (на котором построена <a class="el" href="recommendations_page.html">Итоговые рекомендации</a>)</li>
+<li><code>Doc/FFT_Frequency_Estimation.md</code> — справочник по FFT-методам суб-бинной оценки</li>
+<li><code>Doc/plots/README.md</code> — описание всех графиков с пояснениями</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md69"></a>
+Внешние источники</h2>
+<ol type="1">
+<li>Gasior, Gonzalez (CERN, 2004) — <a href="https://mgasior.web.cern.ch/pap/FFT_resol_note.pdf">Improving FFT frequency measurement resolution by parabolic and Gaussian interpolation</a></li>
+<li>Julius O. Smith III — <a href="https://www.dsprelated.com/freebooks/sasp/Quadratic_Interpolation_Spectral_Peaks.html">Quadratic Interpolation of Spectral Peaks</a></li>
+<li>Quinn, B.G. (IEEE TSP, 1994, 1997) — оригинальные статьи по Quinn estimators</li>
+<li>Candan, Ç. (2011) — Fine resolution frequency estimation from three DFT samples</li>
+</ol>
+<hr  />
 <div class="image">
-<img src="error_vs_grid_step.png" alt=""/>
+<img src="04_methods_vs_snr.png" alt=""/>
 <div class="caption">
-Рис. 4: Ошибка оценки при разных шагах сетки</div></div>
+Главный эксперимент: 5pt-методы стабильно лучше 3pt при любом SNR</div></div>
  </div></div><!-- PageDoc -->
 </div><!-- contents -->
 <!-- start footer part -->

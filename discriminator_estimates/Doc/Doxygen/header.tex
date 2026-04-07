@@ -1,0 +1,333 @@
+% Latex header for doxygen 1.9.8
+  % Handle batch mode
+  $latex_batchmode
+
+  % to overcome problems with too many open files
+  \let\mypdfximage\pdfximage\def\pdfximage{\immediate\mypdfximage}
+
+  \pdfminorversion=7
+
+  % Set document class depending on configuration
+%%BEGIN COMPACT_LATEX
+  \documentclass[twoside]{article}
+%%END COMPACT_LATEX
+%%BEGIN !COMPACT_LATEX
+  \documentclass[twoside]{book}
+%%END !COMPACT_LATEX
+
+  %% moved from doxygen.sty due to workaround for LaTex 2019 version and unmaintained tabu package
+  \usepackage{ifthen}
+  \ifx\requestedLaTeXdate\undefined
+    \usepackage{array}
+  \else
+    \usepackage{array}[=2016-10-06]
+  \fi
+  %%
+
+  % Packages required by doxygen
+  \makeatletter
+  \providecommand\IfFormatAtLeastTF{\@ifl@t@r\fmtversion}
+  % suppress package identification of infwarerr as it contains the word "warning"
+  \let\@@protected@wlog\protected@wlog
+  \def\protected@wlog#1{\wlog{package info suppressed}}
+  \RequirePackage{infwarerr}
+  \let\protected@wlog\@@protected@wlog
+  \makeatother
+  \IfFormatAtLeastTF{2016/01/01}{}{\usepackage{fixltx2e}} % for \textsubscript
+  \IfFormatAtLeastTF{2015/01/01}{\pdfsuppresswarningpagegroup=1}{}
+
+  \usepackage{doxygen}
+  \usepackage{amsmath}
+  \usepackage{amssymb}
+  \usepackage{amstext}
+
+  $extralatexstylesheet
+
+  \usepackage{graphicx}
+  \usepackage[utf8]{inputenc}
+  \usepackage{makeidx}
+  \PassOptionsToPackage{warn}{textcomp}
+  \usepackage{textcomp}
+  \usepackage[nointegrals]{wasysym}
+  \usepackage{ifxetex}
+
+  % NLS support packages
+  $languagesupport
+
+  % Define default fonts
+  % Font selection
+%%BEGIN LATEX_FONTENC
+  \usepackage[$latexfontenc]{fontenc}
+%%END LATEX_FONTENC
+
+  % set main and monospaced font
+  $latexfont
+
+  \doxyallsectionsfont{%
+    \fontseries{bc}\selectfont%
+    \color{darkgray}%
+  }
+  \renewcommand{\DoxyLabelFont}{%
+    \fontseries{bc}\selectfont%
+    \color{darkgray}%
+  }
+  \newcommand{\+}{\discretionary{\mbox{\scriptsize$\hookleftarrow$}}{}{}}
+
+   % Arguments of doxygenemoji:
+   % 1) ':<text>:' form of the emoji, already LaTeX-escaped
+   % 2) file with the name of the emoji without the .png extension
+   % in case image exist use this otherwise use the ':<text>:' form
+   \newcommand{\doxygenemoji}[2]{%
+     \IfFileExists{$latexemojidirectory/#2.png}{\raisebox{-0.1em}{\includegraphics[height=0.9em]{$latexemojidirectory/#2.png}}}{#1}%
+   }
+
+  % Page & text layout
+  \usepackage{geometry}
+  \geometry{%
+    $papertype,%
+    top=2.5cm,%
+    bottom=2.5cm,%
+    left=2.5cm,%
+    right=2.5cm%
+  }
+  \usepackage{changepage}
+
+  % Allow a bit of overflow to go unnoticed by other means
+  \tolerance=750
+  \hfuzz=15pt
+  \hbadness=750
+  \setlength{\emergencystretch}{15pt}
+  \setlength{\parindent}{0cm}
+  \newcommand{\doxynormalparskip}{\setlength{\parskip}{3ex plus 2ex minus 2ex}}
+  \newcommand{\doxytocparskip}{\setlength{\parskip}{1ex plus 0ex minus 0ex}}
+  \doxynormalparskip
+  % Redefine paragraph/subparagraph environments, using sectsty fonts
+  \makeatletter
+  \renewcommand{\paragraph}{%
+    \@startsection{paragraph}{4}{0ex}{-1.0ex}{1.0ex}{%
+      \normalfont\normalsize\bfseries\SS@parafont%
+    }%
+  }
+  \renewcommand{\subparagraph}{%
+    \@startsection{subparagraph}{5}{0ex}{-1.0ex}{1.0ex}{%
+      \normalfont\normalsize\bfseries\SS@subparafont%
+    }%
+  }
+  \makeatother
+
+  \makeatletter
+  \newcommand\hrulefilll{\leavevmode\leaders\hrule\hskip 0pt plus 1filll\kern\z@}
+  \makeatother
+
+  % Headers & footers
+  \usepackage{fancyhdr}
+  \pagestyle{fancyplain}
+  \renewcommand{\footrulewidth}{0.4pt}
+
+  \fancypagestyle{fancyplain}{
+    \fancyhf{}
+    \fancyhead[LE, RO]{\bfseries\thepage}
+    \fancyhead[LO]{\bfseries\rightmark}
+    \fancyhead[RE]{\bfseries\leftmark}
+    \fancyfoot[LO, RE]{\bfseries\scriptsize $generatedby Doxygen }
+  }
+
+  \fancypagestyle{plain}{
+    \fancyhf{}
+    \fancyfoot[LO, RE]{\bfseries\scriptsize $generatedby Doxygen }
+    \renewcommand{\headrulewidth}{0pt}
+  }
+
+  \pagestyle{fancyplain}
+
+
+%%BEGIN !COMPACT_LATEX
+  \renewcommand{\chaptermark}[1]{%
+    \markboth{#1}{}%
+  }
+%%END !COMPACT_LATEX
+  \renewcommand{\sectionmark}[1]{%
+    \markright{\thesection\ #1}%
+  }
+
+  % ToC, LoF, LoT, bibliography, and index
+  % Indices & bibliography
+  \usepackage{natbib}
+  \usepackage[titles]{tocloft}
+  \setcounter{tocdepth}{3}
+  \setcounter{secnumdepth}{5}
+
+  % creating indexes
+  $makeindex
+
+  $extralatexpackages
+
+  $latexspecialformulachars
+
+%%BEGIN FORMULA_MACROFILE
+  \input{$formulamacrofile}
+%%END FORMULA_MACROFILE
+
+  % Hyperlinks
+%%BEGIN PDF_HYPERLINKS
+    % Hyperlinks (required, but should be loaded last)
+    \ifpdf
+      \usepackage[pdftex,pagebackref=true]{hyperref}
+    \else
+      \ifxetex
+        \usepackage[pagebackref=true]{hyperref}
+      \else
+        \usepackage[ps2pdf,pagebackref=true]{hyperref}
+      \fi
+    \fi
+
+    \hypersetup{%
+      colorlinks=true,%
+      linkcolor=blue,%
+      citecolor=blue,%
+      unicode,%
+      pdftitle={$projectname},%
+      pdfsubject={$projectbrief}%
+    }
+
+%%END PDF_HYPERLINKS
+
+  % Custom commands used by the header
+  % Custom commands
+  \newcommand{\clearemptydoublepage}{%
+    \newpage{\pagestyle{empty}\cleardoublepage}%
+  }
+
+  % caption style definition
+  \usepackage{caption}
+  \captionsetup{labelsep=space,justification=centering,font={bf},singlelinecheck=off,skip=4pt,position=top}
+
+
+  % in page table of contents
+  \IfFormatAtLeastTF{2023/05/01}{\usepackage[deeplevels]{etoc}}{\usepackage[deeplevels]{etoc_doxygen}}
+  \etocsettocstyle{\doxytocparskip}{\doxynormalparskip}
+  \etocsetlevel{subsubsubsection}{4}
+  \etocsetlevel{subsubsubsubsection}{5}
+  \etocsetlevel{subsubsubsubsubsection}{6}
+  \etocsetlevel{subsubsubsubsubsubsection}{7}
+  \etocsetlevel{paragraph}{8}
+  \etocsetlevel{subparagraph}{9}
+
+  % prevent numbers overlap the titles in toc
+  \renewcommand{\numberline}[1]{#1~}
+
+% --- Unicode characters used in our markdown pages and source comments ---
+% Без этих объявлений pdflatex падает на нелатинских символах вне Cyrillic.
+
+% Math symbols
+\DeclareUnicodeCharacter{2212}{$-$}            % − MINUS SIGN
+\DeclareUnicodeCharacter{2248}{$\approx$}      % ≈ ALMOST EQUAL
+\DeclareUnicodeCharacter{2264}{$\leq$}         % ≤ LESS-THAN OR EQUAL
+\DeclareUnicodeCharacter{2265}{$\geq$}         % ≥ GREATER-THAN OR EQUAL
+\DeclareUnicodeCharacter{0394}{$\Delta$}       % Δ DELTA
+\DeclareUnicodeCharacter{03B4}{$\delta$}       % δ delta
+
+% Arrows and stars
+\DeclareUnicodeCharacter{2192}{$\rightarrow$}  % → RIGHTWARDS ARROW
+\DeclareUnicodeCharacter{2190}{$\leftarrow$}   % ← LEFTWARDS ARROW
+\DeclareUnicodeCharacter{2605}{$\star$}        % ★ BLACK STAR
+\DeclareUnicodeCharacter{2022}{$\bullet$}      % • BULLET
+\DeclareUnicodeCharacter{2026}{\ldots}         % … ellipsis
+\DeclareUnicodeCharacter{2013}{--}             % – en dash
+\DeclareUnicodeCharacter{2014}{---}            % — em dash
+
+% Geometric shapes (used as bullets/markers)
+\DeclareUnicodeCharacter{25B2}{$\blacktriangle$}      % ▲
+\DeclareUnicodeCharacter{25B6}{$\blacktriangleright$} % ▶
+\DeclareUnicodeCharacter{25BA}{$\blacktriangleright$} % ►
+\DeclareUnicodeCharacter{25C4}{$\blacktriangleleft$}  % ◄
+\DeclareUnicodeCharacter{25CF}{$\bullet$}             % ●
+
+% Box drawing (single line)
+\DeclareUnicodeCharacter{2500}{-}              % ─
+\DeclareUnicodeCharacter{2501}{-}              % ━
+\DeclareUnicodeCharacter{2502}{|}              % │
+\DeclareUnicodeCharacter{250A}{|}              % ┊
+\DeclareUnicodeCharacter{250C}{+}              % ┌
+\DeclareUnicodeCharacter{2510}{+}              % ┐
+\DeclareUnicodeCharacter{2514}{+}              % └
+\DeclareUnicodeCharacter{2518}{+}              % ┘
+\DeclareUnicodeCharacter{251C}{+}              % ├
+\DeclareUnicodeCharacter{2524}{+}              % ┤
+
+% Box drawing (double line)
+\DeclareUnicodeCharacter{2550}{=}              % ═
+\DeclareUnicodeCharacter{2571}{/}              % ╱
+\DeclareUnicodeCharacter{2572}{\textbackslash} % ╲
+
+% Block elements (shading)
+\DeclareUnicodeCharacter{2588}{\rule{1ex}{1.2ex}}  % █
+\DeclareUnicodeCharacter{2591}{ }                  % ░
+\DeclareUnicodeCharacter{2593}{\rule{1ex}{1.2ex}}  % ▓
+
+% Emojis (заменяем на текстовые/символьные эквиваленты)
+\DeclareUnicodeCharacter{267B}{[R]}            % ♻
+\DeclareUnicodeCharacter{26A0}{[!]}            % ⚠
+\DeclareUnicodeCharacter{26A1}{[!]}            % ⚡
+\DeclareUnicodeCharacter{2705}{[OK]}           % ✅
+\DeclareUnicodeCharacter{274C}{[X]}            % ❌
+\DeclareUnicodeCharacter{2753}{[?]}            % ❓
+\DeclareUnicodeCharacter{2B1C}{[]}             % ⬜
+\DeclareUnicodeCharacter{FE0F}{}               % variation selector — пусто
+
+% End of preamble, now comes the document contents
+%===== C O N T E N T S =====
+
+\begin{document}
+  \raggedbottom
+
+  $latexdocumentpre
+
+  % Titlepage & ToC
+%%BEGIN PDF_HYPERLINKS
+%%BEGIN USE_PDFLATEX
+    % To avoid duplicate page anchors due to reuse of same numbers for
+    % the index (be it as roman numbers)
+    \hypersetup{pageanchor=false,
+                bookmarksnumbered=true,
+                pdfencoding=unicode
+               }
+%%END USE_PDFLATEX
+%%END PDF_HYPERLINKS
+  \pagenumbering{alph}
+  \begin{titlepage}
+  \vspace*{7cm}
+  \begin{center}%
+  {\Large $title}\\
+%%BEGIN PROJECT_NUMBER
+  [1ex]\large $projectnumber \\
+%%END PROJECT_NUMBER
+  \vspace*{1cm}
+  {\large $generatedby Doxygen $doxygenversion}\\
+%%BEGIN TIMESTAMP
+    \vspace*{0.5cm}
+    {\small $datetime}
+%%END TIMESTAMP
+  \end{center}
+  \end{titlepage}
+
+%%BEGIN !COMPACT_LATEX
+  \clearemptydoublepage
+%%END !COMPACT_LATEX
+  \pagenumbering{roman}
+
+  \tableofcontents
+%%BEGIN !COMPACT_LATEX
+  \clearemptydoublepage
+%%END !COMPACT_LATEX
+  \pagenumbering{arabic}
+
+%%BEGIN PDF_HYPERLINKS
+%%BEGIN USE_PDFLATEX
+  % re-enable anchors again
+  \hypersetup{pageanchor=true}
+%%END USE_PDFLATEX
+%%END PDF_HYPERLINKS
+
+%--- Begin generated contents ---
+

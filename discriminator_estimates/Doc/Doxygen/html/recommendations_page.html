@@ -1,0 +1,412 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Discriminator Estimates (КППО/ТЗК): Итоговые рекомендации</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript">
+window.MathJax = {
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Discriminator Estimates (КППО/ТЗК)
+   </div>
+   <div id="projectbrief">Дискриминаторные оценки координат цели по отсчётам ДН антенны</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Поиск');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="index.html">Главная страница</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div><div class="header">
+  <div class="headertitle"><div class="title">Итоговые рекомендации</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><h1><a class="anchor" id="autotoc_md110"></a>
+Как найти частоту в зашумлённом сигнале — финальные выводы</h1>
+<blockquote class="doxtable">
+<p>&zwj;<b>Дата:</b> 2026-04-06 <b>Источник:</b> <code>Doc/Frequency_Recommendations_2026-04-06.md</code> (полная версия) <b>Что здесь:</b> концентрат рекомендаций на основе всех проведённых Монте-Карло экспериментов и аналитики. </p>
+</blockquote>
+<h1><a class="anchor" id="autotoc_md111"></a>
+&lt;/blockquote&gt;</h1>
+<h1><a class="anchor" id="autotoc_md112"></a>
+Главная рекомендация — на одну минуту</h1>
+<div class="fragment"><div class="line">┌────────────────────────────────────────────────────────┐</div>
+<div class="line">│                                                        │</div>
+<div class="line">│   ВСЕГДА используй  discr5ea                          │</div>
+<div class="line">│   (МНК-Гауссиан по 5 точкам)                          │</div>
+<div class="line">│                                                        │</div>
+<div class="line">│   Fallback: если какая-то |X(k)| ≤ 0                  │</div>
+<div class="line">│             → переключись на discr5qa                  │</div>
+<div class="line">│                                                        │</div>
+<div class="line">│   Обязательные требования:                            │</div>
+<div class="line">│     • Окно Hanning перед FFT                          │</div>
+<div class="line">│     • Zero-padding минимум ×2                         │</div>
+<div class="line">│     • 5 точек вокруг максимума (k-2 .. k+2)           │</div>
+<div class="line">│                                                        │</div>
+<div class="line">└────────────────────────────────────────────────────────┘</div>
+</div><!-- fragment --><div class="image">
+<img src="06_decision_tree.png" alt=""/>
+<div class="caption">
+Дерево решений: какой метод выбрать в зависимости от условий</div></div>
+<h2><a class="anchor" id="autotoc_md113"></a>
+Почему не нужен «гибрид»</h2>
+<p>Раньше думали: «при шуме один метод, при чистоте другой». На Hanning kernel <b>гибрид не нужен</b>:</p><ul>
+<li>5EA и 5QA дают практически одинаковый результат (разница ~5%);</li>
+<li>Оба стабильно лучше любого 3-точечного метода;</li>
+<li>5EA чуть точнее на чистых данных, 5QA чуть точнее при сильном шуме — но разница исчезающая.</li>
+</ul>
+<p><b>Один вызов. Никаких <code>if-else</code> по уровню шума.</b></p>
+<hr  />
+<h1><a class="anchor" id="autotoc_md115"></a>
+Главный эксперимент — кто победил</h1>
+<div class="image">
+<img src="04_methods_vs_snr.png" alt=""/>
+<div class="caption">
+Монте-Карло: 5pt vs 3pt по медиане ошибки при разных SNR</div></div>
+<p>Эксперимент: для каждого уровня SNR — 5000 × 21 = <b>105 000 испытаний</b>, случайный шум, случайное положение пика, окно Hanning, zp×2.</p>
+<h2><a class="anchor" id="autotoc_md116"></a>
+Левый график — ошибка vs SNR</h2>
+<ul>
+<li><b>Серая пунктирная</b> — EA3 (классика, 3 точки)</li>
+<li><b>Оранжевая</b> — 5QA (МНК-парабола, 5 точек)</li>
+<li><b>Синяя жирная ★</b> — 5EA (МНК-Гауссиан, 5 точек)</li>
+</ul>
+<p><b>Главное наблюдение:</b> обе 5-точечные кривые лежат <b>ниже</b> 3-точечной EA3 <b>при любом SNR</b>. То есть 5-точечные всегда лучше.</p>
+<h2><a class="anchor" id="autotoc_md117"></a>
+Правый график — во сколько раз лучше</h2>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">SNR (дБ)   </th><th class="markdownTableHeadNone">Выигрыш 5pt относительно EA3    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">40 (идеал)   </td><td class="markdownTableBodyNone"><b>1.4×</b>    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">30 (отлично)   </td><td class="markdownTableBodyNone"><b>1.8×</b>    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">25 (хорошо)   </td><td class="markdownTableBodyNone"><b>2.0×</b>    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">20 (норма)   </td><td class="markdownTableBodyNone"><b>2.0×</b>    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">15 (шумно)   </td><td class="markdownTableBodyNone"><b>1.7×</b>    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">10 (плохо)   </td><td class="markdownTableBodyNone"><b>1.2×</b>    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">5 (ужас)   </td><td class="markdownTableBodyNone"><b>1.2×</b>   </td></tr>
+</table>
+<p><b>5-точечные методы стабильно выигрывают в 1.2–2.0 раза.</b></p>
+<hr  />
+<h1><a class="anchor" id="autotoc_md119"></a>
+Что это значит в реальных герцах</h1>
+<div class="image">
+<img src="05_accuracy_in_hz.png" alt=""/>
+<div class="caption">
+Точность оценки в реальных герцах при типичных параметрах радара</div></div>
+<h2><a class="anchor" id="autotoc_md120"></a>
+Левый график — при типичных условиях</h2>
+<p>Параметры: <code>fs = 100 МГц</code>, <code>N = 4M</code>, <code>Δf ≈ 23.84 Гц</code>, <code>SNR = 20 дБ</code>.</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Метод   </th><th class="markdownTableHeadNone">Ошибка    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Без интерполяции (просто <code>argmax</code>)   </td><td class="markdownTableBodyNone">**~12 Гц**    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">EA3 (классика, 3 точки)   </td><td class="markdownTableBodyNone">**~1.2 Гц**    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><b>5EA / 5QA ★ (наш выбор)</b>   </td><td class="markdownTableBodyNone">**~0.6 Гц**    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Quinn 2nd (будущее, по комплексным <code>X(k)</code>)   </td><td class="markdownTableBodyNone">**~2.4 мГц**   </td></tr>
+</table>
+<blockquote class="doxtable">
+<p>&zwj;<b>Переход «argmax → 5EA» = улучшение в 20 раз</b> без единого нового датчика — только за счёт правильной математики. </p>
+</blockquote>
+<h2><a class="anchor" id="autotoc_md121"></a>
+Правый график — точность vs SNR</h2>
+<p>Как ошибка 5EA/5QA в герцах меняется при разном SNR:</p><ul>
+<li>SNR = 30 дБ → ошибка ≈ <b>0.21 Гц</b></li>
+<li>SNR = 20 дБ → ошибка ≈ <b>0.61 Гц</b></li>
+<li>SNR = 10 дБ → ошибка ≈ <b>1.73 Гц</b></li>
+</ul>
+<p>Даже в очень шумных условиях (SNR = 10 дБ) мы <b>в 7 раз точнее</b>, чем без интерполяции.</p>
+<hr  />
+<h1><a class="anchor" id="autotoc_md123"></a>
+Бонус: монотонная зона</h1>
+<div class="image">
+<img src="07_monotonic_zone.png" alt=""/>
+<div class="caption">
+Монотонная зона: 5pt-методы держат пик в 4 раза дольше</div></div>
+<h2><a class="anchor" id="autotoc_md124"></a>
+Что это</h2>
+<p>«Монотонная зона» — ситуация, когда истинный пик <b>вышел за пределы окна</b>, и в окне измерений амплитуды только растут или только убывают.</p>
+<p>| Метод | Граница монотонной зоны | |----&mdash;|-----------------------&mdash;| | 3pt (QA, EA) | \( |x_0| &gt; 0.5 \) бина | | <b>5pt (5QA, 5EA)</b> | ** \( |x_0| &gt; 2.0 \) бина** |</p>
+<p><b>5-точечные методы держат пик в 4 раза более широкой зоне.</b></p>
+<h2><a class="anchor" id="autotoc_md125"></a>
+Что это значит на практике</h2>
+<p>После грубого <code>argmax</code> оценка <code>k_max</code> может промахнуться на половину бина. <b>5pt прощает промах до 2 бинов</b> — он «дотягивает» правильное значение. То есть 5pt <b>робастнее</b> к небольшим сдвигам пика.</p>
+<hr  />
+<h1><a class="anchor" id="autotoc_md127"></a>
+Почему именно 5 точек, а не 7 или 9</h1>
+<p>Логичный вопрос: «Если 5 лучше 3, может 7 или 9 ещё лучше?»</p>
+<div class="image">
+<img src="08_why_5_points.png" alt=""/>
+<div class="caption">
+Сравнение МНК 3/5/7/9 точек на Hanning kernel</div></div>
+<p><b>Результат Монте-Карло:</b> <b>7 и 9 точек почти не дают выигрыша</b> на Hanning kernel. А при высоком SNR (≥ 25 дБ) <b>7 и 9 даже ХУЖЕ</b>, чем 5.</p>
+<h2><a class="anchor" id="autotoc_md128"></a>
+Почему так</h2>
+<p>Hanning-пик — это <b>колокол</b> шириной ±2 бина. Крайние точки 7pt/9pt окон (±3, ±4 бина) попадают в <b>хвосты</b>, где:</p><ul>
+<li>форма уже не параболическая (большой bias);</li>
+<li>амплитуды маленькие (плохое отношение сигнал/шум).</li>
+</ul>
+<p>Классический trade-off:</p><ul>
+<li><b>3 точки</b> — мало данных, шум не усредняется, но bias минимальный;</li>
+<li><b>5 точек</b> — золотая середина, шум усредняется, bias ещё мал;</li>
+<li><b>7/9 точек</b> — шум чуть лучше усреднён, но bias растёт сильно.</li>
+</ul>
+<blockquote class="doxtable">
+<p>&zwj;<b>Вывод:</b> для Hanning kernel <b>5 точек = оптимум</b>. Больше не нужно. </p>
+</blockquote>
+<h1><a class="anchor" id="autotoc_md129"></a>
+&lt;/blockquote&gt;</h1>
+<h1><a class="anchor" id="autotoc_md130"></a>
+Парабола + Hanning = любовь</h1>
+<div class="image">
+<img src="02_hanning_vs_parabola.png" alt=""/>
+<div class="caption">
+Слева — sinc vs Hanning. Справа — парабола идеально ложится на Hanning kernel</div></div>
+<h2><a class="anchor" id="autotoc_md131"></a>
+Левый график — форма пика</h2>
+<ul>
+<li><b>Красная (sinc)</b> — форма пика <b>без</b> окна. Острый, с «ушами» (боковыми лепестками −13 дБ).</li>
+<li><b>Синяя (Hanning kernel)</b> — форма пика <b>с</b> окном Hanning. Гладкий, колоколообразный, без уродливых «ушей».</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md132"></a>
+Правый график — парабола на Hanning</h2>
+<p>5 точек на Hanning-пике + парабола <code>y = ax² + bx + c</code> → ошибка <b>меньше 2.5%</b> в пределах ±0.7 бина от вершины.</p>
+<blockquote class="doxtable">
+<p>&zwj;<b>Аналогия:</b> гора в тумане. У тебя 5 альтиметров, расставленных через равные промежутки. По их показаниям ты хочешь угадать, где <b>самая высокая точка</b> горы между приборами. Если форма горы — парабола (а Hanning kernel очень похож!), достаточно подогнать параболу к 5 точкам и взять её вершину. Это и есть наш метод. </p>
+</blockquote>
+<h1><a class="anchor" id="autotoc_md133"></a>
+&lt;/blockquote&gt;</h1>
+<h1><a class="anchor" id="autotoc_md134"></a>
+Zero-padding ×2 — обязательное требование</h1>
+<div class="image">
+<img src="03_zero_padding_effect.png" alt=""/>
+<div class="caption">
+Эффект zero-padding на сетку бинов</div></div>
+<h2><a class="anchor" id="autotoc_md135"></a>
+Что это</h2>
+<p>Перед FFT дописываем нули к сигналу, чтобы общая длина стала в 2 раза больше. Сетка бинов FFT становится <b>гуще</b>, а форма Hanning kernel не меняется.</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Вариант   </th><th class="markdownTableHeadNone">Шаг бинов   </th><th class="markdownTableHeadNone">Макс. ошибка <code>argmax</code>    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Без zero-padding   </td><td class="markdownTableBodyNone">1.0 бин   </td><td class="markdownTableBodyNone">±0.5 бина    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><b>Zero-pad ×2 ★</b>   </td><td class="markdownTableBodyNone"><b>0.5 бина</b>   </td><td class="markdownTableBodyNone"><b>±0.25 бина</b>    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Zero-pad ×4   </td><td class="markdownTableBodyNone">0.25 бина   </td><td class="markdownTableBodyNone">±0.125 бина   </td></tr>
+</table>
+<h2><a class="anchor" id="autotoc_md136"></a>
+Зачем нам zp×2 минимум</h2>
+<p>При zp×2 все 5 точек 5EA/5QA попадают в <b>главный лепесток</b> Hanning — там, где парабола ложится идеально. При zp×1 крайние точки вылезают из главного лепестка → парабола больше не работает хорошо.</p>
+<p><b>Экспериментальное подтверждение:</b></p><ul>
+<li>без zero-padding: ошибка 5QA = <b>11.9%</b></li>
+<li>с zp×2: ошибка 5QA = <b>2.9%</b></li>
+</ul>
+<p><b>Разница в 4 раза.</b></p>
+<dl class="section note"><dt>Заметки</dt><dd>Zero-padding <b>не улучшает разрешение</b> — два очень близких пика от него не станут различимыми. Разрешение определяется длиной <b>оригинальной</b> записи.</dd></dl>
+<hr  />
+<h1><a class="anchor" id="autotoc_md138"></a>
+Quick reference — как использовать</h1>
+<h2><a class="anchor" id="autotoc_md139"></a>
+C-код (текущий модуль)</h2>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &quot;<a class="code" href="discr5ea_8h.html">discr5ea.h</a>&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="discr__common_8h.html">discr_common.h</a>&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;complex.h&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;stdlib.h&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// ... после FFT и поиска k_max ...</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">double</span> y[5], xs[5];</div>
+<div class="line"><span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; 5; ++i) {</div>
+<div class="line">  y[i]  = cabs(X[k_max - 2 + i]);   <span class="comment">// |X(k-2)| .. |X(k+2)|</span></div>
+<div class="line">  xs[i] = (double)(i - 2);          <span class="comment">// {-2, -1, 0, 1, 2}</span></div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">double</span> delta;   <span class="comment">// суб-бинное смещение в единицах padded-шага</span></div>
+<div class="line"><span class="keywordtype">int</span> ok = <a class="code hl_function" href="discr5ea_8h.html#a7a40e781923ce2b7e9f823d6966a99d3">discr5ea</a>(y, xs, &amp;delta);   <span class="comment">// МНК-Гауссиан по 5 точкам</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keywordflow">if</span> (ok != EXIT_SUCCESS) {</div>
+<div class="line">  <span class="comment">// fallback: какая-то амплитуда ≤ 0 → 5QA по амплитудам</span></div>
+<div class="line">  <a class="code hl_function" href="discr5ea_8h.html#ac785bc2874e4a806c56a89d6232d1f34">discr5qa</a>(y, xs, &amp;delta);</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Перевод в частоту</span></div>
+<div class="line"><span class="keywordtype">double</span> f_hz = (k_max + delta) * fs / (<span class="keywordtype">double</span>)N_padded;</div>
+<div class="ttc" id="adiscr5ea_8h_html"><div class="ttname"><a href="discr5ea_8h.html">discr5ea.h</a></div><div class="ttdoc">Комплекс программ первичной обработки (КППО). Программа вычисления текущих замеров координат (ТЗК)....</div></div>
+<div class="ttc" id="adiscr5ea_8h_html_a7a40e781923ce2b7e9f823d6966a99d3"><div class="ttname"><a href="discr5ea_8h.html#a7a40e781923ce2b7e9f823d6966a99d3">discr5ea</a></div><div class="ttdeci">int discr5ea(const double A[5], const double x[5], double *xe)</div><div class="ttdoc">Пятиточечный дискриминатор, МНК-гауссова аппроксимация (LSQ Gaussian 5pt).</div><div class="ttdef"><b>Definition</b> <a href="discr5ea_8c_source.html#l00061">discr5ea.c:61</a></div></div>
+<div class="ttc" id="adiscr5ea_8h_html_ac785bc2874e4a806c56a89d6232d1f34"><div class="ttname"><a href="discr5ea_8h.html#ac785bc2874e4a806c56a89d6232d1f34">discr5qa</a></div><div class="ttdeci">int discr5qa(const double A[5], const double x[5], double *xe)</div><div class="ttdoc">Пятиточечный дискриминатор, МНК-параболическая аппроксимация (LSQ Parabolic 5pt).</div><div class="ttdef"><b>Definition</b> <a href="discr5ea_8c_source.html#l00112">discr5ea.c:112</a></div></div>
+<div class="ttc" id="adiscr__common_8h_html"><div class="ttname"><a href="discr__common_8h.html">discr_common.h</a></div><div class="ttdoc">Комплекс программ первичной обработки (КППО). Программа вычисления текущих замеров координат (ТЗК)....</div></div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md140"></a>
+Python-код (для тестов и прототипирования)</h2>
+<div class="fragment"><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line"><span class="keyword">from</span> scipy.signal.windows <span class="keyword">import</span> hann</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">def </span>estimate_frequency(signal, fs, zero_pad=2, search_radius=1000):</div>
+<div class="line">    M = len(signal)</div>
+<div class="line">    N_base = 1 &lt;&lt; (M - 1).bit_length()      <span class="comment"># до ближайшей степени 2</span></div>
+<div class="line">    N = N_base * zero_pad</div>
+<div class="line"> </div>
+<div class="line">    X = np.fft.fft(signal * hann(M), n=N)</div>
+<div class="line">    X_mag = np.abs(X[:N // 2])</div>
+<div class="line"> </div>
+<div class="line">    k_max = int(np.argmax(X_mag[:search_radius]))</div>
+<div class="line"> </div>
+<div class="line">    <span class="keywordflow">if</span> 2 &lt;= k_max &lt;= len(X_mag) - 3:</div>
+<div class="line">        y = X_mag[k_max - 2 : k_max + 3]</div>
+<div class="line">        <span class="keywordflow">if</span> np.all(y &gt; 0):</div>
+<div class="line">            z = np.log(y)                    <span class="comment"># 5EA</span></div>
+<div class="line">            a = (2*z[0] - z[1] - 2*z[2] - z[3] + 2*z[4]) / 14.0</div>
+<div class="line">            b = (-2*z[0] - z[1] + z[3] + 2*z[4]) / 10.0</div>
+<div class="line">        <span class="keywordflow">else</span>:                                <span class="comment"># 5QA fallback</span></div>
+<div class="line">            a = (2*y[0] - y[1] - 2*y[2] - y[3] + 2*y[4]) / 14.0</div>
+<div class="line">            b = (-2*y[0] - y[1] + y[3] + 2*y[4]) / 10.0</div>
+<div class="line">        delta = -b / (2*a) <span class="keywordflow">if</span> abs(a) &gt; 1e-30 <span class="keywordflow">else</span> 0.0</div>
+<div class="line">    <span class="keywordflow">else</span>:</div>
+<div class="line">        delta = 0.0</div>
+<div class="line"> </div>
+<div class="line">    <span class="keywordflow">return</span> (k_max + delta) * fs / N</div>
+</div><!-- fragment --><hr  />
+<h1><a class="anchor" id="autotoc_md142"></a>
+Чек-лист перед релизом</h1>
+<ul>
+<li>[ ] Сигнал умножен на <b>окно Hanning</b> <b>до</b> FFT</li>
+<li>[ ] Используется <b>zero-padding минимум ×2</b> (<code>N = next_pow2(M) * 2</code>)</li>
+<li>[ ] Грубый максимум <code>k_max</code> ищется в разумном диапазоне (<b>не на краях</b> FFT)</li>
+<li>[ ] Вокруг максимума есть <b>минимум 2 точки слева и 2 справа</b></li>
+<li>[ ] Для <code>discr5ea</code>: <b>проверка <code>A_i &gt; 0</code></b> перед вызовом, иначе fallback на <code>discr5qa</code></li>
+<li>[ ] Результат переводится в Гц через <code>(k_max + δ) · fs / N_padded</code></li>
+<li>[ ] Покрытие тестами: см. <a class="el" href="tests_page.html">Тестирование</a></li>
+<li>[ ] Проверена точность на эталонных данных (sinc, Hanning kernel, реальные FFT)</li>
+</ul>
+<hr  />
+<h1><a class="anchor" id="autotoc_md144"></a>
+Что дальше — Quinn 2nd и комплексный pipeline</h1>
+<p>Наш текущий pipeline работает с <b>магнитудой</b> <code>|X(k)|</code> — мы выбрасываем фазу. Но фаза содержит <b>половину информации</b> о сигнале.</p>
+<h2><a class="anchor" id="autotoc_md145"></a>
+Quinn 2nd estimator — максимум точности</h2>
+<p>Если в будущем pipeline сможет передавать комплексные <code>X(k)</code> (а не только магнитуду), можно использовать <b>Quinn 2nd estimator</b>:</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Свойство   </th><th class="markdownTableHeadNone">Значение    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Точность   </td><td class="markdownTableBodyNone">достигает <b>Cramér-Rao bound</b> (теоретический предел)    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Точек   </td><td class="markdownTableBodyNone">3 бина (как у EA3)    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Bias   </td><td class="markdownTableBodyNone"><b>±0.0001 бина</b> (в 50× точнее нашего 5EA)    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Сложность   </td><td class="markdownTableBodyNone">~20 операций   </td></tr>
+</table>
+<p>Это путь для модулей, где комплексные данные есть «из коробки».</p>
+<h2><a class="anchor" id="autotoc_md146"></a>
+IPI (Iterative Parabolic Interpolation, 2025)</h2>
+<p>Свежий итеративный метод. Достигает CRLB, но каждая итерация = O(N). Для 1.3M точек это дорого. <b>Для CPU pipeline неактуально.</b></p>
+<h2><a class="anchor" id="autotoc_md147"></a>
+CZT / Zoom FFT</h2>
+<p>Альтернатива FFT: вычисляет спектр только в узкой полосе вокруг пика с любым разрешением. Если нужна <b>экстремальная точность</b> (сотни раз лучше нашего 5EA) и не жалко <code>O(N log N)</code> — это вариант.</p>
+<hr  />
+<h1><a class="anchor" id="autotoc_md149"></a>
+Дополнительные ресурсы</h1>
+<ul>
+<li><b>Полный отчёт</b> (с историей, аналогиями, словарём терминов): <code>Doc/Frequency_Recommendations_2026-04-06.md</code></li>
+<li><b>Справочник FFT-методов</b>: <code>Doc/FFT_Frequency_Estimation.md</code></li>
+<li><b>Детальный отчёт по Монте-Карло (5pt)</b>: <code>Doc/Review/2026-04-03_5pt_LSQ_comparison.md</code></li>
+<li><b>Все формулы методов</b>: <a class="el" href="formulas_page.html">Математические формулы</a></li>
+<li><b>Визуальный разбор</b>: <a class="el" href="methods_visual_page.html">Визуальный разбор методов</a></li>
+</ul>
+<div class="image">
+<img src="01_pipeline.png" alt=""/>
+<div class="caption">
+Полный pipeline: от сырого сигнала до точной частоты</div></div>
+<hr  />
+<h1><a class="anchor" id="autotoc_md151"></a>
+Самое главное, если коротко</h1>
+<blockquote class="doxtable">
+<p>&zwj;<b>Для задачи «найти частоту в зашумлённом сигнале» в текущем CPU-pipeline используй <code>discr5ea</code> (МНК-Гауссиан по 5 точкам) с fallback на <code>discr5qa</code> и обязательным zero-padding ×2.</b></p>
+<p><b>Это даст точность ~0.6 Гц при SNR = 20 дБ — в 20 раз лучше, чем без интерполяции, и в 2 раза лучше, чем классическая 3-точечная EA3.</b></p>
+<p><b>В будущем (когда появится доступ к комплексным X(k)) — перейти на Quinn 2nd для максимальной точности в ±2 мГц.</b> </p>
+</blockquote>
+</div></div><!-- contents -->
+</div><!-- PageDoc -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8
+</small></address>
+</body>
+</html>

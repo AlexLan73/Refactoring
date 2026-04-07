@@ -1,0 +1,308 @@
+\doxysection{Итоговые рекомендации}
+\hypertarget{recommendations_page}{}\label{recommendations_page}\index{Итоговые рекомендации@{Итоговые рекомендации}}
+\hypertarget{recommendations_page_autotoc_md110}{}\doxysubsection{\texorpdfstring{Как найти частоту в зашумлённом сигнале — финальные выводы}{Как найти частоту в зашумлённом сигнале — финальные выводы}}\label{recommendations_page_autotoc_md110}
+\begin{quote}
+{\bfseries{Дата\+:}} 2026-\/04-\/06 {\bfseries{Источник\+:}} {\ttfamily Doc/\+Frequency\+\_\+\+Recommendations\+\_\+2026-\/04-\/06.\+md} (полная версия) {\bfseries{Что здесь\+:}} концентрат рекомендаций на основе всех проведённых Монте-\/Карло экспериментов и аналитики. \end{quote}
+\hypertarget{recommendations_page_autotoc_md111}{}\doxysubsection{\texorpdfstring{$<$/blockquote$>$}{</blockquote>}}\label{recommendations_page_autotoc_md111}
+\hypertarget{recommendations_page_autotoc_md112}{}\doxysubsection{\texorpdfstring{Главная рекомендация — на одну минуту}{Главная рекомендация — на одну минуту}}\label{recommendations_page_autotoc_md112}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{┌────────────────────────────────────────────────────────┐}
+\DoxyCodeLine{│\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ │}
+\DoxyCodeLine{│\ \ \ ВСЕГДА\ используй\ \ discr5ea\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ │}
+\DoxyCodeLine{│\ \ \ (МНК-\/Гауссиан\ по\ 5\ точкам)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ │}
+\DoxyCodeLine{│\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ │}
+\DoxyCodeLine{│\ \ \ Fallback:\ если\ какая-\/то\ |X(k)|\ ≤\ 0\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ │}
+\DoxyCodeLine{│\ \ \ \ \ \ \ \ \ \ \ \ \ →\ переключись\ на\ discr5qa\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ │}
+\DoxyCodeLine{│\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ │}
+\DoxyCodeLine{│\ \ \ Обязательные\ требования:\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ │}
+\DoxyCodeLine{│\ \ \ \ \ •\ Окно\ Hanning\ перед\ FFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ │}
+\DoxyCodeLine{│\ \ \ \ \ •\ Zero-\/padding\ минимум\ ×2\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ │}
+\DoxyCodeLine{│\ \ \ \ \ •\ 5\ точек\ вокруг\ максимума\ (k-\/2\ ..\ k+2)\ \ \ \ \ \ \ \ \ \ \ │}
+\DoxyCodeLine{│\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ │}
+\DoxyCodeLine{└────────────────────────────────────────────────────────┘}
+
+\end{DoxyCode}
+
+
+\hypertarget{recommendations_page_autotoc_md113}{}\doxysubsubsection{\texorpdfstring{Почему не нужен «гибрид»}{Почему не нужен «гибрид»}}\label{recommendations_page_autotoc_md113}
+Раньше думали\+: «при шуме один метод, при чистоте другой». На Hanning kernel {\bfseries{гибрид не нужен}}\+:
+\begin{DoxyItemize}
+\item 5EA и 5QA дают практически одинаковый результат (разница \texorpdfstring{$\sim$}{\string~}5\%);
+\item Оба стабильно лучше любого 3-\/точечного метода;
+\item 5EA чуть точнее на чистых данных, 5QA чуть точнее при сильном шуме — но разница исчезающая.
+\end{DoxyItemize}
+
+{\bfseries{Один вызов. Никаких {\ttfamily if-\/else} по уровню шума.}}
+
+\DoxyHorRuler{0}
+\hypertarget{recommendations_page_autotoc_md115}{}\doxysubsection{\texorpdfstring{Главный эксперимент — кто победил}{Главный эксперимент — кто победил}}\label{recommendations_page_autotoc_md115}
+
+
+Эксперимент\+: для каждого уровня SNR — 5000 × 21 = {\bfseries{105 000 испытаний}}, случайный шум, случайное положение пика, окно Hanning, zp×2.\hypertarget{recommendations_page_autotoc_md116}{}\doxysubsubsection{\texorpdfstring{Левый график — ошибка vs SNR}{Левый график — ошибка vs SNR}}\label{recommendations_page_autotoc_md116}
+
+\begin{DoxyItemize}
+\item {\bfseries{Серая пунктирная}} — EA3 (классика, 3 точки)
+\item {\bfseries{Оранжевая}} — 5QA (МНК-\/парабола, 5 точек)
+\item {\bfseries{Синяя жирная ★}} — 5EA (МНК-\/Гауссиан, 5 точек)
+\end{DoxyItemize}
+
+{\bfseries{Главное наблюдение\+:}} обе 5-\/точечные кривые лежат {\bfseries{ниже}} 3-\/точечной EA3 {\bfseries{при любом SNR}}. То есть 5-\/точечные всегда лучше.\hypertarget{recommendations_page_autotoc_md117}{}\doxysubsubsection{\texorpdfstring{Правый график — во сколько раз лучше}{Правый график — во сколько раз лучше}}\label{recommendations_page_autotoc_md117}
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{2}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ SNR (дБ)   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Выигрыш 5pt относительно EA3    }\\\cline{1-2}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ SNR (дБ)   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Выигрыш 5pt относительно EA3    }\\\cline{1-2}
+\endhead
+40 (идеал)   &{\bfseries{1.\+4×}}    \\\cline{1-2}
+30 (отлично)   &{\bfseries{1.\+8×}}    \\\cline{1-2}
+25 (хорошо)   &{\bfseries{2.\+0×}}    \\\cline{1-2}
+20 (норма)   &{\bfseries{2.\+0×}}    \\\cline{1-2}
+15 (шумно)   &{\bfseries{1.\+7×}}    \\\cline{1-2}
+10 (плохо)   &{\bfseries{1.\+2×}}    \\\cline{1-2}
+5 (ужас)   &{\bfseries{1.\+2×}}   \\\cline{1-2}
+\end{longtabu}
+
+
+{\bfseries{5-\/точечные методы стабильно выигрывают в 1.\+2–2.0 раза.}}
+
+\DoxyHorRuler{0}
+\hypertarget{recommendations_page_autotoc_md119}{}\doxysubsection{\texorpdfstring{Что это значит в реальных герцах}{Что это значит в реальных герцах}}\label{recommendations_page_autotoc_md119}
+\hypertarget{recommendations_page_autotoc_md120}{}\doxysubsubsection{\texorpdfstring{Левый график — при типичных условиях}{Левый график — при типичных условиях}}\label{recommendations_page_autotoc_md120}
+Параметры\+: {\ttfamily fs = 100 МГц}, {\ttfamily N = 4M}, {\ttfamily Δf ≈ 23.\+84 Гц}, {\ttfamily SNR = 20 дБ}.
+
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{2}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Метод   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Ошибка    }\\\cline{1-2}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Метод   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Ошибка    }\\\cline{1-2}
+\endhead
+Без интерполяции (просто {\ttfamily argmax})   &\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}\texorpdfstring{$\sim$}{\string~}12 Гц\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}    \\\cline{1-2}
+EA3 (классика, 3 точки)   &\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}\texorpdfstring{$\sim$}{\string~}1.2 Гц\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}    \\\cline{1-2}
+{\bfseries{5EA / 5QA ★ (наш выбор)}}   &\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}\texorpdfstring{$\sim$}{\string~}0.6 Гц\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}    \\\cline{1-2}
+Quinn 2nd (будущее, по комплексным {\ttfamily X(k)})   &\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}\texorpdfstring{$\sim$}{\string~}2.4 мГц\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}   \\\cline{1-2}
+\end{longtabu}
+
+
+\begin{quote}
+{\bfseries{Переход «argmax → 5EA» = улучшение в 20 раз}} без единого нового датчика — только за счёт правильной математики. \end{quote}
+\hypertarget{recommendations_page_autotoc_md121}{}\doxysubsubsection{\texorpdfstring{Правый график — точность vs SNR}{Правый график — точность vs SNR}}\label{recommendations_page_autotoc_md121}
+Как ошибка 5EA/5\+QA в герцах меняется при разном SNR\+:
+\begin{DoxyItemize}
+\item SNR = 30 дБ → ошибка ≈ {\bfseries{0.\+21 Гц}}
+\item SNR = 20 дБ → ошибка ≈ {\bfseries{0.\+61 Гц}}
+\item SNR = 10 дБ → ошибка ≈ {\bfseries{1.\+73 Гц}}
+\end{DoxyItemize}
+
+Даже в очень шумных условиях (SNR = 10 дБ) мы {\bfseries{в 7 раз точнее}}, чем без интерполяции.
+
+\DoxyHorRuler{0}
+\hypertarget{recommendations_page_autotoc_md123}{}\doxysubsection{\texorpdfstring{Бонус\+: монотонная зона}{Бонус: монотонная зона}}\label{recommendations_page_autotoc_md123}
+\hypertarget{recommendations_page_autotoc_md124}{}\doxysubsubsection{\texorpdfstring{Что это}{Что это}}\label{recommendations_page_autotoc_md124}
+«Монотонная зона» — ситуация, когда истинный пик {\bfseries{вышел за пределы окна}}, и в окне измерений амплитуды только растут или только убывают.
+
+\texorpdfstring{$\vert$}{|} Метод \texorpdfstring{$\vert$}{|} Граница монотонной зоны \texorpdfstring{$\vert$}{|} \texorpdfstring{$\vert$}{|}-\/-\/-\/-\/---\texorpdfstring{$\vert$}{|}-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/---\texorpdfstring{$\vert$}{|} \texorpdfstring{$\vert$}{|} 3pt (QA, EA) \texorpdfstring{$\vert$}{|} $ |x_0| > 0.5 $ бина \texorpdfstring{$\vert$}{|} \texorpdfstring{$\vert$}{|} {\bfseries{5pt (5QA, 5EA)}} \texorpdfstring{$\vert$}{|} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*} $ |x_0| > 2.0 $ бина\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*} \texorpdfstring{$\vert$}{|}
+
+{\bfseries{5-\/точечные методы держат пик в 4 раза более широкой зоне.}}\hypertarget{recommendations_page_autotoc_md125}{}\doxysubsubsection{\texorpdfstring{Что это значит на практике}{Что это значит на практике}}\label{recommendations_page_autotoc_md125}
+После грубого {\ttfamily argmax} оценка {\ttfamily k\+\_\+max} может промахнуться на половину бина. {\bfseries{5pt прощает промах до 2 бинов}} — он «дотягивает» правильное значение. То есть 5pt {\bfseries{робастнее}} к небольшим сдвигам пика.
+
+\DoxyHorRuler{0}
+\hypertarget{recommendations_page_autotoc_md127}{}\doxysubsection{\texorpdfstring{Почему именно 5 точек, а не 7 или 9}{Почему именно 5 точек, а не 7 или 9}}\label{recommendations_page_autotoc_md127}
+Логичный вопрос\+: «Если 5 лучше 3, может 7 или 9 ещё лучше?»
+
+
+
+{\bfseries{Результат Монте-\/Карло\+:}} {\bfseries{7 и 9 точек почти не дают выигрыша}} на Hanning kernel. А при высоком SNR (≥ 25 дБ) {\bfseries{7 и 9 даже ХУЖЕ}}, чем 5.\hypertarget{recommendations_page_autotoc_md128}{}\doxysubsubsection{\texorpdfstring{Почему так}{Почему так}}\label{recommendations_page_autotoc_md128}
+Hanning-\/пик — это {\bfseries{колокол}} шириной ±2 бина. Крайние точки 7pt/9pt окон (±3, ±4 бина) попадают в {\bfseries{хвосты}}, где\+:
+\begin{DoxyItemize}
+\item форма уже не параболическая (большой bias);
+\item амплитуды маленькие (плохое отношение сигнал/шум).
+\end{DoxyItemize}
+
+Классический trade-\/off\+:
+\begin{DoxyItemize}
+\item {\bfseries{3 точки}} — мало данных, шум не усредняется, но bias минимальный;
+\item {\bfseries{5 точек}} — золотая середина, шум усредняется, bias ещё мал;
+\item {\bfseries{7/9 точек}} — шум чуть лучше усреднён, но bias растёт сильно.
+\end{DoxyItemize}
+
+\begin{quote}
+{\bfseries{Вывод\+:}} для Hanning kernel {\bfseries{5 точек = оптимум}}. Больше не нужно. \end{quote}
+\hypertarget{recommendations_page_autotoc_md129}{}\doxysubsection{\texorpdfstring{$<$/blockquote$>$}{</blockquote>}}\label{recommendations_page_autotoc_md129}
+\hypertarget{recommendations_page_autotoc_md130}{}\doxysubsection{\texorpdfstring{Парабола + Hanning = любовь}{Парабола + Hanning = любовь}}\label{recommendations_page_autotoc_md130}
+\hypertarget{recommendations_page_autotoc_md131}{}\doxysubsubsection{\texorpdfstring{Левый график — форма пика}{Левый график — форма пика}}\label{recommendations_page_autotoc_md131}
+
+\begin{DoxyItemize}
+\item {\bfseries{Красная (sinc)}} — форма пика {\bfseries{без}} окна. Острый, с «ушами» (боковыми лепестками −13 дБ).
+\item {\bfseries{Синяя (Hanning kernel)}} — форма пика {\bfseries{с}} окном Hanning. Гладкий, колоколообразный, без уродливых «ушей».
+\end{DoxyItemize}\hypertarget{recommendations_page_autotoc_md132}{}\doxysubsubsection{\texorpdfstring{Правый график — парабола на Hanning}{Правый график — парабола на Hanning}}\label{recommendations_page_autotoc_md132}
+5 точек на Hanning-\/пике + парабола {\ttfamily y = ax² + bx + c} → ошибка {\bfseries{меньше 2.\+5\%}} в пределах ±0.7 бина от вершины.
+
+\begin{quote}
+{\bfseries{Аналогия\+:}} гора в тумане. У тебя 5 альтиметров, расставленных через равные промежутки. По их показаниям ты хочешь угадать, где {\bfseries{самая высокая точка}} горы между приборами. Если форма горы — парабола (а Hanning kernel очень похож!), достаточно подогнать параболу к 5 точкам и взять её вершину. Это и есть наш метод. \end{quote}
+\hypertarget{recommendations_page_autotoc_md133}{}\doxysubsection{\texorpdfstring{$<$/blockquote$>$}{</blockquote>}}\label{recommendations_page_autotoc_md133}
+\hypertarget{recommendations_page_autotoc_md134}{}\doxysubsection{\texorpdfstring{Zero-\/padding ×2 — обязательное требование}{Zero-padding ×2 — обязательное требование}}\label{recommendations_page_autotoc_md134}
+\hypertarget{recommendations_page_autotoc_md135}{}\doxysubsubsection{\texorpdfstring{Что это}{Что это}}\label{recommendations_page_autotoc_md135}
+Перед FFT дописываем нули к сигналу, чтобы общая длина стала в 2 раза больше. Сетка бинов FFT становится {\bfseries{гуще}}, а форма Hanning kernel не меняется.
+
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Вариант   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Шаг бинов   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Макс. ошибка {\ttfamily argmax}    }\\\cline{1-3}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Вариант   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Шаг бинов   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Макс. ошибка {\ttfamily argmax}    }\\\cline{1-3}
+\endhead
+Без zero-\/padding   &1.\+0 бин   &±0.5 бина    \\\cline{1-3}
+{\bfseries{Zero-\/pad ×2 ★}}   &{\bfseries{0.\+5 бина}}   &{\bfseries{±0.25 бина}}    \\\cline{1-3}
+Zero-\/pad ×4   &0.\+25 бина   &±0.125 бина   \\\cline{1-3}
+\end{longtabu}
+\hypertarget{recommendations_page_autotoc_md136}{}\doxysubsubsection{\texorpdfstring{Зачем нам zp×2 минимум}{Зачем нам zp×2 минимум}}\label{recommendations_page_autotoc_md136}
+При zp×2 все 5 точек 5EA/5\+QA попадают в {\bfseries{главный лепесток}} Hanning — там, где парабола ложится идеально. При zp×1 крайние точки вылезают из главного лепестка → парабола больше не работает хорошо.
+
+{\bfseries{Экспериментальное подтверждение\+:}}
+\begin{DoxyItemize}
+\item без zero-\/padding\+: ошибка 5QA = {\bfseries{11.\+9\%}}
+\item с zp×2\+: ошибка 5QA = {\bfseries{2.\+9\%}}
+\end{DoxyItemize}
+
+{\bfseries{Разница в 4 раза.}}
+
+\begin{DoxyNote}{Заметки}
+Zero-\/padding {\bfseries{не улучшает разрешение}} — два очень близких пика от него не станут различимыми. Разрешение определяется длиной {\bfseries{оригинальной}} записи.
+\end{DoxyNote}
+\DoxyHorRuler{0}
+\hypertarget{recommendations_page_autotoc_md138}{}\doxysubsection{\texorpdfstring{Quick reference — как использовать}{Quick reference — как использовать}}\label{recommendations_page_autotoc_md138}
+\hypertarget{recommendations_page_autotoc_md139}{}\doxysubsubsection{\texorpdfstring{C-\/код (текущий модуль)}{C-код (текущий модуль)}}\label{recommendations_page_autotoc_md139}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{discr5ea_8h}{discr5ea.h}}"{}}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{discr__common_8h}{discr\_common.h}}"{}}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <complex.h>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <stdlib.h>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ ...\ после\ FFT\ и\ поиска\ k\_max\ ...}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{double}\ y[5],\ xs[5];}
+\DoxyCodeLine{\textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ 5;\ ++i)\ \{}
+\DoxyCodeLine{\ \ y[i]\ \ =\ cabs(X[k\_max\ -\/\ 2\ +\ i]);\ \ \ \textcolor{comment}{//\ |X(k-\/2)|\ ..\ |X(k+2)|}}
+\DoxyCodeLine{\ \ xs[i]\ =\ (double)(i\ -\/\ 2);\ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \{-\/2,\ -\/1,\ 0,\ 1,\ 2\}}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{double}\ delta;\ \ \ \textcolor{comment}{//\ суб-\/бинное\ смещение\ в\ единицах\ padded-\/шага}}
+\DoxyCodeLine{\textcolor{keywordtype}{int}\ ok\ =\ \mbox{\hyperlink{discr5ea_8h_a7a40e781923ce2b7e9f823d6966a99d3}{discr5ea}}(y,\ xs,\ \&delta);\ \ \ \textcolor{comment}{//\ МНК-\/Гауссиан\ по\ 5\ точкам}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordflow}{if}\ (ok\ !=\ EXIT\_SUCCESS)\ \{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ fallback:\ какая-\/то\ амплитуда\ ≤\ 0\ →\ 5QA\ по\ амплитудам}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{discr5ea_8h_ac785bc2874e4a806c56a89d6232d1f34}{discr5qa}}(y,\ xs,\ \&delta);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Перевод\ в\ частоту}}
+\DoxyCodeLine{\textcolor{keywordtype}{double}\ f\_hz\ =\ (k\_max\ +\ delta)\ *\ fs\ /\ (\textcolor{keywordtype}{double})N\_padded;}
+
+\end{DoxyCode}
+\hypertarget{recommendations_page_autotoc_md140}{}\doxysubsubsection{\texorpdfstring{Python-\/код (для тестов и прототипирования)}{Python-код (для тестов и прототипирования)}}\label{recommendations_page_autotoc_md140}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{import}\ numpy\ \textcolor{keyword}{as}\ np}
+\DoxyCodeLine{\textcolor{keyword}{from}\ scipy.signal.windows\ \textcolor{keyword}{import}\ hann}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{def\ }estimate\_frequency(signal,\ fs,\ zero\_pad=2,\ search\_radius=1000):}
+\DoxyCodeLine{\ \ \ \ M\ =\ len(signal)}
+\DoxyCodeLine{\ \ \ \ N\_base\ =\ 1\ <<\ (M\ -\/\ 1).bit\_length()\ \ \ \ \ \ \textcolor{comment}{\#\ до\ ближайшей\ степени\ 2}}
+\DoxyCodeLine{\ \ \ \ N\ =\ N\_base\ *\ zero\_pad}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ X\ =\ np.fft.fft(signal\ *\ hann(M),\ n=N)}
+\DoxyCodeLine{\ \ \ \ X\_mag\ =\ np.abs(X[:N\ //\ 2])}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ k\_max\ =\ int(np.argmax(X\_mag[:search\_radius]))}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{if}\ 2\ <=\ k\_max\ <=\ len(X\_mag)\ -\/\ 3:}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ y\ =\ X\_mag[k\_max\ -\/\ 2\ :\ k\_max\ +\ 3]}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ np.all(y\ >\ 0):}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ z\ =\ np.log(y)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ 5EA}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ a\ =\ (2*z[0]\ -\/\ z[1]\ -\/\ 2*z[2]\ -\/\ z[3]\ +\ 2*z[4])\ /\ 14.0}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ b\ =\ (-\/2*z[0]\ -\/\ z[1]\ +\ z[3]\ +\ 2*z[4])\ /\ 10.0}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}:\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ 5QA\ fallback}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ a\ =\ (2*y[0]\ -\/\ y[1]\ -\/\ 2*y[2]\ -\/\ y[3]\ +\ 2*y[4])\ /\ 14.0}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ b\ =\ (-\/2*y[0]\ -\/\ y[1]\ +\ y[3]\ +\ 2*y[4])\ /\ 10.0}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ delta\ =\ -\/b\ /\ (2*a)\ \textcolor{keywordflow}{if}\ abs(a)\ >\ 1e-\/30\ \textcolor{keywordflow}{else}\ 0.0}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ delta\ =\ 0.0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{return}\ (k\_max\ +\ delta)\ *\ fs\ /\ N}
+
+\end{DoxyCode}
+
+
+\DoxyHorRuler{0}
+\hypertarget{recommendations_page_autotoc_md142}{}\doxysubsection{\texorpdfstring{Чек-\/лист перед релизом}{Чек-лист перед релизом}}\label{recommendations_page_autotoc_md142}
+
+\begin{DoxyItemize}
+\item \mbox{[} \mbox{]} Сигнал умножен на {\bfseries{окно Hanning}} {\bfseries{до}} FFT
+\item \mbox{[} \mbox{]} Используется {\bfseries{zero-\/padding минимум ×2}} ({\ttfamily N = next\+\_\+pow2(\+M) \texorpdfstring{$\ast$}{*} 2})
+\item \mbox{[} \mbox{]} Грубый максимум {\ttfamily k\+\_\+max} ищется в разумном диапазоне ({\bfseries{не на краях}} FFT)
+\item \mbox{[} \mbox{]} Вокруг максимума есть {\bfseries{минимум 2 точки слева и 2 справа}}
+\item \mbox{[} \mbox{]} Для {\ttfamily discr5ea}\+: {\bfseries{проверка {\ttfamily A\+\_\+i \texorpdfstring{$>$}{>} 0}}} перед вызовом, иначе fallback на {\ttfamily discr5qa}
+\item \mbox{[} \mbox{]} Результат переводится в Гц через {\ttfamily (k\+\_\+max + δ) · fs / N\+\_\+padded}
+\item \mbox{[} \mbox{]} Покрытие тестами\+: см. \doxylink{tests_page}{Тестирование}
+\item \mbox{[} \mbox{]} Проверена точность на эталонных данных (sinc, Hanning kernel, реальные FFT)
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+\hypertarget{recommendations_page_autotoc_md144}{}\doxysubsection{\texorpdfstring{Что дальше — Quinn 2nd и комплексный pipeline}{Что дальше — Quinn 2nd и комплексный pipeline}}\label{recommendations_page_autotoc_md144}
+Наш текущий pipeline работает с {\bfseries{магнитудой}} {\ttfamily \texorpdfstring{$\vert$}{|}X(k)\texorpdfstring{$\vert$}{|}} — мы выбрасываем фазу. Но фаза содержит {\bfseries{половину информации}} о сигнале.\hypertarget{recommendations_page_autotoc_md145}{}\doxysubsubsection{\texorpdfstring{Quinn 2nd estimator — максимум точности}{Quinn 2nd estimator — максимум точности}}\label{recommendations_page_autotoc_md145}
+Если в будущем pipeline сможет передавать комплексные {\ttfamily X(k)} (а не только магнитуду), можно использовать {\bfseries{Quinn 2nd estimator}}\+:
+
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{2}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Свойство   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Значение    }\\\cline{1-2}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Свойство   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Значение    }\\\cline{1-2}
+\endhead
+Точность   &достигает {\bfseries{Cramér-\/\+Rao bound}} (теоретический предел)    \\\cline{1-2}
+Точек   &3 бина (как у EA3)    \\\cline{1-2}
+Bias   &{\bfseries{±0.0001 бина}} (в 50× точнее нашего 5EA)    \\\cline{1-2}
+Сложность   &\texorpdfstring{$\sim$}{\string~}20 операций   \\\cline{1-2}
+\end{longtabu}
+
+
+Это путь для модулей, где комплексные данные есть «из коробки».\hypertarget{recommendations_page_autotoc_md146}{}\doxysubsubsection{\texorpdfstring{IPI (\+Iterative Parabolic Interpolation, 2025)}{IPI (Iterative Parabolic Interpolation, 2025)}}\label{recommendations_page_autotoc_md146}
+Свежий итеративный метод. Достигает CRLB, но каждая итерация = O(\+N). Для 1.\+3M точек это дорого. {\bfseries{Для CPU pipeline неактуально.}}\hypertarget{recommendations_page_autotoc_md147}{}\doxysubsubsection{\texorpdfstring{CZT / Zoom FFT}{CZT / Zoom FFT}}\label{recommendations_page_autotoc_md147}
+Альтернатива FFT\+: вычисляет спектр только в узкой полосе вокруг пика с любым разрешением. Если нужна {\bfseries{экстремальная точность}} (сотни раз лучше нашего 5EA) и не жалко {\ttfamily O(\+N log N)} — это вариант.
+
+\DoxyHorRuler{0}
+\hypertarget{recommendations_page_autotoc_md149}{}\doxysubsection{\texorpdfstring{Дополнительные ресурсы}{Дополнительные ресурсы}}\label{recommendations_page_autotoc_md149}
+
+\begin{DoxyItemize}
+\item {\bfseries{Полный отчёт}} (с историей, аналогиями, словарём терминов)\+: {\ttfamily Doc/\+Frequency\+\_\+\+Recommendations\+\_\+2026-\/04-\/06.\+md}
+\item {\bfseries{Справочник FFT-\/методов}}\+: {\ttfamily Doc/\+FFT\+\_\+\+Frequency\+\_\+\+Estimation.\+md}
+\item {\bfseries{Детальный отчёт по Монте-\/Карло (5pt)}}\+: {\ttfamily Doc/\+Review/2026-\/04-\/03\+\_\+5pt\+\_\+\+LSQ\+\_\+comparison.\+md}
+\item {\bfseries{Все формулы методов}}\+: \doxylink{formulas_page}{Математические формулы}
+\item {\bfseries{Визуальный разбор}}\+: \doxylink{methods_visual_page}{Визуальный разбор методов}
+\end{DoxyItemize}
+
+
+
+\DoxyHorRuler{0}
+\hypertarget{recommendations_page_autotoc_md151}{}\doxysubsection{\texorpdfstring{Самое главное, если коротко}{Самое главное, если коротко}}\label{recommendations_page_autotoc_md151}
+\begin{quote}
+{\bfseries{Для задачи «найти частоту в зашумлённом сигнале» в текущем CPU-\/pipeline используй {\ttfamily discr5ea} (МНК-\/Гауссиан по 5 точкам) с fallback на {\ttfamily discr5qa} и обязательным zero-\/padding ×2.}}
+
+{\bfseries{Это даст точность \texorpdfstring{$\sim$}{\string~}0.6 Гц при SNR = 20 дБ — в 20 раз лучше, чем без интерполяции, и в 2 раза лучше, чем классическая 3-\/точечная EA3.}}
+
+{\bfseries{В будущем (когда появится доступ к комплексным X(k)) — перейти на Quinn 2nd для максимальной точности в ±2 мГц.}} \end{quote}

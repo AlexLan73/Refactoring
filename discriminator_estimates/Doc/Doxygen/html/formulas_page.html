@@ -235,7 +235,175 @@ y_e = A_2 \cdot \exp\left( a_0 \cdot (x_2 - x_e)^2 \right)
 </p>
 <hr  />
 <h1><a class="anchor" id="autotoc_md32"></a>
-5. Обёртка discr3() — коэффициент пересчёта</h1>
+5. МНК-парабола по 5 точкам — 5QA (&lt;tt&gt;discr5qa&lt;/tt&gt;)</h1>
+<p>Идея: вместо параболы, идеально проходящей через <b>3</b> точки, аппроксимируем параболой <b>5</b> точек <b>по методу наименьших квадратов</b> (МНК / LSQ). Получаем переопределённую систему — 5 уравнений на 3 неизвестных \( (a, b, c) \):</p>
+<p class="formulaDsp">
+\[
+A_i \approx a\,x_i^2 + b\,x_i + c, \qquad i = 1,\ldots,5
+\]
+</p>
+<p>В матричной форме:  </p><p class="formulaDsp">
+\[
+\mathbf{H}\,\boldsymbol{\theta} = \mathbf{y},
+\quad
+\mathbf{H} =
+\begin{pmatrix}
+x_1^2 &amp; x_1 &amp; 1 \\
+x_2^2 &amp; x_2 &amp; 1 \\
+x_3^2 &amp; x_3 &amp; 1 \\
+x_4^2 &amp; x_4 &amp; 1 \\
+x_5^2 &amp; x_5 &amp; 1
+\end{pmatrix},
+\quad
+\boldsymbol{\theta} = \begin{pmatrix} a \\ b \\ c \end{pmatrix}.
+\]
+</p>
+<p>Решение МНК (нормальные уравнения):  </p><p class="formulaDsp">
+\[
+(\mathbf{H}^{\!\top}\mathbf{H})\,\boldsymbol{\theta} = \mathbf{H}^{\!\top}\mathbf{y}.
+\]
+</p>
+<h2><a class="anchor" id="autotoc_md33"></a>
+Замкнутая формула для равноотстоящих \f$ x_i = \{-2,-1,0,1,2\} \f$</h2>
+<p>Для равномерной сетки \( x_i = -2,-1,0,1,2 \) матрица \( \mathbf{H}^{\!\top}\mathbf{H} \) блочно-диагональна (так как сумма нечётных степеней равна нулю), и решение можно записать в <b>замкнутом виде</b>:</p>
+<p class="formulaDsp">
+\[
+\boxed{
+a = \frac{2A_1 - A_2 - 2A_3 - A_4 + 2A_5}{14}
+}
+\]
+</p>
+  <p class="formulaDsp">
+\[
+\boxed{
+b = \frac{-2A_1 - A_2 + A_4 + 2A_5}{10}
+}
+\]
+</p>
+  <p class="formulaDsp">
+\[
+\boxed{
+\delta = -\frac{b}{2a}, \qquad x_e = x_3 + h\,\delta
+}
+\]
+</p>
+<p>где \( h \) — шаг сетки, \( x_3 \) — центральная точка.</p>
+<p><b>Свойства:</b></p><ul>
+<li>Сложность: O(1) — 6 умножений + 7 сложений + 1 деление</li>
+<li>Не требует никаких циклов и матричных вычислений</li>
+<li>В нормальной зоне даёт ошибку ~2× меньше, чем 3-точечная QA</li>
+</ul>
+<div class="image">
+<img src="02_hanning_vs_parabola.png" alt=""/>
+<div class="caption">
+Слева — форма пика sinc vs Hanning. Справа — как парабола ложится на Hanning kernel: ошибка &lt;2.5% в пределах ±0.7 бина</div></div>
+<dl class="section note"><dt>Заметки</dt><dd>Защита: при \( |a| &lt; 10^{-30} \) возвращается \( x_e = x_3 \) (данные плоские — оценить нельзя).</dd></dl>
+<hr  />
+<h1><a class="anchor" id="autotoc_md35"></a>
+6. МНК-Гауссиан по 5 точкам — 5EA (&lt;tt&gt;discr5ea&lt;/tt&gt;)</h1>
+<p>Самый точный из реализованных методов. Аппроксимирует пик <b>гауссианом</b> (колоколом) методом наименьших квадратов:</p>
+<p class="formulaDsp">
+\[
+y(x) \approx A_{\max} \cdot \exp\!\bigl(-a\,(x - x_0)^2\bigr)
+\]
+</p>
+<h2><a class="anchor" id="autotoc_md36"></a>
+Алгоритм</h2>
+<p><b>Шаг 1.</b> Логарифмирование амплитуд:  </p><p class="formulaDsp">
+\[
+z_i = \ln A_i, \quad i = 1,\ldots,5
+\]
+</p>
+<p>В лог-пространстве гауссиан превращается в <b>параболу</b>:  </p><p class="formulaDsp">
+\[
+z(x) = -a\,(x - x_0)^2 + \ln A_{\max} = a&#39;x^2 + b&#39;x + c&#39;.
+\]
+</p>
+<p><b>Шаг 2.</b> К <code>z[]</code> применяем те же замкнутые МНК-формулы, что и в 5QA:  </p><p class="formulaDsp">
+\[
+a = \frac{2z_1 - z_2 - 2z_3 - z_4 + 2z_5}{14}
+\]
+</p>
+  <p class="formulaDsp">
+\[
+b = \frac{-2z_1 - z_2 + z_4 + 2z_5}{10}
+\]
+</p>
+<p><b>Шаг 3.</b> Вершина параболы → оценка \( x_e \):  </p><p class="formulaDsp">
+\[
+\delta = -\frac{b}{2a}, \qquad x_e = x_3 + h\,\delta.
+\]
+</p>
+<h2><a class="anchor" id="autotoc_md37"></a>
+Когда не работает (и что делать)</h2>
+<p>Метод требует <b>строго положительных</b> амплитуд: \( A_i &gt; 0 \). Иначе \( \ln A_i \) не определён.</p>
+<p><b>Стратегия fallback</b> в боевом коде: </p><div class="fragment"><div class="line"><span class="keywordtype">int</span> ok = <a class="code hl_function" href="discr5ea_8h.html#a7a40e781923ce2b7e9f823d6966a99d3">discr5ea</a>(A, x, &amp;xe);</div>
+<div class="line"><span class="keywordflow">if</span> (ok != 0) {</div>
+<div class="line">  <span class="comment">// что-то ≤ 0 или результат за границей</span></div>
+<div class="line">  <a class="code hl_function" href="discr5ea_8h.html#ac785bc2874e4a806c56a89d6232d1f34">discr5qa</a>(A, x, &amp;xe);   <span class="comment">// ← переходим на 5QA по амплитудам</span></div>
+<div class="line">}</div>
+<div class="ttc" id="adiscr5ea_8h_html_a7a40e781923ce2b7e9f823d6966a99d3"><div class="ttname"><a href="discr5ea_8h.html#a7a40e781923ce2b7e9f823d6966a99d3">discr5ea</a></div><div class="ttdeci">int discr5ea(const double A[5], const double x[5], double *xe)</div><div class="ttdoc">Пятиточечный дискриминатор, МНК-гауссова аппроксимация (LSQ Gaussian 5pt).</div><div class="ttdef"><b>Definition</b> <a href="discr5ea_8c_source.html#l00061">discr5ea.c:61</a></div></div>
+<div class="ttc" id="adiscr5ea_8h_html_ac785bc2874e4a806c56a89d6232d1f34"><div class="ttname"><a href="discr5ea_8h.html#ac785bc2874e4a806c56a89d6232d1f34">discr5qa</a></div><div class="ttdeci">int discr5qa(const double A[5], const double x[5], double *xe)</div><div class="ttdoc">Пятиточечный дискриминатор, МНК-параболическая аппроксимация (LSQ Parabolic 5pt).</div><div class="ttdef"><b>Definition</b> <a href="discr5ea_8c_source.html#l00112">discr5ea.c:112</a></div></div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md38"></a>
+Почему именно Гауссиан</h2>
+<p>Главное наблюдение проекта: после применения <b>окна Hanning</b> и FFT форма одиночного спектрального пика (Hanning kernel) <b>очень близка к гауссиану</b> в пределах главного лепестка. Поэтому модель \( y \approx A_{\max}\exp(-a(x-x_0)^2) \) является <b>физически обоснованной</b> для типичного FFT-пайплайна.</p>
+<div class="image">
+<img src="02_hanning_vs_parabola.png" alt=""/>
+<div class="caption">
+Hanning kernel ≈ парабола (для амплитуды) ≈ гауссиан (для логарифма)</div></div>
+<hr  />
+<h1><a class="anchor" id="autotoc_md40"></a>
+7. Сравнение всех методов</h1>
+<div class="image">
+<img src="04_methods_vs_snr.png" alt=""/>
+<div class="caption">
+Монте-Карло: 5pt vs 3pt при разных SNR (105 000 испытаний)</div></div>
+<h2><a class="anchor" id="autotoc_md41"></a>
+Таблица сравнения</h2>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Метод   </th><th class="markdownTableHeadNone">Точек   </th><th class="markdownTableHeadNone">Bias (без шума)   </th><th class="markdownTableHeadNone">Шумоустойчивость   </th><th class="markdownTableHeadNone">Сложность   </th><th class="markdownTableHeadNone">Требования    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><b>CG</b>   </td><td class="markdownTableBodyNone">2…N   </td><td class="markdownTableBodyNone">~0.17 шага   </td><td class="markdownTableBodyNone">низкая   </td><td class="markdownTableBodyNone">O(N)   </td><td class="markdownTableBodyNone">\( \sum A_i \neq 0 \)    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><b>SD</b>   </td><td class="markdownTableBodyNone">2   </td><td class="markdownTableBodyNone">~0.10 шага   </td><td class="markdownTableBodyNone">средняя   </td><td class="markdownTableBodyNone">O(1)   </td><td class="markdownTableBodyNone">подобрать \( c \)    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><b>QA</b>   </td><td class="markdownTableBodyNone">3   </td><td class="markdownTableBodyNone">~0.01 шага   </td><td class="markdownTableBodyNone">средняя   </td><td class="markdownTableBodyNone">O(1)   </td><td class="markdownTableBodyNone">\( A_i \) любые    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><b>EA</b>   </td><td class="markdownTableBodyNone">3   </td><td class="markdownTableBodyNone">~0.005 шага   </td><td class="markdownTableBodyNone">средняя   </td><td class="markdownTableBodyNone">O(1)   </td><td class="markdownTableBodyNone">\( A_i &gt; 0 \)    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><b>5QA</b>   </td><td class="markdownTableBodyNone">5   </td><td class="markdownTableBodyNone">~0.005 шага   </td><td class="markdownTableBodyNone"><b>высокая</b>   </td><td class="markdownTableBodyNone">O(1)   </td><td class="markdownTableBodyNone">\( A_i \) любые    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><b>5EA</b> ★   </td><td class="markdownTableBodyNone">5   </td><td class="markdownTableBodyNone">~0.003 шага   </td><td class="markdownTableBodyNone"><b>высокая</b>   </td><td class="markdownTableBodyNone">O(1)   </td><td class="markdownTableBodyNone">\( A_i &gt; 0 \)   </td></tr>
+</table>
+<h2><a class="anchor" id="autotoc_md42"></a>
+Вердикт по результатам Монте-Карло (Hanning kernel, zp×2, 105 000 испытаний)</h2>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">SNR (дБ)   </th><th class="markdownTableHeadNone">Выигрыш лучшего 5pt относительно EA3    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">40 (идеал)   </td><td class="markdownTableBodyNone"><b>1.4×</b>    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">30 (отлично)   </td><td class="markdownTableBodyNone"><b>1.8×</b>    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">25 (хорошо)   </td><td class="markdownTableBodyNone"><b>2.0×</b>    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">20 (норма)   </td><td class="markdownTableBodyNone"><b>2.0×</b>    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">15 (шумно)   </td><td class="markdownTableBodyNone"><b>1.7×</b>    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">10 (плохо)   </td><td class="markdownTableBodyNone"><b>1.2×</b>    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">5 (ужас)   </td><td class="markdownTableBodyNone"><b>1.2×</b>   </td></tr>
+</table>
+<p><b>5pt-методы стабильно выигрывают в 1.2–2.0 раза при любом уровне шума.</b> Подробное обсуждение и дерево выбора — на странице <a class="el" href="recommendations_page.html">Итоговые рекомендации</a>.</p>
+<div class="image">
+<img src="lsq_abs_error_vs_x0.png" alt=""/>
+<div class="caption">
+МНК 5/7/9 без шума: EA-кривые в ~10× ниже QA-кривых</div></div>
+<hr  />
+<h1><a class="anchor" id="autotoc_md44"></a>
+8. Обёртка discr3() — коэффициент пересчёта</h1>
 <p>Для обёрток <code><a class="el" href="discr__common_8h.html#ada0fa80ec1c0edd0e0135de4d4a01c5d" title="Трехточечный дискриминатор (обёртка).">discr3()</a></code> и <code><a class="el" href="discr__common_8h.html#ac4d4e1deafa0bcc5b3c0ba33b1190c43" title="Адаптер трехточечного дискриминатора для статических массивов 3x3.">discr3_()</a></code> координаты пересчитываются:</p>
 <p class="formulaDsp">
 \[

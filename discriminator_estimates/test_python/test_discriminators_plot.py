@@ -77,7 +77,7 @@ def ref_ea(A, x):
 
 # --- Графики ---
 
-OUT_DIR = Path(__file__).resolve().parent.parent / "Doc" / "plots"
+OUT_DIR = Path(__file__).resolve().parent.parent / "Doc" / "plots" / "2_no_noise"
 OUT_DIR.mkdir(parents=True, exist_ok=True)
 
 

@@ -1,0 +1,53 @@
+\doxysection{discr\+\_\+common.\+h}
+\hypertarget{discr__common_8h_source}{}\label{discr__common_8h_source}\index{discr\_common.h@{discr\_common.h}}
+\mbox{\hyperlink{discr__common_8h}{См. документацию.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{discr__common_8h_source_l00001}00001\ \textcolor{comment}{/****************************************************************************}}
+\DoxyCodeLine{\Hypertarget{discr__common_8h_source_l00002}00002\ \textcolor{comment}{*}}
+\DoxyCodeLine{\Hypertarget{discr__common_8h_source_l00003}00003\ \textcolor{comment}{*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ОАО\ НПК\ НИИДАР}}
+\DoxyCodeLine{\Hypertarget{discr__common_8h_source_l00004}00004\ \textcolor{comment}{*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 107258,\ Москва,\ Бухвостова\ 11/12}}
+\DoxyCodeLine{\Hypertarget{discr__common_8h_source_l00005}00005\ \textcolor{comment}{*}}
+\DoxyCodeLine{\Hypertarget{discr__common_8h_source_l00006}00006\ \textcolor{comment}{*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (c)Copyright\ 2009,\ НИИДАР,\ Москва}}
+\DoxyCodeLine{\Hypertarget{discr__common_8h_source_l00007}00007\ \textcolor{comment}{*}}
+\DoxyCodeLine{\Hypertarget{discr__common_8h_source_l00008}00008\ \textcolor{comment}{*\ Все\ права\ защищены.\ \ Данная\ программа\ не\ предназначена\ для\ публикации\ \ и}}
+\DoxyCodeLine{\Hypertarget{discr__common_8h_source_l00009}00009\ \textcolor{comment}{*\ копирования.\ \ Программа\ состоит\ из\ конфиденциальных,\ содержащих}}
+\DoxyCodeLine{\Hypertarget{discr__common_8h_source_l00010}00010\ \textcolor{comment}{*\ коммерческую\ тайну\ НИИДАРа\ материалов.\ Любые\ попытки\ или\ участие}}
+\DoxyCodeLine{\Hypertarget{discr__common_8h_source_l00011}00011\ \textcolor{comment}{*\ в\ дешифрование,\ перепрограммировании\ и\ \ ином\ изменении\ кода\ программы}}
+\DoxyCodeLine{\Hypertarget{discr__common_8h_source_l00012}00012\ \textcolor{comment}{*\ строго\ запрещены\ без\ письменного\ разрешения\ руководства\ НИИДАРа.}}
+\DoxyCodeLine{\Hypertarget{discr__common_8h_source_l00013}00013\ \textcolor{comment}{****************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{discr__common_8h_source_l00023}00023\ \textcolor{preprocessor}{\#ifndef\ DISCR\_COMMON\_H}}
+\DoxyCodeLine{\Hypertarget{discr__common_8h_source_l00024}00024\ \textcolor{preprocessor}{\#define\ DISCR\_COMMON\_H}}
+\DoxyCodeLine{\Hypertarget{discr__common_8h_source_l00025}00025\ }
+\DoxyCodeLine{\Hypertarget{discr__common_8h_source_l00026}00026\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{discr__types_8h}{discr\_types.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{discr__common_8h_source_l00027}00027\ }
+\DoxyCodeLine{\Hypertarget{discr__common_8h_source_l00028}00028\ \textcolor{comment}{/****************************************************************************}}
+\DoxyCodeLine{\Hypertarget{discr__common_8h_source_l00029}00029\ \textcolor{comment}{ОБЪЯВЛЕНИЕ\ ПРОТОТИПОВ\ ФУНКЦИЙ}}
+\DoxyCodeLine{\Hypertarget{discr__common_8h_source_l00030}00030\ \textcolor{comment}{****************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{discr__common_8h_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{discr__common_8h_source_l00032}00032\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{\Hypertarget{discr__common_8h_source_l00033}00033\ \textcolor{keyword}{extern}\ \textcolor{stringliteral}{"{}C"{}}\ \{}
+\DoxyCodeLine{\Hypertarget{discr__common_8h_source_l00034}00034\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{discr__common_8h_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{discr__common_8h_source_l00051}00051\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{discr__common_8h_af4df1b14fa693f96ea5413c1eb0d12a5}{discr2}}(\ \textcolor{keywordtype}{double}\ maz[\ 2\ ][\ 2\ ],\ \textcolor{keywordtype}{double}\ mel[\ 2\ ][\ 2\ ],\ \textcolor{keywordtype}{double}\ mval[\ 2\ ][\ 2\ ],}
+\DoxyCodeLine{\Hypertarget{discr__common_8h_source_l00052}00052\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ *az,\ \textcolor{keywordtype}{double}\ *el,\ \textcolor{keywordtype}{double}\ *val\ );}
+\DoxyCodeLine{\Hypertarget{discr__common_8h_source_l00053}00053\ }
+\DoxyCodeLine{\Hypertarget{discr__common_8h_source_l00070}00070\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{discr__common_8h_ac4d4e1deafa0bcc5b3c0ba33b1190c43}{discr3\_}}(\ \textcolor{keywordtype}{double}\ maz[\ 3\ ][\ 3\ ],\ \textcolor{keywordtype}{double}\ mel[\ 3\ ][\ 3\ ],\ \textcolor{keywordtype}{double}\ mval[\ 3\ ][\ 3\ ],}
+\DoxyCodeLine{\Hypertarget{discr__common_8h_source_l00071}00071\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{discr__types_8h_aaf88ae4f33b415b82feb394eade4a8da}{DISCRTYPE}}\ discrtype,\ \textcolor{keywordtype}{double}\ dx,\ \textcolor{keywordtype}{double}\ lambda,}
+\DoxyCodeLine{\Hypertarget{discr__common_8h_source_l00072}00072\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ *az,\ \textcolor{keywordtype}{double}\ *el,\ \textcolor{keywordtype}{double}\ *val\ );}
+\DoxyCodeLine{\Hypertarget{discr__common_8h_source_l00073}00073\ }
+\DoxyCodeLine{\Hypertarget{discr__common_8h_source_l00101}00101\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{discr__common_8h_ada0fa80ec1c0edd0e0135de4d4a01c5d}{discr3}}(\ \textcolor{keywordtype}{double}\ **maz,\ \textcolor{keywordtype}{double}\ **mel,\ \textcolor{keywordtype}{double}\ **mval,\ \textcolor{keywordtype}{int}\ ndnx,\ \textcolor{keywordtype}{int}\ ndny,}
+\DoxyCodeLine{\Hypertarget{discr__common_8h_source_l00102}00102\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{discr__types_8h_aaf88ae4f33b415b82feb394eade4a8da}{DISCRTYPE}}\ discrtype,\ \textcolor{keywordtype}{double}\ dx,\ \textcolor{keywordtype}{double}\ lambda,}
+\DoxyCodeLine{\Hypertarget{discr__common_8h_source_l00103}00103\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ *az,\ \textcolor{keywordtype}{double}\ *el,\ \textcolor{keywordtype}{double}\ *val\ );}
+\DoxyCodeLine{\Hypertarget{discr__common_8h_source_l00104}00104\ }
+\DoxyCodeLine{\Hypertarget{discr__common_8h_source_l00118}00118\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{discr__common_8h_ab26c38a3820da7bc179b57f8bd8faa04}{checkuse3d}}(\ \textcolor{keywordtype}{double}\ **maz,\ \textcolor{keywordtype}{double}\ **mel,\ \textcolor{keywordtype}{double}\ **mval,\ \textcolor{keywordtype}{int}\ ndnx,\ \textcolor{keywordtype}{int}\ ndny\ );}
+\DoxyCodeLine{\Hypertarget{discr__common_8h_source_l00119}00119\ }
+\DoxyCodeLine{\Hypertarget{discr__common_8h_source_l00136}00136\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{discr__common_8h_a71fe9d3f7b4098569040fa293a6cf0b7}{conv3to2}}(\ \textcolor{keywordtype}{double}\ maz3[\ 3\ ][\ 3\ ],\ \textcolor{keywordtype}{double}\ mel3[\ 3\ ][\ 3\ ],\ \textcolor{keywordtype}{double}\ mval3[\ 3\ ][\ 3\ ],}
+\DoxyCodeLine{\Hypertarget{discr__common_8h_source_l00137}00137\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ maz2[\ 2\ ][\ 2\ ],\ \textcolor{keywordtype}{double}\ mel2[\ 2\ ][\ 2\ ],\ \textcolor{keywordtype}{double}\ mval2[\ 2\ ][\ 2\ ]\ );}
+\DoxyCodeLine{\Hypertarget{discr__common_8h_source_l00138}00138\ }
+\DoxyCodeLine{\Hypertarget{discr__common_8h_source_l00139}00139\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{\Hypertarget{discr__common_8h_source_l00140}00140\ \}}
+\DoxyCodeLine{\Hypertarget{discr__common_8h_source_l00141}00141\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{discr__common_8h_source_l00142}00142\ }
+\DoxyCodeLine{\Hypertarget{discr__common_8h_source_l00143}00143\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

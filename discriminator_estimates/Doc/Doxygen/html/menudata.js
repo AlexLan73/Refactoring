@@ -36,8 +36,12 @@ var menudata={children:[
 {text:"Указатель",url:"globals.html",children:[
 {text:"_",url:"globals.html#index__5F"},
 {text:"c",url:"globals.html#index_c"},
-{text:"d",url:"globals.html#index_d"}]},
-{text:"Функции",url:"globals_func.html"},
+{text:"d",url:"globals.html#index_d"},
+{text:"l",url:"globals.html#index_l"}]},
+{text:"Функции",url:"globals_func.html",children:[
+{text:"c",url:"globals_func.html#index_c"},
+{text:"d",url:"globals_func.html#index_d"},
+{text:"l",url:"globals_func.html#index_l"}]},
 {text:"Перечисления",url:"globals_enum.html"},
 {text:"Элементы перечислений",url:"globals_eval.html"},
 {text:"Макросы",url:"globals_defs.html"}]}]}]}

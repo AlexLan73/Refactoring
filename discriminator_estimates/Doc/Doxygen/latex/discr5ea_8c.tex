@@ -1,0 +1,281 @@
+\doxysection{Файл discr5ea.\+c}
+\hypertarget{discr5ea_8c}{}\label{discr5ea_8c}\index{discr5ea.c@{discr5ea.c}}
+
+
+КППО / ТЗК. Дискриминатор — МНК-\/гауссова аппроксимация по 5 точкам.  
+
+
+{\ttfamily \#include "{}discr5ea.\+h"{}}\newline
+{\ttfamily \#include $<$float.\+h$>$}\newline
+{\ttfamily \#include $<$math.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+\doxysubsubsection*{Функции}
+\begin{DoxyCompactItemize}
+\item 
+static int \mbox{\hyperlink{discr5ea_8c_a695d9751025b7ccf92e589506c5bfa50}{lsq5\+\_\+peak}} (const double y\mbox{[}5\mbox{]}, double \texorpdfstring{$\ast$}{*}peak)
+\begin{DoxyCompactList}\small\item\em Внутренняя функция\+: МНК-\/параболическая оценка вершины по 5 значениям yi. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{discr5ea_8c_a7a40e781923ce2b7e9f823d6966a99d3}{discr5ea}} (const double A\mbox{[}5\mbox{]}, const double x\mbox{[}5\mbox{]}, double \texorpdfstring{$\ast$}{*}xe)
+\begin{DoxyCompactList}\small\item\em Пятиточечный дискриминатор, МНК-\/гауссова аппроксимация (LSQ Gaussian 5pt). \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{discr5ea_8c_ac785bc2874e4a806c56a89d6232d1f34}{discr5qa}} (const double A\mbox{[}5\mbox{]}, const double x\mbox{[}5\mbox{]}, double \texorpdfstring{$\ast$}{*}xe)
+\begin{DoxyCompactList}\small\item\em Пятиточечный дискриминатор, МНК-\/параболическая аппроксимация (LSQ Parabolic 5pt). \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Подробное описание}
+КППО / ТЗК. Дискриминатор — МНК-\/гауссова аппроксимация по 5 точкам. 
+
+\begin{DoxyAuthor}{Автор}
+Кодо (AI), Alex 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Дата}
+03.\+04.\+2026 
+\end{DoxyDate}
+Реализует два метода МНК по 5 равноотстоящим точкам\+:
+\begin{DoxyItemize}
+\item discr5ea\+: гауссов (в лог-\/масштабе)
+\item discr5qa\+: параболический (в линейном масштабе)
+\end{DoxyItemize}
+
+Математика\+: Нормируем координаты xi -\/\texorpdfstring{$>$}{>} \{-\/2, -\/1, 0, 1, 2\}. Для переопределённой системы y = a\texorpdfstring{$\ast$}{*}x\texorpdfstring{$^\wedge$}{\string^}2 + b\texorpdfstring{$\ast$}{*}x + c (5 уравнений, 3 неизвестных) нормальные уравнения (A\texorpdfstring{$^\wedge$}{\string^}T \texorpdfstring{$\ast$}{*} A) \texorpdfstring{$\ast$}{*} beta = A\texorpdfstring{$^\wedge$}{\string^}T \texorpdfstring{$\ast$}{*} y дают замкнутые формулы\+:
+
+a = (2\texorpdfstring{$\ast$}{*}y1 -\/ y2 -\/ 2\texorpdfstring{$\ast$}{*}y3 -\/ y4 + 2\texorpdfstring{$\ast$}{*}y5) / 14 b = (-\/2\texorpdfstring{$\ast$}{*}y1 -\/ y2 + y4 + 2\texorpdfstring{$\ast$}{*}y5) / 10 xe = -\/b / (2\texorpdfstring{$\ast$}{*}a) (в нормированных единицах)
+
+Затем обратная нормировка\+: xe\+\_\+real = x3 + h \texorpdfstring{$\ast$}{*} xe\+\_\+norm 
+
+См. определение в файле \mbox{\hyperlink{discr5ea_8c_source}{discr5ea.\+c}}
+
+
+
+\doxysubsection{Функции}
+\Hypertarget{discr5ea_8c_a7a40e781923ce2b7e9f823d6966a99d3}\label{discr5ea_8c_a7a40e781923ce2b7e9f823d6966a99d3} 
+\index{discr5ea.c@{discr5ea.c}!discr5ea@{discr5ea}}
+\index{discr5ea@{discr5ea}!discr5ea.c@{discr5ea.c}}
+\doxysubsubsection{\texorpdfstring{discr5ea()}{discr5ea()}}
+{\footnotesize\ttfamily int discr5ea (\begin{DoxyParamCaption}\item[{const double}]{A\mbox{[}5\mbox{]},  }\item[{const double}]{x\mbox{[}5\mbox{]},  }\item[{double \texorpdfstring{$\ast$}{*}}]{xe }\end{DoxyParamCaption})}
+
+
+
+Пятиточечный дискриминатор, МНК-\/гауссова аппроксимация (LSQ Gaussian 5pt). 
+
+Аппроксимирует 5 равноотстоящих отсчётов гауссианом методом наименьших квадратов\+:  \[
+  y = A_{max} \exp\!\bigl(-a\,(x - x_0)^2\bigr)
+\]
+
+Алгоритм\+:
+\begin{DoxyEnumerate}
+\item Логарифмирование\+: $ z_i = \ln A_i $
+\item МНК-\/параболическая аппроксимация $ z(x) = a\,x^2 + b\,x + c $ по 5 равноотстоящим точкам (переопределённая система 5 уравнений, 3 неизвестных)
+\item Вершина параболы\+: $ x_e = -b / (2a) $
+\end{DoxyEnumerate}
+
+Формулы МНК для нормированных координат $ \{-2, -1, 0, 1, 2\} $\+:  \[
+  a = \frac{2z_1 - z_2 - 2z_3 - z_4 + 2z_5}{14}
+\]  \[
+  b = \frac{-2z_1 - z_2 + z_4 + 2z_5}{10}
+\]  \[
+  x_e = x_3 + h \cdot \frac{-b}{2a}
+\]
+
+Преимущества перед discr3ea\+:
+\begin{DoxyItemize}
+\item Устойчивость к шуму за счёт сглаживания (5 точек → 3 параметра)
+\item Гауссова модель хорошо приближает sinc(x) вблизи пика
+\end{DoxyItemize}
+
+\begin{DoxyWarning}{Предупреждения}
+Все амплитуды должны быть строго положительны ( $ A_i > 0 $). 
+
+Точки должны быть равноотстоящими (постоянный шаг h).
+\end{DoxyWarning}
+
+\begin{DoxyParams}{Аргументы}
+{\em A} & массив из 5 амплитуд \mbox{[}A1, A2, A3, A4, A5\mbox{]}, центральная = A\mbox{[}2\mbox{]} \\
+\hline
+{\em x} & массив из 5 координат \mbox{[}x1, x2, x3, x4, x5\mbox{]}, равноотстоящие \\
+\hline
+{\em xe} & \mbox{[}out\mbox{]} оценка координаты $ x_e $ \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+EXIT\+\_\+\+SUCCESS (0) при успехе, EXIT\+\_\+\+FAILURE (1) при ошибке (при ошибке \texorpdfstring{$\ast$}{*}xe содержит приближённое значение) 
+\end{DoxyReturn}
+
+
+См. определение в файле \mbox{\hyperlink{discr5ea_8c_source}{discr5ea.\+c}} строка \mbox{\hyperlink{discr5ea_8c_source_l00061}{61}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00062\ \{}
+\DoxyCodeLine{00063\ \ \ \textcolor{keywordtype}{double}\ z[5];}
+\DoxyCodeLine{00064\ \ \ \textcolor{keywordtype}{double}\ h,\ peak;}
+\DoxyCodeLine{00065\ \ \ \textcolor{keywordtype}{int}\ i,\ rc;}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ \ \ \textcolor{comment}{/*\ Шаг\ сетки\ (берём\ из\ первых\ двух\ точек)\ */}}
+\DoxyCodeLine{00068\ \ \ h\ =\ x[1]\ -\/\ x[0];}
+\DoxyCodeLine{00069\ \ \ \textcolor{keywordflow}{if}\ (fabs(h)\ <\ DBL\_EPSILON)\ \{}
+\DoxyCodeLine{00070\ \ \ \ \ *xe\ =\ x[2];}
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keywordflow}{return}\ EXIT\_FAILURE;}
+\DoxyCodeLine{00072\ \ \ \}}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00074\ \ \ \textcolor{comment}{/*\ Проверка:\ все\ амплитуды\ положительны\ */}}
+\DoxyCodeLine{00075\ \ \ \textcolor{keywordflow}{for}\ (i\ =\ 0;\ i\ <\ 5;\ i++)\ \{}
+\DoxyCodeLine{00076\ \ \ \ \ \textcolor{keywordflow}{if}\ (A[i]\ <\ DBL\_EPSILON)\ \{}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ *xe\ =\ x[2];}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ EXIT\_FAILURE;}
+\DoxyCodeLine{00079\ \ \ \ \ \}}
+\DoxyCodeLine{00080\ \ \ \}}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00082\ \ \ \textcolor{comment}{/*\ Проверка:\ не\ все\ равны\ */}}
+\DoxyCodeLine{00083\ \ \ \{}
+\DoxyCodeLine{00084\ \ \ \ \ \textcolor{keywordtype}{int}\ all\_equal\ =\ 1;}
+\DoxyCodeLine{00085\ \ \ \ \ \textcolor{keywordflow}{for}\ (i\ =\ 1;\ i\ <\ 5;\ i++)\ \{}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (fabs(A[i]\ -\/\ A[0])\ >\ DBL\_EPSILON)\ \{}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ all\_equal\ =\ 0;}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00090\ \ \ \ \ \}}
+\DoxyCodeLine{00091\ \ \ \ \ \textcolor{keywordflow}{if}\ (all\_equal)\ \{}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ *xe\ =\ x[2];}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ EXIT\_FAILURE;}
+\DoxyCodeLine{00094\ \ \ \ \ \}}
+\DoxyCodeLine{00095\ \ \ \}}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00097\ \ \ \textcolor{comment}{/*\ Логарифмирование\ */}}
+\DoxyCodeLine{00098\ \ \ \textcolor{keywordflow}{for}\ (i\ =\ 0;\ i\ <\ 5;\ i++)\ \{}
+\DoxyCodeLine{00099\ \ \ \ \ z[i]\ =\ log(A[i]);}
+\DoxyCodeLine{00100\ \ \ \}}
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00102\ \ \ \textcolor{comment}{/*\ МНК-\/оценка\ вершины\ параболы\ в\ лог-\/масштабе\ */}}
+\DoxyCodeLine{00103\ \ \ rc\ =\ \mbox{\hyperlink{discr5ea_8c_a695d9751025b7ccf92e589506c5bfa50}{lsq5\_peak}}(z,\ \&peak);}
+\DoxyCodeLine{00104\ }
+\DoxyCodeLine{00105\ \ \ \textcolor{comment}{/*\ Обратная\ нормировка:\ центр\ =\ x[2],\ шаг\ =\ h\ */}}
+\DoxyCodeLine{00106\ \ \ *xe\ =\ x[2]\ +\ h\ *\ peak;}
+\DoxyCodeLine{00107\ }
+\DoxyCodeLine{00108\ \ \ \textcolor{keywordflow}{return}\ rc;}
+\DoxyCodeLine{00109\ \}}
+
+\end{DoxyCode}
+\Hypertarget{discr5ea_8c_ac785bc2874e4a806c56a89d6232d1f34}\label{discr5ea_8c_ac785bc2874e4a806c56a89d6232d1f34} 
+\index{discr5ea.c@{discr5ea.c}!discr5qa@{discr5qa}}
+\index{discr5qa@{discr5qa}!discr5ea.c@{discr5ea.c}}
+\doxysubsubsection{\texorpdfstring{discr5qa()}{discr5qa()}}
+{\footnotesize\ttfamily int discr5qa (\begin{DoxyParamCaption}\item[{const double}]{A\mbox{[}5\mbox{]},  }\item[{const double}]{x\mbox{[}5\mbox{]},  }\item[{double \texorpdfstring{$\ast$}{*}}]{xe }\end{DoxyParamCaption})}
+
+
+
+Пятиточечный дискриминатор, МНК-\/параболическая аппроксимация (LSQ Parabolic 5pt). 
+
+Аналогичен discr5ea, но работает напрямую с амплитудами (без логарифмирования).
+
+Формулы МНК для нормированных координат $ \{-2, -1, 0, 1, 2\} $\+:  \[
+  a = \frac{2A_1 - A_2 - 2A_3 - A_4 + 2A_5}{14}
+\]  \[
+  b = \frac{-2A_1 - A_2 + A_4 + 2A_5}{10}
+\]
+
+
+\begin{DoxyParams}{Аргументы}
+{\em A} & массив из 5 амплитуд \mbox{[}A1, A2, A3, A4, A5\mbox{]} \\
+\hline
+{\em x} & массив из 5 координат \mbox{[}x1, x2, x3, x4, x5\mbox{]}, равноотстоящие \\
+\hline
+{\em xe} & \mbox{[}out\mbox{]} оценка координаты $ x_e $ \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+EXIT\+\_\+\+SUCCESS (0) при успехе, EXIT\+\_\+\+FAILURE (1) при ошибке 
+\end{DoxyReturn}
+
+
+См. определение в файле \mbox{\hyperlink{discr5ea_8c_source}{discr5ea.\+c}} строка \mbox{\hyperlink{discr5ea_8c_source_l00112}{112}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00113\ \{}
+\DoxyCodeLine{00114\ \ \ \textcolor{keywordtype}{double}\ h,\ peak;}
+\DoxyCodeLine{00115\ \ \ \textcolor{keywordtype}{int}\ rc;}
+\DoxyCodeLine{00116\ }
+\DoxyCodeLine{00117\ \ \ \textcolor{comment}{/*\ Шаг\ сетки\ */}}
+\DoxyCodeLine{00118\ \ \ h\ =\ x[1]\ -\/\ x[0];}
+\DoxyCodeLine{00119\ \ \ \textcolor{keywordflow}{if}\ (fabs(h)\ <\ DBL\_EPSILON)\ \{}
+\DoxyCodeLine{00120\ \ \ \ \ *xe\ =\ x[2];}
+\DoxyCodeLine{00121\ \ \ \ \ \textcolor{keywordflow}{return}\ EXIT\_FAILURE;}
+\DoxyCodeLine{00122\ \ \ \}}
+\DoxyCodeLine{00123\ }
+\DoxyCodeLine{00124\ \ \ \textcolor{comment}{/*\ Проверка:\ не\ все\ равны\ */}}
+\DoxyCodeLine{00125\ \ \ \{}
+\DoxyCodeLine{00126\ \ \ \ \ \textcolor{keywordtype}{int}\ all\_equal\ =\ 1;}
+\DoxyCodeLine{00127\ \ \ \ \ \textcolor{keywordtype}{int}\ i;}
+\DoxyCodeLine{00128\ \ \ \ \ \textcolor{keywordflow}{for}\ (i\ =\ 1;\ i\ <\ 5;\ i++)\ \{}
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (fabs(A[i]\ -\/\ A[0])\ >\ DBL\_EPSILON)\ \{}
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ all\_equal\ =\ 0;}
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00133\ \ \ \ \ \}}
+\DoxyCodeLine{00134\ \ \ \ \ \textcolor{keywordflow}{if}\ (all\_equal)\ \{}
+\DoxyCodeLine{00135\ \ \ \ \ \ \ *xe\ =\ x[2];}
+\DoxyCodeLine{00136\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ EXIT\_FAILURE;}
+\DoxyCodeLine{00137\ \ \ \ \ \}}
+\DoxyCodeLine{00138\ \ \ \}}
+\DoxyCodeLine{00139\ }
+\DoxyCodeLine{00140\ \ \ \textcolor{comment}{/*\ МНК-\/оценка\ вершины\ параболы\ в\ линейном\ масштабе\ */}}
+\DoxyCodeLine{00141\ \ \ rc\ =\ \mbox{\hyperlink{discr5ea_8c_a695d9751025b7ccf92e589506c5bfa50}{lsq5\_peak}}(A,\ \&peak);}
+\DoxyCodeLine{00142\ }
+\DoxyCodeLine{00143\ \ \ \textcolor{comment}{/*\ Обратная\ нормировка\ */}}
+\DoxyCodeLine{00144\ \ \ *xe\ =\ x[2]\ +\ h\ *\ peak;}
+\DoxyCodeLine{00145\ }
+\DoxyCodeLine{00146\ \ \ \textcolor{keywordflow}{return}\ rc;}
+\DoxyCodeLine{00147\ \}}
+
+\end{DoxyCode}
+\Hypertarget{discr5ea_8c_a695d9751025b7ccf92e589506c5bfa50}\label{discr5ea_8c_a695d9751025b7ccf92e589506c5bfa50} 
+\index{discr5ea.c@{discr5ea.c}!lsq5\_peak@{lsq5\_peak}}
+\index{lsq5\_peak@{lsq5\_peak}!discr5ea.c@{discr5ea.c}}
+\doxysubsubsection{\texorpdfstring{lsq5\_peak()}{lsq5\_peak()}}
+{\footnotesize\ttfamily static int lsq5\+\_\+peak (\begin{DoxyParamCaption}\item[{const double}]{y\mbox{[}5\mbox{]},  }\item[{double \texorpdfstring{$\ast$}{*}}]{peak }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Внутренняя функция\+: МНК-\/параболическая оценка вершины по 5 значениям yi. 
+
+Координаты предполагаются нормированными \{-\/2, -\/1, 0, 1, 2\}.
+
+
+\begin{DoxyParams}{Аргументы}
+{\em y} & массив из 5 значений (амплитуды или логарифмы) \\
+\hline
+{\em peak} & \mbox{[}out\mbox{]} смещение вершины в нормированных координатах \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+EXIT\+\_\+\+SUCCESS или EXIT\+\_\+\+FAILURE 
+\end{DoxyReturn}
+
+
+См. определение в файле \mbox{\hyperlink{discr5ea_8c_source}{discr5ea.\+c}} строка \mbox{\hyperlink{discr5ea_8c_source_l00036}{36}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00037\ \{}
+\DoxyCodeLine{00038\ \ \ \textcolor{comment}{/*\ МНК-\/коэффициенты\ параболы\ y\ =\ a*t\string^2\ +\ b*t\ +\ c}}
+\DoxyCodeLine{00039\ \textcolor{comment}{\ \ \ *\ для\ t\ =\ \{-\/2,\ -\/1,\ 0,\ 1,\ 2\}\ */}}
+\DoxyCodeLine{00040\ \ \ \textcolor{keywordtype}{double}\ a\ =\ (2.0\ *\ y[0]\ -\/\ y[1]\ -\/\ 2.0\ *\ y[2]\ -\/\ y[3]\ +\ 2.0\ *\ y[4])\ /\ 14.0;}
+\DoxyCodeLine{00041\ \ \ \textcolor{keywordtype}{double}\ b\ =\ (-\/2.0\ *\ y[0]\ -\/\ y[1]\ +\ y[3]\ +\ 2.0\ *\ y[4])\ /\ 10.0;}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \ \ \textcolor{comment}{/*\ Парабола\ вогнутая\ (a\ <\ 0)\ —\ есть\ максимум\ */}}
+\DoxyCodeLine{00044\ \ \ \textcolor{keywordflow}{if}\ (a\ >\ -\/DBL\_EPSILON)\ \{}
+\DoxyCodeLine{00045\ \ \ \ \ *peak\ =\ 0.0;}
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keywordflow}{return}\ EXIT\_FAILURE;}
+\DoxyCodeLine{00047\ \ \ \}}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \ \ *peak\ =\ -\/b\ /\ (2.0\ *\ a);}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \ \ \textcolor{comment}{/*\ Ограничение:\ вершина\ не\ дальше\ ±2\ шагов\ от\ центра\ */}}
+\DoxyCodeLine{00052\ \ \ \textcolor{keywordflow}{if}\ (*peak\ <\ -\/2.0)}
+\DoxyCodeLine{00053\ \ \ \ \ *peak\ =\ -\/2.0;}
+\DoxyCodeLine{00054\ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (*peak\ >\ 2.0)}
+\DoxyCodeLine{00055\ \ \ \ \ *peak\ =\ 2.0;}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \ \ \textcolor{keywordflow}{return}\ EXIT\_SUCCESS;}
+\DoxyCodeLine{00058\ \}}
+
+\end{DoxyCode}

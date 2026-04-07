@@ -1,0 +1,190 @@
+\begin{theindex}
+
+  \item {\_USE\_MATH\_DEFINES}
+    \subitem {discr\_common.c}, \hyperpage{70}
+
+  \indexspace
+
+  \item {a}
+    \subitem {ax\_pair\_t}, \hyperpage{25}
+    \subitem {axstr\_t}, \hyperpage{26}
+  \item {ax\_pair\_t}, \hyperpage{25}
+    \subitem {a}, \hyperpage{25}
+    \subitem {x}, \hyperpage{25}
+  \item {axstr\_t}, \hyperpage{25}
+    \subitem {a}, \hyperpage{26}
+    \subitem {x}, \hyperpage{26}
+
+  \indexspace
+
+  \item {checkuse3d}
+    \subitem {discr\_common.c}, \hyperpage{70}
+    \subitem {discr\_common.h}, \hyperpage{36}
+  \item {cmp\_by\_x}
+    \subitem {discr\_auto.c}, \hyperpage{62}
+  \item {compare\_by\_x}
+    \subitem {discrea.c}, \hyperpage{80}
+  \item {conv3to2}
+    \subitem {discr\_common.c}, \hyperpage{70}
+    \subitem {discr\_common.h}, \hyperpage{37}
+
+  \indexspace
+
+  \item {discr2}
+    \subitem {discr\_common.c}, \hyperpage{71}
+    \subitem {discr\_common.h}, \hyperpage{38}
+  \item {discr2cg}
+    \subitem {discrcg.c}, \hyperpage{77}
+    \subitem {discrcg.h}, \hyperpage{45}
+  \item {discr2sd}
+    \subitem {discrsd.c}, \hyperpage{87}
+    \subitem {discrsd.h}, \hyperpage{55}
+  \item {discr3}
+    \subitem {discr\_common.c}, \hyperpage{72}
+    \subitem {discr\_common.h}, \hyperpage{39}
+  \item {discr3\_}
+    \subitem {discr\_common.c}, \hyperpage{74}
+    \subitem {discr\_common.h}, \hyperpage{41}
+  \item {discr3\_auto}
+    \subitem {discr\_auto.c}, \hyperpage{62}
+    \subitem {discr\_auto.h}, \hyperpage{31}
+  \item {discr3\_extrap\_gauss}
+    \subitem {discr\_auto.c}, \hyperpage{63}
+    \subitem {discr\_auto.h}, \hyperpage{32}
+  \item {discr3cg}
+    \subitem {discrcg.c}, \hyperpage{78}
+    \subitem {discrcg.h}, \hyperpage{46}
+  \item {discr3ea}
+    \subitem {discrea.c}, \hyperpage{80}
+    \subitem {discrea.h}, \hyperpage{48}
+  \item {discr3eaY}
+    \subitem {discrea.c}, \hyperpage{82}
+    \subitem {discrea.h}, \hyperpage{50}
+  \item {discr3qa}
+    \subitem {discrqa.c}, \hyperpage{85}
+    \subitem {discrqa.h}, \hyperpage{53}
+  \item {discr5ea}
+    \subitem {discr5ea.c}, \hyperpage{57}
+    \subitem {discr5ea.h}, \hyperpage{28}
+  \item {discr5ea.c}, \hyperpage{56}, \hyperpage{60}
+    \subitem {discr5ea}, \hyperpage{57}
+    \subitem {discr5qa}, \hyperpage{58}
+    \subitem {lsq5\_peak}, \hyperpage{59}
+  \item {discr5ea.h}, \hyperpage{27}, \hyperpage{30}
+    \subitem {discr5ea}, \hyperpage{28}
+    \subitem {discr5qa}, \hyperpage{29}
+  \item {discr5qa}
+    \subitem {discr5ea.c}, \hyperpage{58}
+    \subitem {discr5ea.h}, \hyperpage{29}
+  \item {discr\_auto.c}, \hyperpage{61}, \hyperpage{66}
+    \subitem {cmp\_by\_x}, \hyperpage{62}
+    \subitem {discr3\_auto}, \hyperpage{62}
+    \subitem {discr3\_extrap\_gauss}, \hyperpage{63}
+    \subitem {discr\_is\_monotonic}, \hyperpage{65}
+  \item {discr\_auto.h}, \hyperpage{30}, \hyperpage{35}
+    \subitem {discr3\_auto}, \hyperpage{31}
+    \subitem {discr3\_extrap\_gauss}, \hyperpage{32}
+    \subitem {discr\_is\_monotonic}, \hyperpage{34}
+  \item {discr\_common.c}, \hyperpage{69}, \hyperpage{74}
+    \subitem {\_USE\_MATH\_DEFINES}, \hyperpage{70}
+    \subitem {checkuse3d}, \hyperpage{70}
+    \subitem {conv3to2}, \hyperpage{70}
+    \subitem {discr2}, \hyperpage{71}
+    \subitem {discr3}, \hyperpage{72}
+    \subitem {discr3\_}, \hyperpage{74}
+  \item {discr\_common.h}, \hyperpage{35}, \hyperpage{42}
+    \subitem {checkuse3d}, \hyperpage{36}
+    \subitem {conv3to2}, \hyperpage{37}
+    \subitem {discr2}, \hyperpage{38}
+    \subitem {discr3}, \hyperpage{39}
+    \subitem {discr3\_}, \hyperpage{41}
+  \item {discr\_is\_monotonic}
+    \subitem {discr\_auto.c}, \hyperpage{65}
+    \subitem {discr\_auto.h}, \hyperpage{34}
+  \item {discr\_types.h}, \hyperpage{43, 44}
+    \subitem {DISCRTYPE}, \hyperpage{44}
+    \subitem {DT\_CG}, \hyperpage{44}
+    \subitem {DT\_EA}, \hyperpage{44}
+    \subitem {DT\_NO}, \hyperpage{44}
+    \subitem {DT\_QA}, \hyperpage{44}
+    \subitem {DT\_SD}, \hyperpage{44}
+  \item {discrcg.c}, \hyperpage{77}, \hyperpage{79}
+    \subitem {discr2cg}, \hyperpage{77}
+    \subitem {discr3cg}, \hyperpage{78}
+    \subitem {discrncg}, \hyperpage{78}
+  \item {discrcg.h}, \hyperpage{44}, \hyperpage{47}
+    \subitem {discr2cg}, \hyperpage{45}
+    \subitem {discr3cg}, \hyperpage{46}
+    \subitem {discrncg}, \hyperpage{46}
+  \item {discrea.c}, \hyperpage{79}, \hyperpage{83}
+    \subitem {compare\_by\_x}, \hyperpage{80}
+    \subitem {discr3ea}, \hyperpage{80}
+    \subitem {discr3eaY}, \hyperpage{82}
+  \item {discrea.h}, \hyperpage{48}, \hyperpage{52}
+    \subitem {discr3ea}, \hyperpage{48}
+    \subitem {discr3eaY}, \hyperpage{50}
+  \item {discrncg}
+    \subitem {discrcg.c}, \hyperpage{78}
+    \subitem {discrcg.h}, \hyperpage{46}
+  \item {discrqa.c}, \hyperpage{84}, \hyperpage{86}
+    \subitem {discr3qa}, \hyperpage{85}
+  \item {discrqa.h}, \hyperpage{52}, \hyperpage{54}
+    \subitem {discr3qa}, \hyperpage{53}
+  \item {discrsd.c}, \hyperpage{86}, \hyperpage{88}
+    \subitem {discr2sd}, \hyperpage{87}
+  \item {discrsd.h}, \hyperpage{54}, \hyperpage{56}
+    \subitem {discr2sd}, \hyperpage{55}
+  \item {DISCRTYPE}
+    \subitem {discr\_types.h}, \hyperpage{44}
+  \item {DT\_CG}
+    \subitem {discr\_types.h}, \hyperpage{44}
+  \item {DT\_EA}
+    \subitem {discr\_types.h}, \hyperpage{44}
+  \item {DT\_NO}
+    \subitem {discr\_types.h}, \hyperpage{44}
+  \item {DT\_QA}
+    \subitem {discr\_types.h}, \hyperpage{44}
+  \item {DT\_SD}
+    \subitem {discr\_types.h}, \hyperpage{44}
+
+  \indexspace
+
+  \item {FFT-\/дискриминаторы частоты}, 
+		\hyperpage{19}
+  \item {fft.md}, \hyperpage{27}
+  \item {formulas.md}, \hyperpage{27}
+
+  \indexspace
+
+  \item {lsq5\_peak}
+    \subitem {discr5ea.c}, \hyperpage{59}
+
+  \indexspace
+
+  \item {mainpage.md}, \hyperpage{27}
+  \item {methods\_visual.md}, \hyperpage{27}
+
+  \indexspace
+
+  \item {recommendations.md}, \hyperpage{27}
+
+  \indexspace
+
+  \item {tests.md}, \hyperpage{27}
+
+  \indexspace
+
+  \item {x}
+    \subitem {ax\_pair\_t}, \hyperpage{25}
+    \subitem {axstr\_t}, \hyperpage{26}
+
+  \indexspace
+
+  \item {Визуальный разбор методов}, 
+		\hyperpage{8}
+  \item {Главная страница}, \hyperpage{1}
+  \item {Итоговые рекомендации}, \hyperpage{11}
+  \item {Математические формулы}, \hyperpage{4}
+  \item {Тестирование}, \hyperpage{16}
+
+\end{theindex}

@@ -1,0 +1,141 @@
+\doxysection{discrea.\+c}
+\hypertarget{discrea_8c_source}{}\label{discrea_8c_source}\index{discrea.c@{discrea.c}}
+\mbox{\hyperlink{discrea_8c}{См. документацию.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00001}00001\ }
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00016}00016\ \textcolor{preprocessor}{\#include\ <float.h>}}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00017}00017\ \textcolor{preprocessor}{\#include\ <math.h>}}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00018}00018\ \textcolor{preprocessor}{\#include\ <stdlib.h>}}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00019}00019\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{discrea_8h}{discrea.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00022}\mbox{\hyperlink{structaxstr__t}{00022}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00023}\mbox{\hyperlink{structaxstr__t_ad0ebf0e44c5b4d91881919a56737ff86}{00023}}\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{structaxstr__t_ad0ebf0e44c5b4d91881919a56737ff86}{a}};\ \ }
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00024}\mbox{\hyperlink{structaxstr__t_a33b12c05f89f90d477279098cb64908d}{00024}}\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{structaxstr__t_a33b12c05f89f90d477279098cb64908d}{x}};\ \ }
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00025}00025\ \}\ \mbox{\hyperlink{structaxstr__t}{axstr\_t}};}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00026}00026\ }
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00027}00027\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{discrea_8c_a3da7a19413de8b894b042ac61bc441e4}{compare\_by\_x}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{void}\ *p1,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{void}\ *p2);}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00050}\mbox{\hyperlink{discrea_8h_a1d0a905788c41a528b49032ecb9c2748}{00050}}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{discrea_8c_a1d0a905788c41a528b49032ecb9c2748}{discr3ea}}(\textcolor{keywordtype}{double}\ A1,\ \textcolor{keywordtype}{double}\ A2,\ \textcolor{keywordtype}{double}\ A3,}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00051}00051\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ x1,\ \textcolor{keywordtype}{double}\ x2,\ \textcolor{keywordtype}{double}\ x3,\ \textcolor{keywordtype}{double}\ *xe)}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00052}00052\ \{}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00053}00053\ \ \ \textcolor{keywordtype}{double}\ a\ =\ 0.0,\ b\ =\ 0.0;}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00054}00054\ \ \ \textcolor{keywordtype}{double}\ z1,\ z2,\ z3;}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00055}00055\ \ \ \textcolor{keywordtype}{double}\ f1,\ f2,\ f3;}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00056}00056\ \ \ \textcolor{keywordtype}{double}\ a1,\ a2,\ a3,\ a12,\ a23,\ a13;}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00057}00057\ \ \ \textcolor{comment}{/*\ ERR-\/002\ fix:\ локальная\ переменная\ вместо\ static\ */}}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00058}00058\ \ \ \mbox{\hyperlink{structaxstr__t}{axstr\_t}}\ ax[3];}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00059}00059\ }
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00060}00060\ \ \ \textcolor{comment}{/*\ Проверка:\ все\ амплитуды\ должны\ быть\ положительны\ */}}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00061}00061\ \ \ \textcolor{keywordflow}{if}\ (A1\ <\ DBL\_EPSILON\ ||\ A2\ <\ DBL\_EPSILON\ ||\ A3\ <\ DBL\_EPSILON)\ \{}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00062}00062\ \ \ \ \ *xe\ =\ x2;}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00063}00063\ \ \ \ \ \textcolor{keywordflow}{return}\ EXIT\_FAILURE;}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00064}00064\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00065}00065\ }
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00066}00066\ \ \ \textcolor{comment}{/*\ Проверка:\ не\ все\ амплитуды\ равны\ */}}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00067}00067\ \ \ \textcolor{keywordflow}{if}\ ((fabs(A1\ -\/\ A2)\ <\ DBL\_EPSILON)\ \&\&\ (fabs(A2\ -\/\ A3)\ <\ DBL\_EPSILON))\ \{}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00068}00068\ \ \ \ \ *xe\ =\ x2;}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00069}00069\ \ \ \ \ \textcolor{keywordflow}{return}\ EXIT\_FAILURE;}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00070}00070\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00071}00071\ }
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00072}00072\ \ \ \textcolor{comment}{/*\ Сортировка\ по\ координате\ (x\ должна\ возрастать)\ */}}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00073}00073\ \ \ ax[0].\mbox{\hyperlink{structaxstr__t_ad0ebf0e44c5b4d91881919a56737ff86}{a}}\ =\ A1;\ ax[0].\mbox{\hyperlink{structaxstr__t_a33b12c05f89f90d477279098cb64908d}{x}}\ =\ x1;}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00074}00074\ \ \ ax[1].\mbox{\hyperlink{structaxstr__t_ad0ebf0e44c5b4d91881919a56737ff86}{a}}\ =\ A2;\ ax[1].\mbox{\hyperlink{structaxstr__t_a33b12c05f89f90d477279098cb64908d}{x}}\ =\ x2;}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00075}00075\ \ \ ax[2].\mbox{\hyperlink{structaxstr__t_ad0ebf0e44c5b4d91881919a56737ff86}{a}}\ =\ A3;\ ax[2].\mbox{\hyperlink{structaxstr__t_a33b12c05f89f90d477279098cb64908d}{x}}\ =\ x3;}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00076}00076\ \ \ qsort(ax,\ 3,\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{structaxstr__t}{axstr\_t}}),\ \mbox{\hyperlink{discrea_8c_a3da7a19413de8b894b042ac61bc441e4}{compare\_by\_x}});}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00077}00077\ }
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00078}00078\ \ \ a1\ =\ ax[0].\mbox{\hyperlink{structaxstr__t_ad0ebf0e44c5b4d91881919a56737ff86}{a}};\ a2\ =\ ax[1].\mbox{\hyperlink{structaxstr__t_ad0ebf0e44c5b4d91881919a56737ff86}{a}};\ a3\ =\ ax[2].\mbox{\hyperlink{structaxstr__t_ad0ebf0e44c5b4d91881919a56737ff86}{a}};}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00079}00079\ \ \ f1\ =\ ax[0].\mbox{\hyperlink{structaxstr__t_a33b12c05f89f90d477279098cb64908d}{x}};\ f2\ =\ ax[1].\mbox{\hyperlink{structaxstr__t_a33b12c05f89f90d477279098cb64908d}{x}};\ f3\ =\ ax[2].\mbox{\hyperlink{structaxstr__t_a33b12c05f89f90d477279098cb64908d}{x}};}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00080}00080\ }
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00081}00081\ \ \ \textcolor{comment}{/*\ Проверка\ на\ выпуклость:\ максимум\ должен\ быть\ в\ центре\ */}}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00082}00082\ \ \ a12\ =\ a1\ -\/\ a2;}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00083}00083\ \ \ a23\ =\ a2\ -\/\ a3;}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00084}00084\ \ \ a13\ =\ a1\ -\/\ a3;}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00085}00085\ }
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00086}00086\ \ \ \textcolor{comment}{/*\ Вогнутость:\ максимум\ справа\ (например\ 2,\ 4,\ 8)\ */}}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00087}00087\ \ \ \textcolor{keywordflow}{if}\ ((a12\ <\ 0\ \&\&\ a23\ <\ 0\ \&\&\ a12\ >\ a23)\ ||}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00088}00088\ \ \ \ \ \ \ (a12\ >\ 0\ \&\&\ a23\ <\ 0\ \&\&\ a13\ <\ 0))\ \{}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00089}00089\ \ \ \ \ *xe\ =\ x3;}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00090}00090\ \ \ \ \ \textcolor{keywordflow}{return}\ EXIT\_FAILURE;}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00091}00091\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00092}00092\ \ \ \textcolor{comment}{/*\ Вогнутость:\ максимум\ слева\ (например\ 8,\ 4,\ 2)\ */}}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00093}00093\ \ \ \textcolor{keywordflow}{if}\ ((a12\ >\ 0\ \&\&\ a23\ >\ 0\ \&\&\ a12\ >\ a23)\ ||}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00094}00094\ \ \ \ \ \ \ (a12\ >\ 0\ \&\&\ a23\ <\ 0\ \&\&\ a13\ >\ 0))\ \{}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00095}00095\ \ \ \ \ *xe\ =\ x1;}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00096}00096\ \ \ \ \ \textcolor{keywordflow}{return}\ EXIT\_FAILURE;}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00097}00097\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00098}00098\ }
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00099}00099\ \ \ \textcolor{comment}{/*\ Логарифмирование\ */}}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00100}00100\ \ \ z1\ =\ log(a1);}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00101}00101\ \ \ z2\ =\ log(a2);}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00102}00102\ \ \ z3\ =\ log(a3);}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00103}00103\ }
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00104}00104\ \ \ \textcolor{comment}{/*\ Коэффициенты\ параболы\ z(x)\ =\ a\ +\ b*x\ +\ ...\ */}}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00105}00105\ \ \ a\ =\ z1\ *\ (f2\ *\ f2\ -\/\ f3\ *\ f3)\ +\ z2\ *\ (f3\ *\ f3\ -\/\ f1\ *\ f1)\ +\ z3\ *\ (f1\ *\ f1\ -\/\ f2\ *\ f2);}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00106}00106\ \ \ b\ =\ z1\ *\ (f2\ -\/\ f3)\ +\ z2\ *\ (f3\ -\/\ f1)\ +\ z3\ *\ (f1\ -\/\ f2);}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00107}00107\ }
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00108}00108\ \ \ \textcolor{keywordflow}{if}\ (fabs(b)\ <\ DBL\_EPSILON)\ \{}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00109}00109\ \ \ \ \ \textcolor{keywordflow}{if}\ (a\ *\ b\ >=\ 0)\ \{}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00110}00110\ \ \ \ \ \ \ *xe\ =\ f3\ +\ 0.5\ *\ (f3\ -\/\ f1);}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00111}00111\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ EXIT\_FAILURE;}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00112}00112\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00113}00113\ \ \ \ \ \ \ *xe\ =\ f1\ -\/\ 0.5\ *\ (f3\ -\/\ f1);}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00114}00114\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ EXIT\_FAILURE;}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00115}00115\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00116}00116\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00117}00117\ }
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00118}00118\ \ \ \textcolor{comment}{/*\ Вершина\ параболы\ */}}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00119}00119\ \ \ *xe\ =\ 0.5\ *\ a\ /\ b;}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00120}00120\ }
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00121}00121\ \ \ \textcolor{comment}{/*\ Ограничение\ на\ вылет\ за\ пределы\ зондирования\ */}}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00122}00122\ \ \ \textcolor{keywordflow}{if}\ (*xe\ >\ f3\ +\ 0.5\ *\ (f3\ -\/\ f1))\ \{}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00123}00123\ \ \ \ \ *xe\ =\ f3\ +\ 0.5\ *\ (f3\ -\/\ f1);}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00124}00124\ \ \ \ \ \textcolor{keywordflow}{return}\ EXIT\_FAILURE;}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00125}00125\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00126}00126\ \ \ \textcolor{keywordflow}{if}\ (*xe\ <\ f1\ -\/\ 0.5\ *\ (f3\ -\/\ f1))\ \{}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00127}00127\ \ \ \ \ *xe\ =\ f1\ -\/\ 0.5\ *\ (f3\ -\/\ f1);}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00128}00128\ \ \ \ \ \textcolor{keywordflow}{return}\ EXIT\_FAILURE;}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00129}00129\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00130}00130\ }
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00131}00131\ \ \ \textcolor{keywordflow}{return}\ EXIT\_SUCCESS;}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00132}00132\ \}}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00133}00133\ }
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00146}\mbox{\hyperlink{discrea_8h_aeaf78c0e3173b3e10d91f87f58a171d0}{00146}}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{discrea_8c_aeaf78c0e3173b3e10d91f87f58a171d0}{discr3eaY}}(\textcolor{keywordtype}{double}\ A1,\ \textcolor{keywordtype}{double}\ A2,\ \textcolor{keywordtype}{double}\ x1,\ \textcolor{keywordtype}{double}\ x2,\ \textcolor{keywordtype}{double}\ xe)}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00147}00147\ \{}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00148}00148\ \ \ \textcolor{keywordtype}{double}\ ye,\ yMax;}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00149}00149\ \ \ \textcolor{keywordtype}{double}\ z1,\ z2;}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00150}00150\ \ \ \textcolor{keywordtype}{double}\ a0,\ dxe;}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00151}00151\ }
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00152}00152\ \ \ \textcolor{keywordflow}{if}\ (A1\ <\ DBL\_EPSILON\ ||\ A2\ <\ DBL\_EPSILON)}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00153}00153\ \ \ \ \ \textcolor{keywordflow}{return}\ 0.0;}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00154}00154\ }
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00155}00155\ \ \ yMax\ =\ (A1\ >\ A2)\ ?\ A1\ :\ A2;}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00156}00156\ }
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00157}00157\ \ \ z1\ =\ log(A1);}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00158}00158\ \ \ z2\ =\ log(A2);}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00159}00159\ }
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00160}00160\ \ \ a0\ =\ (2.0\ *\ xe\ *\ (x1\ -\/\ x2)\ -\/\ x1\ *\ x1\ +\ x2\ *\ x2);}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00161}00161\ }
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00162}00162\ \ \ \textcolor{keywordflow}{if}\ (fabs(a0)\ <\ DBL\_EPSILON)}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00163}00163\ \ \ \ \ \textcolor{keywordflow}{return}\ yMax;}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00164}00164\ }
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00165}00165\ \ \ a0\ =\ (z1\ -\/\ z2)\ /\ a0;}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00166}00166\ }
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00167}00167\ \ \ dxe\ =\ x2\ -\/\ xe;}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00168}00168\ \ \ ye\ =\ A2\ *\ exp(a0\ *\ dxe\ *\ dxe);}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00169}00169\ }
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00170}00170\ \ \ \textcolor{keywordflow}{return}\ ye;}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00171}00171\ \}}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00172}00172\ }
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00176}\mbox{\hyperlink{discrea_8c_a3da7a19413de8b894b042ac61bc441e4}{00176}}\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{discrea_8c_a3da7a19413de8b894b042ac61bc441e4}{compare\_by\_x}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{void}\ *p1,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{void}\ *p2)}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00177}00177\ \{}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00178}00178\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structaxstr__t}{axstr\_t}}\ *ax1\ =\ (\textcolor{keyword}{const}\ \mbox{\hyperlink{structaxstr__t}{axstr\_t}}\ *)p1;}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00179}00179\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structaxstr__t}{axstr\_t}}\ *ax2\ =\ (\textcolor{keyword}{const}\ \mbox{\hyperlink{structaxstr__t}{axstr\_t}}\ *)p2;}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00180}00180\ }
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00181}00181\ \ \ \textcolor{keywordflow}{if}\ (ax1-\/>\mbox{\hyperlink{structaxstr__t_a33b12c05f89f90d477279098cb64908d}{x}}\ <\ ax2-\/>\mbox{\hyperlink{structaxstr__t_a33b12c05f89f90d477279098cb64908d}{x}})}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00182}00182\ \ \ \ \ \textcolor{keywordflow}{return}\ -\/1;}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00183}00183\ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (ax1-\/>\mbox{\hyperlink{structaxstr__t_a33b12c05f89f90d477279098cb64908d}{x}}\ >\ ax2-\/>\mbox{\hyperlink{structaxstr__t_a33b12c05f89f90d477279098cb64908d}{x}})}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00184}00184\ \ \ \ \ \textcolor{keywordflow}{return}\ 1;}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00185}00185\ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{discrea_8c_source_l00186}00186\ \}}
+
+\end{DoxyCode}

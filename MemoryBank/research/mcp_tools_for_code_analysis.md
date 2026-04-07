@@ -3,18 +3,18 @@
 
 ---
 
-## Текущий статус (Windows, Claude Code global)
+## Текущий статус (Debian, Claude Code global) — обновлено 2026-04-06
 
 | Сервер | Статус | Назначение |
 |--------|--------|-----------|
-| **github** | ✅ Connected | Поиск референсного кода, PR, issues |
 | **sequential-thinking** | ✅ Connected | Пошаговые рассуждения, сложные задачи |
 | **context7** | ✅ Connected | Документация библиотек (OpenCL, ROCm, HIP, pybind11) |
 | **memory** | ✅ Connected | Граф знаний (entities, relations) |
-| **filesystem** | ❌ Fix needed | Прямой доступ к файлам (был настроен с Linux путём) |
-| **git** | ❌ Fix needed | История git, blame (Linux путь) |
-| **sqlite** | ❌ Fix needed | Работа с БД (Linux путь) |
-| **fetch** | ❌ Fix needed | Fetch URL (не запустился) |
+| **repomix** | ✅ Connected | Упаковка кодовой базы для AI-анализа |
+| **filesystem** | ✅ Connected | Прямой доступ к `/home/alex/C++` |
+| **fetch** | ✅ Connected | Fetch URL (`uvx mcp-server-fetch`) |
+| **git** | ✅ Connected | История git, blame (`uvx mcp-server-git`) |
+| **github** | ⏳ Без токена | Нужен PAT — пока не настроен |
 
 ---
 

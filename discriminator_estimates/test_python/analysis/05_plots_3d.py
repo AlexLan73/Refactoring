@@ -35,7 +35,7 @@ import matplotlib.pyplot as plt
 plt.style.use("dark_background")
 from mpl_toolkits.mplot3d import Axes3D  # noqa: F401
 
-OUT_PLOTS = ANALYSIS_DIR / "plots" / "3d"
+OUT_PLOTS = MODULE_DIR / "Doc" / "plots" / "4_3d"
 OUT_PLOTS.mkdir(parents=True, exist_ok=True)
 
 METHODS_MAP = {'CG': 'cg', 'SD': 'sd', 'QA': 'qa', 'EA': 'ea'}

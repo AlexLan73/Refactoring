@@ -1,0 +1,286 @@
+\doxysection{Математические формулы}
+\hypertarget{formulas_page}{}\label{formulas_page}\index{Математические формулы@{Математические формулы}}
+\hypertarget{formulas_page_autotoc_md15}{}\doxysubsection{\texorpdfstring{Полное описание формул дискриминаторных оценок}{Полное описание формул дискриминаторных оценок}}\label{formulas_page_autotoc_md15}
+\DoxyHorRuler{0}
+\hypertarget{formulas_page_autotoc_md17}{}\doxysubsection{\texorpdfstring{1. Центр тяжести (\+CG — Center of Gravity)}{1. Центр тяжести (CG — Center of Gravity)}}\label{formulas_page_autotoc_md17}
+Простейший метод. Координата оценивается как взвешенное среднее.\hypertarget{formulas_page_autotoc_md18}{}\doxysubsubsection{\texorpdfstring{2-\/точечный (discr2cg)}{2-точечный (discr2cg)}}\label{formulas_page_autotoc_md18}
+\[
+x_e = \frac{A_1 \cdot x_1 + A_2 \cdot x_2}{A_1 + A_2}
+\]
+
+{\bfseries{Геометрический смысл}}\+: координата центра масс двух точек с "{}массами"{} $ A_1 $ и $ A_2 $.\hypertarget{formulas_page_autotoc_md19}{}\doxysubsubsection{\texorpdfstring{3-\/точечный (discr3cg)}{3-точечный (discr3cg)}}\label{formulas_page_autotoc_md19}
+\[
+x_e = \frac{A_1 \cdot x_1 + A_2 \cdot x_2 + A_3 \cdot x_3}{A_1 + A_2 + A_3}
+\]\hypertarget{formulas_page_autotoc_md20}{}\doxysubsubsection{\texorpdfstring{N-\/точечный (discrncg)}{N-точечный (discrncg)}}\label{formulas_page_autotoc_md20}
+\[
+x_e = \frac{\sum_{i=0}^{N-1} A_i \cdot x_i}{\sum_{i=0}^{N-1} A_i}
+\]
+
+{\bfseries{Защита}}\+: при $ \sum A_i = 0 $ возвращается средняя точка (ERR-\/005 fix).
+
+\DoxyHorRuler{0}
+\hypertarget{formulas_page_autotoc_md22}{}\doxysubsection{\texorpdfstring{2. Суммарно-\/разностный (\+SD — Sum-\/\+Difference)}{2. Суммарно-разностный (SD — Sum-Difference)}}\label{formulas_page_autotoc_md22}
+Классический моноимпульсный метод. Использует отношение разности к сумме.\hypertarget{formulas_page_autotoc_md23}{}\doxysubsubsection{\texorpdfstring{2-\/точечный (discr2sd)}{2-точечный (discr2sd)}}\label{formulas_page_autotoc_md23}
+\[
+x_c = \frac{x_1 + x_2}{2}
+\]
+
+\[
+\Delta x = c \cdot \frac{A_2 - A_1}{A_2 + A_1}
+\]
+
+\[
+x_e = x_c + \Delta x
+\]
+
+где $ c $ — коэффициент крутизны дискриминаторной характеристики.
+
+{\bfseries{Физический смысл}}\+: $ \frac{A_2 - A_1}{A_2 + A_1} $ — нормированная разность, пропорциональная отклонению цели от середины. Коэффициент $ c $ зависит от ширины ДН и шага сетки.
+
+\DoxyHorRuler{0}
+\hypertarget{formulas_page_autotoc_md25}{}\doxysubsection{\texorpdfstring{3. Квадратичная аппроксимация (\+QA — Quadratic Approximation)}{3. Квадратичная аппроксимация (QA — Quadratic Approximation)}}\label{formulas_page_autotoc_md25}
+Через 3 точки проводится парабола $ y = a x^2 + b x + c $, находится вершина.\hypertarget{formulas_page_autotoc_md26}{}\doxysubsubsection{\texorpdfstring{3-\/точечный (discr3qa)}{3-точечный (discr3qa)}}\label{formulas_page_autotoc_md26}
+\[
+A_o = \frac{A_2 - A_1}{A_2 - A_3}
+\]
+
+\[
+x_e = \frac{1}{2} \cdot \frac{(A_o - 1) \cdot x_2^2 - A_o \cdot x_3^2 + x_1^2}{(A_o - 1) \cdot x_2 - A_o \cdot x_3 + x_1}
+\]
+
+{\bfseries{Граничные случаи}} (ERR-\/004 fix, используется {\ttfamily DBL\+\_\+\+EPSILON})\+:
+
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{2}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Условие   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Результат    }\\\cline{1-2}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Условие   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Результат    }\\\cline{1-2}
+\endhead
+$ A_1 = A_2 = A_3 $   &$ x_e = x_2 $ (центральная точка)    \\\cline{1-2}
+$ A_2 = A_3 $, $ A_1 > A_2 $   &$ x_e = x_1 $    \\\cline{1-2}
+$ A_2 = A_3 $, $ A_1 < A_2 $   &$ x_e = \frac{x_2 + x_3}{2} $    \\\cline{1-2}
+$ A_1 = A_2 $, $ A_3 > A_2 $   &$ x_e = x_3 $    \\\cline{1-2}
+$ A_1 = A_2 $, $ A_3 < A_2 $   &$ x_e = \frac{x_1 + x_2}{2} $   \\\cline{1-2}
+\end{longtabu}
+
+
+\DoxyHorRuler{0}
+\hypertarget{formulas_page_autotoc_md28}{}\doxysubsection{\texorpdfstring{4. Экспоненциальная аппроксимация (\+EA — Exponential Approximation)}{4. Экспоненциальная аппроксимация (EA — Exponential Approximation)}}\label{formulas_page_autotoc_md28}
+Наиболее точный метод. Моделирует ДН функцией Гаусса\+:
+
+\[
+y(x) = A_{max} \cdot \exp\left( -a \cdot (x - x_0)^2 \right)
+\]\hypertarget{formulas_page_autotoc_md29}{}\doxysubsubsection{\texorpdfstring{Алгоритм (discr3ea)}{Алгоритм (discr3ea)}}\label{formulas_page_autotoc_md29}
+{\bfseries{Шаг 1}}\+: Проверка входных данных
+\begin{DoxyItemize}
+\item Все амплитуды должны быть \texorpdfstring{$>$}{>} 0
+\item Не все амплитуды равны
+\end{DoxyItemize}
+
+{\bfseries{Шаг 2}}\+: Сортировка по возрастанию координаты $ x $
+
+{\bfseries{Шаг 3}}\+: Проверка выпуклости
+\begin{DoxyItemize}
+\item Максимум должен быть в центре (а не на краю)
+\item При вогнутости → {\ttfamily EXIT\+\_\+\+FAILURE}
+\end{DoxyItemize}
+
+{\bfseries{Шаг 4}}\+: Логарифмирование
+
+\[
+z_i = \ln(A_i), \quad i = 1, 2, 3
+\]
+
+Задача сводится к параболической аппроксимации в логарифмическом масштабе\+: $ z(x) = -a(x - x_0)^2 + \ln(A_{max}) $
+
+{\bfseries{Шаг 5}}\+: Вершина параболы
+
+\[
+\alpha = z_1 (f_2^2 - f_3^2) + z_2 (f_3^2 - f_1^2) + z_3 (f_1^2 - f_2^2)
+\]
+
+\[
+\beta = z_1 (f_2 - f_3) + z_2 (f_3 - f_1) + z_3 (f_1 - f_2)
+\]
+
+\[
+x_e = \frac{\alpha}{2 \beta}
+\]
+
+где $ f_i $ — координаты после сортировки.
+
+{\bfseries{Шаг 6}}\+: Ограничение на вылет
+
+\[
+f_1 - \frac{f_3 - f_1}{2} \leq x_e \leq f_3 + \frac{f_3 - f_1}{2}
+\]
+
+Оценка не должна выходить за пределы области зондирования более чем на полшага.\hypertarget{formulas_page_autotoc_md30}{}\doxysubsubsection{\texorpdfstring{Уточнение амплитуды (discr3ea\+Y)}{Уточнение амплитуды (discr3eaY)}}\label{formulas_page_autotoc_md30}
+\[
+a_0 = \frac{z_1 - z_2}{2 x_e (x_1 - x_2) - x_1^2 + x_2^2}
+\]
+
+\[
+y_e = A_2 \cdot \exp\left( a_0 \cdot (x_2 - x_e)^2 \right)
+\]
+
+\DoxyHorRuler{0}
+\hypertarget{formulas_page_autotoc_md32}{}\doxysubsection{\texorpdfstring{5. МНК-\/парабола по 5 точкам — 5\+QA ($<$tt$>$discr5qa$<$/tt$>$)}{5. МНК-парабола по 5 точкам — 5QA (<tt>discr5qa</tt>)}}\label{formulas_page_autotoc_md32}
+Идея\+: вместо параболы, идеально проходящей через {\bfseries{3}} точки, аппроксимируем параболой {\bfseries{5}} точек {\bfseries{по методу наименьших квадратов}} (МНК / LSQ). Получаем переопределённую систему — 5 уравнений на 3 неизвестных $ (a, b, c) $\+:
+
+\[
+A_i \approx a\,x_i^2 + b\,x_i + c, \qquad i = 1,\ldots,5
+\]
+
+В матричной форме\+:  \[
+\mathbf{H}\,\boldsymbol{\theta} = \mathbf{y},
+\quad
+\mathbf{H} =
+\begin{pmatrix}
+x_1^2 & x_1 & 1 \\
+x_2^2 & x_2 & 1 \\
+x_3^2 & x_3 & 1 \\
+x_4^2 & x_4 & 1 \\
+x_5^2 & x_5 & 1
+\end{pmatrix},
+\quad
+\boldsymbol{\theta} = \begin{pmatrix} a \\ b \\ c \end{pmatrix}.
+\]
+
+Решение МНК (нормальные уравнения)\+:  \[
+(\mathbf{H}^{\!\top}\mathbf{H})\,\boldsymbol{\theta} = \mathbf{H}^{\!\top}\mathbf{y}.
+\]\hypertarget{formulas_page_autotoc_md33}{}\doxysubsubsection{\texorpdfstring{Замкнутая формула для равноотстоящих \textbackslash{}f\$ x\+\_\+i = \textbackslash{}\{-\/2,-\/1,0,1,2\textbackslash{}\} \textbackslash{}f\$}{Замкнутая формула для равноотстоящих \textbackslash{}f\$ x\_i = \textbackslash{}\{-2,-1,0,1,2\textbackslash{}\} \textbackslash{}f\$}}\label{formulas_page_autotoc_md33}
+Для равномерной сетки $ x_i = -2,-1,0,1,2 $ матрица $ \mathbf{H}^{\!\top}\mathbf{H} $ блочно-\/диагональна (так как сумма нечётных степеней равна нулю), и решение можно записать в {\bfseries{замкнутом виде}}\+:
+
+\[
+\boxed{
+a = \frac{2A_1 - A_2 - 2A_3 - A_4 + 2A_5}{14}
+}
+\]  \[
+\boxed{
+b = \frac{-2A_1 - A_2 + A_4 + 2A_5}{10}
+}
+\]  \[
+\boxed{
+\delta = -\frac{b}{2a}, \qquad x_e = x_3 + h\,\delta
+}
+\]
+
+где $ h $ — шаг сетки, $ x_3 $ — центральная точка.
+
+{\bfseries{Свойства\+:}}
+\begin{DoxyItemize}
+\item Сложность\+: O(1) — 6 умножений + 7 сложений + 1 деление
+\item Не требует никаких циклов и матричных вычислений
+\item В нормальной зоне даёт ошибку \texorpdfstring{$\sim$}{\string~}2× меньше, чем 3-\/точечная QA
+\end{DoxyItemize}
+
+
+
+\begin{DoxyNote}{Заметки}
+Защита\+: при $ |a| < 10^{-30} $ возвращается $ x_e = x_3 $ (данные плоские — оценить нельзя).
+\end{DoxyNote}
+\DoxyHorRuler{0}
+\hypertarget{formulas_page_autotoc_md35}{}\doxysubsection{\texorpdfstring{6. МНК-\/Гауссиан по 5 точкам — 5\+EA ($<$tt$>$discr5ea$<$/tt$>$)}{6. МНК-Гауссиан по 5 точкам — 5EA (<tt>discr5ea</tt>)}}\label{formulas_page_autotoc_md35}
+Самый точный из реализованных методов. Аппроксимирует пик {\bfseries{гауссианом}} (колоколом) методом наименьших квадратов\+:
+
+\[
+y(x) \approx A_{\max} \cdot \exp\!\bigl(-a\,(x - x_0)^2\bigr)
+\]\hypertarget{formulas_page_autotoc_md36}{}\doxysubsubsection{\texorpdfstring{Алгоритм}{Алгоритм}}\label{formulas_page_autotoc_md36}
+{\bfseries{Шаг 1.}} Логарифмирование амплитуд\+:  \[
+z_i = \ln A_i, \quad i = 1,\ldots,5
+\]
+
+В лог-\/пространстве гауссиан превращается в {\bfseries{параболу}}\+:  \[
+z(x) = -a\,(x - x_0)^2 + \ln A_{\max} = a\textnormal{\textquotesingle}x^2 + b\textnormal{\textquotesingle}x + c\textnormal{\textquotesingle}.
+\]
+
+{\bfseries{Шаг 2.}} К {\ttfamily z\mbox{[}\mbox{]}} применяем те же замкнутые МНК-\/формулы, что и в 5QA\+:  \[
+a = \frac{2z_1 - z_2 - 2z_3 - z_4 + 2z_5}{14}
+\]  \[
+b = \frac{-2z_1 - z_2 + z_4 + 2z_5}{10}
+\]
+
+{\bfseries{Шаг 3.}} Вершина параболы → оценка $ x_e $\+:  \[
+\delta = -\frac{b}{2a}, \qquad x_e = x_3 + h\,\delta.
+\]\hypertarget{formulas_page_autotoc_md37}{}\doxysubsubsection{\texorpdfstring{Когда не работает (и что делать)}{Когда не работает (и что делать)}}\label{formulas_page_autotoc_md37}
+Метод требует {\bfseries{строго положительных}} амплитуд\+: $ A_i > 0 $. Иначе $ \ln A_i $ не определён.
+
+{\bfseries{Стратегия fallback}} в боевом коде\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{int}\ ok\ =\ \mbox{\hyperlink{discr5ea_8h_a7a40e781923ce2b7e9f823d6966a99d3}{discr5ea}}(A,\ x,\ \&xe);}
+\DoxyCodeLine{\textcolor{keywordflow}{if}\ (ok\ !=\ 0)\ \{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ что-\/то\ ≤\ 0\ или\ результат\ за\ границей}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{discr5ea_8h_ac785bc2874e4a806c56a89d6232d1f34}{discr5qa}}(A,\ x,\ \&xe);\ \ \ \textcolor{comment}{//\ ←\ переходим\ на\ 5QA\ по\ амплитудам}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\hypertarget{formulas_page_autotoc_md38}{}\doxysubsubsection{\texorpdfstring{Почему именно Гауссиан}{Почему именно Гауссиан}}\label{formulas_page_autotoc_md38}
+Главное наблюдение проекта\+: после применения {\bfseries{окна Hanning}} и FFT форма одиночного спектрального пика (Hanning kernel) {\bfseries{очень близка к гауссиану}} в пределах главного лепестка. Поэтому модель $ y \approx A_{\max}\exp(-a(x-x_0)^2) $ является {\bfseries{физически обоснованной}} для типичного FFT-\/пайплайна.
+
+
+
+\DoxyHorRuler{0}
+\hypertarget{formulas_page_autotoc_md40}{}\doxysubsection{\texorpdfstring{7. Сравнение всех методов}{7. Сравнение всех методов}}\label{formulas_page_autotoc_md40}
+\hypertarget{formulas_page_autotoc_md41}{}\doxysubsubsection{\texorpdfstring{Таблица сравнения}{Таблица сравнения}}\label{formulas_page_autotoc_md41}
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{6}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Метод   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Точек   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Bias (без шума)   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Шумоустойчивость   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Сложность   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Требования    }\\\cline{1-6}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Метод   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Точек   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Bias (без шума)   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Шумоустойчивость   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Сложность   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Требования    }\\\cline{1-6}
+\endhead
+{\bfseries{CG}}   &2…N   &\texorpdfstring{$\sim$}{\string~}0.17 шага   &низкая   &O(\+N)   &$ \sum A_i \neq 0 $    \\\cline{1-6}
+{\bfseries{SD}}   &2   &\texorpdfstring{$\sim$}{\string~}0.10 шага   &средняя   &O(1)   &подобрать $ c $    \\\cline{1-6}
+{\bfseries{QA}}   &3   &\texorpdfstring{$\sim$}{\string~}0.01 шага   &средняя   &O(1)   &$ A_i $ любые    \\\cline{1-6}
+{\bfseries{EA}}   &3   &\texorpdfstring{$\sim$}{\string~}0.005 шага   &средняя   &O(1)   &$ A_i > 0 $    \\\cline{1-6}
+{\bfseries{5QA}}   &5   &\texorpdfstring{$\sim$}{\string~}0.005 шага   &{\bfseries{высокая}}   &O(1)   &$ A_i $ любые    \\\cline{1-6}
+{\bfseries{5EA}} ★   &5   &\texorpdfstring{$\sim$}{\string~}0.003 шага   &{\bfseries{высокая}}   &O(1)   &$ A_i > 0 $   \\\cline{1-6}
+\end{longtabu}
+\hypertarget{formulas_page_autotoc_md42}{}\doxysubsubsection{\texorpdfstring{Вердикт по результатам Монте-\/Карло (\+Hanning kernel, zp×2, 105 000 испытаний)}{Вердикт по результатам Монте-Карло (Hanning kernel, zp×2, 105 000 испытаний)}}\label{formulas_page_autotoc_md42}
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{2}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ SNR (дБ)   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Выигрыш лучшего 5pt относительно EA3    }\\\cline{1-2}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ SNR (дБ)   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Выигрыш лучшего 5pt относительно EA3    }\\\cline{1-2}
+\endhead
+40 (идеал)   &{\bfseries{1.\+4×}}    \\\cline{1-2}
+30 (отлично)   &{\bfseries{1.\+8×}}    \\\cline{1-2}
+25 (хорошо)   &{\bfseries{2.\+0×}}    \\\cline{1-2}
+20 (норма)   &{\bfseries{2.\+0×}}    \\\cline{1-2}
+15 (шумно)   &{\bfseries{1.\+7×}}    \\\cline{1-2}
+10 (плохо)   &{\bfseries{1.\+2×}}    \\\cline{1-2}
+5 (ужас)   &{\bfseries{1.\+2×}}   \\\cline{1-2}
+\end{longtabu}
+
+
+{\bfseries{5pt-\/методы стабильно выигрывают в 1.\+2–2.0 раза при любом уровне шума.}} Подробное обсуждение и дерево выбора — на странице \doxylink{recommendations_page}{Итоговые рекомендации}.
+
+
+
+\DoxyHorRuler{0}
+\hypertarget{formulas_page_autotoc_md44}{}\doxysubsection{\texorpdfstring{8. Обёртка discr3() — коэффициент пересчёта}{8. Обёртка discr3() — коэффициент пересчёта}}\label{formulas_page_autotoc_md44}
+Для обёрток {\ttfamily \doxylink{discr__common_8h_ada0fa80ec1c0edd0e0135de4d4a01c5d}{discr3()}} и {\ttfamily \doxylink{discr__common_8h_ac4d4e1deafa0bcc5b3c0ba33b1190c43}{discr3\+\_\+()}} координаты пересчитываются\+:
+
+\[
+c = \frac{2 \pi \cdot dx}{\lambda}
+\]
+
+где $ dx $ — шаг антенной решётки, $ \lambda $ — длина волны.
+
+Координаты масштабируются\+: $ x\textnormal{\textquotesingle} = x \cdot c $, оценка возвращается в исходных единицах\+: $ x_e = x\textnormal{\textquotesingle}_e / c $.
+
+\begin{DoxyNote}{Заметки}
+После рефакторинга (ERR-\/003 fix) входные массивы {\bfseries{не модифицируются}} — координаты умножаются на $ c $ при передаче в дискриминатор, а не в массиве. 
+\end{DoxyNote}

@@ -96,8 +96,10 @@ COLORS = {
     '5EA': '#45B7D1',
 }
 
-OUT_DIR = Path(__file__).resolve().parent.parent / "Doc" / "plots"
+OUT_DIR = Path(__file__).resolve().parent.parent / "Doc" / "plots" / "2_no_noise"
+OUT_DIR_NOISE = Path(__file__).resolve().parent.parent / "Doc" / "plots" / "3_noise"
 OUT_DIR.mkdir(parents=True, exist_ok=True)
+OUT_DIR_NOISE.mkdir(parents=True, exist_ok=True)
 
 
 # --- Графики ---
@@ -293,7 +295,7 @@ def plot4_noise_robustness():
                  fontsize=15, y=1.02)
     fig.tight_layout()
 
-    path = OUT_DIR / "hanning_noise_robustness.png"
+    path = OUT_DIR_NOISE / "hanning_noise_robustness.png"
     fig.savefig(path, dpi=120, bbox_inches='tight')
     plt.close(fig)
     print(f"[Plot 4] Saved: {path}")

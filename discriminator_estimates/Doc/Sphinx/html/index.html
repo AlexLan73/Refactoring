@@ -1,141 +1,635 @@
+<!doctype html>
+<html class="no-js" lang="ru" data-content_root="./">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Алфавитный указатель" href="genindex.html"><link rel="search" title="Поиск" href="search.html"><link rel="next" title="Обзор" href="overview.html">
+
+    <!-- Generated with Sphinx 9.1.0 and Furo 2025.12.19 -->
+        <title>Discriminator Estimates</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=acfd86a5" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=7bdb33bb" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=5fd99b8d" />
+    
+    
 
 
-<!DOCTYPE html>
-<html class="writer-html5" lang="ru" data-content_root="./">
-<head>
-  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
-
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TSignalFrequency &mdash; Discriminator Estimates — FFT Frequency Discriminators</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
-
+<style>
+  body {
+    --color-code-background: #f2f2f2;
+  --color-code-foreground: #1e1e1e;
+  --color-brand-primary: #1f4e79;
+  --color-brand-content: #1f4e79;
+  --color-admonition-background: #f0f9ff;
   
-      <script src="_static/jquery.js?v=5d32c60e"></script>
-      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=9ca2116e"></script>
-      <script src="_static/doctools.js?v=fd6eb6e6"></script>
-      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
-      <script src="_static/translations.js?v=cd1d70c9"></script>
-    <script src="_static/js/theme.js"></script>
-    <link rel="index" title="Алфавитный указатель" href="genindex.html" />
-    <link rel="search" title="Поиск" href="search.html" />
-    <link rel="next" title="Обзор" href="overview.html" /> 
-</head>
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #60a5fa;
+  --color-brand-content: #93c5fd;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #60a5fa;
+  --color-brand-content: #93c5fd;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
 
-<body class="wy-body-for-nav"> 
-  <div class="wy-grid-for-nav">
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
-      <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
 
-          
-          
-          <a href="#" class="icon icon-home">
-            Discriminator Estimates — FFT Frequency
-          </a>
-<div role="search">
-  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Поиск в документации" aria-label="Поиск в документации" />
-    <input type="hidden" name="check_keywords" value="yes" />
-    <input type="hidden" name="area" value="default" />
-  </form>
-</div>
-        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Меню навигации">
-              <p class="caption" role="heading"><span class="caption-text">Содержание:</span></p>
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="#"><div class="brand">Discriminator Estimates</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="#">
+  
+  <span class="sidebar-brand-text">Discriminator Estimates</span>
+  
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder="Поиск" name="q" aria-label="Поиск">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Основные разделы</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="overview.html">Обзор</a></li>
-<li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="formulas.html">Формулы</a></li>
+<li class="toctree-l1"><a class="reference internal" href="methods.html">Сравнение методов</a></li>
+<li class="toctree-l1"><a class="reference internal" href="recommendations.html">Рекомендации</a></li>
+<li class="toctree-l1"><a class="reference internal" href="visual.html">Визуальный разбор</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fft.html">FFT-дискриминаторы частоты</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tests.html">Тесты</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">C API Reference</a></li>
 </ul>
 
-        </div>
-      </div>
-    </nav>
-
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Меню навигации для мобильных устройств" >
-          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="#">Discriminator Estimates — FFT Frequency</a>
-      </nav>
-
-      <div class="wy-nav-content">
-        <div class="rst-content">
-          <div role="navigation" aria-label="Навигация по страницам">
-  <ul class="wy-breadcrumbs">
-      <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">TSignalFrequency</li>
-      <li class="wy-breadcrumbs-aside">
-            <a href="_sources/index.rst.txt" rel="nofollow"> Просмотреть исходный код страницы</a>
-      </li>
-  </ul>
-  <hr/>
 </div>
-          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
-           <div itemprop="articleBody">
-             
-  <section id="tsignalfrequency">
-<h1>TSignalFrequency<a class="headerlink" href="#tsignalfrequency" title="Ссылка на этот заголовок"></a></h1>
-<p>FFT-дискриминаторы частоты – сравнение 5 методов оценки частоты по спектру.</p>
-<p>Python-порт MatLab Primer.m + C-библиотеки КППО/ТЗК (discr3ea, discr3qa, discrsd, discrcg).</p>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="_sources/index.rst.txt" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div><div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="discriminator-estimates">
+<h1>Discriminator Estimates<a class="headerlink" href="#discriminator-estimates" title="Ссылка на этот заголовок">¶</a></h1>
+<p class="rubric">Дискриминаторные оценки координат — поиск пика в зашумлённом сигнале</p>
+<p>Полная документация модуля для определения частоты/координаты пика
+в FFT-спектре или ДН антенны с <strong>суб-бинной точностью</strong>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Модуль<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">discriminator_estimates</span></code></p>
+</dd>
+<dt class="field-even">Организация<span class="colon">:</span></dt>
+<dd class="field-even"><p>ОАО НПК НИИДАР</p>
+</dd>
+<dt class="field-odd">Авторы<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Федоров С.А., Добродумов А.Б., Керский Е.В.</p>
+</dd>
+<dt class="field-even">Рефакторинг 2026<span class="colon">:</span></dt>
+<dd class="field-even"><p>Кодо (AI) + Alex</p>
+</dd>
+<dt class="field-odd">Версия<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2.0 (2026-04-06)</p>
+</dd>
+</dl>
+<figure class="align-center" id="id8">
+<a class="reference internal image-reference" href="_images/01_pipeline.png"><img alt="Pipeline обработки сигнала — от сырых отсчётов до точной частоты" src="_images/01_pipeline.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Рис. 1 </span><span class="caption-text">Полный pipeline обработки сигнала: от сырых отсчётов до точной частоты.</span><a class="headerlink" href="#id8" title="Ссылка на это изображение">¶</a></p>
+</figcaption>
+</figure>
+<hr class="docutils" />
+<section id="id1">
+<h2>О чём этот модуль<a class="headerlink" href="#id1" title="Ссылка на этот заголовок">¶</a></h2>
+<p>Библиотека отвечает на один очень практичный вопрос:</p>
+<blockquote>
+<div><p><strong>«У меня есть несколько точек измерения сигнала. Где находится
+истинный максимум — между точками?»</strong></p>
+</div></blockquote>
+<p>Под «точками» понимаются:</p>
+<ul class="simple">
+<li><p>отсчёты <strong>диаграммы направленности</strong> (ДН) антенны для оценки угловых
+координат цели в РЛС;</p></li>
+<li><p><strong>бины спектра FFT</strong> для оценки точной частоты одиночного
+гармонического сигнала в зашумлённой записи.</p></li>
+</ul>
+<p>В обоих случаях математика одинаковая, и здесь собраны <strong>6 проверенных
+методов</strong> — от классических 2-точечных до новых 5-точечных МНК-аппроксимаций.</p>
+<div class="note admonition">
+<p class="admonition-title">Аналогия из жизни</p>
+<p>Представь, что ты стоишь на стадионе в шумной толпе и пытаешься
+услышать, на какой ноте поёт один конкретный певец. Толпа — это шум.
+Голос певца — наш полезный сигнал. У тебя есть 3–5 микрофонов,
+расставленных по частотной шкале. Задача: по этим 3–5 числам угадать,
+где <strong>точно</strong> находится голос певца.</p>
+</div>
+</section>
+<hr class="docutils" />
+<section id="id2">
+<h2>Главная рекомендация<a class="headerlink" href="#id2" title="Ссылка на этот заголовок">¶</a></h2>
+<div class="admonition tip">
+<p class="admonition-title">Совет</p>
+<p><strong>Используй</strong> <code class="docutils literal notranslate"><span class="pre">discr5ea</span></code> <strong>(МНК-Гауссиан по 5 точкам) с fallback
+на</strong> <code class="docutils literal notranslate"><span class="pre">discr5qa</span></code> <strong>и обязательным zero-padding ×2 + окном Hanning.</strong></p>
+<p>Это даёт точность ~0.6 Гц при SNR = 20 дБ — <strong>в 20 раз лучше</strong>, чем
+без интерполяции, и в 2 раза лучше классической 3-точечной <code class="docutils literal notranslate"><span class="pre">discr3ea</span></code>.</p>
+</div>
+<figure class="align-center" id="id9">
+<a class="reference internal image-reference" href="_images/06_decision_tree.png"><img alt="Дерево решений — какой метод выбрать" src="_images/06_decision_tree.png" style="width: 90%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Рис. 2 </span><span class="caption-text">Дерево решений: какой метод выбрать в зависимости от условий.</span><a class="headerlink" href="#id9" title="Ссылка на это изображение">¶</a></p>
+</figcaption>
+</figure>
+<p>Подробное обоснование — на странице <a class="reference internal" href="recommendations.html"><span class="doc">Рекомендации</span></a>.</p>
+</section>
+<hr class="docutils" />
+<section id="id3">
+<h2>Содержание документации<a class="headerlink" href="#id3" title="Ссылка на этот заголовок">¶</a></h2>
 <div class="toctree-wrapper compound">
-<p class="caption" role="heading"><span class="caption-text">Содержание:</span></p>
+<p class="caption" role="heading"><span class="caption-text">Основные разделы</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="overview.html">Обзор</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="overview.html#id2">Назначение</a></li>
-<li class="toctree-l2"><a class="reference internal" href="overview.html#id3">Параметры тестового сигнала</a></li>
-<li class="toctree-l2"><a class="reference internal" href="overview.html#id4">Формулы дискриминаторов</a></li>
-<li class="toctree-l2"><a class="reference internal" href="overview.html#id5">Графики</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#id2">История из жизни</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#id3">Постановка задачи</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#pipeline">Полный pipeline обработки</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#id7">Главная идея: парабола + Hanning = любовь</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#id8">Суб-бинная оценка на цифрах</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#id9">Структура модуля</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#id10">Дальше</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="api.html#module-tsignal.signal_gen">signal_gen</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api.html#module-tsignal.discriminators">discriminators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="formulas.html">Формулы</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="formulas.html#cg">1. Центр тяжести (CG)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="formulas.html#sd">2. Суммарно-разностный (SD)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="formulas.html#qa">3. Квадратичная аппроксимация (QA)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="formulas.html#ea">4. Экспоненциальная аппроксимация (EA)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="formulas.html#id3">5. МНК-парабола по 5 точкам (5QA)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="formulas.html#id4">6. МНК-Гауссиан по 5 точкам (5EA) ★</a></li>
+<li class="toctree-l2"><a class="reference internal" href="formulas.html#id8">7. Сравнение всех методов</a></li>
+<li class="toctree-l2"><a class="reference internal" href="formulas.html#discr3">8. Обёртка discr3() — коэффициент пересчёта</a></li>
+<li class="toctree-l2"><a class="reference internal" href="formulas.html#id10">Дальше</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="methods.html">Сравнение методов</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="methods.html#id3">Сводная таблица</a></li>
+<li class="toctree-l2"><a class="reference internal" href="methods.html#id4">Главный эксперимент — «кто победил»</a></li>
+<li class="toctree-l2"><a class="reference internal" href="methods.html#id5">Детальный разбор каждого метода</a></li>
+<li class="toctree-l2"><a class="reference internal" href="methods.html#id6">Визуальные сравнения</a></li>
+<li class="toctree-l2"><a class="reference internal" href="methods.html#id9">Почему 5 точек, а не 7 или 9</a></li>
+<li class="toctree-l2"><a class="reference internal" href="methods.html#id11">Монотонная зона</a></li>
+<li class="toctree-l2"><a class="reference internal" href="methods.html#id12">Итоговый выбор</a></li>
+<li class="toctree-l2"><a class="reference internal" href="methods.html#id13">Дальше</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="recommendations.html">Рекомендации</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="recommendations.html#id2">Главная рекомендация — за 60 секунд</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recommendations.html#id4">Главный эксперимент — кто победил</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recommendations.html#id7">Что это значит в реальных герцах</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recommendations.html#id9">Бонус: монотонная зона</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recommendations.html#id11">Почему именно 5 точек, а не 7 или 9</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recommendations.html#hanning">Парабола + Hanning = любовь</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recommendations.html#zero-padding-2">Zero-padding ×2 — обязательное требование</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recommendations.html#quick-reference">Quick reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recommendations.html#id16">Чек-лист перед релизом</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recommendations.html#quinn-2nd-pipeline">Что дальше — Quinn 2nd и комплексный pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recommendations.html#id17">Самое главное, если коротко</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recommendations.html#id18">Связанные ресурсы</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="visual.html">Визуальный разбор</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="visual.html#gif">Раздел 1. GIF-анимации — поведение в динамике</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visual.html#d-heatmap">Раздел 2. Карты точности — 3D и heatmap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visual.html#id9">Раздел 3. Чистый сигнал — точность на эталоне</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visual.html#id11">Раздел 4. С шумом — устойчивость</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visual.html#id14">Раздел 5. Монотонная зона</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visual.html#id15">Дальше</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="fft.html">FFT-дискриминаторы частоты</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="fft.html#id1">Сигнал и параметры</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fft.html#id2">Классические 5 методов оценки частоты</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fft.html#id3">Дискриминационная характеристика</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fft.html#id4">Сравнение точности (классика)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fft.html#id5">Влияние оконной функции</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fft.html#pipeline-discr5ea">Современный pipeline — discr5ea ★</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fft.html#python">Запуск Python-тестов</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fft.html#id6">Происхождение</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fft.html#id7">Дальше</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="tests.html">Тесты</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="tests.html#id2">Запуск</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tests.html#id3">Таблица точности</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tests.html#c-test-cpp-27">1. Простые C++ тесты (<code class="docutils literal notranslate"><span class="pre">test_cpp/</span></code>) — 27 тестов</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tests.html#google-test-test-gtest-40">2. Google Test (<code class="docutils literal notranslate"><span class="pre">test_gtest/</span></code>) — 40 тестов</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tests.html#python-test-python-7-3">3. Python тесты (<code class="docutils literal notranslate"><span class="pre">test_python/</span></code>) — 7 тестов + 3 графика</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tests.html#fft-test-python-10-2">4. FFT-дискриминаторы (<code class="docutils literal notranslate"><span class="pre">test_python/</span></code>) — 10 тестов + 2 графика</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tests.html#id12">Сборка и запуск</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tests.html#id13">Дальше</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">C API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api.html#id2">Обзор заголовков</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#discrcg-h">1. discrcg.h — Центр тяжести</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#discrsd-h">2. discrsd.h — Суммарно-разностный</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#discrqa-h-3">3. discrqa.h — Парабола по 3 точкам</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#discrea-h-3-ea">4. discrea.h — Гауссиан по 3 точкам (EA)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#discr5ea-h-5">5. discr5ea.h — МНК по 5 точкам ★</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#discr-auto-h">6. discr_auto.h — Автовыбор метода</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#discr-common-h-discr2-discr3">7. discr_common.h — Обёртки discr2 / discr3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#id3">8. Константы и возвращаемые значения</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#python-api">Python API (будущее)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#id4">Связанные документы</a></li>
 </ul>
 </li>
 </ul>
 </div>
-<section id="id1">
-<h2>Индексы<a class="headerlink" href="#id1" title="Ссылка на этот заголовок"></a></h2>
+</section>
+<hr class="docutils" />
+<section id="id4">
+<h2>Быстрый старт<a class="headerlink" href="#id4" title="Ссылка на этот заголовок">¶</a></h2>
+<p>Суб-бинная оценка частоты по 5 точкам спектра (рекомендация):</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;discr5ea.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;complex.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span>
+
+<span class="c1">// X[]      — комплексный спектр после FFT (длина N_padded)</span>
+<span class="c1">// k_max    — индекс максимума |X(k)| (грубая оценка)</span>
+<span class="c1">// fs       — частота дискретизации [Гц]</span>
+<span class="c1">// N_padded — длина FFT с zero-padding ×2</span>
+
+<span class="kt">double</span><span class="w"> </span><span class="n">y</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span><span class="w"> </span><span class="n">xs</span><span class="p">[</span><span class="mi">5</span><span class="p">];</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">cabs</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">k_max</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="p">]);</span><span class="w">   </span><span class="c1">// |X(k-2)| .. |X(k+2)|</span>
+<span class="w">  </span><span class="n">xs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">double</span><span class="p">)(</span><span class="n">i</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span><span class="w">          </span><span class="c1">// {-2, -1, 0, 1, 2}</span>
+<span class="p">}</span>
+
+<span class="kt">double</span><span class="w"> </span><span class="n">delta</span><span class="p">;</span><span class="w">   </span><span class="c1">// суб-бинное смещение в единицах padded-шага</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">ok</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">discr5ea</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">xs</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">delta</span><span class="p">);</span><span class="w">   </span><span class="c1">// МНК-Гауссиан по 5 точкам</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ok</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">EXIT_SUCCESS</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">// fallback: какая-то амплитуда ≤ 0 → 5QA по амплитудам</span>
+<span class="w">  </span><span class="n">discr5qa</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">xs</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">delta</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">double</span><span class="w"> </span><span class="n">f_hz</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">k_max</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">delta</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">fs</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">N_padded</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Классический 3-точечный QA на угловой ДН:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;discrqa.h&quot;</span>
+
+<span class="kt">double</span><span class="w"> </span><span class="n">A1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.75</span><span class="p">,</span><span class="w"> </span><span class="n">A2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2.75</span><span class="p">,</span><span class="w"> </span><span class="n">A3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2.75</span><span class="p">;</span>
+<span class="kt">double</span><span class="w"> </span><span class="n">x1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">-1.0</span><span class="p">,</span><span class="w"> </span><span class="n">x2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">  </span><span class="n">x3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0</span><span class="p">;</span>
+<span class="kt">double</span><span class="w"> </span><span class="n">xe</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">discr3qa</span><span class="p">(</span><span class="n">A1</span><span class="p">,</span><span class="w"> </span><span class="n">A2</span><span class="p">,</span><span class="w"> </span><span class="n">A3</span><span class="p">,</span><span class="w"> </span><span class="n">x1</span><span class="p">,</span><span class="w"> </span><span class="n">x2</span><span class="p">,</span><span class="w"> </span><span class="n">x3</span><span class="p">);</span>
+<span class="c1">// xe ≈ 0.5 — оценка положения пика между точками</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="id5">
+<h2>Шесть методов одним взглядом<a class="headerlink" href="#id5" title="Ссылка на этот заголовок">¶</a></h2>
+<div class="table-wrapper colwidths-given docutils container">
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 10.0%" />
+<col style="width: 15.0%" />
+<col style="width: 8.0%" />
+<col style="width: 20.0%" />
+<col style="width: 25.0%" />
+<col style="width: 22.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Метод</p></th>
+<th class="head"><p>Файл</p></th>
+<th class="head"><p>Точек</p></th>
+<th class="head"><p>Идея</p></th>
+<th class="head"><p>Краткая формула</p></th>
+<th class="head"><p>Когда хорош</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>CG</strong></p></td>
+<td><p><code class="file docutils literal notranslate"><span class="pre">discrcg.h</span></code></p></td>
+<td><p>2…N</p></td>
+<td><p>Центр тяжести</p></td>
+<td><p><span class="math notranslate nohighlight">\(x_e = \dfrac{\sum A_i x_i}{\sum A_i}\)</span></p></td>
+<td><p>Грубая оценка</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>SD</strong></p></td>
+<td><p><code class="file docutils literal notranslate"><span class="pre">discrsd.h</span></code></p></td>
+<td><p>2</p></td>
+<td><p>Сумма-разность</p></td>
+<td><p><span class="math notranslate nohighlight">\(x_e = x_c + c\,\dfrac{A_2 - A_1}{A_2 + A_1}\)</span></p></td>
+<td><p>Моноимпульсный канал</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>QA</strong></p></td>
+<td><p><code class="file docutils literal notranslate"><span class="pre">discrqa.h</span></code></p></td>
+<td><p>3</p></td>
+<td><p>Парабола по 3 точкам</p></td>
+<td><p><span class="math notranslate nohighlight">\(x_e = -\dfrac{b}{2a}\)</span></p></td>
+<td><p>Параболоподобный пик</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>EA</strong></p></td>
+<td><p><code class="file docutils literal notranslate"><span class="pre">discrea.h</span></code></p></td>
+<td><p>3</p></td>
+<td><p>Парабола в log-масштабе (Гаусс)</p></td>
+<td><p><span class="math notranslate nohighlight">\(x_e = \alpha / (2\beta)\)</span></p></td>
+<td><p>Гауссовый пик</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>5QA</strong> ★</p></td>
+<td><p><code class="file docutils literal notranslate"><span class="pre">discr5ea.h</span></code></p></td>
+<td><p>5</p></td>
+<td><p>МНК-парабола по 5 точкам</p></td>
+<td><p><span class="math notranslate nohighlight">\(a = \dfrac{2y_1 - y_2 - 2y_3 - y_4 + 2y_5}{14}\)</span></p></td>
+<td><p>Шум, Hanning kernel</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>5EA</strong> ★★</p></td>
+<td><p><code class="file docutils literal notranslate"><span class="pre">discr5ea.h</span></code></p></td>
+<td><p>5</p></td>
+<td><p>МНК-Гаусс по 5 точкам</p></td>
+<td><p>то же, но <span class="math notranslate nohighlight">\(z_i = \ln y_i\)</span></p></td>
+<td><p><strong>Универсал, FFT</strong></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>★ — добавлено при рефакторинге 2026, ★★ — <strong>рекомендуемый по умолчанию</strong>
+для FFT-задачи.</p>
+<figure class="align-center" id="id10">
+<a class="reference internal image-reference" href="_images/04_methods_vs_snr.png"><img alt="5pt-методы стабильно лучше 3pt при любом SNR" src="_images/04_methods_vs_snr.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Рис. 51 </span><span class="caption-text">Главный эксперимент: 5pt-методы стабильно лучше 3pt при любом SNR
+(Монте-Карло, 105 000 испытаний).</span><a class="headerlink" href="#id10" title="Ссылка на это изображение">¶</a></p>
+</figcaption>
+</figure>
+</section>
+<hr class="docutils" />
+<section id="id6">
+<h2>Связанные документы<a class="headerlink" href="#id6" title="Ссылка на этот заголовок">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="recommendations.html"><span class="doc">Рекомендации</span></a> — итоговые рекомендации с обоснованием</p></li>
+<li><p><a class="reference internal" href="formulas.html"><span class="doc">Формулы</span></a> — все математические формулы</p></li>
+<li><p><a class="reference internal" href="visual.html"><span class="doc">Визуальный разбор</span></a> — визуальный разбор с GIF-анимациями и 3D-картами</p></li>
+<li><p><a class="reference internal" href="fft.html"><span class="doc">FFT-дискриминаторы частоты</span></a> — применение к оценке частоты по FFT-спектру</p></li>
+</ul>
+</section>
+<section id="id7">
+<h2>Индексы и поиск<a class="headerlink" href="#id7" title="Ссылка на этот заголовок">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Алфавитный указатель</span></a></p></li>
-<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Состав модуля</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Поиск</span></a></p></li>
 </ul>
 </section>
 </section>
 
-
-           </div>
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="overview.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Обзор</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2026, Кодо (AI) + Alex
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
           </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Нижняя область">
-        <a href="overview.html" class="btn btn-neutral float-right" title="Обзор" accesskey="n" rel="next">Следующая <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
     </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Discriminator Estimates</a><ul>
+<li><a class="reference internal" href="#id1">О чём этот модуль</a></li>
+<li><a class="reference internal" href="#id2">Главная рекомендация</a></li>
+<li><a class="reference internal" href="#id3">Содержание документации</a></li>
+<li><a class="reference internal" href="#id4">Быстрый старт</a></li>
+<li><a class="reference internal" href="#id5">Шесть методов одним взглядом</a></li>
+<li><a class="reference internal" href="#id6">Связанные документы</a></li>
+<li><a class="reference internal" href="#id7">Индексы и поиск</a></li>
+</ul>
+</li>
+</ul>
 
-  <hr/>
-
-  <div role="contentinfo">
-    <p>&#169; Авторские права . </p>
-  </div>
-
-  Собрано при помощи <a href="https://www.sphinx-doc.org/">Sphinx</a> с использованием
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">темы,</a>
-    предоставленной <a href="https://readthedocs.org">Read the Docs</a>.
-   
-
-</footer>
+          </div>
         </div>
       </div>
-    </section>
+      
+      
+    </aside>
   </div>
-  <script>
-      jQuery(function () {
-          SphinxRtdTheme.Navigation.enable(true);
-      });
-  </script> 
-
-</body>
+</div><script src="_static/documentation_options.js?v=16c2fb31"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/scripts/furo.js?v=46bd48cc"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=df1a032d"></script>
+    <script src="_static/translations.js?v=cd1d70c9"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    </body>
 </html>
